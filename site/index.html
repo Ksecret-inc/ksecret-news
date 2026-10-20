@@ -4,187 +4,236 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>케이시크릿 소식</title>
-<meta name="description" content="SEOUL 1988을 만드는 케이시크릿 구성원이 직접 전하는 팀 이야기, 제품 소식, 채용 공고.">
+<meta name="description" content="SEOUL 1988을 만드는 케이시크릿의 공지, 일정, 팀 이야기.">
 <meta property="og:title" content="케이시크릿 소식">
-<meta property="og:description" content="케이시크릿 구성원이 직접 전하는 팀 이야기, 제품 소식, 채용 공고.">
+<meta property="og:description" content="SEOUL 1988을 만드는 케이시크릿의 공지, 일정, 팀 이야기.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#F5F4F8" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#17121A" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💧</text></svg>">
 <link rel="preload" as="image" href="film/poster-d.jpg" media="(min-aspect-ratio: 1/1)">
 <link rel="preload" as="image" href="film/poster-m.jpg" media="(max-aspect-ratio: 1/1)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;400;500;700&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
 <style>
+/* SEOUL 1988 palette, sampled from the brand film */
 :root{
-  --porcelain:#F5F4F8; --surface:#FFFFFF; --ink:#221A26; --mute:#6E6573; --line:#E2DEE7; --skeleton:#ECE9F0;
-  --berry:#8C1D4F; --onberry:#FFFFFF; --rose:#F3CFD6;
-  --display:"Hahmlet","Noto Serif KR","Apple SD Gothic Neo",serif;
+  --paper:#FFFFFF;      /* the film's last frame */
+  --cream:#F6F2E7;      /* bottle body, lightened */
+  --bottle:#EAE4CF;     /* bottle body */
+  --butter:#E6E0B5;     /* cream texture */
+  --red:#C64046;        /* SEOUL 1988 label */
+  --red-ink:#A8323A;    /* red for text and buttons on light grounds */
+  --ink:#1F1B18; --mute:#746D66; --line:#E8E3D7;
   --body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --num:"Oswald","Arial Narrow","IBM Plex Sans KR",sans-serif;
   --ease:cubic-bezier(.2,.7,.1,1);
   color-scheme:light;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --porcelain:#17121A; --surface:#211A24; --ink:#F2ECF3; --mute:#A79CAB; --line:#352B39; --skeleton:#2A222D;
-    --berry:#F08DB4; --onberry:#17121A; --rose:#4A2235;
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --porcelain:#17121A; --surface:#211A24; --ink:#F2ECF3; --mute:#A79CAB; --line:#352B39; --skeleton:#2A222D;
-  --berry:#F08DB4; --onberry:#17121A; --rose:#4A2235;
-  color-scheme:dark;
-}
 *,*::before,*::after{box-sizing:inherit}
-html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px)}
-body{margin:0;background:var(--porcelain);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:anywhere}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--porcelain)}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:anywhere}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--berry);outline-offset:3px;border-radius:6px}
+:focus-visible{outline:2px solid var(--red-ink);outline-offset:3px;border-radius:6px}
 .wrap{width:min(1120px,100% - 2.5rem);margin-inline:auto}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+h2,h3{font-weight:600;letter-spacing:-.025em}
 
-/* ---------- header ---------- */
+/* ---------- header: menu only ---------- */
 .site-head{position:fixed;top:0;left:0;right:0;z-index:20;padding-top:env(safe-area-inset-top,0px);transition:background .35s var(--ease),box-shadow .35s var(--ease)}
-.site-head.solid{background:color-mix(in srgb,var(--porcelain) 86%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
-.site-head .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
-.wordmark{font-family:var(--display);font-weight:700;font-size:1.32rem;letter-spacing:-.01em;text-decoration:none}
-.site-head nav{display:flex;gap:1.5rem;font-size:.95rem}
+.site-head.solid{background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.site-head .wrap{display:flex;align-items:center;justify-content:flex-end;height:60px}
+.site-head nav{display:flex;gap:1.6rem;font-size:.95rem}
 .site-head nav a{text-decoration:none;color:var(--mute);padding:.3rem 0;position:relative}
 .site-head nav a:hover,.site-head nav a[aria-current="true"]{color:var(--ink)}
-.site-head nav a[aria-current="true"]::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;border-radius:2px;background:var(--berry)}
-.story-bar{position:absolute;left:0;bottom:0;height:2px;width:100%;transform-origin:left;transform:scaleX(var(--hp,0));background:var(--berry);transition:opacity .3s}
+.site-head nav a[aria-current="true"]::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;border-radius:2px;background:var(--red)}
+.story-bar{position:absolute;left:0;bottom:0;height:2px;width:100%;transform-origin:left;transform:scaleX(var(--hp,0));background:var(--ink);transition:opacity .3s}
 .site-head.solid .story-bar{opacity:0}
 
 /* ---------- hero: scroll-scrubbed brand film ---------- */
-.hero{position:relative;height:640vh}
-@media (max-aspect-ratio:1/1){.hero{height:540vh}}
-.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#EFEDEA;color:#221A26}
-.stage video,.stage .still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.stage .still[hidden]{display:none}
-.site-head:not(.solid) .wordmark{color:#221A26}
-.site-head:not(.solid) nav a{color:rgba(34,26,38,.62)}
-.site-head:not(.solid) .story-bar{background:#221A26}
-.btn{pointer-events:auto;display:inline-flex;align-items:center;gap:.5rem;font:600 .98rem/1 var(--body);padding:1rem 1.7rem;border-radius:999px;text-decoration:none;border:0;cursor:pointer;transition:transform .2s var(--ease),filter .2s}
-.btn:hover{filter:brightness(1.15)}
-.btn:active{transform:scale(.97)}
+.hero{position:relative;height:680vh}
+@media (max-aspect-ratio:1/1){.hero{height:560vh}}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--paper)}
+.film{position:absolute;inset:0;transform-origin:50% 50%;will-change:transform}
+.film video,.film .still,.film canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.film .still[hidden],.film video[hidden]{display:none}
 .static .hero{height:auto}
 .static .stage{position:relative}
-.static @media (max-width:760px){
-    }
+.static .film video{display:none}
 
-/* ---------- news ---------- */
-.news{padding:7.5rem 0 5.5rem;scroll-margin-top:0}
-.news-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:1.5rem 2rem;margin-bottom:1.6rem}
-.news-head h2{font-family:var(--display);font-weight:500;font-size:clamp(2.3rem,5vw,3.5rem);letter-spacing:-.03em;line-height:1.1;margin:0}
-.news-head .lede{margin:.6rem 0 0;color:var(--mute);max-width:40ch}
-.search{position:relative;width:min(320px,100%)}
-.search input{width:100%;font:inherit;font-size:.95rem;padding:.78rem 1rem .78rem 2.6rem;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
-.search input::placeholder{color:var(--mute)}
-.search input:focus{outline:2px solid var(--berry);outline-offset:1px}
-.search svg{position:absolute;left:1rem;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--mute);fill:none;stroke-width:2}
-.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.2rem}
-.chip{font:500 .92rem/1 var(--body);padding:.6rem .95rem;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;transition:background .2s,border-color .2s,color .2s}
-.chip:hover{border-color:var(--mute)}
-.chip[aria-pressed="true"]{background:var(--ink);color:var(--porcelain);border-color:var(--ink)}
-.chip .n{font-size:.8rem;opacity:.6;font-variant-numeric:tabular-nums}
-
-/* category textures: each reads like a product swatch */
-.tx{border-radius:50%;flex:none}
-.tx-notice{background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.7) 0 8%,transparent 30%),linear-gradient(140deg,#B8457A,#6E1238)}
-.tx-team{background:radial-gradient(circle at 35% 30%,#FBE6EA,#E2A2B2 70%,#D48C9E)}
-.tx-product{background:radial-gradient(circle at 30% 26%,#fff 0 9%,transparent 26%),radial-gradient(circle at 60% 70%,#B6D3E6,#DCEBF5 70%)}
-.tx-hiring{background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.8) 0 7%,transparent 28%),linear-gradient(150deg,#F6E2B5,#D3A85A)}
-.dot{width:.75rem;height:.75rem}
-
-.featured{display:grid;grid-template-columns:1fr minmax(150px,280px);gap:clamp(1.5rem,4vw,4rem);align-items:center;background:var(--surface);border-radius:32px;padding:clamp(1.6rem,4vw,3.2rem);margin-bottom:2.6rem;scroll-margin-top:96px}
-.meta{color:var(--mute);font-size:.9rem;display:flex;gap:.4rem 1rem;flex-wrap:wrap;align-items:center}
-.cat{display:inline-flex;align-items:center;gap:.45rem;font-weight:500;color:var(--ink)}
-.new{font-size:.78rem;font-weight:600;padding:.18rem .55rem;border-radius:6px;background:var(--rose);color:var(--ink)}
-.featured h3{font-family:var(--display);font-weight:500;font-size:clamp(1.65rem,3.6vw,2.6rem);line-height:1.25;letter-spacing:-.02em;margin:.8rem 0 1rem}
-.body{white-space:pre-line;max-width:62ch;margin:0}
-.body a{color:var(--berry);text-underline-offset:3px}
-.featured .swatch{aspect-ratio:1;border-radius:47% 53% 50% 50% / 56% 46% 54% 44%;box-shadow:inset -14px -18px 40px rgba(0,0,0,.08)}
-.actions{margin-top:1.4rem;display:flex;gap:.6rem}
-.ghost{font:500 .88rem/1 var(--body);padding:.6rem .9rem;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:.4rem}
+/* ---------- shared bits ---------- */
+.sec-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:1.2rem 2rem;margin-bottom:2.4rem}
+.sec-head h2{font-size:clamp(2rem,4.4vw,3.1rem);line-height:1.15;margin:0}
+.sec-head .lede{margin:.55rem 0 0;color:var(--mute);max-width:42ch}
+.ghost{font:500 .88rem/1 var(--body);padding:.62rem .95rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;transition:border-color .2s}
 .ghost:hover{border-color:var(--mute)}
 .ghost svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
-
-.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.row{border-bottom:1px solid var(--line);scroll-margin-top:96px}
-.row-btn{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:7.5rem 1fr auto;gap:1.2rem;align-items:center;padding:1.35rem .4rem;border-radius:12px;transition:background .2s}
-.row-btn:hover{background:color-mix(in srgb,var(--surface) 70%,transparent)}
-.row-btn:focus-visible{outline:2px solid var(--berry);outline-offset:-2px}
-.when{color:var(--mute);font-size:.9rem;font-variant-numeric:tabular-nums}
-.row-main{display:flex;gap:.9rem;align-items:flex-start}
-.row-main .dot{margin-top:.55rem}
-.row-title{display:block;font-family:var(--display);font-weight:500;font-size:clamp(1.12rem,2.2vw,1.36rem);line-height:1.4;letter-spacing:-.01em}
-.row-sub{display:flex;gap:.3rem .8rem;flex-wrap:wrap;color:var(--mute);font-size:.86rem;margin-top:.25rem;font-family:var(--body)}
-.chev{width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;transition:transform .35s var(--ease),background .25s}
+.body{white-space:pre-line;max-width:62ch;margin:0}
+.body a{color:var(--red-ink);text-underline-offset:3px}
+.new{font-size:.76rem;font-weight:600;padding:.16rem .5rem;border-radius:6px;background:var(--red);color:#fff}
+.empty{padding:2.4rem 0;color:var(--mute)}
+.empty b{display:block;color:var(--ink);font-weight:600;margin-bottom:.2rem}
+.chev{width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;flex:none;transition:transform .35s var(--ease),background .25s}
 .chev svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:2}
-.row-btn[aria-expanded="true"] .chev{transform:rotate(180deg);background:var(--rose)}
+[aria-expanded="true"] .chev{transform:rotate(180deg);background:var(--bottle)}
 .panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--ease)}
 .panel>div{overflow:hidden}
-.row-btn[aria-expanded="true"]+.panel{grid-template-rows:1fr}
-.panel-inner{padding:0 .4rem 1.7rem calc(7.5rem + 1.2rem + .4rem + 1.65rem)}
-.more{display:flex;justify-content:center;margin-top:2rem}
-.empty{padding:3rem 0;color:var(--mute);text-align:center}
-.empty b{display:block;color:var(--ink);font-weight:500;margin-bottom:.3rem}
-.sk{height:5rem;border-bottom:1px solid var(--line);display:grid;grid-template-columns:7.5rem 1fr;gap:1.2rem;align-items:center;padding:0 .4rem}
-.sk span{height:.9rem;border-radius:6px;background:var(--skeleton)}
-.sk span:last-child{width:60%;height:1.1rem}
+[aria-expanded="true"]+.panel{grid-template-rows:1fr}
+.actions{margin-top:1.2rem;display:flex;gap:.6rem}
+.sk{height:4.6rem;border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;gap:.5rem}
+.sk span{height:.85rem;border-radius:6px;background:var(--cream);width:40%}
+.sk span:last-child{width:70%;height:1.05rem}
+
+/* ---------- people team: vertical scroll drives a horizontal track ---------- */
+.people{position:relative;z-index:2;margin-top:-45vh}
+.static .people{margin-top:0}
+.hz{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:1.6rem;padding-top:60px}
+.track{display:flex;gap:1.25rem;align-items:stretch;height:min(540px,calc(100svh - 190px));padding:0 max(1.25rem,calc((100vw - 1120px) / 2));will-change:transform;width:max-content}
+.hz.flat{position:relative;height:auto;padding:5.5rem 0}
+.hz.flat .track{width:auto;flex-wrap:wrap;height:auto}
+.intro-p{flex:none;width:clamp(280px,34vw,440px);display:flex;flex-direction:column;justify-content:center;padding-right:1rem}
+.intro-p h2{font-size:clamp(2.2rem,4.6vw,3.4rem);line-height:1.12;margin:0 0 .8rem}
+.intro-p p{margin:0;color:var(--mute);max-width:26ch}
+.counts{display:flex;gap:1.6rem;margin-top:2rem}
+.counts div{display:flex;flex-direction:column}
+.counts b{font-family:var(--num);font-weight:600;font-size:2.6rem;line-height:1;color:var(--red)}
+.counts span{font-size:.88rem;color:var(--mute);margin-top:.35rem}
+.go{margin-top:2.2rem;display:flex;align-items:center;gap:.7rem;color:var(--mute);font-size:.9rem}
+.go i{display:block;width:56px;height:1px;background:var(--mute);position:relative}
+.go i::after{content:"";position:absolute;right:0;top:-4px;width:8px;height:8px;border-top:1px solid var(--mute);border-right:1px solid var(--mute);transform:rotate(45deg)}
+.hz.flat .go{display:none}
+
+.card{flex:none;width:clamp(272px,28vw,360px);border-radius:28px;padding:clamp(1.4rem,2.4vw,2rem);display:flex;flex-direction:column;scroll-margin:0 2rem;position:relative;overflow:hidden}
+.card:focus-within{outline:2px solid var(--red-ink);outline-offset:3px}
+.kind{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--mute);margin-bottom:auto;flex-wrap:wrap}
+.kind .dot{width:.6rem;height:.6rem}
+.card h3{font-size:clamp(1.25rem,2vw,1.5rem);line-height:1.35;margin:.9rem 0 .7rem}
+.card .body{font-size:.95rem;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:6;overflow:hidden}
+.card .actions{margin-top:auto;padding-top:1rem}
+
+.ev-card{background:var(--cream)}
+.ev-card .bigdate{font-family:var(--num);line-height:.9;color:var(--red);margin-top:1.4rem}
+.ev-card .bigdate .m{display:block;font-size:1.05rem;font-weight:500;color:var(--ink);margin-bottom:.3rem}
+.ev-card .bigdate .d{display:block;font-size:clamp(4rem,7vw,5.6rem);font-weight:600;letter-spacing:-.02em}
+.ev-card .bigdate .w{display:block;font-family:var(--body);font-size:.92rem;color:var(--mute);margin-top:.45rem}
+.ev-card.next{background:var(--red);color:#fff;width:clamp(300px,36vw,460px)}
+.ev-card.next .kind,.ev-card.next .bigdate .w,.ev-card.next .where svg{color:rgba(255,255,255,.82);stroke:rgba(255,255,255,.82)}
+.ev-card.next .bigdate,.ev-card.next .bigdate .m{color:#fff}
+.ev-card.next .dday{border-color:#fff;color:#fff}
+.ev-card.next .dday.today{background:#fff;color:var(--red-ink)}
+.ev-card.next .where{color:#fff}
+.ev-card.next .dot{background:#fff}
+.where{display:flex;flex-direction:column;gap:.15rem;font-size:.92rem}
+.where span{display:flex;gap:.5rem;align-items:center}
+.where svg{width:15px;height:15px;stroke:var(--mute);fill:none;stroke-width:2;flex:none}
+.dday{font-family:var(--num);font-weight:500;font-size:.95rem;letter-spacing:.02em;padding:.15rem .6rem;border-radius:999px;border:1.5px solid var(--red);color:var(--red-ink);white-space:nowrap;margin-left:auto}
+.dday.today{background:var(--red);color:#fff}
+
+.nt-card{background:var(--paper);box-shadow:inset 0 0 0 1px var(--line)}
+.nt-card .when-big{font-family:var(--num);font-weight:600;font-size:1.9rem;line-height:1;margin-top:1.4rem;color:var(--ink)}
+.nt-card .when-big small{font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--mute);margin-left:.5rem}
+.c-notice{background:var(--ink)}
+.c-event{background:var(--red)}
+.empty-card{flex:none;width:clamp(272px,28vw,360px);border-radius:28px;padding:2rem;background:var(--cream);color:var(--mute);display:flex;flex-direction:column;justify-content:center}
+.empty-card b{color:var(--ink);font-weight:600;display:block;margin-bottom:.3rem}
+.track-end{flex:none;width:1px}
+
+.hz-bar{width:min(1120px,100% - 2.5rem);margin:0 auto;height:2px;background:var(--line);border-radius:2px;overflow:hidden}
+.hz-bar span{display:block;height:100%;background:var(--ink);transform-origin:left;transform:scaleX(var(--hzp,0))}
+.hz.flat .hz-bar{display:none}
+.static .hz{position:relative;height:auto;overflow-x:auto;scroll-snap-type:x mandatory;padding:5.5rem 0 3rem}
+.static .track{transform:none!important}
+.static .card,.static .intro-p{scroll-snap-align:start}
+@media (max-width:760px){
+  .hz{gap:1.1rem}
+  .track{height:min(500px,calc(100svh - 170px))}
+  .intro-p{width:78vw}
+  .card,.empty-card{width:78vw}
+  .ev-card.next{width:84vw}
+}
+
+/* ---------- news ---------- */
+.news{padding:5.5rem 0 5.5rem;border-top:1px solid var(--line)}
+.search{position:relative;width:min(320px,100%)}
+.search input{width:100%;font:inherit;font-size:.95rem;padding:.78rem 1rem .78rem 2.6rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+.search input::placeholder{color:var(--mute)}
+.search input:focus{outline:2px solid var(--red-ink);outline-offset:1px}
+.search svg{position:absolute;left:1rem;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--mute);fill:none;stroke-width:2}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:-1rem 0 2.2rem}
+.chip{font:500 .92rem/1 var(--body);padding:.6rem .95rem;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;transition:background .2s,border-color .2s,color .2s}
+.chip:hover{border-color:var(--mute)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip .n{font-family:var(--num);font-size:.85rem;opacity:.6}
+.dot{width:.7rem;height:.7rem;border-radius:50%;flex:none}
+.c-team{background:var(--bottle);box-shadow:inset 0 0 0 1px #D6CDB0}
+.c-product{background:var(--butter);box-shadow:inset 0 0 0 1px #CFC690}
+.c-hiring{background:var(--red)}
+.featured{display:grid;grid-template-columns:1fr minmax(140px,240px);gap:clamp(1.5rem,4vw,4rem);align-items:center;background:var(--cream);border-radius:28px;padding:clamp(1.6rem,4vw,3rem);margin-bottom:2.4rem;scroll-margin-top:96px}
+.meta{color:var(--mute);font-size:.9rem;display:flex;gap:.4rem 1rem;flex-wrap:wrap;align-items:center}
+.cat{display:inline-flex;align-items:center;gap:.45rem;font-weight:500;color:var(--ink)}
+.featured h3{font-size:clamp(1.55rem,3.4vw,2.3rem);line-height:1.3;margin:.7rem 0 .9rem}
+.featured .mark{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:var(--paper);font-family:var(--num);font-weight:600;font-size:clamp(1.6rem,3vw,2.4rem);color:var(--red);letter-spacing:.01em;text-align:center;line-height:1}
+.featured .mark small{display:block;font-size:.42em;color:var(--mute);font-weight:500;margin-top:.4rem;letter-spacing:.08em}
+.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{border-bottom:1px solid var(--line);scroll-margin-top:96px}
+.row-btn{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:7rem 1fr auto;gap:1.2rem;align-items:center;padding:1.3rem .3rem}
+.row-btn:focus-visible{outline:2px solid var(--red-ink);outline-offset:-2px;border-radius:8px}
+.when{color:var(--mute);font-size:.9rem;font-family:var(--num);letter-spacing:.02em}
+.row-main{display:flex;gap:.9rem;align-items:flex-start}
+.row-main .dot{margin-top:.6rem}
+.row-title{display:block;font-weight:600;font-size:clamp(1.05rem,2vw,1.22rem);line-height:1.45}
+.row-sub{display:flex;gap:.3rem .8rem;flex-wrap:wrap;color:var(--mute);font-size:.86rem;margin-top:.2rem}
+.panel-inner{padding:0 .3rem 1.6rem calc(7rem + 1.2rem + .3rem + 1.6rem)}
+.more{display:flex;justify-content:center;margin-top:1.8rem}
 
 /* ---------- how ---------- */
-.how{padding:5.5rem 0 6rem;background:var(--rose)}
+.how{padding:5.5rem 0 6rem;background:var(--cream)}
 .how-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(2rem,5vw,5rem);align-items:start}
-.how h2{font-family:var(--display);font-weight:500;font-size:clamp(1.9rem,4.2vw,2.8rem);letter-spacing:-.025em;line-height:1.2;margin:0 0 1rem}
-.how .lede{max-width:40ch;margin:0 0 2rem}
+.how h2{font-size:clamp(1.8rem,3.8vw,2.6rem);line-height:1.25;margin:0 0 1rem}
+.how .lede{max-width:42ch;margin:0 0 2rem}
 .steps{list-style:none;counter-reset:s;margin:0;padding:0}
-.steps li{counter-increment:s;display:grid;grid-template-columns:2.6rem 1fr;gap:.6rem;padding:1rem 0;border-top:1px solid color-mix(in srgb,var(--ink) 14%,transparent)}
-.steps li::before{content:counter(s);font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1.2;color:var(--berry)}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2.4rem 1fr;gap:.6rem;padding:1rem 0;border-top:1px solid #DED7C3}
+.steps li::before{content:counter(s);font-family:var(--num);font-weight:600;font-size:1.6rem;line-height:1.1;color:var(--red)}
 .steps b{display:block;font-weight:600}
-.slack{background:var(--surface);border-radius:22px;padding:1.4rem 1.5rem;font-size:.95rem;box-shadow:0 24px 50px -30px rgba(80,20,50,.45)}
-.slack-ch{color:var(--mute);font-size:.85rem;border-bottom:1px solid var(--line);padding-bottom:.8rem;margin-bottom:1rem}
-.msg{display:grid;grid-template-columns:2.4rem 1fr;gap:.8rem}
-.avatar{width:2.4rem;height:2.4rem;border-radius:10px}
-.msg-name{font-weight:600}
-.msg-name span{color:var(--mute);font-weight:400;font-size:.82rem;margin-left:.4rem}
-.msg-text{margin:.2rem 0 .7rem;white-space:pre-line}
-.react{display:inline-flex;gap:.35rem;align-items:center;font-size:.85rem;padding:.2rem .6rem;border-radius:999px;border:1px solid var(--berry);background:color-mix(in srgb,var(--berry) 10%,transparent)}
+.formats{display:grid;gap:1rem}
+.slack{background:var(--paper);border-radius:20px;padding:1.2rem 1.4rem;font-size:.94rem;box-shadow:0 20px 44px -30px rgba(60,40,20,.45)}
+.slack-ch{color:var(--mute);font-size:.82rem;margin-bottom:.6rem}
+.msg-text{margin:0 0 .6rem;white-space:pre-line}
+.react{display:inline-flex;gap:.35rem;align-items:center;font-size:.85rem;padding:.15rem .55rem;border-radius:999px;border:1px solid var(--red);background:color-mix(in srgb,var(--red) 8%,transparent)}
 
 footer{padding:3rem 0 3.5rem;color:var(--mute);font-size:.9rem}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 footer p{margin:0}
 
-.toast{visibility:hidden;opacity:0;position:fixed;left:50%;bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));z-index:40;transform:translate(-50%,140%);background:var(--ink);color:var(--porcelain);padding:.8rem 1.2rem;border-radius:999px;font-size:.92rem;transition:transform .35s var(--ease),opacity .25s,visibility 0s .35s}
+.toast{visibility:hidden;opacity:0;position:fixed;left:50%;bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));z-index:40;transform:translate(-50%,140%);background:var(--ink);color:var(--paper);padding:.8rem 1.2rem;border-radius:999px;font-size:.92rem;transition:transform .35s var(--ease),opacity .25s,visibility 0s .35s}
 .toast.show{transform:translate(-50%,0);opacity:1;visibility:visible;transition:transform .35s var(--ease),opacity .25s}
 
 @media (max-width:760px){
-  .site-head nav{gap:1rem;font-size:.9rem}
-  .news-head{grid-template-columns:1fr}
+  .site-head .wrap{justify-content:center}
+  .site-head nav{gap:1.2rem;font-size:.9rem}
+  .sec-head{grid-template-columns:1fr}
   .search{width:100%}
   .featured{grid-template-columns:1fr}
-  .featured .swatch{max-width:110px;order:-1}
+  .featured .mark{display:none}
   .row-btn{grid-template-columns:1fr auto;gap:.35rem 1rem}
   .when{grid-column:1 / -1}
-  .panel-inner{padding-left:2.1rem}
+  .panel-inner{padding-left:1.9rem}
   .how-grid{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){
   .panel,.chev,.toast,.site-head{transition:none}
-  }
+}
 </style>
 </head>
 <body>
 <header class="site-head" id="head">
   <div class="wrap">
-    <a class="wordmark" href="#top">Ksecret</a>
-    <nav aria-label="주요 메뉴"><a href="#news" data-sec="news">소식</a><a href="#how" data-sec="how">소식 올리기</a></nav>
+    <nav aria-label="주요 메뉴"><a href="#people" data-sec="people">공지와 일정</a><a href="#news" data-sec="news">소식</a><a href="#how" data-sec="how">소식 올리기</a></nav>
   </div>
   <div class="story-bar" aria-hidden="true"></div>
 </header>
@@ -192,18 +241,37 @@ footer p{margin:0}
 <main>
   <section class="hero" id="top" aria-label="SEOUL 1988 브랜드 영상">
     <div class="stage" id="stage">
-      <video id="film" muted playsinline preload="auto" disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
-      <img class="still" id="still" alt="" aria-hidden="true" hidden>
+      <div class="film" id="filmWrap">
+        <video id="film" muted playsinline preload="auto" disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
+        <img class="still" id="still" alt="" aria-hidden="true" hidden>
+      </div>
       <h1 class="sr-only">케이시크릿 소식, SEOUL 1988</h1>
+    </div>
+  </section>
+
+  <section class="people" id="people" aria-labelledby="people-h">
+    <div class="hz" id="hz">
+      <div class="track" id="track">
+        <div class="intro-p">
+          <h2 id="people-h">피플팀 안내</h2>
+          <p>꼭 알아야 할 공지와 다가오는 일정을 모았어요.</p>
+          <div class="counts" aria-live="polite">
+            <div><b id="evCount">–</b><span>다가오는 일정</span></div>
+            <div><b id="ntCount">–</b><span>공지</span></div>
+          </div>
+          <div class="go" aria-hidden="true">스크롤하면 옆으로 넘어가요 <i></i></div>
+        </div>
+      </div>
+      <div class="hz-bar" aria-hidden="true"><span></span></div>
     </div>
   </section>
 
   <section class="news" id="news" aria-labelledby="news-h">
     <div class="wrap">
-      <div class="news-head">
+      <div class="sec-head">
         <div>
           <h2 id="news-h">소식</h2>
-          <p class="lede" id="lede">팀에서 생긴 일, 새로 나올 제품, 함께할 동료를 찾는 글까지.</p>
+          <p class="lede">팀에서 생긴 일, 새로 나올 제품, 함께할 동료를 찾는 글까지.</p>
         </div>
         <label class="search">
           <span class="sr-only">소식 검색</span>
@@ -212,13 +280,7 @@ footer p{margin:0}
         </label>
       </div>
       <div class="chips" id="chips" role="group" aria-label="분류로 보기"></div>
-      <div id="feed" aria-live="polite">
-        <ul class="list" aria-hidden="true">
-          <li class="sk"><span></span><span></span></li>
-          <li class="sk"><span></span><span></span></li>
-          <li class="sk"><span></span><span></span></li>
-        </ul>
-      </div>
+      <div id="feed" aria-live="polite"><div class="sk"><span></span><span></span></div><div class="sk"><span></span><span></span></div></div>
     </div>
   </section>
 
@@ -228,21 +290,25 @@ footer p{margin:0}
         <h2 id="how-h">슬랙에 쓰면 여기에 올라갑니다</h2>
         <p class="lede">케이시크릿 구성원이라면 누구나 소식을 올릴 수 있어요. 홈페이지는 회사 밖에서도 보이니, 사내 전용 정보는 빼고 써 주세요.</p>
         <ol class="steps">
-          <li><div><b>#홈페이지-소식 채널에 글을 씁니다</b>첫 줄에 [분류] 제목, 다음 줄부터 본문을 적어요. 분류는 공지, 팀 이야기, 제품, 채용 중 하나예요.</div></li>
-          <li><div><b>담당자가 ✅ 로 확인합니다</b>외부 공개에 문제가 없는지 보고 체크 반응을 남겨요.</div></li>
-          <li><div><b>홈페이지에 게시됩니다</b>확인된 글은 10분 안팎으로 소식 목록 맨 위에 올라가요. 슬랙에서 글을 고치면 여기도 바뀌고, ✅ 를 지우면 내려가요.</div></li>
+          <li><div><b>#홈페이지-소식 채널에 글을 씁니다</b>첫 줄에 [분류] 제목을 적어요. 분류는 공지, 일정, 팀 이야기, 제품, 채용 중 하나예요.</div></li>
+          <li><div><b>일정은 일시와 장소를 함께 적어요</b>“일시:”와 “장소:”로 시작하는 줄을 넣으면 날짜순으로 정리되고, 지난 일정은 저절로 내려가요.</div></li>
+          <li><div><b>담당자가 ✅ 로 확인하면 게시됩니다</b>10분 안팎으로 올라가요. 슬랙에서 글을 고치면 여기도 바뀌고, ✅ 를 지우면 내려가요.</div></li>
         </ol>
       </div>
-      <div class="slack" aria-label="슬랙 작성 예시">
-        <div class="slack-ch"># 홈페이지-소식</div>
-        <div class="msg">
-          <div class="avatar tx-product" aria-hidden="true"></div>
-          <div>
-            <div class="msg-name">BX팀 <span>오전 10:24</span></div>
-            <p class="msg-text">[팀 이야기] 새 패키지 시안을 벽에 붙였어요
-지나가다 마음에 드는 시안에 스티커 하나씩 붙여 주세요. 금요일까지 모아서 최종안을 고릅니다.</p>
-            <span class="react">✅ 1</span>
-          </div>
+      <div class="formats" aria-label="슬랙 작성 예시">
+        <div class="slack">
+          <div class="slack-ch"># 홈페이지-소식</div>
+          <p class="msg-text">[일정] 하반기 타운홀
+일시: 11월 14일 오후 3시
+장소: 7층 라운지
+상반기 결과와 내년 계획을 함께 나눠요.</p>
+          <span class="react">✅ 1</span>
+        </div>
+        <div class="slack">
+          <div class="slack-ch"># 홈페이지-소식</div>
+          <p class="msg-text">[공지] 연말 휴무 안내
+12월 31일은 전사 휴무예요.</p>
+          <span class="react">✅ 1</span>
         </div>
       </div>
     </div>
@@ -263,28 +329,33 @@ footer p{margin:0}
   const $ = s => document.querySelector(s);
   const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const root = document.documentElement;
+  if (reduce) root.classList.add("static");
+  const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+  const icon = {
+    link: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>',
+    chev: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
+    clock: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+    pin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>'
+  };
 
   /* =========================================================
-     NEWS
+     DATA HELPERS
      ========================================================= */
-  const CATS = [
-    {name: "전체"},
-    {name: "공지", tx: "tx-notice"},
-    {name: "팀 이야기", tx: "tx-team"},
-    {name: "제품", tx: "tx-product"},
-    {name: "채용", tx: "tx-hiring"}
-  ];
-  const txOf = n => (CATS.find(c => c.name === n) || {}).tx || "tx-team";
-  const PAGE = 8;
-  const state = {posts: [], cat: "전체", q: "", limit: PAGE, open: new Set(), status: "loading"};
-
+  const WD = ["일", "월", "화", "수", "목", "금", "토"];
   const dayMs = 864e5;
-  function parseDate(d) { const [y, m, dd] = (d || "").split("-").map(Number); return y ? new Date(y, m - 1, dd) : null; }
-  function daysAgo(d) { const t = parseDate(d); if (!t) return Infinity; const now = new Date(); now.setHours(0, 0, 0, 0); return Math.round((now - t) / dayMs); }
-  function fmtAbs(d) { const [y, m, dd] = (d || "").split("-"); return y ? `${y}.${m}.${dd}` : ""; }
-  function fmtRel(d) { const n = daysAgo(d); if (n <= 0) return "오늘"; if (n === 1) return "어제"; if (n < 7) return `${n}일 전`; return fmtAbs(d); }
+  const parseDate = d => { const [y, m, dd] = String(d || "").split("-").map(Number); return y ? new Date(y, m - 1, dd) : null; };
+  const today0 = () => { const n = new Date(); n.setHours(0, 0, 0, 0); return n; };
+  const daysFrom = d => { const t = parseDate(d); return t ? Math.round((t - today0()) / dayMs) : NaN; };   // future positive
+  const fmtAbs = d => { const [y, m, dd] = String(d || "").split("-"); return y ? `${y}.${m}.${dd}` : ""; };
+  function fmtRel(d) { const n = -daysFrom(d); if (isNaN(n)) return ""; if (n <= 0) return "오늘"; if (n === 1) return "어제"; if (n < 7) return `${n}일 전`; return fmtAbs(d); }
+  function fmtTime(t) {
+    if (!t) return "";
+    const [h, m] = t.split(":").map(Number); const ap = h < 12 ? "오전" : "오후"; const h12 = h % 12 || 12;
+    return `${ap} ${h12}시${m ? ` ${m}분` : ""}`;
+  }
   const anchorOf = p => "post-" + String(p.id).replace(/[^\w-]/g, "-");
-
   function linkify(text) {
     const frag = document.createDocumentFragment();
     String(text || "").split(/(https?:\/\/[^\s)]+)/g).forEach((part, i) => {
@@ -293,177 +364,230 @@ footer p{margin:0}
     });
     return frag;
   }
-  function catTag(p) {
-    const t = el("span", "cat"); t.append(el("span", "tx dot " + txOf(p.category)), p.category || "소식"); return t;
-  }
-  function timeEl(p, cls) {
-    const t = el("time", cls, fmtRel(p.date)); t.dateTime = p.date || ""; t.title = fmtAbs(p.date); return t;
-  }
-  const icon = {
-    link: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>',
-    chev: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'
-  };
+  function timeEl(p, cls) { const t = el("time", cls, fmtRel(p.date)); t.dateTime = p.date || ""; t.title = fmtAbs(p.date); return t; }
+  let toastTimer;
+  function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 2200); }
   function copyBtn(p) {
     const b = el("button", "ghost"); b.type = "button"; b.innerHTML = icon.link; b.append("링크 복사");
     b.addEventListener("click", e => {
       e.stopPropagation();
       const url = location.origin + location.pathname + "#" + anchorOf(p);
-      const done = () => toast("링크를 복사했어요");
-      if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, () => prompt("링크를 복사하세요", url));
+      if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => toast("링크를 복사했어요"), () => prompt("링크를 복사하세요", url));
       else prompt("링크를 복사하세요", url);
     });
     return b;
   }
-  let toastTimer;
-  function toast(msg) {
-    const t = $("#toast"); t.textContent = msg; t.classList.add("show");
-    clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+  function expandable(btn, inner, open, onToggle) {
+    const panel = el("div", "panel"); const box = el("div"); box.append(inner); panel.append(box);
+    btn.setAttribute("aria-expanded", String(open)); panel.inert = !open;
+    btn.addEventListener("click", () => { const now = btn.getAttribute("aria-expanded") !== "true"; btn.setAttribute("aria-expanded", String(now)); panel.inert = !now; onToggle && onToggle(now); });
+    return panel;
+  }
+  const chevEl = () => { const c = el("span", "chev"); c.innerHTML = icon.chev; return c; };
+
+  const state = {posts: [], status: "loading", cat: "전체", q: "", limit: 8, open: new Set(), ntLimit: 4, evLimit: 5};
+
+  /* =========================================================
+     PEOPLE TEAM: cards on a horizontal track
+     ========================================================= */
+  const people = $("#people"), hz = $("#hz"), track = $("#track");
+  const introP = track.querySelector(".intro-p");
+  function ddayEl(date) { const n = daysFrom(date); return el("span", "dday" + (n === 0 ? " today" : ""), n === 0 ? "오늘" : `D-${n}`); }
+  function whereEl(p) {
+    const w = el("div", "where");
+    if (p.eventTime) { const s = el("span"); s.innerHTML = icon.clock; s.append(fmtTime(p.eventTime)); w.append(s); }
+    if (p.place) { const s = el("span"); s.innerHTML = icon.pin; s.append(p.place); w.append(s); }
+    return w;
+  }
+  function kindEl(label, cls, extra) {
+    const k = el("div", "kind"); k.append(el("span", "dot " + cls), label); if (extra) k.append(...[].concat(extra)); return k;
+  }
+  function eventCard(p, isNext) {
+    const c = el("article", "card ev-card" + (isNext ? " next" : "")); c.id = anchorOf(p); c.tabIndex = -1;
+    const d = parseDate(p.eventDate);
+    c.append(kindEl(isNext ? "다음 일정" : "일정", "c-event", ddayEl(p.eventDate)));
+    const big = el("div", "bigdate"); big.setAttribute("aria-hidden", "true");
+    big.append(el("span", "m", `${d.getMonth() + 1}월`), el("span", "d", String(d.getDate()).padStart(2, "0")), el("span", "w", WD[d.getDay()] + "요일"));
+    c.append(big, el("span", "sr-only", `${d.getMonth() + 1}월 ${d.getDate()}일 ${WD[d.getDay()]}요일`), el("h3", null, p.title), whereEl(p));
+    if (p.body) { const b = el("p", "body"); b.style.marginTop = ".8rem"; b.append(linkify(p.body)); c.append(b); }
+    return c;
+  }
+  function noticeCard(p) {
+    const c = el("article", "card nt-card"); c.id = anchorOf(p); c.tabIndex = -1;
+    const extra = -daysFrom(p.date) <= 7 ? el("span", "new", "새 공지") : null;
+    c.append(kindEl("공지", "c-notice", extra));
+    const d = parseDate(p.date);
+    const wb = el("div", "when-big"); wb.append(d ? `${d.getMonth() + 1}.${String(d.getDate()).padStart(2, "0")}` : ""); wb.append(el("small", null, p.team || "")); c.append(wb);
+    c.append(el("h3", null, p.title));
+    if (p.body) { const b = el("p", "body"); b.append(linkify(p.body)); c.append(b); }
+    const a = el("div", "actions"); a.append(copyBtn(p)); c.append(a);
+    return c;
+  }
+  function renderPeople() {
+    [...track.children].forEach(n => { if (n !== introP) n.remove(); });
+    if (state.status === "error") { const e = el("div", "empty-card"); e.append(el("b", null, "내용을 불러오지 못했어요."), "인터넷 연결을 확인한 뒤 새로고침해 주세요."); track.append(e); layoutHz(); return; }
+    const events = state.posts.filter(p => p.category === "일정" && p.eventDate && daysFrom(p.eventDate) >= 0)
+      .sort((a, b) => (a.eventDate + (a.eventTime || "")).localeCompare(b.eventDate + (b.eventTime || "")));
+    const notices = state.posts.filter(p => p.category === "공지").slice(0, 8);
+    $("#evCount").textContent = String(events.length);
+    $("#ntCount").textContent = String(state.posts.filter(p => p.category === "공지").length);
+    if (!events.length) { const e = el("div", "empty-card"); e.append(el("b", null, "예정된 일정이 없어요."), "새 일정이 올라오면 날짜순으로 여기에 보여요."); track.append(e); }
+    events.slice(0, 8).forEach((p, i) => track.append(eventCard(p, i === 0)));
+    if (!notices.length) { const e = el("div", "empty-card"); e.append(el("b", null, "아직 올라온 공지가 없어요."), "새 공지가 올라오면 여기에 보여요."); track.append(e); }
+    notices.forEach(p => track.append(noticeCard(p)));
+    track.append(el("div", "track-end"));
+    layoutHz();
   }
 
+  // section height = one screen + however far the track has to travel
+  let hzExtra = 0, hzShown = 0, hzRunning = false;
+  function layoutHz() {
+    if (root.classList.contains("static")) { people.style.height = ""; hz.classList.remove("flat"); return; }
+    hz.classList.remove("flat"); track.style.transform = "";
+    hzExtra = Math.max(0, track.scrollWidth - innerWidth);
+    if (hzExtra < 40) { hz.classList.add("flat"); people.style.height = ""; return; }
+    people.style.height = `${innerHeight + hzExtra}px`;
+    hzTick();
+  }
+  function hzTarget() { return clamp(-people.getBoundingClientRect().top / hzExtra); }
+  function hzTick() {
+    if (hz.classList.contains("flat") || root.classList.contains("static")) return;
+    if (!hzRunning) { hzRunning = true; requestAnimationFrame(hzFrame); }
+  }
+  function hzFrame() {
+    const t = hzTarget();
+    hzShown += (t - hzShown) * .18;
+    if (Math.abs(t - hzShown) < .0005) hzShown = t;
+    track.style.transform = `translate3d(${(-hzShown * hzExtra).toFixed(1)}px,0,0)`;
+    hz.style.setProperty("--hzp", hzShown.toFixed(4));
+    if (hzShown !== t) requestAnimationFrame(hzFrame); else hzRunning = false;
+  }
+  addEventListener("scroll", hzTick, {passive: true});
+  addEventListener("resize", () => { clearTimeout(layoutHz.t); layoutHz.t = setTimeout(layoutHz, 150); });
+  if (document.fonts) document.fonts.ready.then(layoutHz);
+  // keyboard and shared links: bring a card into view by scrolling the page to its spot on the track
+  function revealCard(card, smooth) {
+    if (hz.classList.contains("flat") || root.classList.contains("static")) { card.scrollIntoView({block: "center", inline: "start"}); return; }
+    const pad = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+    const x = clamp((card.offsetLeft - pad) / hzExtra);
+    scrollTo({top: people.offsetTop + x * hzExtra + 1, behavior: smooth && !reduce ? "smooth" : "auto"});
+  }
+  track.addEventListener("focusin", e => { const c = e.target.closest(".card"); if (c) revealCard(c, false); });
+
+  /* =========================================================
+     NEWS (everything that is not a notice or an event)
+     ========================================================= */
+  const CATS = [{name: "전체"}, {name: "팀 이야기", c: "c-team"}, {name: "제품", c: "c-product"}, {name: "채용", c: "c-hiring"}];
+  const cOf = n => (CATS.find(c => c.name === n) || {}).c || "c-team";
+  const isNews = p => p.category !== "공지" && p.category !== "일정";
   function matches(p) {
+    if (!isNews(p)) return false;
     if (state.cat !== "전체" && p.category !== state.cat) return false;
     if (!state.q) return true;
     const q = state.q.toLowerCase();
     return [p.title, p.body, p.team, p.category].some(v => String(v || "").toLowerCase().includes(q));
   }
-
   const chips = $("#chips");
   function renderChips() {
     chips.replaceChildren();
+    const news = state.posts.filter(isNews);
     CATS.forEach(c => {
-      const n = c.name === "전체" ? state.posts.length : state.posts.filter(p => p.category === c.name).length;
+      const n = c.name === "전체" ? news.length : news.filter(p => p.category === c.name).length;
       if (c.name !== "전체" && !n) return;
-      const b = el("button", "chip"); b.type = "button";
-      b.setAttribute("aria-pressed", String(c.name === state.cat));
-      if (c.tx) b.append(el("span", "tx dot " + c.tx));
+      const b = el("button", "chip"); b.type = "button"; b.setAttribute("aria-pressed", String(c.name === state.cat));
+      if (c.c) b.append(el("span", "dot " + c.c));
       b.append(c.name, el("span", "n", String(n)));
-      b.addEventListener("click", () => { state.cat = c.name; state.limit = PAGE; renderChips(); renderFeed(); });
+      b.addEventListener("click", () => { state.cat = c.name; state.limit = 8; renderChips(); renderFeed(); });
       chips.append(b);
     });
   }
-
   function renderFeed() {
-    const feed = $("#feed");
-    feed.replaceChildren();
-    if (state.status === "error") {
-      const e = el("div", "empty"); e.append(el("b", null, "소식을 불러오지 못했어요."), "인터넷 연결을 확인한 뒤 새로고침해 주세요."); feed.append(e); return;
-    }
+    const feed = $("#feed"); feed.replaceChildren();
+    if (state.status === "error") { feed.append(errorEl()); return; }
     const shown = state.posts.filter(matches);
     if (!shown.length) {
       const e = el("div", "empty");
       if (state.q) e.append(el("b", null, `‘${state.q}’ 에 맞는 소식이 없어요.`), "다른 단어로 찾거나 분류를 전체로 바꿔 보세요.");
-      else if (!state.posts.length) e.append(el("b", null, "아직 올라온 소식이 없어요."), "슬랙 #홈페이지-소식 채널에 첫 글을 남겨 보세요.");
-      else e.append(el("b", null, "이 분류에는 아직 소식이 없어요."), "다른 분류를 골라 보세요.");
+      else e.append(el("b", null, "아직 올라온 소식이 없어요."), "슬랙 #홈페이지-소식 채널에 첫 글을 남겨 보세요.");
       feed.append(e); return;
     }
     const [f, ...rest] = shown;
-
-    // featured
     const art = el("article", "featured"); art.id = anchorOf(f);
     const left = el("div");
-    const meta = el("div", "meta"); meta.append(catTag(f), timeEl(f), el("span", null, f.team || ""));
-    if (daysAgo(f.date) <= 7) meta.append(el("span", "new", "새 소식"));
+    const meta = el("div", "meta"); const cat = el("span", "cat"); cat.append(el("span", "dot " + cOf(f.category)), f.category || "소식");
+    meta.append(cat, timeEl(f), el("span", null, f.team || ""));
+    if (-daysFrom(f.date) <= 7) meta.append(el("span", "new", "새 소식"));
     const body = el("p", "body"); body.append(linkify(f.body));
     const acts = el("div", "actions"); acts.append(copyBtn(f));
     left.append(meta, el("h3", null, f.title), body, acts);
-    const sw = el("div", "swatch " + txOf(f.category)); sw.setAttribute("aria-hidden", "true");
-    art.append(left, sw);
-    feed.append(art);
-
+    const d = parseDate(f.date); const mark = el("div", "mark"); mark.setAttribute("aria-hidden", "true");
+    if (d) { mark.append(`${d.getMonth() + 1}.${String(d.getDate()).padStart(2, "0")}`); mark.append(el("small", null, String(d.getFullYear()))); }
+    art.append(left, mark); feed.append(art);
     if (!rest.length) return;
     const list = el("ul", "list");
     rest.slice(0, state.limit).forEach(p => {
       const li = el("li", "row"); li.id = anchorOf(p);
       const btn = el("button", "row-btn"); btn.type = "button";
-      const pid = "panel-" + anchorOf(p);
-      const open = state.open.has(p.id);
-      btn.setAttribute("aria-expanded", String(open)); btn.setAttribute("aria-controls", pid);
-      const main = el("span", "row-main");
-      const txt = el("span");
+      const main = el("span", "row-main"); const txt = el("span");
       const sub = el("span", "row-sub"); sub.append(el("span", null, p.category || ""), el("span", null, p.team || ""));
-      if (daysAgo(p.date) <= 7) sub.append(el("span", "new", "새 소식"));
+      if (-daysFrom(p.date) <= 7) sub.append(el("span", "new", "새 소식"));
       txt.append(el("span", "row-title", p.title), sub);
-      main.append(el("span", "tx dot " + txOf(p.category)), txt);
-      const chev = el("span", "chev"); chev.innerHTML = icon.chev;
-      btn.append(timeEl(p, "when"), main, chev);
-      const panel = el("div", "panel"); panel.id = pid; panel.setAttribute("role", "region");
-      const inner = el("div"); const pi = el("div", "panel-inner");
-      const pb = el("p", "body"); pb.append(linkify(p.body));
-      const pa = el("div", "actions"); pa.append(copyBtn(p));
-      pi.append(pb, pa); inner.append(pi); panel.append(inner);
-      if (!open) panel.inert = true;
-      btn.addEventListener("click", () => {
-        const now = btn.getAttribute("aria-expanded") !== "true";
-        btn.setAttribute("aria-expanded", String(now)); panel.inert = !now;
-        now ? state.open.add(p.id) : state.open.delete(p.id);
-      });
-      li.append(btn, panel); list.append(li);
+      main.append(el("span", "dot " + cOf(p.category)), txt);
+      btn.append(timeEl(p, "when"), main, chevEl());
+      const inner = el("div", "panel-inner"); const pb = el("p", "body"); pb.append(linkify(p.body)); const pa = el("div", "actions"); pa.append(copyBtn(p)); inner.append(pb, pa);
+      li.append(btn, expandable(btn, inner, state.open.has(p.id), now => now ? state.open.add(p.id) : state.open.delete(p.id)));
+      list.append(li);
     });
     feed.append(list);
-
-    const left2 = rest.length - state.limit;
-    if (left2 > 0) {
-      const m = el("div", "more"); const b = el("button", "ghost", `소식 더 보기 (${left2})`); b.type = "button";
-      b.addEventListener("click", () => { state.limit += PAGE; renderFeed(); });
-      m.append(b); feed.append(m);
-    }
+    if (rest.length > state.limit) feed.append(moreBtn(`소식 더 보기 (${rest.length - state.limit})`, () => { state.limit += 8; renderFeed(); }));
   }
-
   let qTimer;
-  $("#q").addEventListener("input", e => {
-    clearTimeout(qTimer);
-    qTimer = setTimeout(() => { state.q = e.target.value.trim(); state.limit = PAGE; renderFeed(); }, 160);
-  });
+  $("#q").addEventListener("input", e => { clearTimeout(qTimer); qTimer = setTimeout(() => { state.q = e.target.value.trim(); state.limit = 8; renderFeed(); }, 160); });
 
+  function renderAll() { renderPeople(); renderChips(); renderFeed(); }
   function openFromHash() {
     const h = decodeURIComponent(location.hash.slice(1));
     if (!h.startsWith("post-")) return;
-    const p = state.posts.find(x => anchorOf(x) === h);
-    if (!p) return;
-    state.cat = "전체"; state.q = ""; $("#q").value = "";
-    const idx = state.posts.indexOf(p);
-    state.limit = Math.max(PAGE, idx + 1);
-    if (idx > 0) state.open.add(p.id);
-    renderChips(); renderFeed();
-    requestAnimationFrame(() => { const t = document.getElementById(h); if (t) t.scrollIntoView({block: "start"}); });
+    const p = state.posts.find(x => anchorOf(x) === h); if (!p) return;
+    if (isNews(p)) {
+      state.cat = "전체"; state.q = ""; $("#q").value = "";
+      const i = state.posts.filter(isNews).indexOf(p); state.limit = Math.max(8, i + 1); if (i > 0) state.open.add(p.id);
+      renderChips(); renderFeed();
+      requestAnimationFrame(() => { const t = document.getElementById(h); if (t) t.scrollIntoView({block: "start"}); });
+    } else {
+      requestAnimationFrame(() => { const t = document.getElementById(h); if (t) revealCard(t, false); });
+    }
   }
   addEventListener("hashchange", openFromHash);
-
   function setPosts(data) {
     state.posts = (Array.isArray(data) ? data : []).filter(p => p && p.title)
       .sort((a, b) => (b.date || "").localeCompare(a.date || "") || String(b.id).localeCompare(String(a.id)));
-    state.status = "ready";
-    renderChips(); renderFeed(); openFromHash();
+    state.status = "ready"; renderAll(); openFromHash();
   }
   if (Array.isArray(window.__PREVIEW_POSTS)) setPosts(window.__PREVIEW_POSTS);
-  else fetch("posts.json", {cache: "no-store"})
-    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(setPosts)
-    .catch(() => { state.status = "error"; renderFeed(); });
+  else fetch("posts.json", {cache: "no-store"}).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(setPosts).catch(() => { state.status = "error"; renderAll(); });
 
-  /* header: solid after hero, current section */
+  /* header: current section + solid after the film */
   const head = $("#head");
   const navLinks = [...document.querySelectorAll(".site-head nav a")];
   const secObs = new IntersectionObserver(entries => {
     entries.forEach(en => { if (en.isIntersecting) navLinks.forEach(a => a.setAttribute("aria-current", String(a.dataset.sec === en.target.id))); });
   }, {rootMargin: "-45% 0px -50% 0px"});
-  ["news", "how"].forEach(id => secObs.observe(document.getElementById(id)));
+  ["people", "news", "how"].forEach(id => secObs.observe(document.getElementById(id)));
   new IntersectionObserver(([en]) => { if (en.isIntersecting) navLinks.forEach(a => a.setAttribute("aria-current", "false")); }, {rootMargin: "-45% 0px -50% 0px"}).observe($("#top"));
+  addEventListener("scroll", () => { head.classList.toggle("solid", $("#people").getBoundingClientRect().top <= 120); }, {passive: true});
 
   /* =========================================================
-     HERO: brand film scrubbed by scroll (no overlay text)
+     HERO: brand film scrubbed by scroll, then it settles into the page
      ========================================================= */
-  const hero = $("#top"), stage = $("#stage"), video = $("#film"), still = $("#still");
-  const root = document.documentElement;
-  const DUR = 23.2;           // seconds of film used
-  const FILM_END = .92;       // share of the scroll spent playing; the rest holds the logo
+  const hero = $("#top"), stage = $("#stage"), wrap = $("#filmWrap"), video = $("#film"), still = $("#still");
+  const DUR = 23.2;          // seconds of film used
+  const FILM_END = .86;      // share of the scroll spent playing; the rest eases the logo away
   const portrait = matchMedia("(max-aspect-ratio: 1/1)");
   const media = () => portrait.matches
     ? {film: "film/film-m.mp4", poster: "film/poster-m.jpg", end: "film/end-m.jpg"}
     : {film: "film/film-d.mp4", poster: "film/poster-d.jpg", end: "film/end-d.jpg"};
   const preview = Array.isArray(window.__PREVIEW_FRAMES) ? window.__PREVIEW_FRAMES : null;
-  if (reduce) root.classList.add("static");
-  const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 
   function progress() {
     if (root.classList.contains("static")) return 1;
@@ -471,19 +595,42 @@ footer p{margin:0}
     return clamp(-r.top / (hero.offsetHeight - innerHeight));
   }
 
-  // film is fetched whole so every seek is served from memory
+  // preview only: frames are decoded from embedded bytes straight onto a canvas
+  let pvCanvas = null, pvCtx = null, pvBlobs = [], pvWant = -1;
+  function setupPreview() {
+    if (pvCanvas) return;
+    pvCanvas = document.createElement("canvas"); pvCanvas.setAttribute("aria-hidden", "true");
+    wrap.prepend(pvCanvas); pvCtx = pvCanvas.getContext("2d");
+    const fit = () => { const d = Math.min(devicePixelRatio || 1, 2); pvCanvas.width = stage.clientWidth * d; pvCanvas.height = stage.clientHeight * d; if (pvWant >= 0) drawPreview(pvWant); };
+    fit(); addEventListener("resize", fit);
+  }
+  function pvBlob(i) {
+    if (!pvBlobs[i]) {
+      const bin = atob(preview[i].slice(preview[i].indexOf(",") + 1)), u = new Uint8Array(bin.length);
+      for (let k = 0; k < bin.length; k++) u[k] = bin.charCodeAt(k);
+      pvBlobs[i] = new Blob([u], {type: "image/jpeg"});
+    }
+    return pvBlobs[i];
+  }
+  function drawPreview(i) {
+    pvWant = i;
+    createImageBitmap(pvBlob(i)).then(bm => {
+      if (pvWant !== i) { bm.close && bm.close(); return; }
+      const W = pvCanvas.width, H = pvCanvas.height, s = Math.max(W / bm.width, H / bm.height), w = bm.width * s, h = bm.height * s;
+      pvCtx.fillStyle = "#fff"; pvCtx.fillRect(0, 0, W, H);
+      pvCtx.drawImage(bm, (W - w) / 2, (H - h) / 2, w, h); bm.close && bm.close();
+    }).catch(() => {});
+  }
+
   let blobUrl = null, loadToken = 0;
   function loadFilm() {
     const m = media(), token = ++loadToken;
-    if (preview) { video.hidden = true; still.hidden = false; still.src = preview[0]; return; }
+    if (preview) { video.hidden = true; still.hidden = true; setupPreview(); drawPreview(root.classList.contains("static") ? preview.length - 1 : 0); return; }
     video.poster = m.poster;
-    if (root.classList.contains("static")) { still.hidden = false; still.src = m.end; return; }
+    if (root.classList.contains("static")) { video.hidden = true; still.hidden = false; still.src = m.end; return; }
     video.src = m.film; video.load();
     video.play().then(() => video.pause()).catch(() => {});
-    fetch(m.film).then(res => {
-      if (!res.ok) throw new Error(res.status);
-      return res.blob();
-    }).then(b => {
+    fetch(m.film).then(res => { if (!res.ok) throw new Error(res.status); return res.blob(); }).then(b => {
       if (token !== loadToken) return;
       const at = video.currentTime;
       if (blobUrl) URL.revokeObjectURL(blobUrl);
@@ -502,19 +649,17 @@ footer p{margin:0}
     if (Math.abs(target - shown) < .004) shown = target;
     if (preview) {
       const i = Math.round(shown / DUR * (preview.length - 1));
-      if (i !== lastPreview) { still.src = preview[i]; lastPreview = i; }
+      if (i !== lastPreview) { lastPreview = i; drawPreview(i); }
     } else if (video.readyState >= 1 && !video.seeking && Math.abs(video.currentTime - shown) > .02) {
       video.currentTime = Math.min(shown, (video.duration || DUR) - .05);
     }
+    // after the logo lands, the frame shrinks and lifts so the page below takes over
+    const e = easeOut(clamp((p - FILM_END) / (1 - FILM_END)));
+    wrap.style.transform = `translateY(${(-14 * e).toFixed(2)}%) scale(${(1 - .34 * e).toFixed(4)})`;
     head.style.setProperty("--hp", p.toFixed(4));
     if (visible && !root.classList.contains("static")) requestAnimationFrame(frame); else running = false;
   }
   function start() { if (!running && !root.classList.contains("static")) { running = true; requestAnimationFrame(frame); } }
-
-  addEventListener("scroll", () => {
-    const r = $("#news").getBoundingClientRect();
-    head.classList.toggle("solid", r.top <= 120);
-  }, {passive: true});
 
   loadFilm();
   if (!root.classList.contains("static")) {
