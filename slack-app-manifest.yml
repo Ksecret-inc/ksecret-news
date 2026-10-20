@@ -1,0 +1,17 @@
+display_information:
+  name: Ksecret Homepage Bot
+  description: 홈페이지-소식 채널에서 확인된 글을 회사 홈페이지로 옮깁니다.
+features:
+  bot_user:
+    display_name: homepage-bot
+    always_online: false
+oauth_config:
+  scopes:
+    bot:
+      - channels:history
+      - groups:history
+      - users:read
+settings:
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
