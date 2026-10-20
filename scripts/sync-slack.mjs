@@ -13,7 +13,7 @@ const EMOJI = process.env.APPROVE_EMOJI || "white_check_mark";
 const APPROVERS = (process.env.APPROVER_IDS || "").split(",").map(s => s.trim()).filter(Boolean);
 const LOOKBACK_DAYS = 90;
 const OUT = "site/posts.json";
-const CATEGORIES = ["공지", "팀 이야기", "제품", "채용"];
+const CATEGORIES = ["공지", "일정", "팀 이야기", "제품", "채용"];
 
 if (!TOKEN || !CHANNEL) {
   console.error("SLACK_BOT_TOKEN 과 SLACK_CHANNEL_ID 를 설정해 주세요.");
@@ -43,14 +43,54 @@ function clean(text) {
 }
 
 // 첫 줄 "[분류] 제목", 다음 줄부터 본문
-function parse(text) {
+// [일정] 글은 "일시:" "장소:" 줄을 따로 읽어 날짜순 정리에 씁니다.
+function parse(text, postDate) {
   const lines = clean(text).split("\n");
   const first = lines.shift() || "";
   const m = first.match(/^\s*\[([^\]]+)\]\s*(.+)$/);
-  const category = m && CATEGORIES.includes(m[1].trim()) ? m[1].trim() : "공지";
+  let category = m && CATEGORIES.includes(m[1].trim()) ? m[1].trim() : "공지";
   const title = (m ? m[2] : first).trim();
-  const body = lines.join("\n").trim();
-  return { category, title, body };
+  const extra = {};
+  let rest = lines;
+  if (category === "일정") {
+    rest = [];
+    for (const line of lines) {
+      const kv = line.match(/^\s*(일시|날짜|시간|장소)\s*[:：]\s*(.+)$/);
+      if (!kv) { rest.push(line); continue; }
+      if (kv[1] === "장소") extra.place = kv[2].trim();
+      else Object.assign(extra, parseWhen(kv[2], postDate, extra));
+    }
+    if (!extra.eventDate) {
+      console.warn(`일정 날짜를 읽지 못해 공지로 올립니다: ${title}`);
+      category = "공지"; rest = lines;
+      for (const k of Object.keys(extra)) delete extra[k];
+    }
+  }
+  return { category, title, body: rest.join("\n").trim(), ...extra };
+}
+
+// "2026-11-14 15:00", "11/14 오후 3시", "11월 14일(금) 오후 3시 30분" 등을 읽습니다.
+function parseWhen(str, postDate, prev = {}) {
+  const out = {};
+  let s = str.replace(/\(.\)/g, " ");
+  let y, mo, d;
+  let r = s.match(/(\d{4})\s*[-./년]\s*(\d{1,2})\s*[-./월]\s*(\d{1,2})\s*일?/);
+  if (r) { [y, mo, d] = [+r[1], +r[2], +r[3]]; s = s.replace(r[0], " "); }
+  else if ((r = s.match(/(\d{1,2})\s*월\s*(\d{1,2})\s*일/)) || (r = s.match(/(\d{1,2})\s*[/.]\s*(\d{1,2})(?!\s*:)/))) {
+    [mo, d] = [+r[1], +r[2]]; s = s.replace(r[0], " ");
+    const [py, pm] = postDate.split("-").map(Number);
+    y = py; if (mo < pm - 2) y = py + 1;          // 12월에 쓴 "1월 5일"은 다음 해
+  }
+  if (mo && d) out.eventDate = `${y}-${String(mo).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+  let t = s.match(/(\d{1,2})\s*:\s*(\d{2})/), h, mi = 0;
+  const pm = /오후|저녁|밤/.test(s), am = /오전|아침/.test(s);
+  if (t) { h = +t[1]; mi = +t[2]; }
+  else if ((t = s.match(/(\d{1,2})\s*시(?:\s*(\d{1,2})\s*분|\s*반)?/))) { h = +t[1]; mi = t[2] ? +t[2] : /반/.test(t[0]) ? 30 : 0; }
+  if (h != null) {
+    if (pm && h < 12) h += 12; if (am && h === 12) h = 0;
+    if (h < 24 && mi < 60) out.eventTime = `${String(h).padStart(2, "0")}:${String(mi).padStart(2, "0")}`;
+  }
+  return out;
 }
 
 function isApproved(msg) {
@@ -97,9 +137,10 @@ for (const msg of messages) {
   if (msg.subtype || !msg.text) continue; // 입장 알림, 봇 메시지 등 제외
   fetchedIds.add(msg.ts);
   if (!isApproved(msg)) continue;
-  const { category, title, body } = parse(msg.text);
+  const date = seoulDate(msg.ts);
+  const { title, ...rest } = parse(msg.text, date);
   if (!title) continue;
-  approved.push({ id: msg.ts, date: seoulDate(msg.ts), category, team: await teamOf(msg.user), title, body });
+  approved.push({ id: msg.ts, date, team: await teamOf(msg.user), title, ...rest });
 }
 
 // 3) 기존 목록과 합치기
