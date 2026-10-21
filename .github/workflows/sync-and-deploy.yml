@@ -2,10 +2,10 @@ name: 슬랙 소식 동기화 및 배포
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
-  workflow_dispatch:
+    - cron: "*/10 * * * *"   # 10분마다 슬랙 확인 (GitHub 사정에 따라 몇 분 늦어질 수 있음)
+  workflow_dispatch:          # Actions 탭에서 수동 실행
   push:
-    branches: [main]
+    branches: [main]          # 디자인 수정 등을 push 하면 바로 배포
 
 permissions:
   contents: write
@@ -24,6 +24,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main            # 실행 시점의 최신 main 을 받아요
 
       - uses: actions/setup-node@v4
         with:
@@ -35,6 +37,7 @@ jobs:
           SLACK_CHANNEL_ID: ${{ vars.SLACK_CHANNEL_ID }}
           APPROVER_IDS: ${{ vars.APPROVER_IDS }}
           APPROVE_EMOJI: ${{ vars.APPROVE_EMOJI }}
+          OWNER_IDS: ${{ vars.OWNER_IDS }}
         run: node scripts/sync-slack.mjs
 
       - name: 바뀐 소식 저장
@@ -47,7 +50,12 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add site/posts.json
             git commit -m "소식 동기화"
-            git push
+            # 그사이 다른 커밋이 올라왔으면 받아서 합친 뒤 다시 올려요 (최대 3번)
+            for i in 1 2 3; do
+              if git pull --rebase origin main && git push; then pushed=1; break; fi
+              sleep 5
+            done
+            [ "$pushed" = 1 ] || { echo "저장소에 올리지 못했어요. 다음 실행 때 다시 시도합니다."; exit 1; }
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
