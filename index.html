@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>케이시크릿 소식</title>
+<meta name="description" content="SEOUL 1988을 만드는 케이시크릿의 업무 일정, 인사이트, 팀 이야기.">
+<meta property="og:title" content="케이시크릿 소식">
+<meta property="og:description" content="SEOUL 1988을 만드는 케이시크릿의 업무 일정, 인사이트, 팀 이야기.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💧</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* SEOUL 1988 palette, sampled from the brand film */
+:root{
+  --paper:#FFFFFF;      /* the film's last frame */
+  --cream:#F6F2E7;      /* bottle body, lightened */
+  --bottle:#EAE4CF;     /* bottle body */
+  --butter:#E6E0B5;     /* cream texture */
+  --red:#C64046;        /* SEOUL 1988 label */
+  --red-ink:#A8323A;    /* red for text and buttons on light grounds */
+  --ink:#1F1B18; --mute:#746D66; --line:#E8E3D7;
+  --body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --num:"Oswald","Arial Narrow","IBM Plex Sans KR",sans-serif;
+  --ease:cubic-bezier(.2,.7,.1,1);
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:anywhere}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--red-ink);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1120px,100% - 2.5rem);margin-inline:auto}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+h2,h3{font-weight:600;letter-spacing:-.025em}
+
+/* ---------- header: menu only ---------- */
+.site-head{position:fixed;top:0;left:0;right:0;z-index:20;padding-top:env(safe-area-inset-top,0px);transition:background .35s var(--ease),box-shadow .35s var(--ease)}
+.site-head.solid{background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.site-head .wrap{display:flex;align-items:center;justify-content:flex-end;height:60px}
+.site-head nav{display:flex;gap:1.6rem;font-size:.95rem}
+.site-head nav a{text-decoration:none;color:var(--mute);padding:.3rem 0;position:relative}
+.site-head nav a:hover,.site-head nav a[aria-current="true"]{color:var(--ink)}
+.site-head nav a[aria-current="true"]::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;border-radius:2px;background:var(--red)}
+.story-bar{position:absolute;left:0;bottom:0;height:2px;width:100%;transform-origin:left;transform:scaleX(var(--hp,0));background:var(--ink);transition:opacity .3s}
+.site-head.solid .story-bar{opacity:0}
+
+/* ---------- hero: campaign film scrubbed by scroll ---------- */
+.hero{position:relative;height:640vh}
+@media (max-aspect-ratio:1/1){.hero{height:540vh}}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#fff}
+.film{position:absolute;inset:0;transform-origin:50% 50%;will-change:transform;background:#fff;clip-path:inset(1px)}
+.film video,.film canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#fff}
+.static .hero{height:auto}
+.static .stage{position:relative}
+/* opening: the film first shows through a capsule, like looking into the bottle */
+.film{transition:background .4s}
+
+
+/* ---------- shared bits ---------- */
+.sec-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:1.2rem 2rem;margin-bottom:2.4rem}
+.sec-head h2{font-size:clamp(2rem,4.4vw,3.1rem);line-height:1.15;margin:0}
+.sec-head .lede{margin:.55rem 0 0;color:var(--mute);max-width:42ch}
+.ghost{font:500 .88rem/1 var(--body);padding:.62rem .95rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;transition:border-color .2s}
+.ghost:hover{border-color:var(--mute)}
+.ghost svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+.body{white-space:pre-line;max-width:62ch;margin:0}
+.body a{color:var(--red-ink);text-underline-offset:3px}
+.new{font-size:.76rem;font-weight:600;padding:.16rem .5rem;border-radius:6px;background:var(--red);color:#fff}
+.empty{padding:2.4rem 0;color:var(--mute)}
+.empty b{display:block;color:var(--ink);font-weight:600;margin-bottom:.2rem}
+.chev{width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;flex:none;transition:transform .35s var(--ease),background .25s}
+.chev svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:2}
+[aria-expanded="true"] .chev{transform:rotate(180deg);background:var(--bottle)}
+.panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--ease)}
+.panel>div{overflow:hidden}
+[aria-expanded="true"]+.panel{grid-template-rows:1fr}
+.actions{margin-top:1.2rem;display:flex;gap:.6rem}
+.sk{height:4.6rem;border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;gap:.5rem}
+.sk span{height:.85rem;border-radius:6px;background:var(--cream);width:40%}
+.sk span:last-child{width:70%;height:1.05rem}
+
+/* ---------- schedule + insights: a 3D ring of cards turned by scrolling ---------- */
+.people{position:relative;z-index:2;margin-top:-45vh}
+.static .people{margin-top:0}
+.static .people{margin-top:0}
+.hz{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;padding:48px 0 28px;isolation:isolate}
+.hz-film{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;object-fit:cover;opacity:var(--fo,0);transition:opacity .6s var(--ease);will-change:transform}
+.hz-film{-webkit-mask-image:linear-gradient(to bottom,transparent,#000 32%);mask-image:linear-gradient(to bottom,transparent,#000 32%)}
+.static .hz-film{display:none}
+.hz::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(70% 38% at 50% 14%,rgba(255,255,255,.92),rgba(255,255,255,0) 70%),linear-gradient(to top,rgba(255,255,255,.75),rgba(255,255,255,0) 22%)}
+.hz>:not(.hz-film){position:relative;z-index:1}
+.ring-head{text-align:center;padding:0 1.25rem}
+.ring-head h1{font-size:clamp(1.8rem,3.4vw,2.7rem);font-weight:700;line-height:1.28;letter-spacing:-.035em;margin:0 auto;max-width:15em;text-wrap:balance}
+.ring-meta{display:flex;justify-content:center;align-items:center;gap:.7rem;margin-top:1.1rem;flex-wrap:wrap}
+.ring-meta .c{display:inline-flex;align-items:center;gap:.65rem;padding:.4rem 1.1rem .4rem .4rem;border-radius:999px;background:rgba(255,255,255,.94);box-shadow:0 10px 26px -14px rgba(60,30,20,.45),inset 0 0 0 1px var(--line);font-size:1rem;font-weight:600;color:var(--ink)}
+.ring-meta .c b{display:grid;place-items:center;min-width:2.3rem;height:2.3rem;padding:0 .45rem;border-radius:999px;font-family:var(--num);font-weight:600;font-size:1.3rem;line-height:1;color:#fff;background:var(--red)}
+.ring-meta .c.ins b{background:var(--ink)}
+.ring-stage{position:relative;perspective:1500px;perspective-origin:50% 40%;display:grid;place-items:center;min-height:0}
+.ring{position:relative;width:var(--cw);height:var(--ch);transform-style:preserve-3d;will-change:transform}
+.rcard{position:absolute;inset:0;border-radius:26px;padding:1.5rem 1.5rem 1.4rem;display:flex;flex-direction:column;text-align:left;cursor:pointer;text-decoration:none;color:var(--ink);backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 30px 60px -36px rgba(60,30,20,.45);transition:box-shadow .3s}
+.rcard:hover{box-shadow:0 34px 70px -30px rgba(60,30,20,.55)}
+.rcard:focus-visible{outline:3px solid var(--red-ink);outline-offset:4px}
+.rcard .kind{display:flex;align-items:center;gap:.5rem;font-size:.84rem;color:var(--mute);flex-wrap:wrap}
+.rcard .kind .dot{width:.6rem;height:.6rem}
+.rcard h3{font-size:clamp(1.15rem,1.8vw,1.4rem);line-height:1.35;margin:.7rem 0 .5rem}
+.rcard .body{font-size:.92rem;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+.rcard .open{margin-top:auto;padding-top:.8rem;font-size:.86rem;font-weight:600;display:flex;align-items:center;gap:.35rem;opacity:.75}
+.rcard .bigdate{font-family:var(--num);line-height:.9;color:var(--red);margin-top:auto}
+.rcard .bigdate .m{display:block;font-size:1rem;font-weight:500;color:var(--ink);margin-bottom:.25rem}
+.rcard .bigdate .d{display:block;font-size:clamp(3.6rem,6vw,4.8rem);font-weight:600;letter-spacing:-.02em}
+.rcard .bigdate .w{display:block;font-family:var(--body);font-size:.9rem;color:var(--mute);margin-top:.35rem}
+.r-ev{background:var(--cream)}
+.r-ev.next{background:var(--red);color:#fff}
+.r-ev.next .kind,.r-ev.next .bigdate,.r-ev.next .bigdate .m,.r-ev.next .bigdate .w{color:#fff}
+.r-ev.next .dot{background:#fff}
+.r-ev.next .dday{border-color:#fff;color:#fff}
+.r-ev.next .where svg{stroke:#fff}
+.r-in{background:var(--paper);box-shadow:inset 0 0 0 1px var(--line),0 30px 60px -36px rgba(60,30,20,.45)}
+.r-in .when-big{font-family:var(--num);font-weight:600;font-size:1.7rem;line-height:1;margin-top:1.2rem}
+.r-in .when-big small{font-family:var(--body);font-weight:400;font-size:.82rem;color:var(--mute);margin-left:.45rem}
+.r-empty{background:var(--cream);color:var(--mute);justify-content:center;cursor:default}
+.r-empty b{color:var(--ink);display:block;margin-bottom:.3rem}
+.where{display:flex;flex-direction:column;gap:.1rem;font-size:.9rem}
+.where span{display:flex;gap:.45rem;align-items:center}
+.where svg{width:14px;height:14px;stroke:var(--mute);fill:none;stroke-width:2;flex:none}
+.dday{font-family:var(--num);font-weight:500;font-size:.92rem;letter-spacing:.02em;padding:.12rem .55rem;border-radius:999px;border:1.5px solid var(--red);color:var(--red-ink);white-space:nowrap;margin-left:auto}
+.dday.today{background:var(--red);color:#fff}
+.c-event{background:var(--red)}
+.c-insight{background:var(--butter);box-shadow:inset 0 0 0 1px #CFC690}
+.c-notice{background:var(--ink)}
+.hz-bar{width:min(520px,100% - 2.5rem);margin:0 auto;height:2px;background:var(--line);border-radius:2px;overflow:hidden}
+.hz-bar span{display:block;height:100%;background:var(--ink);transform-origin:left;transform:scaleX(var(--hzp,0))}
+.static .hz{position:relative;height:auto;min-height:100svh}
+@media (max-width:760px){
+  .hz{padding-top:40px}
+  .ring-stage{perspective:1000px}
+}
+
+/* ---------- the list page (#work) ---------- */
+.work{display:none;padding:56px 0 5rem;min-height:100vh}
+.in-work .work{display:block}
+.in-work main>section:not(.work){display:none}
+.in-work .site-head{background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.back{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;color:var(--mute);font-size:.92rem;margin-bottom:1.6rem}
+.back:hover{color:var(--ink)}
+.back:focus-visible{outline:2px solid var(--red-ink);outline-offset:3px;border-radius:6px}
+.back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.work h1{font-size:clamp(1.9rem,4vw,3rem);font-weight:700;line-height:1.25;letter-spacing:-.035em;margin:0 0 1.8rem;max-width:16em}
+.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:3rem}
+.work h2{font-size:1.35rem;margin:0 0 1.2rem;display:flex;align-items:baseline;gap:.6rem}
+.work h2 .n{font-family:var(--num);font-weight:500;color:var(--mute);font-size:1.1rem}
+.w-block{margin-bottom:4rem}
+.month{font-family:var(--num);font-weight:500;font-size:1rem;letter-spacing:.04em;color:var(--mute);margin:2rem 0 .4rem;padding-bottom:.5rem;border-bottom:2px solid var(--ink)}
+.w-ev{display:grid;grid-template-columns:5.2rem 1fr auto;gap:1.2rem;align-items:start;padding:1.2rem .3rem;border-bottom:1px solid var(--line);scroll-margin-top:110px;border-radius:12px;transition:background .6s}
+.w-ev .date{font-family:var(--num);line-height:1}
+.w-ev .date b{display:block;font-size:2.2rem;font-weight:600;color:var(--red)}
+.w-ev .date i{font-style:normal;display:block;font-family:var(--body);font-size:.82rem;color:var(--mute);margin-top:.3rem}
+.w-ev .t{font-weight:600;font-size:1.12rem;line-height:1.45}
+.w-ev .s{color:var(--mute);font-size:.88rem;display:flex;gap:.2rem .9rem;flex-wrap:wrap;margin-top:.2rem}
+.w-ev .body{margin-top:.6rem;font-size:.95rem}
+.w-ev.past .date b{color:var(--mute)}
+.w-ev.past{opacity:.7}
+.w-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
+.w-in{border-radius:22px;padding:1.6rem;box-shadow:inset 0 0 0 1px var(--line);scroll-margin-top:110px;transition:box-shadow .6s,background .6s;display:flex;flex-direction:column}
+.w-in .meta{margin-bottom:.6rem}
+.w-in h3{font-size:1.25rem;line-height:1.4;margin:0 0 .6rem}
+.w-in .actions{margin-top:auto;padding-top:1rem}
+.focus{background:color-mix(in srgb,var(--butter) 55%,transparent)}
+.w-in.focus{box-shadow:inset 0 0 0 2px var(--red)}
+.past-toggle{margin-top:1.2rem}
+@media (max-width:760px){
+  .w-ev{grid-template-columns:4.2rem 1fr;gap:.9rem}
+  .w-ev .dday{grid-column:2;justify-self:start;margin-left:0}
+}
+
+/* ---------- news ---------- */
+.news{padding:5.5rem 0 5.5rem;border-top:1px solid var(--line)}
+.search{position:relative;width:min(320px,100%)}
+.search input{width:100%;font:inherit;font-size:.95rem;padding:.78rem 1rem .78rem 2.6rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+.search input::placeholder{color:var(--mute)}
+.search input:focus{outline:2px solid var(--red-ink);outline-offset:1px}
+.search svg{position:absolute;left:1rem;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--mute);fill:none;stroke-width:2}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:-1rem 0 2.2rem}
+.chip{font:500 .92rem/1 var(--body);padding:.6rem .95rem;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;transition:background .2s,border-color .2s,color .2s}
+.chip:hover{border-color:var(--mute)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip .n{font-family:var(--num);font-size:.85rem;opacity:.6}
+.dot{width:.7rem;height:.7rem;border-radius:50%;flex:none}
+.c-team{background:var(--bottle);box-shadow:inset 0 0 0 1px #D6CDB0}
+.c-product{background:var(--butter);box-shadow:inset 0 0 0 1px #CFC690}
+.c-hiring{background:var(--red)}
+.featured{display:grid;grid-template-columns:1fr minmax(140px,240px);gap:clamp(1.5rem,4vw,4rem);align-items:center;background:var(--cream);border-radius:28px;padding:clamp(1.6rem,4vw,3rem);margin-bottom:2.4rem;scroll-margin-top:96px}
+.meta{color:var(--mute);font-size:.9rem;display:flex;gap:.4rem 1rem;flex-wrap:wrap;align-items:center}
+.cat{display:inline-flex;align-items:center;gap:.45rem;font-weight:500;color:var(--ink)}
+.featured h3{font-size:clamp(1.55rem,3.4vw,2.3rem);line-height:1.3;margin:.7rem 0 .9rem}
+.featured .mark{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:var(--paper);font-family:var(--num);font-weight:600;font-size:clamp(1.6rem,3vw,2.4rem);color:var(--red);letter-spacing:.01em;text-align:center;line-height:1}
+.featured .mark small{display:block;font-size:.42em;color:var(--mute);font-weight:500;margin-top:.4rem;letter-spacing:.08em}
+.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{border-bottom:1px solid var(--line);scroll-margin-top:96px}
+.row-btn{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:7rem 1fr auto;gap:1.2rem;align-items:center;padding:1.3rem .3rem}
+.row-btn:focus-visible{outline:2px solid var(--red-ink);outline-offset:-2px;border-radius:8px}
+.when{color:var(--mute);font-size:.9rem;font-family:var(--num);letter-spacing:.02em}
+.row-main{display:flex;gap:.9rem;align-items:flex-start}
+.row-main .dot{margin-top:.6rem}
+.row-title{display:block;font-weight:600;font-size:clamp(1.05rem,2vw,1.22rem);line-height:1.45}
+.row-sub{display:flex;gap:.3rem .8rem;flex-wrap:wrap;color:var(--mute);font-size:.86rem;margin-top:.2rem}
+.panel-inner{padding:0 .3rem 1.6rem calc(7rem + 1.2rem + .3rem + 1.6rem)}
+.more{display:flex;justify-content:center;margin-top:1.8rem}
+
+footer{padding:3rem 0 3.5rem;color:var(--mute);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+footer p{margin:0}
+
+.toast{visibility:hidden;opacity:0;position:fixed;left:50%;bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));z-index:40;transform:translate(-50%,140%);background:var(--ink);color:var(--paper);padding:.8rem 1.2rem;border-radius:999px;font-size:.92rem;transition:transform .35s var(--ease),opacity .25s,visibility 0s .35s}
+.toast.show{transform:translate(-50%,0);opacity:1;visibility:visible;transition:transform .35s var(--ease),opacity .25s}
+
+@media (max-width:760px){
+  .site-head .wrap{justify-content:center}
+  .site-head nav{gap:1.2rem;font-size:.9rem}
+  .sec-head{grid-template-columns:1fr}
+  .search{width:100%}
+  .featured{grid-template-columns:1fr}
+  .featured .mark{display:none}
+  .row-btn{grid-template-columns:1fr auto;gap:.35rem 1rem}
+  .when{grid-column:1 / -1}
+  .panel-inner{padding-left:1.9rem}
+  .how-grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  .panel,.chev,.toast,.site-head{transition:none}
+}
+</style>
+</head>
+<body>
+
+<main>
+  <section class="hero" id="top" aria-label="SEOUL 1988 캠페인 영상">
+    <div class="stage" id="stage">
+      <div class="film" id="introWrap"><video id="intro" muted playsinline preload="auto" disablepictureinpicture aria-hidden="true" tabindex="-1"></video></div>
+    </div>
+  </section>
+  <section class="people" id="people" aria-labelledby="people-h">
+    <div class="hz" id="hz">
+      <video class="hz-film" id="film" muted playsinline preload="auto" disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
+      <div class="ring-head">
+        <h1 id="people-h">일정과 인사이트를 공유합니다</h1>
+        <div class="ring-meta">
+          <span class="c"><b id="evCount">–</b>다가오는 일정</span>
+          <span class="c ins"><b id="ntCount">–</b>인사이트</span>
+        </div>
+      </div>
+      <div class="ring-stage" id="ringStage"><div class="ring" id="ring" role="list" aria-label="일정과 인사이트 카드"></div></div>
+      <div class="hz-bar" aria-hidden="true"><span></span></div>
+    </div>
+  </section>
+
+  <section class="work" id="workView" aria-labelledby="work-h">
+    <div class="wrap">
+      <button class="back" type="button" id="backBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>처음으로</button>
+      <h1 id="work-h">일정과 인사이트</h1>
+      <div class="tabs" id="workTabs" role="group" aria-label="보기"></div>
+      <div id="workBody"></div>
+    </div>
+  </section>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  "use strict";
+  const $ = s => document.querySelector(s);
+  const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const root = document.documentElement;
+  if (reduce) root.classList.add("static");
+  const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+  const icon = {
+    link: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>',
+    chev: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
+    clock: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+    pin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>'
+  };
+
+  /* =========================================================
+     DATA HELPERS
+     ========================================================= */
+  const WD = ["일", "월", "화", "수", "목", "금", "토"];
+  const dayMs = 864e5;
+  const parseDate = d => { const [y, m, dd] = String(d || "").split("-").map(Number); return y ? new Date(y, m - 1, dd) : null; };
+  const today0 = () => { const n = new Date(); n.setHours(0, 0, 0, 0); return n; };
+  const daysFrom = d => { const t = parseDate(d); return t ? Math.round((t - today0()) / dayMs) : NaN; };   // future positive
+  const fmtAbs = d => { const [y, m, dd] = String(d || "").split("-"); return y ? `${y}.${m}.${dd}` : ""; };
+  function fmtRel(d) { const n = -daysFrom(d); if (isNaN(n)) return ""; if (n <= 0) return "오늘"; if (n === 1) return "어제"; if (n < 7) return `${n}일 전`; return fmtAbs(d); }
+  function fmtTime(t) {
+    if (!t) return "";
+    const [h, m] = t.split(":").map(Number); const ap = h < 12 ? "오전" : "오후"; const h12 = h % 12 || 12;
+    return `${ap} ${h12}시${m ? ` ${m}분` : ""}`;
+  }
+  const anchorOf = p => "post-" + String(p.id).replace(/[^\w-]/g, "-");
+  function linkify(text) {
+    const frag = document.createDocumentFragment();
+    String(text || "").split(/(https?:\/\/[^\s)]+)/g).forEach((part, i) => {
+      if (i % 2) { const a = el("a", null, part); a.href = part; a.target = "_blank"; a.rel = "noopener"; frag.append(a); }
+      else if (part) frag.append(document.createTextNode(part));
+    });
+    return frag;
+  }
+  function timeEl(p, cls) { const t = el("time", cls, fmtRel(p.date)); t.dateTime = p.date || ""; t.title = fmtAbs(p.date); return t; }
+  let toastTimer;
+  function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 2200); }
+  function copyBtn(p, hash) {
+    const b = el("button", "ghost"); b.type = "button"; b.innerHTML = icon.link; b.append("링크 복사");
+    b.addEventListener("click", e => {
+      e.stopPropagation();
+      const url = location.origin + location.pathname + "#" + (hash || anchorOf(p));
+      if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => toast("링크를 복사했어요"), () => prompt("링크를 복사하세요", url));
+      else prompt("링크를 복사하세요", url);
+    });
+    return b;
+  }
+  function expandable(btn, inner, open, onToggle) {
+    const panel = el("div", "panel"); const box = el("div"); box.append(inner); panel.append(box);
+    btn.setAttribute("aria-expanded", String(open)); panel.inert = !open;
+    btn.addEventListener("click", () => { const now = btn.getAttribute("aria-expanded") !== "true"; btn.setAttribute("aria-expanded", String(now)); panel.inert = !now; onToggle && onToggle(now); });
+    return panel;
+  }
+  const chevEl = () => { const c = el("span", "chev"); c.innerHTML = icon.chev; return c; };
+
+  const state = {posts: [], status: "loading", cat: "전체", q: "", limit: 8, open: new Set(), ntLimit: 4, evLimit: 5};
+
+  /* =========================================================
+     SCHEDULE + INSIGHTS: 3D ring on the home page
+     ========================================================= */
+  const people = $("#people"), hz = $("#hz"), ring = $("#ring"), ringStage = $("#ringStage");
+  const workHash = p => "work." + anchorOf(p);
+  const upcoming = () => state.posts.filter(p => p.category === "일정" && p.eventDate && daysFrom(p.eventDate) >= 0)
+    .sort((a, b) => (a.eventDate + (a.eventTime || "")).localeCompare(b.eventDate + (b.eventTime || "")));
+  const pastEvents = () => state.posts.filter(p => p.category === "일정" && p.eventDate && daysFrom(p.eventDate) < 0)
+    .sort((a, b) => (b.eventDate + (b.eventTime || "")).localeCompare(a.eventDate + (a.eventTime || "")));
+  const insightsAll = () => state.posts.filter(p => p.category === "인사이트");
+  function ddayEl(date) { const n = daysFrom(date); return el("span", "dday" + (n === 0 ? " today" : ""), n === 0 ? "오늘" : `D-${n}`); }
+  function whereEl(p) {
+    const w = el("div", "where");
+    if (p.eventTime) { const s = el("span"); s.innerHTML = icon.clock; s.append(fmtTime(p.eventTime)); w.append(s); }
+    if (p.place) { const s = el("span"); s.innerHTML = icon.pin; s.append(p.place); w.append(s); }
+    return w;
+  }
+  function kindEl(label, cls, extra) { const k = el("div", "kind"); k.append(el("span", "dot " + cls), label); if (extra) k.append(extra); return k; }
+  const openEl = () => { const o = el("span", "open", "자세히 보기"); o.insertAdjacentHTML("beforeend", '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'); return o; };
+
+  let cards = [], n = 0, stepDeg = 0, R = 0, hzShown = 0, hzRunning = false, ringOn = false;
+  function eventCard(p, isNext) {
+    const c = el("a", "rcard r-ev" + (isNext ? " next" : "")); c.href = "#" + workHash(p); c.setAttribute("role", "listitem");
+    const d = parseDate(p.eventDate);
+    c.append(kindEl(isNext ? "다음 일정" : "일정", "c-event", ddayEl(p.eventDate)));
+    const big = el("div", "bigdate"); big.setAttribute("aria-hidden", "true");
+    big.append(el("span", "m", `${d.getMonth() + 1}월`), el("span", "d", String(d.getDate()).padStart(2, "0")), el("span", "w", WD[d.getDay()] + "요일"));
+    c.append(big, el("span", "sr-only", `${d.getMonth() + 1}월 ${d.getDate()}일 ${WD[d.getDay()]}요일`), el("h3", null, p.title), whereEl(p));
+    return c;
+  }
+  function insightCard(p) {
+    const c = el("a", "rcard r-in"); c.href = "#" + workHash(p); c.setAttribute("role", "listitem");
+    c.append(kindEl("인사이트", "c-insight", -daysFrom(p.date) <= 7 ? el("span", "new", "새 글") : null));
+    const d = parseDate(p.date);
+    const wb = el("div", "when-big"); wb.append(d ? `${d.getMonth() + 1}.${String(d.getDate()).padStart(2, "0")}` : ""); wb.append(el("small", null, p.team || ""));
+    const b = el("p", "body"); b.append(p.body || "");
+    c.append(wb, el("h3", null, p.title), b, openEl());
+    return c;
+  }
+  function renderPeople() {
+    ring.replaceChildren(); cards = [];
+    const ev = upcoming(), ins = insightsAll();
+    $("#evCount").textContent = String(ev.length); $("#ntCount").textContent = String(ins.length);
+    if (state.status === "error") { const e = el("div", "rcard r-empty"); e.append(el("b", null, "내용을 불러오지 못했어요."), "새로고침해 주세요."); cards.push(e); }
+    ev.slice(0, 10).forEach((p, i) => cards.push(eventCard(p, i === 0)));
+    ins.slice(0, 10).forEach(p => cards.push(insightCard(p)));
+    if (!cards.length) { const e = el("div", "rcard r-empty"); e.append(el("b", null, "아직 올라온 일정이나 인사이트가 없어요."), "새 글이 올라오면 여기에서 돌아가요."); cards.push(e); }
+    cards.forEach((c, i) => { c.addEventListener("focus", () => revealCard(i)); ring.append(c); });
+    n = cards.length; layoutRing();
+  }
+  function layoutRing() {
+    if (!n) return;
+    const narrow = innerWidth < 760;
+    const cw = narrow ? Math.min(innerWidth * .66, 300) : clamp(innerWidth * .23, 260, 330);
+    const ch = Math.min(cw * 1.36, Math.max(300, ringStage.clientHeight - 24));
+    ring.style.setProperty("--cw", cw + "px"); ring.style.setProperty("--ch", ch + "px");
+    stepDeg = 360 / Math.max(n, 7);
+    R = (cw / 2) / Math.tan(stepDeg * Math.PI / 360) + (narrow ? 14 : 28);
+    cards.forEach((c, i) => { c.dataset.base = `rotateY(${i * stepDeg}deg) translateZ(${R}px)`; c.style.transform = c.dataset.base; });
+    if (root.classList.contains("static") || n < 2) people.style.height = "";
+    else people.style.height = `${innerHeight + (n - 1) * innerHeight * .4}px`;
+    hzTick(true);
+  }
+  function hzTarget() {
+    if (root.classList.contains("static") || n < 2) return hzShown;
+    const span = people.offsetHeight - innerHeight;
+    return span > 0 ? clamp(-people.getBoundingClientRect().top / span) : 0;
+  }
+  function applyRing() {
+    const rot = hzShown * (n - 1) * stepDeg;
+    ring.style.transform = `translateZ(${-R}px) rotateY(${-rot}deg)`;
+    cards.forEach((c, i) => {
+      const rel = ((i * stepDeg - rot) % 360 + 540) % 360 - 180, a = Math.abs(rel);
+      c.style.opacity = a > 100 ? 0 : (.25 + .75 * Math.max(0, Math.cos(rel * Math.PI / 180))).toFixed(3);
+      c.style.pointerEvents = a < 40 ? "auto" : "none";
+      c.tabIndex = a < 40 ? 0 : -1;
+    });
+    hz.style.setProperty("--hzp", hzShown.toFixed(4));
+  }
+  function hzTick(force) { if (force) applyRing(); if (!hzRunning) { hzRunning = true; requestAnimationFrame(hzFrame); } }
+  function hzFrame() {
+    const t = hzTarget();
+    hzShown += (t - hzShown) * .14;
+    if (Math.abs(t - hzShown) < .0004) hzShown = t;
+    applyRing();
+    if (hzShown !== t) requestAnimationFrame(hzFrame); else hzRunning = false;
+  }
+  function revealCard(i) {
+    if (n < 2) return;
+    const x = i / (n - 1);
+    if (root.classList.contains("static")) { hzShown = x; applyRing(); return; }
+    const span = people.offsetHeight - innerHeight;
+    if (Math.abs(hzTarget() - x) > .001) scrollTo({top: people.offsetTop + x * span + 1, behavior: "auto"});
+  }
+  addEventListener("scroll", () => { if (!document.body.classList.contains("in-work")) hzTick(); }, {passive: true});
+  addEventListener("resize", () => { clearTimeout(layoutRing.t); layoutRing.t = setTimeout(layoutRing, 150); });
+  if (document.fonts) document.fonts.ready.then(layoutRing);
+
+  /* ---------- the brand film plays behind the ring, scrubbed by the same scroll ---------- */
+  const DUR = 23.2, FILM_FROM = .3, FILM_TO = 20.6, FILM_ALPHA = .55;
+  const portrait = matchMedia("(max-aspect-ratio: 1/1)");
+  const filmSrc = () => portrait.matches ? "film/film-m.mp4" : "film/film-d.mp4";
+  const preview = Array.isArray(window.__PREVIEW_FRAMES) ? window.__PREVIEW_FRAMES : null;
+  let video = $("#film"), pvCanvas = null, pvCtx = null, pvBlobs = [], pvIdx = -1, pvPending = false;
+  let filmOn = false, filmVisible = false, blobUrl = null, loadToken = 0;
+  const filmT = () => FILM_FROM + hzShown * (FILM_TO - FILM_FROM);
+  const drift = () => `translateX(${((1 - 2 * hzShown) * 3).toFixed(2)}%) scale(1.08)`;   // slow sideways drift
+
+  // preview only: frames are decoded from embedded bytes straight onto a canvas
+  function pvBlob(i) {
+    if (!pvBlobs[i]) {
+      const bin = atob(preview[i].slice(preview[i].indexOf(",") + 1)), u = new Uint8Array(bin.length);
+      for (let k = 0; k < bin.length; k++) u[k] = bin.charCodeAt(k);
+      pvBlobs[i] = new Blob([u], {type: "image/jpeg"});
+    }
+    return pvBlobs[i];
+  }
+  function pvSize() { const d = Math.min(devicePixelRatio || 1, 1.5) * .8; pvCanvas.width = Math.max(1, hz.clientWidth * d); pvCanvas.height = Math.max(1, hz.clientHeight * d); pvIdx = -1; }
+  function pvDraw() {
+    const i = Math.round(filmT() / DUR * (preview.length - 1));
+    if (i === pvIdx || pvPending) return;
+    pvPending = true;
+    createImageBitmap(pvBlob(i)).then(bm => {
+      pvIdx = i;
+      const W = pvCanvas.width, H = pvCanvas.height, sc = Math.max(W / bm.width, H / bm.height), w = bm.width * sc, h = bm.height * sc;
+      pvCtx.clearRect(0, 0, W, H); pvCtx.drawImage(bm, (W - w) / 2, (H - h) / 2, w, h); bm.close && bm.close();
+      hz.style.setProperty("--fo", FILM_ALPHA);
+    }).catch(() => {}).finally(() => { pvPending = false; });
+  }
+
+  function loadFilm() {
+    if (root.classList.contains("static")) { video.hidden = true; return; }
+    if (preview) {
+      if (!pvCanvas) { pvCanvas = el("canvas", "hz-film"); pvCanvas.setAttribute("aria-hidden", "true"); video.replaceWith(pvCanvas); pvCtx = pvCanvas.getContext("2d"); pvSize(); addEventListener("resize", pvSize); }
+      return;
+    }
+    const src = filmSrc(), token = ++loadToken;
+    video.src = src; video.load();
+    video.addEventListener("loadeddata", () => hz.style.setProperty("--fo", FILM_ALPHA), {once: true});
+    video.play().then(() => video.pause()).catch(() => {});
+    // fetch the whole file so every seek is served from memory
+    fetch(src).then(res => { if (!res.ok) throw new Error(res.status); return res.blob(); }).then(b => {
+      if (token !== loadToken) return;
+      if (blobUrl) URL.revokeObjectURL(blobUrl);
+      blobUrl = URL.createObjectURL(b);
+      video.src = blobUrl; video.load();
+      video.addEventListener("loadeddata", () => { video.currentTime = filmT(); }, {once: true});
+    }).catch(() => {});
+  }
+  portrait.addEventListener("change", loadFilm);
+  function filmFrame() {
+    const el2 = pvCanvas || video;
+    el2.style.transform = drift();
+    if (preview) pvDraw();
+    else if (video.readyState >= 1 && !video.seeking && Math.abs(video.currentTime - filmT()) > .03) video.currentTime = Math.min(filmT(), (video.duration || DUR) - .05);
+    if (filmVisible) requestAnimationFrame(filmFrame); else filmOn = false;
+  }
+  let bgStarted = false;
+  function startBg() { if (!bgStarted) { bgStarted = true; loadFilm(); } }
+  new IntersectionObserver(([en]) => { if (en.isIntersecting) startBg(); }, {rootMargin: "150% 0px"}).observe(people);
+  if (!root.classList.contains("static")) new IntersectionObserver(([en]) => {
+    filmVisible = en.isIntersecting;
+    if (filmVisible && !filmOn) { filmOn = true; requestAnimationFrame(filmFrame); }
+  }).observe(people);
+
+  /* =========================================================
+     LIST PAGE (#work): every schedule and insight in one place
+     ========================================================= */
+  const workState = {tab: "전체", showPast: false};
+  function renderWork() {
+    const ev = upcoming(), past = pastEvents(), ins = insightsAll();
+    const tabs = $("#workTabs"); tabs.replaceChildren();
+    [["전체", ev.length + ins.length], ["일정", ev.length], ["인사이트", ins.length]].forEach(([name, cnt]) => {
+      const b = el("button", "chip"); b.type = "button"; b.setAttribute("aria-pressed", String(workState.tab === name));
+      b.append(name, el("span", "n", String(cnt)));
+      b.addEventListener("click", () => { workState.tab = name; renderWork(); });
+      tabs.append(b);
+    });
+    const body = $("#workBody"); body.replaceChildren();
+    if (state.status === "error") { body.append(errorEl()); return; }
+    if (workState.tab !== "인사이트") {
+      const blk = el("div", "w-block");
+      const h = el("h2", null, "다가오는 일정"); h.append(el("span", "n", String(ev.length))); blk.append(h);
+      if (!ev.length) { const e = el("div", "empty"); e.append(el("b", null, "예정된 일정이 없어요."), "새 일정이 올라오면 날짜순으로 정리돼요."); blk.append(e); }
+      let month = "";
+      ev.forEach(p => {
+        const d = parseDate(p.eventDate), m = `${d.getFullYear()}년 ${d.getMonth() + 1}월`;
+        if (m !== month) { month = m; blk.append(el("div", "month", m)); }
+        blk.append(eventRow(p, false));
+      });
+      if (past.length) {
+        const t = el("button", "ghost past-toggle", workState.showPast ? "지난 일정 접기" : `지난 일정 보기 (${past.length})`); t.type = "button";
+        t.setAttribute("aria-expanded", String(workState.showPast));
+        t.addEventListener("click", () => { workState.showPast = !workState.showPast; renderWork(); });
+        blk.append(t);
+        if (workState.showPast) past.forEach(p => blk.append(eventRow(p, true)));
+      }
+      body.append(blk);
+    }
+    if (workState.tab !== "일정") {
+      const blk = el("div", "w-block");
+      const h = el("h2", null, "인사이트"); h.append(el("span", "n", String(ins.length))); blk.append(h);
+      if (!ins.length) { const e = el("div", "empty"); e.append(el("b", null, "아직 올라온 인사이트가 없어요."), "새 글이 올라오면 최신순으로 보여요."); blk.append(e); }
+      const grid = el("div", "w-grid");
+      ins.forEach(p => {
+        const a = el("article", "w-in"); a.id = "w-" + anchorOf(p);
+        const meta = el("div", "meta"); meta.append(el("span", null, fmtAbs(p.date)), el("span", null, p.team || ""));
+        if (-daysFrom(p.date) <= 7) meta.append(el("span", "new", "새 글"));
+        const b = el("p", "body"); b.append(linkify(p.body));
+        const act = el("div", "actions"); act.append(copyBtn(p, workHash(p)));
+        a.append(meta, el("h3", null, p.title), b, act); grid.append(a);
+      });
+      blk.append(grid); body.append(blk);
+    }
+  }
+  function eventRow(p, past) {
+    const r = el("article", "w-ev" + (past ? " past" : "")); r.id = "w-" + anchorOf(p);
+    const d = parseDate(p.eventDate);
+    const dt = el("div", "date"); dt.append(el("b", null, String(d.getDate()).padStart(2, "0")), el("i", null, `${d.getMonth() + 1}월 ${WD[d.getDay()]}요일`));
+    const mid = el("div"); mid.append(el("div", "t", p.title));
+    const s = el("div", "s"); if (p.eventTime) s.append(el("span", null, fmtTime(p.eventTime))); if (p.place) s.append(el("span", null, p.place)); if (past) s.append(el("span", null, fmtAbs(p.eventDate)));
+    mid.append(s);
+    if (p.body) { const b = el("p", "body"); b.append(linkify(p.body)); mid.append(b); }
+    const act = el("div", "actions"); act.append(copyBtn(p, workHash(p))); mid.append(act);
+    r.append(dt, mid, past ? el("span") : ddayEl(p.eventDate));
+    return r;
+  }
+  function focusWorkItem(anchor) {
+    const p = state.posts.find(x => anchorOf(x) === anchor);
+    if (p && p.category === "일정" && daysFrom(p.eventDate) < 0 && !workState.showPast) { workState.showPast = true; renderWork(); }
+    const t = document.getElementById("w-" + anchor);
+    if (!t) { scrollTo(0, 0); return; }
+    t.scrollIntoView({block: "center"});
+    t.classList.add("focus"); setTimeout(() => t.classList.remove("focus"), 2600);
+  }
+
+  /* ---------- simple router: "#work" opens the list page ---------- */
+  let inWork = false, savedY = 0, cameFromHome = false;
+  function route() {
+    const h = decodeURIComponent(location.hash.slice(1));
+    if (h === "work" || h.startsWith("work.")) {
+      if (!inWork) { cameFromHome = state.routed; savedY = scrollY; inWork = true; document.body.classList.add("in-work"); document.title = "일정과 인사이트 | 케이시크릿 소식"; }
+      workState.tab = "전체";
+      renderWork();
+      requestAnimationFrame(() => { if (h.startsWith("work.")) focusWorkItem(h.slice(5)); else scrollTo(0, 0); });
+    } else {
+      if (inWork) {
+        inWork = false; document.body.classList.remove("in-work"); document.title = "케이시크릿 소식";
+        layoutRing();
+        requestAnimationFrame(() => { const t = h && document.getElementById(h); if (t && !h.startsWith("post-")) t.scrollIntoView(); else scrollTo(0, savedY); });
+      }
+      if (h.startsWith("post-")) openFromHash();
+    }
+    state.routed = true;
+  }
+  $("#backBtn").addEventListener("click", () => { if (cameFromHome) history.back(); else location.hash = "people"; });
+  addEventListener("keydown", e => { if (e.key === "Escape" && inWork) $("#backBtn").click(); });
+
+  function renderAll() { renderPeople(); }
+  function openFromHash() {           // older shared links (#post-…) open the list page
+    const h = decodeURIComponent(location.hash.slice(1));
+    if (h.startsWith("post-") && state.posts.some(x => anchorOf(x) === h)) location.replace("#work." + h);
+  }
+  addEventListener("hashchange", route);
+  function setPosts(data) {
+    state.posts = (Array.isArray(data) ? data : []).filter(p => p && p.title)
+      .sort((a, b) => (b.date || "").localeCompare(a.date || "") || String(b.id).localeCompare(String(a.id)));
+    state.status = "ready"; renderAll(); route();
+  }
+  if (Array.isArray(window.__PREVIEW_POSTS)) setPosts(window.__PREVIEW_POSTS);
+  else fetch("posts.json", {cache: "no-store"}).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(setPosts).catch(() => { state.status = "error"; renderAll(); route(); });
+
+  /* =========================================================
+     HERO: campaign film scrubbed by scroll; its closing logo hands over to the ring
+     ========================================================= */
+  const hero = $("#top"), stage = $("#stage"), iwrap = $("#introWrap"), intro = $("#intro");
+  const IDUR = 22.4;          // seconds of film used (ends on the SEOUL 1988 logo)
+  const IEND = .86;           // share of the hero scroll spent playing; the rest eases the logo away
+  const introSrc = () => portrait.matches ? "film/intro-m.mp4" : "film/intro-d.mp4";
+  const ipreview = Array.isArray(window.__PREVIEW_INTRO) ? window.__PREVIEW_INTRO : null;
+  let iShown = 0, iRunning = false, heroVisible = true, iCanvas = null, ictx = null, iBlobs = [], iWant = -1, iDrawn = -1, iBusy = false, iBlobUrl = null, iToken = 0;
+
+  function heroProgress() {
+    if (root.classList.contains("static")) return 1;
+    const r = hero.getBoundingClientRect();
+    return clamp(-r.top / (hero.offsetHeight - innerHeight));
+  }
+  // preview only: frames decoded from embedded bytes straight onto a canvas
+  function iBlob(i) {
+    if (!iBlobs[i]) {
+      const bin = atob(ipreview[i].slice(ipreview[i].indexOf(",") + 1)), u = new Uint8Array(bin.length);
+      for (let k = 0; k < bin.length; k++) u[k] = bin.charCodeAt(k);
+      iBlobs[i] = new Blob([u], {type: "image/jpeg"});
+    }
+    return iBlobs[i];
+  }
+  function iSize() { const d = Math.min(devicePixelRatio || 1, 2); iCanvas.width = stage.clientWidth * d; iCanvas.height = stage.clientHeight * d; iDrawn = -1; iDraw(Math.max(iWant, 0)); }
+  function iDraw(i) {
+    iWant = i;
+    if (iBusy || i === iDrawn) return;
+    iBusy = true;
+    createImageBitmap(iBlob(i)).then(bm => {
+      const W = iCanvas.width, H = iCanvas.height, s = Math.max(W / bm.width, H / bm.height), w = bm.width * s, h = bm.height * s;
+      ictx.fillStyle = "#fff"; ictx.fillRect(0, 0, W, H); ictx.drawImage(bm, (W - w) / 2, (H - h) / 2, w, h); bm.close && bm.close();
+      iDrawn = i;
+    }).catch(() => {}).finally(() => { iBusy = false; if (iWant !== iDrawn) iDraw(iWant); });
+  }
+
+  function loadIntro() {
+    const isStatic = root.classList.contains("static");
+    if (ipreview) {
+      if (!iCanvas) { iCanvas = el("canvas"); iCanvas.setAttribute("aria-hidden", "true"); intro.replaceWith(iCanvas); ictx = iCanvas.getContext("2d"); addEventListener("resize", iSize); }
+      iSize(); iDraw(isStatic ? ipreview.length - 1 : 0); startBg(); return;
+    }
+    const src = introSrc(), token = ++iToken;
+    intro.src = src; intro.load();
+    if (isStatic) { intro.addEventListener("loadeddata", () => { intro.currentTime = IDUR - .1; }, {once: true}); startBg(); return; }
+    intro.play().then(() => intro.pause()).catch(() => {});
+    // fetch the whole file so every seek is served from memory, then let the background film start loading
+    fetch(src).then(res => { if (!res.ok) throw new Error(res.status); return res.blob(); }).then(b => {
+      if (token !== iToken) return;
+      const at = intro.currentTime;
+      if (iBlobUrl) URL.revokeObjectURL(iBlobUrl);
+      iBlobUrl = URL.createObjectURL(b);
+      intro.src = iBlobUrl; intro.load();
+      intro.addEventListener("loadeddata", () => { intro.currentTime = at; }, {once: true});
+    }).catch(() => {}).finally(startBg);
+  }
+  portrait.addEventListener("change", loadIntro);
+
+  const OPEN = .07;            // share of the hero scroll spent opening the capsule
+  let prevShown = 0, iBlur = 0;
+  const easeIO = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  function heroFrame() {
+    const p = heroProgress();
+    const W = stage.clientWidth, H = stage.clientHeight;
+
+    // 1) opening: a capsule window widens until the film fills the screen
+    const o = easeIO(clamp(p / OPEN));
+    const cw = clamp(W * .2, 170, 300), chh = Math.min(H * .64, cw * 2.5);
+    const ix = ((W - cw) / 2) * (1 - o) + 1, iy = ((H - chh) / 2) * (1 - o) + 1, rad = (cw / 2) * (1 - o);
+    iwrap.style.clipPath = `inset(${iy.toFixed(1)}px ${ix.toFixed(1)}px round ${rad.toFixed(1)}px)`;
+    iwrap.style.background = o < 1 ? "#ECEEEA" : "#fff";
+
+    const target = clamp((p - OPEN) / (IEND - OPEN)) * IDUR;
+    iShown += (target - iShown) * .2;                   // eased scrub, feels like a dial
+    if (Math.abs(target - iShown) < .004) iShown = target;
+    if (ipreview) iDraw(Math.round(iShown / IDUR * (ipreview.length - 1)));
+    else if (intro.readyState >= 1 && !intro.seeking && Math.abs(intro.currentTime - iShown) > .02) intro.currentTime = Math.min(iShown, (intro.duration || IDUR) - .05);
+    // after the logo lands, the frame shrinks and lifts while the ring rises from below
+    const e = easeOut(clamp((p - IEND) / (1 - IEND)));
+    iwrap.style.transform = `translateY(${(-14 * e).toFixed(2)}%) scale(${(1 - .34 * e).toFixed(4)})`;
+
+    // 2) speed blur: a fast flick smears the film a little, slow scrolling stays crisp
+    const dv = Math.abs(iShown - prevShown); prevShown = iShown;
+    iBlur += (Math.min(innerWidth < 760 ? 3 : 6, dv * 36) - iBlur) * .3;
+    (iCanvas || intro).style.filter = iBlur > .2 ? `blur(${iBlur.toFixed(2)}px)` : "none";
+
+    if (heroVisible && !root.classList.contains("static")) requestAnimationFrame(heroFrame); else iRunning = false;
+  }
+  function heroStart() { if (!iRunning && !root.classList.contains("static")) { iRunning = true; requestAnimationFrame(heroFrame); } }
+  loadIntro();
+  if (!root.classList.contains("static")) {
+    new IntersectionObserver(([en]) => { heroVisible = en.isIntersecting; if (heroVisible) heroStart(); }).observe(hero);
+    heroStart();
+  }
+})();
+</script>
+</body>
+</html>
