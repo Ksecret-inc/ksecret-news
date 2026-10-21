@@ -4,15 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>케이시크릿 소식</title>
-<meta name="description" content="SEOUL 1988을 만드는 케이시크릿의 공지, 일정, 팀 이야기.">
+<meta name="description" content="SEOUL 1988을 만드는 케이시크릿의 업무 일정, 인사이트, 팀 이야기.">
 <meta property="og:title" content="케이시크릿 소식">
-<meta property="og:description" content="SEOUL 1988을 만드는 케이시크릿의 공지, 일정, 팀 이야기.">
+<meta property="og:description" content="SEOUL 1988을 만드는 케이시크릿의 업무 일정, 인사이트, 팀 이야기.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="color-scheme" content="light">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💧</text></svg>">
-<link rel="preload" as="image" href="film/poster-d.jpg" media="(min-aspect-ratio: 1/1)">
-<link rel="preload" as="image" href="film/poster-m.jpg" media="(max-aspect-ratio: 1/1)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
@@ -55,16 +53,17 @@ h2,h3{font-weight:600;letter-spacing:-.025em}
 .story-bar{position:absolute;left:0;bottom:0;height:2px;width:100%;transform-origin:left;transform:scaleX(var(--hp,0));background:var(--ink);transition:opacity .3s}
 .site-head.solid .story-bar{opacity:0}
 
-/* ---------- hero: scroll-scrubbed brand film ---------- */
-.hero{position:relative;height:680vh}
-@media (max-aspect-ratio:1/1){.hero{height:560vh}}
-.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--paper)}
-.film{position:absolute;inset:0;transform-origin:50% 50%;will-change:transform}
-.film video,.film .still,.film canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.film .still[hidden],.film video[hidden]{display:none}
+/* ---------- hero: campaign film scrubbed by scroll ---------- */
+.hero{position:relative;height:640vh}
+@media (max-aspect-ratio:1/1){.hero{height:540vh}}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#fff}
+.film{position:absolute;inset:0;transform-origin:50% 50%;will-change:transform;background:#fff;clip-path:inset(1px)}
+.film video,.film canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#fff}
 .static .hero{height:auto}
 .static .stage{position:relative}
-.static .film video{display:none}
+/* opening: the film first shows through a capsule, like looking into the bottle */
+.film{transition:background .4s}
+
 
 /* ---------- shared bits ---------- */
 .sec-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:1.2rem 2rem;margin-bottom:2.4rem}
@@ -89,72 +88,98 @@ h2,h3{font-weight:600;letter-spacing:-.025em}
 .sk span{height:.85rem;border-radius:6px;background:var(--cream);width:40%}
 .sk span:last-child{width:70%;height:1.05rem}
 
-/* ---------- people team: vertical scroll drives a horizontal track ---------- */
+/* ---------- schedule + insights: a 3D ring of cards turned by scrolling ---------- */
 .people{position:relative;z-index:2;margin-top:-45vh}
 .static .people{margin-top:0}
-.hz{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:1.6rem;padding-top:60px}
-.track{display:flex;gap:1.25rem;align-items:stretch;height:min(540px,calc(100svh - 190px));padding:0 max(1.25rem,calc((100vw - 1120px) / 2));will-change:transform;width:max-content}
-.hz.flat{position:relative;height:auto;padding:5.5rem 0}
-.hz.flat .track{width:auto;flex-wrap:wrap;height:auto}
-.intro-p{flex:none;width:clamp(280px,34vw,440px);display:flex;flex-direction:column;justify-content:center;padding-right:1rem}
-.intro-p h2{font-size:clamp(2.2rem,4.6vw,3.4rem);line-height:1.12;margin:0 0 .8rem}
-.intro-p p{margin:0;color:var(--mute);max-width:26ch}
-.counts{display:flex;gap:1.6rem;margin-top:2rem}
-.counts div{display:flex;flex-direction:column}
-.counts b{font-family:var(--num);font-weight:600;font-size:2.6rem;line-height:1;color:var(--red)}
-.counts span{font-size:.88rem;color:var(--mute);margin-top:.35rem}
-.go{margin-top:2.2rem;display:flex;align-items:center;gap:.7rem;color:var(--mute);font-size:.9rem}
-.go i{display:block;width:56px;height:1px;background:var(--mute);position:relative}
-.go i::after{content:"";position:absolute;right:0;top:-4px;width:8px;height:8px;border-top:1px solid var(--mute);border-right:1px solid var(--mute);transform:rotate(45deg)}
-.hz.flat .go{display:none}
-
-.card{flex:none;width:clamp(272px,28vw,360px);border-radius:28px;padding:clamp(1.4rem,2.4vw,2rem);display:flex;flex-direction:column;scroll-margin:0 2rem;position:relative;overflow:hidden}
-.card:focus-within{outline:2px solid var(--red-ink);outline-offset:3px}
-.kind{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--mute);margin-bottom:auto;flex-wrap:wrap}
-.kind .dot{width:.6rem;height:.6rem}
-.card h3{font-size:clamp(1.25rem,2vw,1.5rem);line-height:1.35;margin:.9rem 0 .7rem}
-.card .body{font-size:.95rem;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:6;overflow:hidden}
-.card .actions{margin-top:auto;padding-top:1rem}
-
-.ev-card{background:var(--cream)}
-.ev-card .bigdate{font-family:var(--num);line-height:.9;color:var(--red);margin-top:1.4rem}
-.ev-card .bigdate .m{display:block;font-size:1.05rem;font-weight:500;color:var(--ink);margin-bottom:.3rem}
-.ev-card .bigdate .d{display:block;font-size:clamp(4rem,7vw,5.6rem);font-weight:600;letter-spacing:-.02em}
-.ev-card .bigdate .w{display:block;font-family:var(--body);font-size:.92rem;color:var(--mute);margin-top:.45rem}
-.ev-card.next{background:var(--red);color:#fff;width:clamp(300px,36vw,460px)}
-.ev-card.next .kind,.ev-card.next .bigdate .w,.ev-card.next .where svg{color:rgba(255,255,255,.82);stroke:rgba(255,255,255,.82)}
-.ev-card.next .bigdate,.ev-card.next .bigdate .m{color:#fff}
-.ev-card.next .dday{border-color:#fff;color:#fff}
-.ev-card.next .dday.today{background:#fff;color:var(--red-ink)}
-.ev-card.next .where{color:#fff}
-.ev-card.next .dot{background:#fff}
-.where{display:flex;flex-direction:column;gap:.15rem;font-size:.92rem}
-.where span{display:flex;gap:.5rem;align-items:center}
-.where svg{width:15px;height:15px;stroke:var(--mute);fill:none;stroke-width:2;flex:none}
-.dday{font-family:var(--num);font-weight:500;font-size:.95rem;letter-spacing:.02em;padding:.15rem .6rem;border-radius:999px;border:1.5px solid var(--red);color:var(--red-ink);white-space:nowrap;margin-left:auto}
+.static .people{margin-top:0}
+.hz{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;padding:48px 0 28px;isolation:isolate}
+.hz-film{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;object-fit:cover;opacity:var(--fo,0);transition:opacity .6s var(--ease);will-change:transform}
+.hz-film{-webkit-mask-image:linear-gradient(to bottom,transparent,#000 32%);mask-image:linear-gradient(to bottom,transparent,#000 32%)}
+.static .hz-film{display:none}
+.hz::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(70% 38% at 50% 14%,rgba(255,255,255,.92),rgba(255,255,255,0) 70%),linear-gradient(to top,rgba(255,255,255,.75),rgba(255,255,255,0) 22%)}
+.hz>:not(.hz-film){position:relative;z-index:1}
+.ring-head{text-align:center;padding:0 1.25rem}
+.ring-head h1{font-size:clamp(1.8rem,3.4vw,2.7rem);font-weight:700;line-height:1.28;letter-spacing:-.035em;margin:0 auto;max-width:15em;text-wrap:balance}
+.ring-meta{display:flex;justify-content:center;align-items:center;gap:.7rem;margin-top:1.1rem;flex-wrap:wrap}
+.ring-meta .c{display:inline-flex;align-items:center;gap:.65rem;padding:.4rem 1.1rem .4rem .4rem;border-radius:999px;background:rgba(255,255,255,.94);box-shadow:0 10px 26px -14px rgba(60,30,20,.45),inset 0 0 0 1px var(--line);font-size:1rem;font-weight:600;color:var(--ink)}
+.ring-meta .c b{display:grid;place-items:center;min-width:2.3rem;height:2.3rem;padding:0 .45rem;border-radius:999px;font-family:var(--num);font-weight:600;font-size:1.3rem;line-height:1;color:#fff;background:var(--red)}
+.ring-meta .c.ins b{background:var(--ink)}
+.ring-stage{position:relative;perspective:1500px;perspective-origin:50% 40%;display:grid;place-items:center;min-height:0}
+.ring{position:relative;width:var(--cw);height:var(--ch);transform-style:preserve-3d;will-change:transform}
+.rcard{position:absolute;inset:0;border-radius:26px;padding:1.5rem 1.5rem 1.4rem;display:flex;flex-direction:column;text-align:left;cursor:pointer;text-decoration:none;color:var(--ink);backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 30px 60px -36px rgba(60,30,20,.45);transition:box-shadow .3s}
+.rcard:hover{box-shadow:0 34px 70px -30px rgba(60,30,20,.55)}
+.rcard:focus-visible{outline:3px solid var(--red-ink);outline-offset:4px}
+.rcard .kind{display:flex;align-items:center;gap:.5rem;font-size:.84rem;color:var(--mute);flex-wrap:wrap}
+.rcard .kind .dot{width:.6rem;height:.6rem}
+.rcard h3{font-size:clamp(1.15rem,1.8vw,1.4rem);line-height:1.35;margin:.7rem 0 .5rem}
+.rcard .body{font-size:.92rem;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+.rcard .open{margin-top:auto;padding-top:.8rem;font-size:.86rem;font-weight:600;display:flex;align-items:center;gap:.35rem;opacity:.75}
+.rcard .bigdate{font-family:var(--num);line-height:.9;color:var(--red);margin-top:auto}
+.rcard .bigdate .m{display:block;font-size:1rem;font-weight:500;color:var(--ink);margin-bottom:.25rem}
+.rcard .bigdate .d{display:block;font-size:clamp(3.6rem,6vw,4.8rem);font-weight:600;letter-spacing:-.02em}
+.rcard .bigdate .w{display:block;font-family:var(--body);font-size:.9rem;color:var(--mute);margin-top:.35rem}
+.r-ev{background:var(--cream)}
+.r-ev.next{background:var(--red);color:#fff}
+.r-ev.next .kind,.r-ev.next .bigdate,.r-ev.next .bigdate .m,.r-ev.next .bigdate .w{color:#fff}
+.r-ev.next .dot{background:#fff}
+.r-ev.next .dday{border-color:#fff;color:#fff}
+.r-ev.next .where svg{stroke:#fff}
+.r-in{background:var(--paper);box-shadow:inset 0 0 0 1px var(--line),0 30px 60px -36px rgba(60,30,20,.45)}
+.r-in .when-big{font-family:var(--num);font-weight:600;font-size:1.7rem;line-height:1;margin-top:1.2rem}
+.r-in .when-big small{font-family:var(--body);font-weight:400;font-size:.82rem;color:var(--mute);margin-left:.45rem}
+.r-empty{background:var(--cream);color:var(--mute);justify-content:center;cursor:default}
+.r-empty b{color:var(--ink);display:block;margin-bottom:.3rem}
+.where{display:flex;flex-direction:column;gap:.1rem;font-size:.9rem}
+.where span{display:flex;gap:.45rem;align-items:center}
+.where svg{width:14px;height:14px;stroke:var(--mute);fill:none;stroke-width:2;flex:none}
+.dday{font-family:var(--num);font-weight:500;font-size:.92rem;letter-spacing:.02em;padding:.12rem .55rem;border-radius:999px;border:1.5px solid var(--red);color:var(--red-ink);white-space:nowrap;margin-left:auto}
 .dday.today{background:var(--red);color:#fff}
-
-.nt-card{background:var(--paper);box-shadow:inset 0 0 0 1px var(--line)}
-.nt-card .when-big{font-family:var(--num);font-weight:600;font-size:1.9rem;line-height:1;margin-top:1.4rem;color:var(--ink)}
-.nt-card .when-big small{font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--mute);margin-left:.5rem}
-.c-notice{background:var(--ink)}
 .c-event{background:var(--red)}
-.empty-card{flex:none;width:clamp(272px,28vw,360px);border-radius:28px;padding:2rem;background:var(--cream);color:var(--mute);display:flex;flex-direction:column;justify-content:center}
-.empty-card b{color:var(--ink);font-weight:600;display:block;margin-bottom:.3rem}
-.track-end{flex:none;width:1px}
-
-.hz-bar{width:min(1120px,100% - 2.5rem);margin:0 auto;height:2px;background:var(--line);border-radius:2px;overflow:hidden}
+.c-insight{background:var(--butter);box-shadow:inset 0 0 0 1px #CFC690}
+.c-notice{background:var(--ink)}
+.hz-bar{width:min(520px,100% - 2.5rem);margin:0 auto;height:2px;background:var(--line);border-radius:2px;overflow:hidden}
 .hz-bar span{display:block;height:100%;background:var(--ink);transform-origin:left;transform:scaleX(var(--hzp,0))}
-.hz.flat .hz-bar{display:none}
-.static .hz{position:relative;height:auto;overflow-x:auto;scroll-snap-type:x mandatory;padding:5.5rem 0 3rem}
-.static .track{transform:none!important}
-.static .card,.static .intro-p{scroll-snap-align:start}
+.static .hz{position:relative;height:auto;min-height:100svh}
 @media (max-width:760px){
-  .hz{gap:1.1rem}
-  .track{height:min(500px,calc(100svh - 170px))}
-  .intro-p{width:78vw}
-  .card,.empty-card{width:78vw}
-  .ev-card.next{width:84vw}
+  .hz{padding-top:40px}
+  .ring-stage{perspective:1000px}
+}
+
+/* ---------- the list page (#work) ---------- */
+.work{display:none;padding:56px 0 5rem;min-height:100vh}
+.in-work .work{display:block}
+.in-work main>section:not(.work){display:none}
+.in-work .site-head{background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.back{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;color:var(--mute);font-size:.92rem;margin-bottom:1.6rem}
+.back:hover{color:var(--ink)}
+.back:focus-visible{outline:2px solid var(--red-ink);outline-offset:3px;border-radius:6px}
+.back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.work h1{font-size:clamp(1.9rem,4vw,3rem);font-weight:700;line-height:1.25;letter-spacing:-.035em;margin:0 0 1.8rem;max-width:16em}
+.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:3rem}
+.work h2{font-size:1.35rem;margin:0 0 1.2rem;display:flex;align-items:baseline;gap:.6rem}
+.work h2 .n{font-family:var(--num);font-weight:500;color:var(--mute);font-size:1.1rem}
+.w-block{margin-bottom:4rem}
+.month{font-family:var(--num);font-weight:500;font-size:1rem;letter-spacing:.04em;color:var(--mute);margin:2rem 0 .4rem;padding-bottom:.5rem;border-bottom:2px solid var(--ink)}
+.w-ev{display:grid;grid-template-columns:5.2rem 1fr auto;gap:1.2rem;align-items:start;padding:1.2rem .3rem;border-bottom:1px solid var(--line);scroll-margin-top:110px;border-radius:12px;transition:background .6s}
+.w-ev .date{font-family:var(--num);line-height:1}
+.w-ev .date b{display:block;font-size:2.2rem;font-weight:600;color:var(--red)}
+.w-ev .date i{font-style:normal;display:block;font-family:var(--body);font-size:.82rem;color:var(--mute);margin-top:.3rem}
+.w-ev .t{font-weight:600;font-size:1.12rem;line-height:1.45}
+.w-ev .s{color:var(--mute);font-size:.88rem;display:flex;gap:.2rem .9rem;flex-wrap:wrap;margin-top:.2rem}
+.w-ev .body{margin-top:.6rem;font-size:.95rem}
+.w-ev.past .date b{color:var(--mute)}
+.w-ev.past{opacity:.7}
+.w-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
+.w-in{border-radius:22px;padding:1.6rem;box-shadow:inset 0 0 0 1px var(--line);scroll-margin-top:110px;transition:box-shadow .6s,background .6s;display:flex;flex-direction:column}
+.w-in .meta{margin-bottom:.6rem}
+.w-in h3{font-size:1.25rem;line-height:1.4;margin:0 0 .6rem}
+.w-in .actions{margin-top:auto;padding-top:1rem}
+.focus{background:color-mix(in srgb,var(--butter) 55%,transparent)}
+.w-in.focus{box-shadow:inset 0 0 0 2px var(--red)}
+.past-toggle{margin-top:1.2rem}
+@media (max-width:760px){
+  .w-ev{grid-template-columns:4.2rem 1fr;gap:.9rem}
+  .w-ev .dday{grid-column:2;justify-self:start;margin-left:0}
 }
 
 /* ---------- news ---------- */
@@ -191,21 +216,6 @@ h2,h3{font-weight:600;letter-spacing:-.025em}
 .panel-inner{padding:0 .3rem 1.6rem calc(7rem + 1.2rem + .3rem + 1.6rem)}
 .more{display:flex;justify-content:center;margin-top:1.8rem}
 
-/* ---------- how ---------- */
-.how{padding:5.5rem 0 6rem;background:var(--cream)}
-.how-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(2rem,5vw,5rem);align-items:start}
-.how h2{font-size:clamp(1.8rem,3.8vw,2.6rem);line-height:1.25;margin:0 0 1rem}
-.how .lede{max-width:42ch;margin:0 0 2rem}
-.steps{list-style:none;counter-reset:s;margin:0;padding:0}
-.steps li{counter-increment:s;display:grid;grid-template-columns:2.4rem 1fr;gap:.6rem;padding:1rem 0;border-top:1px solid #DED7C3}
-.steps li::before{content:counter(s);font-family:var(--num);font-weight:600;font-size:1.6rem;line-height:1.1;color:var(--red)}
-.steps b{display:block;font-weight:600}
-.formats{display:grid;gap:1rem}
-.slack{background:var(--paper);border-radius:20px;padding:1.2rem 1.4rem;font-size:.94rem;box-shadow:0 20px 44px -30px rgba(60,40,20,.45)}
-.slack-ch{color:var(--mute);font-size:.82rem;margin-bottom:.6rem}
-.msg-text{margin:0 0 .6rem;white-space:pre-line}
-.react{display:inline-flex;gap:.35rem;align-items:center;font-size:.85rem;padding:.15rem .55rem;border-radius:999px;border:1px solid var(--red);background:color-mix(in srgb,var(--red) 8%,transparent)}
-
 footer{padding:3rem 0 3.5rem;color:var(--mute);font-size:.9rem}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 footer p{margin:0}
@@ -231,96 +241,38 @@ footer p{margin:0}
 </style>
 </head>
 <body>
-<header class="site-head" id="head">
-  <div class="wrap">
-    <nav aria-label="주요 메뉴"><a href="#people" data-sec="people">공지와 일정</a><a href="#news" data-sec="news">소식</a><a href="#how" data-sec="how">소식 올리기</a></nav>
-  </div>
-  <div class="story-bar" aria-hidden="true"></div>
-</header>
 
 <main>
-  <section class="hero" id="top" aria-label="SEOUL 1988 브랜드 영상">
+  <section class="hero" id="top" aria-label="SEOUL 1988 캠페인 영상">
     <div class="stage" id="stage">
-      <div class="film" id="filmWrap">
-        <video id="film" muted playsinline preload="auto" disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
-        <img class="still" id="still" alt="" aria-hidden="true" hidden>
-      </div>
-      <h1 class="sr-only">케이시크릿 소식, SEOUL 1988</h1>
+      <div class="film" id="introWrap"><video id="intro" muted playsinline preload="auto" disablepictureinpicture aria-hidden="true" tabindex="-1"></video></div>
     </div>
   </section>
-
   <section class="people" id="people" aria-labelledby="people-h">
     <div class="hz" id="hz">
-      <div class="track" id="track">
-        <div class="intro-p">
-          <h2 id="people-h">피플팀 안내</h2>
-          <p>꼭 알아야 할 공지와 다가오는 일정을 모았어요.</p>
-          <div class="counts" aria-live="polite">
-            <div><b id="evCount">–</b><span>다가오는 일정</span></div>
-            <div><b id="ntCount">–</b><span>공지</span></div>
-          </div>
-          <div class="go" aria-hidden="true">스크롤하면 옆으로 넘어가요 <i></i></div>
+      <video class="hz-film" id="film" muted playsinline preload="auto" disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
+      <div class="ring-head">
+        <h1 id="people-h">일정과 인사이트를 공유합니다</h1>
+        <div class="ring-meta">
+          <span class="c"><b id="evCount">–</b>다가오는 일정</span>
+          <span class="c ins"><b id="ntCount">–</b>인사이트</span>
         </div>
       </div>
+      <div class="ring-stage" id="ringStage"><div class="ring" id="ring" role="list" aria-label="일정과 인사이트 카드"></div></div>
       <div class="hz-bar" aria-hidden="true"><span></span></div>
     </div>
   </section>
 
-  <section class="news" id="news" aria-labelledby="news-h">
+  <section class="work" id="workView" aria-labelledby="work-h">
     <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <h2 id="news-h">소식</h2>
-          <p class="lede">팀에서 생긴 일, 새로 나올 제품, 함께할 동료를 찾는 글까지.</p>
-        </div>
-        <label class="search">
-          <span class="sr-only">소식 검색</span>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <input id="q" type="search" placeholder="제목, 내용, 팀으로 찾기" autocomplete="off">
-        </label>
-      </div>
-      <div class="chips" id="chips" role="group" aria-label="분류로 보기"></div>
-      <div id="feed" aria-live="polite"><div class="sk"><span></span><span></span></div><div class="sk"><span></span><span></span></div></div>
-    </div>
-  </section>
-
-  <section class="how" id="how" aria-labelledby="how-h">
-    <div class="wrap how-grid">
-      <div>
-        <h2 id="how-h">슬랙에 쓰면 여기에 올라갑니다</h2>
-        <p class="lede">케이시크릿 구성원이라면 누구나 소식을 올릴 수 있어요. 홈페이지는 회사 밖에서도 보이니, 사내 전용 정보는 빼고 써 주세요.</p>
-        <ol class="steps">
-          <li><div><b>#홈페이지-소식 채널에 글을 씁니다</b>첫 줄에 [분류] 제목을 적어요. 분류는 공지, 일정, 팀 이야기, 제품, 채용 중 하나예요.</div></li>
-          <li><div><b>일정은 일시와 장소를 함께 적어요</b>“일시:”와 “장소:”로 시작하는 줄을 넣으면 날짜순으로 정리되고, 지난 일정은 저절로 내려가요.</div></li>
-          <li><div><b>담당자가 ✅ 로 확인하면 게시됩니다</b>10분 안팎으로 올라가요. 슬랙에서 글을 고치면 여기도 바뀌고, ✅ 를 지우면 내려가요.</div></li>
-        </ol>
-      </div>
-      <div class="formats" aria-label="슬랙 작성 예시">
-        <div class="slack">
-          <div class="slack-ch"># 홈페이지-소식</div>
-          <p class="msg-text">[일정] 하반기 타운홀
-일시: 11월 14일 오후 3시
-장소: 7층 라운지
-상반기 결과와 내년 계획을 함께 나눠요.</p>
-          <span class="react">✅ 1</span>
-        </div>
-        <div class="slack">
-          <div class="slack-ch"># 홈페이지-소식</div>
-          <p class="msg-text">[공지] 연말 휴무 안내
-12월 31일은 전사 휴무예요.</p>
-          <span class="react">✅ 1</span>
-        </div>
-      </div>
+      <button class="back" type="button" id="backBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>처음으로</button>
+      <h1 id="work-h">일정과 인사이트</h1>
+      <div class="tabs" id="workTabs" role="group" aria-label="보기"></div>
+      <div id="workBody"></div>
     </div>
   </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <p>(주)케이시크릿</p>
-    <p>서울 강남구 테헤란로84길 14, 지어로빌딩 6–7층</p>
-  </div>
-</footer>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -367,11 +319,11 @@ footer p{margin:0}
   function timeEl(p, cls) { const t = el("time", cls, fmtRel(p.date)); t.dateTime = p.date || ""; t.title = fmtAbs(p.date); return t; }
   let toastTimer;
   function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 2200); }
-  function copyBtn(p) {
+  function copyBtn(p, hash) {
     const b = el("button", "ghost"); b.type = "button"; b.innerHTML = icon.link; b.append("링크 복사");
     b.addEventListener("click", e => {
       e.stopPropagation();
-      const url = location.origin + location.pathname + "#" + anchorOf(p);
+      const url = location.origin + location.pathname + "#" + (hash || anchorOf(p));
       if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => toast("링크를 복사했어요"), () => prompt("링크를 복사하세요", url));
       else prompt("링크를 복사하세요", url);
     });
@@ -388,10 +340,15 @@ footer p{margin:0}
   const state = {posts: [], status: "loading", cat: "전체", q: "", limit: 8, open: new Set(), ntLimit: 4, evLimit: 5};
 
   /* =========================================================
-     PEOPLE TEAM: cards on a horizontal track
+     SCHEDULE + INSIGHTS: 3D ring on the home page
      ========================================================= */
-  const people = $("#people"), hz = $("#hz"), track = $("#track");
-  const introP = track.querySelector(".intro-p");
+  const people = $("#people"), hz = $("#hz"), ring = $("#ring"), ringStage = $("#ringStage");
+  const workHash = p => "work." + anchorOf(p);
+  const upcoming = () => state.posts.filter(p => p.category === "일정" && p.eventDate && daysFrom(p.eventDate) >= 0)
+    .sort((a, b) => (a.eventDate + (a.eventTime || "")).localeCompare(b.eventDate + (b.eventTime || "")));
+  const pastEvents = () => state.posts.filter(p => p.category === "일정" && p.eventDate && daysFrom(p.eventDate) < 0)
+    .sort((a, b) => (b.eventDate + (b.eventTime || "")).localeCompare(a.eventDate + (a.eventTime || "")));
+  const insightsAll = () => state.posts.filter(p => p.category === "인사이트");
   function ddayEl(date) { const n = daysFrom(date); return el("span", "dday" + (n === 0 ? " today" : ""), n === 0 ? "오늘" : `D-${n}`); }
   function whereEl(p) {
     const w = el("div", "where");
@@ -399,211 +356,98 @@ footer p{margin:0}
     if (p.place) { const s = el("span"); s.innerHTML = icon.pin; s.append(p.place); w.append(s); }
     return w;
   }
-  function kindEl(label, cls, extra) {
-    const k = el("div", "kind"); k.append(el("span", "dot " + cls), label); if (extra) k.append(...[].concat(extra)); return k;
-  }
+  function kindEl(label, cls, extra) { const k = el("div", "kind"); k.append(el("span", "dot " + cls), label); if (extra) k.append(extra); return k; }
+  const openEl = () => { const o = el("span", "open", "자세히 보기"); o.insertAdjacentHTML("beforeend", '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'); return o; };
+
+  let cards = [], n = 0, stepDeg = 0, R = 0, hzShown = 0, hzRunning = false, ringOn = false;
   function eventCard(p, isNext) {
-    const c = el("article", "card ev-card" + (isNext ? " next" : "")); c.id = anchorOf(p); c.tabIndex = -1;
+    const c = el("a", "rcard r-ev" + (isNext ? " next" : "")); c.href = "#" + workHash(p); c.setAttribute("role", "listitem");
     const d = parseDate(p.eventDate);
     c.append(kindEl(isNext ? "다음 일정" : "일정", "c-event", ddayEl(p.eventDate)));
     const big = el("div", "bigdate"); big.setAttribute("aria-hidden", "true");
     big.append(el("span", "m", `${d.getMonth() + 1}월`), el("span", "d", String(d.getDate()).padStart(2, "0")), el("span", "w", WD[d.getDay()] + "요일"));
     c.append(big, el("span", "sr-only", `${d.getMonth() + 1}월 ${d.getDate()}일 ${WD[d.getDay()]}요일`), el("h3", null, p.title), whereEl(p));
-    if (p.body) { const b = el("p", "body"); b.style.marginTop = ".8rem"; b.append(linkify(p.body)); c.append(b); }
     return c;
   }
-  function noticeCard(p) {
-    const c = el("article", "card nt-card"); c.id = anchorOf(p); c.tabIndex = -1;
-    const extra = -daysFrom(p.date) <= 7 ? el("span", "new", "새 공지") : null;
-    c.append(kindEl("공지", "c-notice", extra));
+  function insightCard(p) {
+    const c = el("a", "rcard r-in"); c.href = "#" + workHash(p); c.setAttribute("role", "listitem");
+    c.append(kindEl("인사이트", "c-insight", -daysFrom(p.date) <= 7 ? el("span", "new", "새 글") : null));
     const d = parseDate(p.date);
-    const wb = el("div", "when-big"); wb.append(d ? `${d.getMonth() + 1}.${String(d.getDate()).padStart(2, "0")}` : ""); wb.append(el("small", null, p.team || "")); c.append(wb);
-    c.append(el("h3", null, p.title));
-    if (p.body) { const b = el("p", "body"); b.append(linkify(p.body)); c.append(b); }
-    const a = el("div", "actions"); a.append(copyBtn(p)); c.append(a);
+    const wb = el("div", "when-big"); wb.append(d ? `${d.getMonth() + 1}.${String(d.getDate()).padStart(2, "0")}` : ""); wb.append(el("small", null, p.team || ""));
+    const b = el("p", "body"); b.append(p.body || "");
+    c.append(wb, el("h3", null, p.title), b, openEl());
     return c;
   }
   function renderPeople() {
-    [...track.children].forEach(n => { if (n !== introP) n.remove(); });
-    if (state.status === "error") { const e = el("div", "empty-card"); e.append(el("b", null, "내용을 불러오지 못했어요."), "인터넷 연결을 확인한 뒤 새로고침해 주세요."); track.append(e); layoutHz(); return; }
-    const events = state.posts.filter(p => p.category === "일정" && p.eventDate && daysFrom(p.eventDate) >= 0)
-      .sort((a, b) => (a.eventDate + (a.eventTime || "")).localeCompare(b.eventDate + (b.eventTime || "")));
-    const notices = state.posts.filter(p => p.category === "공지").slice(0, 8);
-    $("#evCount").textContent = String(events.length);
-    $("#ntCount").textContent = String(state.posts.filter(p => p.category === "공지").length);
-    if (!events.length) { const e = el("div", "empty-card"); e.append(el("b", null, "예정된 일정이 없어요."), "새 일정이 올라오면 날짜순으로 여기에 보여요."); track.append(e); }
-    events.slice(0, 8).forEach((p, i) => track.append(eventCard(p, i === 0)));
-    if (!notices.length) { const e = el("div", "empty-card"); e.append(el("b", null, "아직 올라온 공지가 없어요."), "새 공지가 올라오면 여기에 보여요."); track.append(e); }
-    notices.forEach(p => track.append(noticeCard(p)));
-    track.append(el("div", "track-end"));
-    layoutHz();
+    ring.replaceChildren(); cards = [];
+    const ev = upcoming(), ins = insightsAll();
+    $("#evCount").textContent = String(ev.length); $("#ntCount").textContent = String(ins.length);
+    if (state.status === "error") { const e = el("div", "rcard r-empty"); e.append(el("b", null, "내용을 불러오지 못했어요."), "새로고침해 주세요."); cards.push(e); }
+    ev.slice(0, 10).forEach((p, i) => cards.push(eventCard(p, i === 0)));
+    ins.slice(0, 10).forEach(p => cards.push(insightCard(p)));
+    if (!cards.length) { const e = el("div", "rcard r-empty"); e.append(el("b", null, "아직 올라온 일정이나 인사이트가 없어요."), "새 글이 올라오면 여기에서 돌아가요."); cards.push(e); }
+    cards.forEach((c, i) => { c.addEventListener("focus", () => revealCard(i)); ring.append(c); });
+    n = cards.length; layoutRing();
   }
-
-  // section height = one screen + however far the track has to travel
-  let hzExtra = 0, hzShown = 0, hzRunning = false;
-  function layoutHz() {
-    if (root.classList.contains("static")) { people.style.height = ""; hz.classList.remove("flat"); return; }
-    hz.classList.remove("flat"); track.style.transform = "";
-    hzExtra = Math.max(0, track.scrollWidth - innerWidth);
-    if (hzExtra < 40) { hz.classList.add("flat"); people.style.height = ""; return; }
-    people.style.height = `${innerHeight + hzExtra}px`;
-    hzTick();
+  function layoutRing() {
+    if (!n) return;
+    const narrow = innerWidth < 760;
+    const cw = narrow ? Math.min(innerWidth * .66, 300) : clamp(innerWidth * .23, 260, 330);
+    const ch = Math.min(cw * 1.36, Math.max(300, ringStage.clientHeight - 24));
+    ring.style.setProperty("--cw", cw + "px"); ring.style.setProperty("--ch", ch + "px");
+    stepDeg = 360 / Math.max(n, 7);
+    R = (cw / 2) / Math.tan(stepDeg * Math.PI / 360) + (narrow ? 14 : 28);
+    cards.forEach((c, i) => { c.dataset.base = `rotateY(${i * stepDeg}deg) translateZ(${R}px)`; c.style.transform = c.dataset.base; });
+    if (root.classList.contains("static") || n < 2) people.style.height = "";
+    else people.style.height = `${innerHeight + (n - 1) * innerHeight * .4}px`;
+    hzTick(true);
   }
-  function hzTarget() { return clamp(-people.getBoundingClientRect().top / hzExtra); }
-  function hzTick() {
-    if (hz.classList.contains("flat") || root.classList.contains("static")) return;
-    if (!hzRunning) { hzRunning = true; requestAnimationFrame(hzFrame); }
+  function hzTarget() {
+    if (root.classList.contains("static") || n < 2) return hzShown;
+    const span = people.offsetHeight - innerHeight;
+    return span > 0 ? clamp(-people.getBoundingClientRect().top / span) : 0;
   }
+  function applyRing() {
+    const rot = hzShown * (n - 1) * stepDeg;
+    ring.style.transform = `translateZ(${-R}px) rotateY(${-rot}deg)`;
+    cards.forEach((c, i) => {
+      const rel = ((i * stepDeg - rot) % 360 + 540) % 360 - 180, a = Math.abs(rel);
+      c.style.opacity = a > 100 ? 0 : (.25 + .75 * Math.max(0, Math.cos(rel * Math.PI / 180))).toFixed(3);
+      c.style.pointerEvents = a < 40 ? "auto" : "none";
+      c.tabIndex = a < 40 ? 0 : -1;
+    });
+    hz.style.setProperty("--hzp", hzShown.toFixed(4));
+  }
+  function hzTick(force) { if (force) applyRing(); if (!hzRunning) { hzRunning = true; requestAnimationFrame(hzFrame); } }
   function hzFrame() {
     const t = hzTarget();
-    hzShown += (t - hzShown) * .18;
-    if (Math.abs(t - hzShown) < .0005) hzShown = t;
-    track.style.transform = `translate3d(${(-hzShown * hzExtra).toFixed(1)}px,0,0)`;
-    hz.style.setProperty("--hzp", hzShown.toFixed(4));
+    hzShown += (t - hzShown) * .14;
+    if (Math.abs(t - hzShown) < .0004) hzShown = t;
+    applyRing();
     if (hzShown !== t) requestAnimationFrame(hzFrame); else hzRunning = false;
   }
-  addEventListener("scroll", hzTick, {passive: true});
-  addEventListener("resize", () => { clearTimeout(layoutHz.t); layoutHz.t = setTimeout(layoutHz, 150); });
-  if (document.fonts) document.fonts.ready.then(layoutHz);
-  // keyboard and shared links: bring a card into view by scrolling the page to its spot on the track
-  function revealCard(card, smooth) {
-    if (hz.classList.contains("flat") || root.classList.contains("static")) { card.scrollIntoView({block: "center", inline: "start"}); return; }
-    const pad = parseFloat(getComputedStyle(track).paddingLeft) || 0;
-    const x = clamp((card.offsetLeft - pad) / hzExtra);
-    scrollTo({top: people.offsetTop + x * hzExtra + 1, behavior: smooth && !reduce ? "smooth" : "auto"});
+  function revealCard(i) {
+    if (n < 2) return;
+    const x = i / (n - 1);
+    if (root.classList.contains("static")) { hzShown = x; applyRing(); return; }
+    const span = people.offsetHeight - innerHeight;
+    if (Math.abs(hzTarget() - x) > .001) scrollTo({top: people.offsetTop + x * span + 1, behavior: "auto"});
   }
-  track.addEventListener("focusin", e => { const c = e.target.closest(".card"); if (c) revealCard(c, false); });
+  addEventListener("scroll", () => { if (!document.body.classList.contains("in-work")) hzTick(); }, {passive: true});
+  addEventListener("resize", () => { clearTimeout(layoutRing.t); layoutRing.t = setTimeout(layoutRing, 150); });
+  if (document.fonts) document.fonts.ready.then(layoutRing);
 
-  /* =========================================================
-     NEWS (everything that is not a notice or an event)
-     ========================================================= */
-  const CATS = [{name: "전체"}, {name: "팀 이야기", c: "c-team"}, {name: "제품", c: "c-product"}, {name: "채용", c: "c-hiring"}];
-  const cOf = n => (CATS.find(c => c.name === n) || {}).c || "c-team";
-  const isNews = p => p.category !== "공지" && p.category !== "일정";
-  function matches(p) {
-    if (!isNews(p)) return false;
-    if (state.cat !== "전체" && p.category !== state.cat) return false;
-    if (!state.q) return true;
-    const q = state.q.toLowerCase();
-    return [p.title, p.body, p.team, p.category].some(v => String(v || "").toLowerCase().includes(q));
-  }
-  const chips = $("#chips");
-  function renderChips() {
-    chips.replaceChildren();
-    const news = state.posts.filter(isNews);
-    CATS.forEach(c => {
-      const n = c.name === "전체" ? news.length : news.filter(p => p.category === c.name).length;
-      if (c.name !== "전체" && !n) return;
-      const b = el("button", "chip"); b.type = "button"; b.setAttribute("aria-pressed", String(c.name === state.cat));
-      if (c.c) b.append(el("span", "dot " + c.c));
-      b.append(c.name, el("span", "n", String(n)));
-      b.addEventListener("click", () => { state.cat = c.name; state.limit = 8; renderChips(); renderFeed(); });
-      chips.append(b);
-    });
-  }
-  function renderFeed() {
-    const feed = $("#feed"); feed.replaceChildren();
-    if (state.status === "error") { feed.append(errorEl()); return; }
-    const shown = state.posts.filter(matches);
-    if (!shown.length) {
-      const e = el("div", "empty");
-      if (state.q) e.append(el("b", null, `‘${state.q}’ 에 맞는 소식이 없어요.`), "다른 단어로 찾거나 분류를 전체로 바꿔 보세요.");
-      else e.append(el("b", null, "아직 올라온 소식이 없어요."), "슬랙 #홈페이지-소식 채널에 첫 글을 남겨 보세요.");
-      feed.append(e); return;
-    }
-    const [f, ...rest] = shown;
-    const art = el("article", "featured"); art.id = anchorOf(f);
-    const left = el("div");
-    const meta = el("div", "meta"); const cat = el("span", "cat"); cat.append(el("span", "dot " + cOf(f.category)), f.category || "소식");
-    meta.append(cat, timeEl(f), el("span", null, f.team || ""));
-    if (-daysFrom(f.date) <= 7) meta.append(el("span", "new", "새 소식"));
-    const body = el("p", "body"); body.append(linkify(f.body));
-    const acts = el("div", "actions"); acts.append(copyBtn(f));
-    left.append(meta, el("h3", null, f.title), body, acts);
-    const d = parseDate(f.date); const mark = el("div", "mark"); mark.setAttribute("aria-hidden", "true");
-    if (d) { mark.append(`${d.getMonth() + 1}.${String(d.getDate()).padStart(2, "0")}`); mark.append(el("small", null, String(d.getFullYear()))); }
-    art.append(left, mark); feed.append(art);
-    if (!rest.length) return;
-    const list = el("ul", "list");
-    rest.slice(0, state.limit).forEach(p => {
-      const li = el("li", "row"); li.id = anchorOf(p);
-      const btn = el("button", "row-btn"); btn.type = "button";
-      const main = el("span", "row-main"); const txt = el("span");
-      const sub = el("span", "row-sub"); sub.append(el("span", null, p.category || ""), el("span", null, p.team || ""));
-      if (-daysFrom(p.date) <= 7) sub.append(el("span", "new", "새 소식"));
-      txt.append(el("span", "row-title", p.title), sub);
-      main.append(el("span", "dot " + cOf(p.category)), txt);
-      btn.append(timeEl(p, "when"), main, chevEl());
-      const inner = el("div", "panel-inner"); const pb = el("p", "body"); pb.append(linkify(p.body)); const pa = el("div", "actions"); pa.append(copyBtn(p)); inner.append(pb, pa);
-      li.append(btn, expandable(btn, inner, state.open.has(p.id), now => now ? state.open.add(p.id) : state.open.delete(p.id)));
-      list.append(li);
-    });
-    feed.append(list);
-    if (rest.length > state.limit) feed.append(moreBtn(`소식 더 보기 (${rest.length - state.limit})`, () => { state.limit += 8; renderFeed(); }));
-  }
-  let qTimer;
-  $("#q").addEventListener("input", e => { clearTimeout(qTimer); qTimer = setTimeout(() => { state.q = e.target.value.trim(); state.limit = 8; renderFeed(); }, 160); });
-
-  function renderAll() { renderPeople(); renderChips(); renderFeed(); }
-  function openFromHash() {
-    const h = decodeURIComponent(location.hash.slice(1));
-    if (!h.startsWith("post-")) return;
-    const p = state.posts.find(x => anchorOf(x) === h); if (!p) return;
-    if (isNews(p)) {
-      state.cat = "전체"; state.q = ""; $("#q").value = "";
-      const i = state.posts.filter(isNews).indexOf(p); state.limit = Math.max(8, i + 1); if (i > 0) state.open.add(p.id);
-      renderChips(); renderFeed();
-      requestAnimationFrame(() => { const t = document.getElementById(h); if (t) t.scrollIntoView({block: "start"}); });
-    } else {
-      requestAnimationFrame(() => { const t = document.getElementById(h); if (t) revealCard(t, false); });
-    }
-  }
-  addEventListener("hashchange", openFromHash);
-  function setPosts(data) {
-    state.posts = (Array.isArray(data) ? data : []).filter(p => p && p.title)
-      .sort((a, b) => (b.date || "").localeCompare(a.date || "") || String(b.id).localeCompare(String(a.id)));
-    state.status = "ready"; renderAll(); openFromHash();
-  }
-  if (Array.isArray(window.__PREVIEW_POSTS)) setPosts(window.__PREVIEW_POSTS);
-  else fetch("posts.json", {cache: "no-store"}).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(setPosts).catch(() => { state.status = "error"; renderAll(); });
-
-  /* header: current section + solid after the film */
-  const head = $("#head");
-  const navLinks = [...document.querySelectorAll(".site-head nav a")];
-  const secObs = new IntersectionObserver(entries => {
-    entries.forEach(en => { if (en.isIntersecting) navLinks.forEach(a => a.setAttribute("aria-current", String(a.dataset.sec === en.target.id))); });
-  }, {rootMargin: "-45% 0px -50% 0px"});
-  ["people", "news", "how"].forEach(id => secObs.observe(document.getElementById(id)));
-  new IntersectionObserver(([en]) => { if (en.isIntersecting) navLinks.forEach(a => a.setAttribute("aria-current", "false")); }, {rootMargin: "-45% 0px -50% 0px"}).observe($("#top"));
-  addEventListener("scroll", () => { head.classList.toggle("solid", $("#people").getBoundingClientRect().top <= 120); }, {passive: true});
-
-  /* =========================================================
-     HERO: brand film scrubbed by scroll, then it settles into the page
-     ========================================================= */
-  const hero = $("#top"), stage = $("#stage"), wrap = $("#filmWrap"), video = $("#film"), still = $("#still");
-  const DUR = 23.2;          // seconds of film used
-  const FILM_END = .86;      // share of the scroll spent playing; the rest eases the logo away
+  /* ---------- the brand film plays behind the ring, scrubbed by the same scroll ---------- */
+  const DUR = 23.2, FILM_FROM = .3, FILM_TO = 20.6, FILM_ALPHA = .55;
   const portrait = matchMedia("(max-aspect-ratio: 1/1)");
-  const media = () => portrait.matches
-    ? {film: "film/film-m.mp4", poster: "film/poster-m.jpg", end: "film/end-m.jpg"}
-    : {film: "film/film-d.mp4", poster: "film/poster-d.jpg", end: "film/end-d.jpg"};
+  const filmSrc = () => portrait.matches ? "film/film-m.mp4" : "film/film-d.mp4";
   const preview = Array.isArray(window.__PREVIEW_FRAMES) ? window.__PREVIEW_FRAMES : null;
-
-  function progress() {
-    if (root.classList.contains("static")) return 1;
-    const r = hero.getBoundingClientRect();
-    return clamp(-r.top / (hero.offsetHeight - innerHeight));
-  }
+  let video = $("#film"), pvCanvas = null, pvCtx = null, pvBlobs = [], pvIdx = -1, pvPending = false;
+  let filmOn = false, filmVisible = false, blobUrl = null, loadToken = 0;
+  const filmT = () => FILM_FROM + hzShown * (FILM_TO - FILM_FROM);
+  const drift = () => `translateX(${((1 - 2 * hzShown) * 3).toFixed(2)}%) scale(1.08)`;   // slow sideways drift
 
   // preview only: frames are decoded from embedded bytes straight onto a canvas
-  let pvCanvas = null, pvCtx = null, pvBlobs = [], pvWant = -1;
-  function setupPreview() {
-    if (pvCanvas) return;
-    pvCanvas = document.createElement("canvas"); pvCanvas.setAttribute("aria-hidden", "true");
-    wrap.prepend(pvCanvas); pvCtx = pvCanvas.getContext("2d");
-    const fit = () => { const d = Math.min(devicePixelRatio || 1, 2); pvCanvas.width = stage.clientWidth * d; pvCanvas.height = stage.clientHeight * d; if (pvWant >= 0) drawPreview(pvWant); };
-    fit(); addEventListener("resize", fit);
-  }
   function pvBlob(i) {
     if (!pvBlobs[i]) {
       const bin = atob(preview[i].slice(preview[i].indexOf(",") + 1)), u = new Uint8Array(bin.length);
@@ -612,59 +456,254 @@ footer p{margin:0}
     }
     return pvBlobs[i];
   }
-  function drawPreview(i) {
-    pvWant = i;
+  function pvSize() { const d = Math.min(devicePixelRatio || 1, 1.5) * .8; pvCanvas.width = Math.max(1, hz.clientWidth * d); pvCanvas.height = Math.max(1, hz.clientHeight * d); pvIdx = -1; }
+  function pvDraw() {
+    const i = Math.round(filmT() / DUR * (preview.length - 1));
+    if (i === pvIdx || pvPending) return;
+    pvPending = true;
     createImageBitmap(pvBlob(i)).then(bm => {
-      if (pvWant !== i) { bm.close && bm.close(); return; }
-      const W = pvCanvas.width, H = pvCanvas.height, s = Math.max(W / bm.width, H / bm.height), w = bm.width * s, h = bm.height * s;
-      pvCtx.fillStyle = "#fff"; pvCtx.fillRect(0, 0, W, H);
-      pvCtx.drawImage(bm, (W - w) / 2, (H - h) / 2, w, h); bm.close && bm.close();
-    }).catch(() => {});
+      pvIdx = i;
+      const W = pvCanvas.width, H = pvCanvas.height, sc = Math.max(W / bm.width, H / bm.height), w = bm.width * sc, h = bm.height * sc;
+      pvCtx.clearRect(0, 0, W, H); pvCtx.drawImage(bm, (W - w) / 2, (H - h) / 2, w, h); bm.close && bm.close();
+      hz.style.setProperty("--fo", FILM_ALPHA);
+    }).catch(() => {}).finally(() => { pvPending = false; });
   }
 
-  let blobUrl = null, loadToken = 0;
   function loadFilm() {
-    const m = media(), token = ++loadToken;
-    if (preview) { video.hidden = true; still.hidden = true; setupPreview(); drawPreview(root.classList.contains("static") ? preview.length - 1 : 0); return; }
-    video.poster = m.poster;
-    if (root.classList.contains("static")) { video.hidden = true; still.hidden = false; still.src = m.end; return; }
-    video.src = m.film; video.load();
+    if (root.classList.contains("static")) { video.hidden = true; return; }
+    if (preview) {
+      if (!pvCanvas) { pvCanvas = el("canvas", "hz-film"); pvCanvas.setAttribute("aria-hidden", "true"); video.replaceWith(pvCanvas); pvCtx = pvCanvas.getContext("2d"); pvSize(); addEventListener("resize", pvSize); }
+      return;
+    }
+    const src = filmSrc(), token = ++loadToken;
+    video.src = src; video.load();
+    video.addEventListener("loadeddata", () => hz.style.setProperty("--fo", FILM_ALPHA), {once: true});
     video.play().then(() => video.pause()).catch(() => {});
-    fetch(m.film).then(res => { if (!res.ok) throw new Error(res.status); return res.blob(); }).then(b => {
+    // fetch the whole file so every seek is served from memory
+    fetch(src).then(res => { if (!res.ok) throw new Error(res.status); return res.blob(); }).then(b => {
       if (token !== loadToken) return;
-      const at = video.currentTime;
       if (blobUrl) URL.revokeObjectURL(blobUrl);
       blobUrl = URL.createObjectURL(b);
       video.src = blobUrl; video.load();
-      video.addEventListener("loadeddata", () => { video.currentTime = at; }, {once: true});
+      video.addEventListener("loadeddata", () => { video.currentTime = filmT(); }, {once: true});
     }).catch(() => {});
   }
   portrait.addEventListener("change", loadFilm);
-
-  let shown = 0, running = false, visible = true, lastPreview = -1;
-  function frame() {
-    const p = progress();
-    const target = clamp(p / FILM_END) * DUR;
-    shown += (target - shown) * .2;                     // eased scrub, feels like a dial
-    if (Math.abs(target - shown) < .004) shown = target;
-    if (preview) {
-      const i = Math.round(shown / DUR * (preview.length - 1));
-      if (i !== lastPreview) { lastPreview = i; drawPreview(i); }
-    } else if (video.readyState >= 1 && !video.seeking && Math.abs(video.currentTime - shown) > .02) {
-      video.currentTime = Math.min(shown, (video.duration || DUR) - .05);
-    }
-    // after the logo lands, the frame shrinks and lifts so the page below takes over
-    const e = easeOut(clamp((p - FILM_END) / (1 - FILM_END)));
-    wrap.style.transform = `translateY(${(-14 * e).toFixed(2)}%) scale(${(1 - .34 * e).toFixed(4)})`;
-    head.style.setProperty("--hp", p.toFixed(4));
-    if (visible && !root.classList.contains("static")) requestAnimationFrame(frame); else running = false;
+  function filmFrame() {
+    const el2 = pvCanvas || video;
+    el2.style.transform = drift();
+    if (preview) pvDraw();
+    else if (video.readyState >= 1 && !video.seeking && Math.abs(video.currentTime - filmT()) > .03) video.currentTime = Math.min(filmT(), (video.duration || DUR) - .05);
+    if (filmVisible) requestAnimationFrame(filmFrame); else filmOn = false;
   }
-  function start() { if (!running && !root.classList.contains("static")) { running = true; requestAnimationFrame(frame); } }
+  let bgStarted = false;
+  function startBg() { if (!bgStarted) { bgStarted = true; loadFilm(); } }
+  new IntersectionObserver(([en]) => { if (en.isIntersecting) startBg(); }, {rootMargin: "150% 0px"}).observe(people);
+  if (!root.classList.contains("static")) new IntersectionObserver(([en]) => {
+    filmVisible = en.isIntersecting;
+    if (filmVisible && !filmOn) { filmOn = true; requestAnimationFrame(filmFrame); }
+  }).observe(people);
 
-  loadFilm();
+  /* =========================================================
+     LIST PAGE (#work): every schedule and insight in one place
+     ========================================================= */
+  const workState = {tab: "전체", showPast: false};
+  function renderWork() {
+    const ev = upcoming(), past = pastEvents(), ins = insightsAll();
+    const tabs = $("#workTabs"); tabs.replaceChildren();
+    [["전체", ev.length + ins.length], ["일정", ev.length], ["인사이트", ins.length]].forEach(([name, cnt]) => {
+      const b = el("button", "chip"); b.type = "button"; b.setAttribute("aria-pressed", String(workState.tab === name));
+      b.append(name, el("span", "n", String(cnt)));
+      b.addEventListener("click", () => { workState.tab = name; renderWork(); });
+      tabs.append(b);
+    });
+    const body = $("#workBody"); body.replaceChildren();
+    if (state.status === "error") { body.append(errorEl()); return; }
+    if (workState.tab !== "인사이트") {
+      const blk = el("div", "w-block");
+      const h = el("h2", null, "다가오는 일정"); h.append(el("span", "n", String(ev.length))); blk.append(h);
+      if (!ev.length) { const e = el("div", "empty"); e.append(el("b", null, "예정된 일정이 없어요."), "새 일정이 올라오면 날짜순으로 정리돼요."); blk.append(e); }
+      let month = "";
+      ev.forEach(p => {
+        const d = parseDate(p.eventDate), m = `${d.getFullYear()}년 ${d.getMonth() + 1}월`;
+        if (m !== month) { month = m; blk.append(el("div", "month", m)); }
+        blk.append(eventRow(p, false));
+      });
+      if (past.length) {
+        const t = el("button", "ghost past-toggle", workState.showPast ? "지난 일정 접기" : `지난 일정 보기 (${past.length})`); t.type = "button";
+        t.setAttribute("aria-expanded", String(workState.showPast));
+        t.addEventListener("click", () => { workState.showPast = !workState.showPast; renderWork(); });
+        blk.append(t);
+        if (workState.showPast) past.forEach(p => blk.append(eventRow(p, true)));
+      }
+      body.append(blk);
+    }
+    if (workState.tab !== "일정") {
+      const blk = el("div", "w-block");
+      const h = el("h2", null, "인사이트"); h.append(el("span", "n", String(ins.length))); blk.append(h);
+      if (!ins.length) { const e = el("div", "empty"); e.append(el("b", null, "아직 올라온 인사이트가 없어요."), "새 글이 올라오면 최신순으로 보여요."); blk.append(e); }
+      const grid = el("div", "w-grid");
+      ins.forEach(p => {
+        const a = el("article", "w-in"); a.id = "w-" + anchorOf(p);
+        const meta = el("div", "meta"); meta.append(el("span", null, fmtAbs(p.date)), el("span", null, p.team || ""));
+        if (-daysFrom(p.date) <= 7) meta.append(el("span", "new", "새 글"));
+        const b = el("p", "body"); b.append(linkify(p.body));
+        const act = el("div", "actions"); act.append(copyBtn(p, workHash(p)));
+        a.append(meta, el("h3", null, p.title), b, act); grid.append(a);
+      });
+      blk.append(grid); body.append(blk);
+    }
+  }
+  function eventRow(p, past) {
+    const r = el("article", "w-ev" + (past ? " past" : "")); r.id = "w-" + anchorOf(p);
+    const d = parseDate(p.eventDate);
+    const dt = el("div", "date"); dt.append(el("b", null, String(d.getDate()).padStart(2, "0")), el("i", null, `${d.getMonth() + 1}월 ${WD[d.getDay()]}요일`));
+    const mid = el("div"); mid.append(el("div", "t", p.title));
+    const s = el("div", "s"); if (p.eventTime) s.append(el("span", null, fmtTime(p.eventTime))); if (p.place) s.append(el("span", null, p.place)); if (past) s.append(el("span", null, fmtAbs(p.eventDate)));
+    mid.append(s);
+    if (p.body) { const b = el("p", "body"); b.append(linkify(p.body)); mid.append(b); }
+    const act = el("div", "actions"); act.append(copyBtn(p, workHash(p))); mid.append(act);
+    r.append(dt, mid, past ? el("span") : ddayEl(p.eventDate));
+    return r;
+  }
+  function focusWorkItem(anchor) {
+    const p = state.posts.find(x => anchorOf(x) === anchor);
+    if (p && p.category === "일정" && daysFrom(p.eventDate) < 0 && !workState.showPast) { workState.showPast = true; renderWork(); }
+    const t = document.getElementById("w-" + anchor);
+    if (!t) { scrollTo(0, 0); return; }
+    t.scrollIntoView({block: "center"});
+    t.classList.add("focus"); setTimeout(() => t.classList.remove("focus"), 2600);
+  }
+
+  /* ---------- simple router: "#work" opens the list page ---------- */
+  let inWork = false, savedY = 0, cameFromHome = false;
+  function route() {
+    const h = decodeURIComponent(location.hash.slice(1));
+    if (h === "work" || h.startsWith("work.")) {
+      if (!inWork) { cameFromHome = state.routed; savedY = scrollY; inWork = true; document.body.classList.add("in-work"); document.title = "일정과 인사이트 | 케이시크릿 소식"; }
+      workState.tab = "전체";
+      renderWork();
+      requestAnimationFrame(() => { if (h.startsWith("work.")) focusWorkItem(h.slice(5)); else scrollTo(0, 0); });
+    } else {
+      if (inWork) {
+        inWork = false; document.body.classList.remove("in-work"); document.title = "케이시크릿 소식";
+        layoutRing();
+        requestAnimationFrame(() => { const t = h && document.getElementById(h); if (t && !h.startsWith("post-")) t.scrollIntoView(); else scrollTo(0, savedY); });
+      }
+      if (h.startsWith("post-")) openFromHash();
+    }
+    state.routed = true;
+  }
+  $("#backBtn").addEventListener("click", () => { if (cameFromHome) history.back(); else location.hash = "people"; });
+  addEventListener("keydown", e => { if (e.key === "Escape" && inWork) $("#backBtn").click(); });
+
+  function renderAll() { renderPeople(); }
+  function openFromHash() {           // older shared links (#post-…) open the list page
+    const h = decodeURIComponent(location.hash.slice(1));
+    if (h.startsWith("post-") && state.posts.some(x => anchorOf(x) === h)) location.replace("#work." + h);
+  }
+  addEventListener("hashchange", route);
+  function setPosts(data) {
+    state.posts = (Array.isArray(data) ? data : []).filter(p => p && p.title)
+      .sort((a, b) => (b.date || "").localeCompare(a.date || "") || String(b.id).localeCompare(String(a.id)));
+    state.status = "ready"; renderAll(); route();
+  }
+  if (Array.isArray(window.__PREVIEW_POSTS)) setPosts(window.__PREVIEW_POSTS);
+  else fetch("posts.json", {cache: "no-store"}).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(setPosts).catch(() => { state.status = "error"; renderAll(); route(); });
+
+  /* =========================================================
+     HERO: campaign film scrubbed by scroll; its closing logo hands over to the ring
+     ========================================================= */
+  const hero = $("#top"), stage = $("#stage"), iwrap = $("#introWrap"), intro = $("#intro");
+  const IDUR = 22.4;          // seconds of film used (ends on the SEOUL 1988 logo)
+  const IEND = .86;           // share of the hero scroll spent playing; the rest eases the logo away
+  const introSrc = () => portrait.matches ? "film/intro-m.mp4" : "film/intro-d.mp4";
+  const ipreview = Array.isArray(window.__PREVIEW_INTRO) ? window.__PREVIEW_INTRO : null;
+  let iShown = 0, iRunning = false, heroVisible = true, iCanvas = null, ictx = null, iBlobs = [], iWant = -1, iDrawn = -1, iBusy = false, iBlobUrl = null, iToken = 0;
+
+  function heroProgress() {
+    if (root.classList.contains("static")) return 1;
+    const r = hero.getBoundingClientRect();
+    return clamp(-r.top / (hero.offsetHeight - innerHeight));
+  }
+  // preview only: frames decoded from embedded bytes straight onto a canvas
+  function iBlob(i) {
+    if (!iBlobs[i]) {
+      const bin = atob(ipreview[i].slice(ipreview[i].indexOf(",") + 1)), u = new Uint8Array(bin.length);
+      for (let k = 0; k < bin.length; k++) u[k] = bin.charCodeAt(k);
+      iBlobs[i] = new Blob([u], {type: "image/jpeg"});
+    }
+    return iBlobs[i];
+  }
+  function iSize() { const d = Math.min(devicePixelRatio || 1, 2); iCanvas.width = stage.clientWidth * d; iCanvas.height = stage.clientHeight * d; iDrawn = -1; iDraw(Math.max(iWant, 0)); }
+  function iDraw(i) {
+    iWant = i;
+    if (iBusy || i === iDrawn) return;
+    iBusy = true;
+    createImageBitmap(iBlob(i)).then(bm => {
+      const W = iCanvas.width, H = iCanvas.height, s = Math.max(W / bm.width, H / bm.height), w = bm.width * s, h = bm.height * s;
+      ictx.fillStyle = "#fff"; ictx.fillRect(0, 0, W, H); ictx.drawImage(bm, (W - w) / 2, (H - h) / 2, w, h); bm.close && bm.close();
+      iDrawn = i;
+    }).catch(() => {}).finally(() => { iBusy = false; if (iWant !== iDrawn) iDraw(iWant); });
+  }
+
+  function loadIntro() {
+    const isStatic = root.classList.contains("static");
+    if (ipreview) {
+      if (!iCanvas) { iCanvas = el("canvas"); iCanvas.setAttribute("aria-hidden", "true"); intro.replaceWith(iCanvas); ictx = iCanvas.getContext("2d"); addEventListener("resize", iSize); }
+      iSize(); iDraw(isStatic ? ipreview.length - 1 : 0); startBg(); return;
+    }
+    const src = introSrc(), token = ++iToken;
+    intro.src = src; intro.load();
+    if (isStatic) { intro.addEventListener("loadeddata", () => { intro.currentTime = IDUR - .1; }, {once: true}); startBg(); return; }
+    intro.play().then(() => intro.pause()).catch(() => {});
+    // fetch the whole file so every seek is served from memory, then let the background film start loading
+    fetch(src).then(res => { if (!res.ok) throw new Error(res.status); return res.blob(); }).then(b => {
+      if (token !== iToken) return;
+      const at = intro.currentTime;
+      if (iBlobUrl) URL.revokeObjectURL(iBlobUrl);
+      iBlobUrl = URL.createObjectURL(b);
+      intro.src = iBlobUrl; intro.load();
+      intro.addEventListener("loadeddata", () => { intro.currentTime = at; }, {once: true});
+    }).catch(() => {}).finally(startBg);
+  }
+  portrait.addEventListener("change", loadIntro);
+
+  const OPEN = .07;            // share of the hero scroll spent opening the capsule
+  let prevShown = 0, iBlur = 0;
+  const easeIO = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  function heroFrame() {
+    const p = heroProgress();
+    const W = stage.clientWidth, H = stage.clientHeight;
+
+    // 1) opening: a capsule window widens until the film fills the screen
+    const o = easeIO(clamp(p / OPEN));
+    const cw = clamp(W * .2, 170, 300), chh = Math.min(H * .64, cw * 2.5);
+    const ix = ((W - cw) / 2) * (1 - o) + 1, iy = ((H - chh) / 2) * (1 - o) + 1, rad = (cw / 2) * (1 - o);
+    iwrap.style.clipPath = `inset(${iy.toFixed(1)}px ${ix.toFixed(1)}px round ${rad.toFixed(1)}px)`;
+    iwrap.style.background = o < 1 ? "#ECEEEA" : "#fff";
+
+    const target = clamp((p - OPEN) / (IEND - OPEN)) * IDUR;
+    iShown += (target - iShown) * .2;                   // eased scrub, feels like a dial
+    if (Math.abs(target - iShown) < .004) iShown = target;
+    if (ipreview) iDraw(Math.round(iShown / IDUR * (ipreview.length - 1)));
+    else if (intro.readyState >= 1 && !intro.seeking && Math.abs(intro.currentTime - iShown) > .02) intro.currentTime = Math.min(iShown, (intro.duration || IDUR) - .05);
+    // after the logo lands, the frame shrinks and lifts while the ring rises from below
+    const e = easeOut(clamp((p - IEND) / (1 - IEND)));
+    iwrap.style.transform = `translateY(${(-14 * e).toFixed(2)}%) scale(${(1 - .34 * e).toFixed(4)})`;
+
+    // 2) speed blur: a fast flick smears the film a little, slow scrolling stays crisp
+    const dv = Math.abs(iShown - prevShown); prevShown = iShown;
+    iBlur += (Math.min(innerWidth < 760 ? 3 : 6, dv * 36) - iBlur) * .3;
+    (iCanvas || intro).style.filter = iBlur > .2 ? `blur(${iBlur.toFixed(2)}px)` : "none";
+
+    if (heroVisible && !root.classList.contains("static")) requestAnimationFrame(heroFrame); else iRunning = false;
+  }
+  function heroStart() { if (!iRunning && !root.classList.contains("static")) { iRunning = true; requestAnimationFrame(heroFrame); } }
+  loadIntro();
   if (!root.classList.contains("static")) {
-    new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) start(); }).observe(hero);
-    start();
+    new IntersectionObserver(([en]) => { heroVisible = en.isIntersecting; if (heroVisible) heroStart(); }).observe(hero);
+    heroStart();
   }
 })();
 </script>
