@@ -1,75 +1,17 @@
-name: 슬랙 소식 동기화 및 배포
-
-on:
-  schedule:
-    - cron: "*/10 * * * *"   # 10분마다 슬랙 확인 (GitHub 사정에 따라 몇 분 늦어질 수 있음)
-  workflow_dispatch:          # Actions 탭에서 수동 실행
-  push:
-    branches: [main]          # 디자인 수정 등을 push 하면 바로 배포
-
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
-jobs:
-  sync-and-deploy:
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main            # 실행 시점의 최신 main 을 받아요
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: 슬랙에서 소식 가져오기
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-          SLACK_CHANNEL_ID: ${{ vars.SLACK_CHANNEL_ID }}
-          APPROVER_IDS: ${{ vars.APPROVER_IDS }}
-          APPROVE_EMOJI: ${{ vars.APPROVE_EMOJI }}
-          OWNER_IDS: ${{ vars.OWNER_IDS }}
-        run: node scripts/sync-slack.mjs
-
-      - name: 바뀐 소식 저장
-        id: commit
-        run: |
-          if git diff --quiet; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            git config user.name "ksecret-news-bot"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add site/posts.json
-            git commit -m "소식 동기화"
-            # 그사이 다른 커밋이 올라왔으면 받아서 합친 뒤 다시 올려요 (최대 3번)
-            for i in 1 2 3; do
-              if git pull --rebase origin main && git push; then pushed=1; break; fi
-              sleep 5
-            done
-            [ "$pushed" = 1 ] || { echo "저장소에 올리지 못했어요. 다음 실행 때 다시 시도합니다."; exit 1; }
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Pages 설정
-        if: steps.commit.outputs.changed == 'true' || github.event_name != 'schedule'
-        uses: actions/configure-pages@v5
-
-      - name: 사이트 업로드
-        if: steps.commit.outputs.changed == 'true' || github.event_name != 'schedule'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
-      - name: 배포
-        id: deployment
-        if: steps.commit.outputs.changed == 'true' || github.event_name != 'schedule'
-        uses: actions/deploy-pages@v4
+display_information:
+  name: Ksecret Homepage Bot
+  description: 홈페이지-소식 채널에서 확인된 글을 회사 홈페이지로 옮깁니다.
+features:
+  bot_user:
+    display_name: homepage-bot
+    always_online: false
+oauth_config:
+  scopes:
+    bot:
+      - channels:history
+      - groups:history
+      - users:read
+settings:
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
