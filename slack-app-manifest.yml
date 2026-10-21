@@ -37,6 +37,7 @@ jobs:
           SLACK_CHANNEL_ID: ${{ vars.SLACK_CHANNEL_ID }}
           APPROVER_IDS: ${{ vars.APPROVER_IDS }}
           APPROVE_EMOJI: ${{ vars.APPROVE_EMOJI }}
+          OWNER_IDS: ${{ vars.OWNER_IDS }}
         run: node scripts/sync-slack.mjs
 
       - name: 바뀐 소식 저장
