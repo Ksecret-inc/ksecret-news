@@ -4,6 +4,7 @@
 //   SLACK_CHANNEL_ID  채널 ID, 예: C0123456789 (Variable)
 //   APPROVER_IDS      (선택) 확인 권한자 슬랙 멤버 ID, 쉼표로 구분 (Variable)
 //   APPROVE_EMOJI     (선택) 확인 이모지 이름, 기본값 white_check_mark (Variable)
+//   OWNER_IDS         (선택) [일정]·[인사이트]를 올릴 수 있는 사람의 슬랙 멤버 ID, 쉼표로 구분 (Variable)
 
 import { readFile, writeFile } from "node:fs/promises";
 
@@ -11,9 +12,11 @@ const TOKEN = process.env.SLACK_BOT_TOKEN;
 const CHANNEL = process.env.SLACK_CHANNEL_ID;
 const EMOJI = process.env.APPROVE_EMOJI || "white_check_mark";
 const APPROVERS = (process.env.APPROVER_IDS || "").split(",").map(s => s.trim()).filter(Boolean);
+const OWNERS = (process.env.OWNER_IDS || "").split(",").map(s => s.trim()).filter(Boolean);
 const LOOKBACK_DAYS = 90;
 const OUT = "site/posts.json";
-const CATEGORIES = ["공지", "일정", "팀 이야기", "제품", "채용"];
+const CATEGORIES = ["공지", "일정", "인사이트", "팀 이야기", "제품", "채용"];
+const OWNER_ONLY = ["일정", "인사이트"];   // OWNER_IDS 를 넣으면 이 분류는 지정한 사람 글만 올라가요
 
 if (!TOKEN || !CHANNEL) {
   console.error("SLACK_BOT_TOKEN 과 SLACK_CHANNEL_ID 를 설정해 주세요.");
@@ -140,6 +143,10 @@ for (const msg of messages) {
   const date = seoulDate(msg.ts);
   const { title, ...rest } = parse(msg.text, date);
   if (!title) continue;
+  if (OWNERS.length && OWNER_ONLY.includes(rest.category) && !OWNERS.includes(msg.user)) {
+    console.warn(`지정된 작성자가 아니라 건너뜁니다: [${rest.category}] ${title}`);
+    continue;
+  }
   approved.push({ id: msg.ts, date, team: await teamOf(msg.user), title, ...rest });
 }
 
