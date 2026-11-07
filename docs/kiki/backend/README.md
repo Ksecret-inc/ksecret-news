@@ -16,7 +16,7 @@
 5. 나오는 **웹 앱 URL**(`https://script.google.com/macros/s/.../exec`)을 복사.
 
 ## 3. 게임에 URL 넣기
-`site/kiki/index.html` 상단의 설정에서:
+`site/beautysecret/index.html` 상단의 설정에서:
 ```js
 const CONFIG = {
   LEADERBOARD_URL: 'https://script.google.com/macros/s/XXXX/exec',

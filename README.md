@@ -87,10 +87,10 @@ slack-app-manifest.yml                슬랙 앱 설정
 
 ## 캠페인 게임: KIKI'S SECRET
 
-SEOUL 1988 글로벌 캠페인용 브라우저 게임. 배포되면 `https://<계정명>.github.io/ksecret-news/kiki/` 에서 열립니다.
+SEOUL 1988 글로벌 캠페인용 브라우저 게임. 배포되면 `https://ksecret-inc.github.io/ksecret-news/beautysecret/` 에서 열립니다.
 
 ```
-site/kiki/index.html              게임 (단일 파일)
+site/beautysecret/index.html              게임 (단일 파일)
 docs/kiki/GAME_DESIGN.md          기획서
 docs/kiki/CHANGELOG.md            차수별 변경 기록
 docs/kiki/backend/leaderboard.gs  Top 50 리더보드 백엔드 (Google Apps Script)

@@ -3,7 +3,7 @@
 > SEOUL 1988 글로벌 캠페인 게임. LA 고등학교의 퀸카 Kiki의 유리 피부를 밤마다 지켜주는
 > 서울의 뷰티 요정(= 케이시크릿 제품)들의 이야기.
 >
-> 문서 버전: v5 (5차 산출물, 10~13장 참고) · 1차 2026-11-06 · 2차 2026-11-07 · 플레이: `site/kiki/index.html`
+> 문서 버전: v5 (5차 산출물, 10~13장 참고) · 1차 2026-11-06 · 2차 2026-11-07 · 플레이: `site/beautysecret/index.html`
 
 ---
 
@@ -191,7 +191,7 @@ Kiki의 얼굴은 7개 존으로 나뉜다. 저주는 종류별로 정해진 존
 4. 다시 하기 / 친구에게 공유(링크 복사).
 
 ### 5.1 리더보드 백엔드 (1차 제공: Google Apps Script)
-- `docs/kiki/backend/leaderboard.gs` 를 Google 시트에 붙여 웹앱으로 배포 → URL을 `site/kiki/index.html` 상단 `CONFIG.LEADERBOARD_URL` 에 입력.
+- `docs/kiki/backend/leaderboard.gs` 를 Google 시트에 붙여 웹앱으로 배포 → URL을 `site/beautysecret/index.html` 상단 `CONFIG.LEADERBOARD_URL` 에 입력.
 - `POST` { nickname, country, email, score, nights, maxCombo, duration, checksum, version } → { ok, rank, total }
 - `GET ?top=50` → [{ nickname, country, score, nights }] (이메일은 절대 반환하지 않음)
 - URL 미설정 시 브라우저 로컬(기기 내) 랭킹으로 동작 (데모용 샘플 행 표시).
@@ -294,7 +294,7 @@ Kiki의 얼굴은 7개 존으로 나뉜다. 저주는 종류별로 정해진 존
 
 ### 11.1 로고 자산
 - 출처: 브랜드 필름 엔드프레임(`site/film/end-d.jpg`, 1920px)의 공식 락업. 모노그램 + K-SECRET 워드마크, SEOUL 1988 워드마크.
-- 가공: 투명 PNG(2배 업스케일) 4색 — 크림 `#FFF6E3`, 잉크 `#2B2240`, 레드 `#C64046`, 화이트. `site/kiki/brand/`.
+- 가공: 투명 PNG(2배 업스케일) 4색 — 크림 `#FFF6E3`, 잉크 `#2B2240`, 레드 `#C64046`, 화이트. `site/beautysecret/brand/`.
 - 게임 내 사용: CSS `mask-image` 로 색을 자유롭게 입힌 `.logo-s88` / `.logo-ks` 요소, SVG 심볼 `#s88w #s88r #s88c`, 공유 카드 캔버스용 데이터 URI.
 - 공식 벡터(AI/SVG) 원본을 받으면 교체만 하면 된다(동일 비율 888×148 / 452×110).
 
@@ -347,7 +347,7 @@ Kiki의 얼굴은 7개 존으로 나뉜다. 저주는 종류별로 정해진 존
 
 - 가공: 흰 배경은 플러드필로 제거, 투명 PNG는 그대로. 여백 8%를 두고 480×480 정사각 PNG로 저장.
 - 게임 안에서는 날개·반짝이 SVG 위에 실사를 올리고, 뒤에 크림색 후광을 깔아 어두운 화면에서도 제품이 또렷하게 보인다. 이미지가 없으면 자동으로 보틀 일러스트로 폴백.
-- 교체 방법: 같은 파일명으로 `site/kiki/products/` 에 덮어쓰기만 하면 된다(정사각, 투명 배경 권장).
+- 교체 방법: 같은 파일명으로 `site/beautysecret/products/` 에 덮어쓰기만 하면 된다(정사각, 투명 배경 권장).
 - 참고: 드라이브에는 "Retinal Shot(리뉴얼)" 실사도 있다. 어드밴스드 샷이 리뉴얼 패키지로 바뀌면 `ashot.png` 만 교체.
 
 ### 12.2 K-SECRET 로고 배치 (SEOUL 1988 과 항상 짝으로)
