@@ -3,7 +3,7 @@
 > SEOUL 1988 글로벌 캠페인 게임. LA 고등학교의 퀸카 Kiki의 유리 피부를 밤마다 지켜주는
 > 서울의 뷰티 요정(= 케이시크릿 제품)들의 이야기.
 >
-> 문서 버전: v4 (4차 산출물, 10~12장 참고) · 1차 2026-11-06 · 2차 2026-11-07 · 플레이: `site/kiki/index.html`
+> 문서 버전: v5 (5차 산출물, 10~13장 참고) · 1차 2026-11-06 · 2차 2026-11-07 · 플레이: `site/kiki/index.html`
 
 ---
 
@@ -366,3 +366,31 @@ Kiki의 얼굴은 7개 존으로 나뉜다. 저주는 종류별로 정해진 존
 2. 어드밴스드 샷 vs 리뉴얼 레틴알 샷 중 어느 패키지를 쓸지
 3. 카드 스탬프 투명도(현재 42~50%)와 HUD K-SECRET 크기
 4. 리더보드 서버 연결 시점(Apps Script) 및 런칭 도메인
+
+
+---
+
+## 13. 5차 변경 — 스토리 인트로 (v5, 2026-11-07)
+
+### 13.1 구조 (인스타그램 스토리 문법)
+- 세로 패널(폰 전체 화면, 데스크톱은 가운데 460px 카드), 상단 7칸 진행 바, 프로필 줄(키키 아바타 · kikis.secret · 건너뛰기).
+- 조작: 오른쪽 70% 탭 = 다음, 왼쪽 30% 탭 = 이전, 좌우 스와이프, 길게 누르면 일시정지, 키보드 ←/→/Esc. 카드당 6.5초 자동 진행, 마지막 카드는 CTA 대기.
+- 첫 접속에만 자동 재생(`kiki_intro_seen`). 타이틀의 "스토리" 버튼으로 언제든 다시 볼 수 있다.
+- 마지막 카드의 "요정 부르기" → 바로 피부 고민 선택 → 1번째 밤. "타이틀로"는 타이틀 화면.
+
+### 13.2 카드 구성
+| # | 아이브로 | 장면 애니메이션 | 카피(EN) |
+|---|---|---|---|
+| 1 | Westgate High, LA | 낮 하늘, 해, 키키(눈 뜸), 얼굴 위 반짝임 | Meet Kiki. Queen of Westgate High. Famous for one thing: glass skin. |
+| 2 | Her secret | 1.4초 뒤 낮→밤 전환, 달 등장, 눈 감김, 일기 한 줄 | But Kiki has a SECRET. Every night, while she sleeps… |
+| 3 | From Seoul, with love | "SEOUL ✈ LA" 라벨, 요정 4명(실사)이 오른쪽에서 날아와 떠다님 | …beauty fairies from Seoul fly in. Each one is a real SEOUL 1988 product. |
+| 4 | Every night | 볼·이마·눈가에 저주 4종이 순서대로 팝업(이름표) | And every night, the curses come too. |
+| 5 | The rule | Nia 가 날아와 기미 저주에 닿으면 저주가 사라지고 반짝임 | Every curse has its fairy. Dark spots? Nia. Lines? Retina. Eyes? Only Bean. |
+| 6 | Seven nights | 월~일 칸이 순서대로 켜지고 일요일은 PROM | Guard her for seven nights, until prom. Top 50 make the board. Top 5 win SEOUL 1988. |
+| 7 | Ready? | K-SECRET / SEOUL 1988 / Kiki's SECRET 락업, CTA 버튼 맥동 | Tonight, Kiki's SECRET is in your hands. |
+
+### 13.3 확인받고 싶은 것
+1. 카드 수(7장)와 카드당 6.5초가 적당한지, 더 짧게(5장) 줄일지
+2. 2·6번 카드의 일기 한 줄 톤
+3. 첫 접속에만 자동 재생 vs 매번 재생
+4. 스토리에 배경음(짧은 멜로디)을 넣을지
