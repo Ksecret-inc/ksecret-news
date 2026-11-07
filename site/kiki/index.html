@@ -256,13 +256,16 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 /* ---------- real product photos as fairies (SVG bottle stays as fallback) ---------- */
 .pimg{position:relative;display:block;width:100%;height:100%}
 .pimg::before{content:"";position:absolute;left:10%;right:10%;top:12%;bottom:6%;border-radius:50%;background:radial-gradient(circle,rgba(255,246,227,.95) 0 46%,rgba(255,246,227,0) 70%)}
-.pimg .wings{position:absolute;left:-14%;top:-6%;width:128%;height:100%;opacity:.95;transform-origin:50% 55%;animation:flap 1.2s ease-in-out infinite}
-.pimg .face{position:absolute;left:50%;top:var(--fy,55%);width:46%;height:23%;transform:translate(-50%,-50%);pointer-events:none;opacity:.9;filter:drop-shadow(0 1px 2px rgba(0,0,0,.2))}
+span.pimg>svg.wg{position:absolute;width:calc(var(--ww) * 1%);height:calc(var(--ww) * 2.25%);top:calc((var(--wy) - var(--ww) * 1.24) * 1%);overflow:visible;filter:drop-shadow(0 1px 1.5px rgba(43,34,64,.45))}
+span.pimg>svg.wr{left:calc((var(--wr) - 3 - var(--ww) * .06) * 1%);transform-origin:6% 55%;animation:flapR 1.3s ease-in-out infinite}
+span.pimg>svg.wl{left:calc((var(--wl) + 3 - var(--ww) * .94) * 1%);transform-origin:94% 55%;animation:flapL 1.3s ease-in-out infinite}
+.pimg.nf .wg{display:none}
+span.pimg>svg.face{position:absolute;left:calc(var(--fx) * 1%);top:calc(var(--fy) * 1%);width:calc(var(--fw) * 1%);height:calc(var(--fw) * .5%);transform:translate(-50%,-50%);pointer-events:none;opacity:.9;filter:drop-shadow(0 1px 2px rgba(0,0,0,.2))}
 .pimg.nf .face{display:none}
-.pimg img{position:absolute;left:4%;top:6%;width:92%;height:90%;object-fit:contain;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3))}
-.pimg>svg:not(.wings):not(.face){display:none;position:absolute;inset:0;width:100%;height:100%}
+.pimg img{position:absolute;left:5%;top:5%;width:90%;height:90%;object-fit:contain;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3))}
+.pimg>svg:not(.wg):not(.face){display:none;position:absolute;inset:0;width:100%;height:100%}
 .pimg.nf img,.pimg.nf::before{display:none}
-.pimg.nf>svg:not(.wings):not(.face){display:block}
+.pimg.nf>svg:not(.wg):not(.face){display:block}
 /* ---------- brand layer: the official K-SECRET lockup and SEOUL 1988 wordmark, tinted through CSS masks ---------- */
 .logo-s88,.logo-ks{display:inline-block;background-color:currentColor;-webkit-mask:var(--logo-s88) no-repeat center/contain;mask:var(--logo-s88) no-repeat center/contain;aspect-ratio:888/148;height:1em;vertical-align:-.12em}
 .logo-ks{-webkit-mask-image:var(--logo-ks);mask-image:var(--logo-ks);aspect-ratio:452/110}
@@ -404,9 +407,10 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 @keyframes toast{0%{opacity:0;transform:translateY(-8px)}10%,80%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-8px)}}
 @keyframes shieldPulse{0%,100%{opacity:.75}50%{opacity:1}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes flap{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.8)}}
+@keyframes flapR{0%,100%{transform:rotate(0) scaleX(1)}50%{transform:rotate(-7deg) scaleX(.82)}}
+@keyframes flapL{0%,100%{transform:rotate(0) scaleX(1)}50%{transform:rotate(7deg) scaleX(.82)}}
 @media (prefers-reduced-motion:reduce){
-  .star,.zzz,.curse.s3::before,.wand::before,.facebox.shield::after,.pimg .wings{animation:none}
+  .star,.zzz,.curse.s3::before,.wand::before,.facebox.shield::after,.pimg .wg{animation:none}
   .curse,.fairy,.combo{transition:none}
 }
 </style>
@@ -617,6 +621,8 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
       <path d="M33,40 C37,18 52,4 61,9 C68,17 60,38 37,48 M34,46 C44,45 58,52 58,64 C58,75 46,75 36,61" stroke="#fff" stroke-width="1.2" fill="none" opacity=".85" stroke-linejoin="round"/>
       <path d="M35,42 C42,32 50,22 58,14 M36,46 C44,50 52,56 55,64" stroke="#fff" stroke-width=".9" fill="none" opacity=".6"/>
     </symbol>
+    <symbol id="wingR" viewBox="32 4 32 72"><use href="#wing" width="64" height="80"/></symbol>
+    <symbol id="wingL" viewBox="0 4 32 72"><g transform="matrix(-1,0,0,1,64,0)"><use href="#wing" width="64" height="80"/></g></symbol>
     <symbol id="wings" viewBox="0 0 64 80">
       <use href="#wing"/><use href="#wing" transform="matrix(-1,0,0,1,64,0)"/>
       <path d="M8,14 l1.5,4 4,1.5 -4,1.5 -1.5,4 -1.5,-4 -4,-1.5 4,-1.5 z" fill="#fff" opacity=".8"/>
@@ -963,11 +969,25 @@ const el = {
 };
 
 /* ---------------- icons ---------------- */
-const FACE = {nia:['happy',60], cica:['calm',56], retinal:['wink',55], eyecream:['smile',55], snail:['calm',56], foam:['happy',56], glow:['wink',56], ashot:['smile',52], txa:['calm',52], eyepatch:['happy',62], sleeping:['sleepy',54], hydrogel:['smile',48]};
-function fairyFace(f){ return FACE[f.id] || ['smile', 55]; }
+// per-product fairy layout, in % of the product cutout: [body left, body right, wing attach y, wing width, face x, face y, face width, expression]
+const FLAY = {
+  nia:     [12, 88, 30, 24, 50, 64, 36, 'happy'],
+  cica:    [36, 63, 34, 27, 49.5, 28, 28, 'calm'],
+  retinal: [34, 66, 44, 28, 50, 47, 30, 'wink'],
+  eyecream:[40, 60, 34, 25, 50, 28, 23, 'smile'],
+  snail:   [38, 62, 48, 25, 50, 53, 25, 'calm'],
+  foam:    [34, 66, 34, 28, 49.5, 28, 30, 'happy'],
+  glow:    [33, 67, 44, 28, 50, 47, 32, 'wink'],
+  ashot:   [41, 60, 34, 24, 50, 26, 21, 'smile'],
+  txa:     [43, 57, 34, 23, 50, 26, 17, 'calm'],
+  eyepatch:[10, 90, 40, 22, 50, 64, 30, 'happy'],
+  sleeping:[35, 65, 34, 27, 50, 28, 28, 'sleepy'],
+  hydrogel:[14, 86, 26, 24, 50, 44, 32, 'smile']
+};
+function fairyLayout(f){ return FLAY[f.id] || [30, 70, 40, 26, 50, 45, 24, 'smile']; }
 function fairyIcon(f){
-  const [face, fy] = fairyFace(f);
-  return `<span class="pimg" style="--acc:${f.acc};--fy:${fy}%"><svg viewBox="0 0 64 80" class="wings" aria-hidden="true"><use href="#wings"/></svg><img src="${f.img}" alt="" loading="lazy" decoding="async" draggable="false" onerror="this.parentNode.classList.add('nf')"><svg viewBox="0 0 64 32" class="face" aria-hidden="true"><use href="#f-${face}"/></svg>${fairySVG(f)}</span>`;
+  const [wl, wr, wy, ww, fx, fy, fw, face] = fairyLayout(f), p = v => (5 + v * .9).toFixed(1);
+  return `<span class="pimg" style="--acc:${f.acc};--wl:${p(wl)};--wr:${p(wr)};--wy:${p(wy)};--ww:${(ww * .9).toFixed(1)};--fx:${p(fx)};--fy:${p(fy)};--fw:${(fw * .9).toFixed(1)}"><svg viewBox="0 0 32 72" class="wg wl" aria-hidden="true"><use href="#wingL"/></svg><svg viewBox="0 0 32 72" class="wg wr" aria-hidden="true"><use href="#wingR"/></svg><img src="${f.img}" alt="" loading="lazy" decoding="async" draggable="false" onerror="this.parentNode.classList.add('nf')"><svg viewBox="0 0 64 32" class="face" aria-hidden="true"><use href="#f-${face}"/></svg>${fairySVG(f)}</span>`;
 }
 function fairySVG(f, cls = ''){
   return `<svg viewBox="0 0 64 80" class="${cls}" style="--acc:${f.acc}" aria-hidden="true"><use href="#wings"/><use href="#${f.shape}"/><text x="32" y="54.5" text-anchor="middle" font-family="Fredoka, Arial, sans-serif" font-size="${f.label.length > 3 ? 8.5 : 10}" font-weight="600" fill="#fff" letter-spacing=".5">${esc(f.label)}</text></svg>`;
@@ -1409,12 +1429,15 @@ async function drawShareCard(f){
   x.fillStyle = 'rgba(255,246,227,.97)'; roundRect(x, 70, 900, W - 140, 370, 44); x.fill();
   if (photo){
     try {
-      const [face, fy] = fairyFace(f), acc = f.acc;
-      const wingSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 80" width="128" height="160">${defMarkup('wing')}${defMarkup('wings')}<use href="#wings"/></svg>`.replace(/var\(--acc(,#C9B8FF)?\)/g, acc);
-      x.drawImage(await svgImage(wingSvg), 92 - 204 * .14, 926 - 204 * .06, 204 * 1.28, 204);
+      const [wl, wr, wy, ww, fx, fy, fw, face] = fairyLayout(f), acc = f.acc, X = v => 92 + 2.04 * v, Y = v => 926 + 2.04 * v, k = 2.04;
+      const wing = async side => svgImage(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 72" width="64" height="144">${defMarkup('wing')}${defMarkup('wing' + side)}<use href="#wing${side}"/></svg>`.replace(/var\(--acc(,#C9B8FF)?\)/g, acc));
+      const wW = ww * k, wH = wW * 2.25, wTop = Y(wy) - wW * 1.24;
+      x.save(); x.shadowColor = 'rgba(43,34,64,.45)'; x.shadowBlur = 6; x.shadowOffsetY = 2;
+      x.drawImage(await wing('L'), X(wl) + 6 - wW * .94, wTop, wW, wH);
+      x.drawImage(await wing('R'), X(wr) - 6 - wW * .06, wTop, wW, wH); x.restore();
       x.drawImage(fi, 92, 926, 204, 204);
       const faceSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 32" width="128" height="64">${defMarkup('f-' + face)}<use href="#f-${face}"/></svg>`;
-      x.drawImage(await svgImage(faceSvg), 92 + 102 - 47, 926 + 204 * fy / 100 - 23.5, 94, 47);
+      const fW = fw * k; x.globalAlpha = .9; x.drawImage(await svgImage(faceSvg), X(fx) - fW / 2, Y(fy) - fW / 4, fW, fW / 2); x.globalAlpha = 1;
     } catch { x.drawImage(fi, 92, 926, 204, 204); }
   } else x.drawImage(fi, 92, 926, 204, 204);
   const disp = lang === 'ko' ? 'Jua, Fredoka, sans-serif' : 'Fredoka, Jua, sans-serif';
