@@ -374,7 +374,7 @@ Kiki의 얼굴은 7개 존으로 나뉜다. 저주는 종류별로 정해진 존
 
 ### 13.1 구조 (인스타그램 스토리 문법)
 - 세로 패널(폰 전체 화면, 데스크톱은 가운데 460px 카드), 상단 7칸 진행 바, 프로필 줄(키키 아바타 · kikis.secret · 건너뛰기).
-- 조작: 오른쪽 70% 탭 = 다음, 왼쪽 30% 탭 = 이전, 좌우 스와이프, 길게 누르면 일시정지, 키보드 ←/→/Esc. 카드당 6.5초 자동 진행, 마지막 카드는 CTA 대기.
+- 조작: 오른쪽 70% 탭 = 다음, 왼쪽 30% 탭 = 이전, 좌우 스와이프, 길게 누르면 일시정지, 키보드 ←/→/Esc. 카드당 6.5초 자동 진행(6차에서 3초로 변경, 14장 참조), 마지막 카드는 CTA 대기.
 - 첫 접속에만 자동 재생(`kiki_intro_seen`). 타이틀의 "스토리" 버튼으로 언제든 다시 볼 수 있다.
 - 마지막 카드의 "요정 부르기" → 바로 피부 고민 선택 → 1번째 밤. "타이틀로"는 타이틀 화면.
 
@@ -394,3 +394,35 @@ Kiki의 얼굴은 7개 존으로 나뉜다. 저주는 종류별로 정해진 존
 2. 2·6번 카드의 일기 한 줄 톤
 3. 첫 접속에만 자동 재생 vs 매번 재생
 4. 스토리에 배경음(짧은 멜로디)을 넣을지
+
+## 14. 6차 변경 — 키키 리디자인, 요정 날개·표정, 스토리 재배치 (v6, 2026-11-07)
+
+### 14.1 키키 리디자인 ("더 귀엽고 사랑스럽게")
+- 비율: 얼굴을 둥글고 넓게(가로 264 : 세로 320), 눈을 얼굴 아래쪽에 크게(흰자 62×70), 턱은 작게. 눈은 홍채 그라데이션 + 아래쪽 밝은 링 + 큰 하이라이트 2개 + 바깥쪽 속눈썹. 잠든 눈은 아래로 휘는 속눈썹 + 연한 핑크 눈두덩.
+- 머리: 시스루 뱅(반투명 가닥 9개) + 커튼 앞머리 + 어깨까지 오는 옆머리, 정수리 광택, 오른쪽 리본 핀. 수면안대는 제거.
+- 피부: 큰 타원 하이라이트 대신 부드러운 광택 그라데이션(`gSheen`) + 작은 별 반짝임 3개. 글로우가 떨어지면 함께 흐려진다(`--glow`).
+- 좌표: 저주 등장 영역을 새 얼굴에 맞춤 — 이마(200,172) · 눈가(148/252,288) · 코(200,330) · 볼(112/288,348) · 턱(200,404).
+
+### 14.2 요정 = 실사 + 날개 + 표정
+- 날개: 한쪽 날개 심볼(`#wing`)을 좌우 대칭으로 배치. 흰색 반투명 바탕 위에 요정별 포인트 색(`--acc`) 안쪽 날개, 흰 윤곽선과 날개맥. 제품 폭의 128% 로 펼쳐지고 1.2초 주기로 퍼덕인다(`flap`, 동작 줄이기 시 정지).
+- 표정: 제품 위에 작은 크림색 스티커(폭 46%)로 눈·볼·입을 얹는다. 5종 — smile(동그란 눈) · happy(^^ + 벌린 입) · wink · calm(차분) · sleepy(z z). 요정별 표정과 세로 위치(`FACE` 맵): Nia happy 60% · Cica calm · Retina wink · Bean smile · Snail calm · Pine happy · Yuja wink · Shot 12 smile · TXA calm · Patch happy 62% · 슬리핑 마스크 sleepy · 하이드로겔 smile 48%.
+- 적용 범위: 덱 카드, 파워업 링, 속삭임, 오늘의 레슨, 피부 매치, MVP, 앨범, 스토리 비행 장면, 공유 카드(캔버스에 날개→실사→표정 순으로 합성). 실사 로드 실패 시 기존 보틀 일러스트 폴백에는 표정 스티커를 얹지 않는다.
+
+### 14.3 스토리 인트로 v2 (카드당 3초, 8장)
+| # | 아이브로 | 장면 | 카피(EN) |
+|---|---|---|---|
+| 1 | Westgate High, LA | 낮, 키키(눈 뜸), 반짝임 | Meet Kiki. Queen of Westgate High. Everyone wants to know her secret. |
+| 2 | Why she's the queen | 콜아웃 3개 팝업: Glass-clear skin · Bouncy elasticity · Bright, line-free eyes | Skin as clear as glass. Cheeks so bouncy they might pop. Bright, lively eyes without a single line. |
+| 3 | Her secret | 1.4초 뒤 낮→밤, 눈 감김, 일기 | But Kiki has a SECRET. Every night, while she sleeps… |
+| 4 | Every night | 저주 4종 팝업(0.2/0.7/1.2/1.7초) | …the curses creep in. Breakouts, dark spots, fine lines, dark circles. |
+| 5 | From Seoul, with love | 요정 4명(실사+날개+표정) 비행 | That's when beauty fairies from Seoul fly in to guard her. Each one is a real SEOUL 1988 product. |
+| 6 | The rule | Nia 매칭 데모 | Every curse has its fairy. Dark spots? Nia. Lines? Retina. Eyes? Only Bean. |
+| 7 | Seven nights | 월~일, 일요일 PROM | Guard her for seven nights, until prom. Top 50 make the board. Top 5 win SEOUL 1988. |
+| 8 | Ready? | 락업 + CTA | Tonight, Kiki's SECRET is in your hands. |
+
+- 저주(4) 가 요정(5) 보다 먼저 나오도록 순서를 바꿨다. 자동 진행은 3초, 마지막 카드는 CTA 대기. 길게 누르면 멈추므로 3초가 짧게 느껴지는 사용자도 읽을 수 있다.
+
+### 14.4 확인받고 싶은 것
+1. 새 키키 인상(눈 크기·앞머리·리본) — 더 조정할 부분
+2. 표정 스티커가 제품 라벨을 가리는 정도(폭 46%)가 적당한지, 더 작게 할지
+3. 날개 퍼덕임이 덱에서 산만하지 않은지(끄거나 느리게 가능)
