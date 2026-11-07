@@ -208,6 +208,7 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 .field input,.field select{width:100%;font:inherit;font-size:1rem;padding:.75rem .9rem;border-radius:12px;border:1.5px solid var(--line-2);background:var(--night);color:var(--fg);min-width:0}
 .field input:focus,.field select:focus{outline:2px solid var(--glow);outline-offset:1px;border-color:transparent}
 .field .err{color:var(--bad);font-size:.82rem;min-height:1.2em}
+.field #fCountryQ{padding:.6rem .9rem;font-size:.92rem;border-style:dashed}
 .check{display:flex;gap:10px;align-items:flex-start;font-size:.86rem;color:var(--mute)}
 .check input{width:18px;height:18px;margin-top:2px;flex:none;accent-color:var(--red)}
 .note{font-size:.82rem;color:var(--mute);margin:0}
@@ -769,7 +770,7 @@ en: {
   stop_t:'You stopped here.', stop_s:'Your score is locked in. Kiki sleeps well tonight.',
   r_score:'Final score', r_nights:'Nights survived', r_combo:'Best combo', r_curses:'Curses dispelled', r_mvp:'Fairies that saved tonight',
   f_t:'Join the Top 50', f_s:'Top 5 win SEOUL 1988 products. Leave your email to be eligible for the prize draw.',
-  f_nick:'Nickname', f_country:'Country', f_country_ph:'Choose a country', f_email:'Email (for prizes, optional)',
+  f_nick:'Nickname', f_country:'Country', f_country_ph:'Choose a country', f_country_q:'Search country (e.g. Korea, US)', f_country_none:'No match', f_email:'Email (for prizes, optional)',
   f_consent:'I agree that my email is used only to contact me about prizes and is deleted after the event.',
   e_nick:'Nickname must be 2 to 16 characters.', e_country:'Pick your country.', e_email:"That email doesn't look right.", e_consent:'Please agree so we can contact you about prizes.',
   sending:'Sending…', fail:"Couldn't reach the leaderboard. Your score was saved on this device.",
@@ -791,7 +792,7 @@ en: {
   story_now:'now', story_skip:'Skip', story_play:'Call the fairies', story_later:'Go to title', btn_story:'Story', story_hint:'Next: pick your skin worry',
   story_ey:['Westgate High, LA','Why she\'s the queen','The secret of her glow','Every night','From Seoul, with love','The rule','Seven nights','Ready?'],
   story_q:['Glass-clear skin','Bouncy elasticity','Bright, line-free eyes'],
-  st:["Meet <b>Kiki</b>. Queen of Westgate High. Everyone wants to know her secret.","Skin as clear as <b>glass</b>. Cheeks so <b>bouncy</b> they might pop. Bright, lively eyes without a <b>single line</b>.","But Kiki has a <b>SECRET</b>. Every night, while she sleeps…","…the <b>curses</b> creep in. Breakouts, dark spots, fine lines, dark circles.","That's when beauty fairies from <b>Seoul</b> fly in to guard her. Each one is a real SEOUL 1988 product.","Every curse has its fairy. Dark spots? <b>Nia</b>. Lines? <b>Retina</b>. Eyes? Only <b>Bean</b>.","Guard her for <b>seven nights</b>, until prom. Top 50 make the board. Top 5 win SEOUL 1988.","Tonight, Kiki's SECRET is in your hands."],
+  st:["Meet <b>Kiki</b>. Queen of Westgate High. Everyone wants to know her secret.","Skin as clear as <b>glass</b>. Cheeks so <b>bouncy</b> they might pop. Bright, lively eyes without a <b>single line</b>.","But Kiki has a <b>SECRET</b>. Every night, while she sleeps…","…the <b>curses</b> creep in. Breakouts, dark spots, fine lines, dark circles.","That's when beauty fairies from <b>Seoul</b>, filled with the <b>energy of Korea</b>, fly in to guard her.","Every curse has its fairy. Dark spots? <b>Nia</b>. Lines? <b>Retina</b>. Eyes? Only <b>Bean</b>.","Guard her for <b>seven nights</b>, until prom. Top 50 make the board, and the fairies might just come to visit the <b>top 5</b>.","Tonight, Kiki's SECRET is in your hands."],
   st_diary:["","","\"Please don't let anyone find out.\"","","","","\"Prom is Sunday. Seven nights to go.\"",""],
   day:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
   nt:['First Night','Fine Lines','The Eye Trap','Dry Spell','Clogged','Party Glow','Prom Eve'],
@@ -819,7 +820,7 @@ ko: {
   stop_t:'여기서 멈췄어요.', stop_s:'점수가 확정됐어요. 오늘 밤 키키는 편히 자요.',
   r_score:'최종 점수', r_nights:'버틴 밤', r_combo:'최고 콤보', r_curses:'물리친 저주', r_mvp:'오늘 밤의 MVP 요정',
   f_t:'Top 50에 이름을 올리세요', f_s:'1~5등에게 SEOUL 1988 제품을 드려요. 경품 대상이 되려면 이메일을 남겨주세요.',
-  f_nick:'닉네임', f_country:'국가', f_country_ph:'국가 선택', f_email:'이메일 (경품 안내용, 선택)',
+  f_nick:'닉네임', f_country:'국가', f_country_ph:'국가 선택', f_country_q:'국가 검색 (예: 한국, 미국, Japan)', f_country_none:'검색 결과 없음', f_email:'이메일 (경품 안내용, 선택)',
   f_consent:'이메일은 경품 안내 목적으로만 사용하고 이벤트 종료 후 삭제하는 데 동의합니다.',
   e_nick:'닉네임은 2~16자로 입력해주세요.', e_country:'국가를 선택해주세요.', e_email:'이메일 형식을 확인해주세요.', e_consent:'경품 안내를 위해 동의가 필요해요.',
   sending:'등록 중…', fail:'서버에 연결하지 못했어요. 점수는 이 기기에 저장했어요.',
@@ -841,7 +842,7 @@ ko: {
   story_now:'지금', story_skip:'건너뛰기', story_play:'요정 부르기', story_later:'타이틀로', btn_story:'스토리', story_hint:'다음: 내 피부 고민 고르기',
   story_ey:['LA 웨스트게이트 고등학교','퀸카인 이유','그녀 피부 광채의 비밀','매일 밤','서울에서 온 요정','규칙','일주일 밤','준비됐나요?'],
   story_q:['유리같이 맑은 피부','톡 터질 듯한 탄력','주름 없는 생기 눈빛'],
-  st:["<b>키키</b>를 소개할게요. 웨스트게이트 고등학교의 퀸카. 모두가 그녀의 비밀을 궁금해해요.","<b>유리</b>같이 맑은 피부. 톡 터질 것 같은 <b>탄력</b>. 주름 하나 보이지 않는 <b>생기 넘치는 눈빛</b>.","하지만 키키에겐 <b>비밀</b>이 있어요. 매일 밤, 그녀가 잠들면…","…<b>저주</b>가 찾아와요. 여드름, 기미, 잔주름, 다크서클.","그때 <b>서울</b>에서 뷰티 요정들이 키키를 지키러 날아와요. 요정 하나하나가 진짜 SEOUL 1988 제품이죠.","저주마다 짝이 되는 요정이 있어요. 기미엔 <b>Nia</b>, 주름엔 <b>Retina</b>, 눈가엔 오직 <b>Bean</b>.","프롬까지 <b>일주일 밤</b>을 지켜주세요. Top 50은 랭킹에, 1~5등은 SEOUL 1988 선물.","오늘 밤, 키키의 SECRET은 당신 손에."],
+  st:["<b>키키</b>를 소개할게요. 웨스트게이트 고등학교의 퀸카. 모두가 그녀의 비밀을 궁금해해요.","<b>유리</b>같이 맑은 피부. 톡 터질 것 같은 <b>탄력</b>. 주름 하나 보이지 않는 <b>생기 넘치는 눈빛</b>.","하지만 키키에겐 <b>비밀</b>이 있어요. 매일 밤, 그녀가 잠들면…","…<b>저주</b>가 찾아와요. 여드름, 기미, 잔주름, 다크서클.","그때 <b>한국의 에너지</b>가 담긴 요정들이 <b>서울</b>에서 키키를 지키러 날아와요.","저주마다 짝이 되는 요정이 있어요. 기미엔 <b>Nia</b>, 주름엔 <b>Retina</b>, 눈가엔 오직 <b>Bean</b>.","프롬까지 <b>일주일 밤</b>을 지켜주세요. Top 50은 랭킹에 오르고, <b>1~5등</b>에겐 요정들이 직접 찾아갈지도 몰라요.","오늘 밤, 키키의 SECRET은 당신 손에."],
   st_diary:["","","\"아무도 몰랐으면 좋겠어.\"","","","","\"프롬은 일요일. 일곱 밤 남았어.\"",""],
   day:['월','화','수','목','금','토','일'],
   nt:['첫날 밤','미세한 선','눈가의 함정','건조 주의보','막힌 모공','파티 글로우','프롬 전야'],
@@ -933,6 +934,15 @@ function nightCfg(n){
 const COUNTRIES = [['US','United States'],['CA','Canada'],['MX','Mexico'],['BR','Brazil'],['AR','Argentina'],['CL','Chile'],['CO','Colombia'],['PE','Peru'],['GB','United Kingdom'],['IE','Ireland'],['FR','France'],['DE','Germany'],['ES','Spain'],['IT','Italy'],['PT','Portugal'],['NL','Netherlands'],['BE','Belgium'],['CH','Switzerland'],['AT','Austria'],['SE','Sweden'],['NO','Norway'],['DK','Denmark'],['FI','Finland'],['PL','Poland'],['CZ','Czechia'],['HU','Hungary'],['RO','Romania'],['GR','Greece'],['TR','Türkiye'],['UA','Ukraine'],['RU','Russia'],['KR','South Korea'],['JP','Japan'],['CN','China'],['TW','Taiwan'],['HK','Hong Kong'],['SG','Singapore'],['MY','Malaysia'],['TH','Thailand'],['VN','Vietnam'],['PH','Philippines'],['ID','Indonesia'],['IN','India'],['PK','Pakistan'],['BD','Bangladesh'],['LK','Sri Lanka'],['NP','Nepal'],['MN','Mongolia'],['KZ','Kazakhstan'],['UZ','Uzbekistan'],['AU','Australia'],['NZ','New Zealand'],['AE','United Arab Emirates'],['SA','Saudi Arabia'],['QA','Qatar'],['KW','Kuwait'],['BH','Bahrain'],['OM','Oman'],['JO','Jordan'],['IL','Israel'],['EG','Egypt'],['MA','Morocco'],['TN','Tunisia'],['ZA','South Africa'],['NG','Nigeria'],['KE','Kenya'],['GH','Ghana'],['ET','Ethiopia'],['PR','Puerto Rico'],['DO','Dominican Republic'],['CR','Costa Rica'],['PA','Panama'],['GT','Guatemala'],['EC','Ecuador'],['VE','Venezuela'],['UY','Uruguay'],['BO','Bolivia'],['PY','Paraguay'],['IS','Iceland'],['LT','Lithuania'],['LV','Latvia'],['EE','Estonia'],['SK','Slovakia'],['SI','Slovenia'],['HR','Croatia'],['RS','Serbia'],['BG','Bulgaria'],['GE','Georgia'],['AM','Armenia'],['AZ','Azerbaijan'],['IQ','Iraq'],['LB','Lebanon'],['MM','Myanmar'],['KH','Cambodia'],['LA','Laos'],['BN','Brunei'],['MO','Macao'],['XX','Other']];
 const flag = c => (!c || c === 'XX') ? '🌐' : String.fromCodePoint(...[...c.toUpperCase()].map(ch => 0x1F1E6 + ch.charCodeAt(0) - 65));
 const countryName = c => (COUNTRIES.find(x => x[0] === c) || ['', c])[1];
+const countryKo = (() => { let d = null; try { d = new Intl.DisplayNames(['ko'], {type:'region'}); } catch {} return c => { try { return d ? d.of(c) || '' : ''; } catch { return ''; } }; })();
+const ALIAS = {US:'usa america 미국 미합중국', GB:'uk britain england 영국', KR:'south korea 대한민국 한국 korea', AE:'uae emirates 아랍에미리트', CN:'china 중국', TW:'taiwan 대만', JP:'japan 일본'};
+const norm = v => String(v).toLowerCase().replace(/\s+/g, '');
+function countryOptions(query, selected){
+  const qn = norm(query || '');
+  const list = COUNTRIES.filter(([c, n]) => !qn || norm(`${c} ${n} ${countryKo(c)} ${ALIAS[c] || ''}`).includes(qn));
+  const head = `<option value="">${esc(list.length ? t('f_country_ph') : t('f_country_none'))}</option>`;
+  return head + list.map(([c, n]) => { const ko = lang === 'ko' ? countryKo(c) : ''; return `<option value="${c}" ${selected === c ? 'selected' : ''}>${flag(c)} ${esc(ko && ko !== n ? `${ko} · ${n}` : n)}</option>`; }).join('');
+}
 
 /* ---------------- audio ---------------- */
 let soundOn = store.get('kiki_sound') !== 'off';
@@ -1470,7 +1480,7 @@ function showForm(){
     <p class="lede">${esc(t('f_s'))}</p>
     <form class="form" id="rankForm" novalidate>
       <div class="field"><label for="fNick">${esc(t('f_nick'))}</label><input id="fNick" name="nickname" maxlength="16" autocomplete="nickname" value="${esc(saved.nickname || '')}" autofocus><div class="err" id="eNick"></div></div>
-      <div class="field"><label for="fCountry">${esc(t('f_country'))}</label><select id="fCountry" name="country"><option value="">${esc(t('f_country_ph'))}</option>${COUNTRIES.map(([c, n]) => `<option value="${c}" ${saved.country === c ? 'selected' : ''}>${flag(c)} ${esc(n)}</option>`).join('')}</select><div class="err" id="eCountry"></div></div>
+      <div class="field"><label for="fCountry">${esc(t('f_country'))}</label><input type="search" id="fCountryQ" placeholder="${esc(t('f_country_q'))}" autocomplete="off" enterkeyhint="search" aria-label="${esc(t('f_country_q'))}"><select id="fCountry" name="country">${countryOptions('', saved.country)}</select><div class="err" id="eCountry"></div></div>
       <div class="field"><label for="fEmail">${esc(t('f_email'))}</label><input id="fEmail" name="email" type="email" inputmode="email" autocomplete="email" value="${esc(saved.email || '')}"><div class="err" id="eEmail"></div></div>
       <div class="field"><label for="fHandle">${esc(t('f_handle'))}</label><input id="fHandle" name="handle" maxlength="40" autocomplete="off" placeholder="@" value="${esc(saved.handle || '')}"></div>
       <label class="check"><input type="checkbox" id="fAge" name="age"><span>${esc(t('f_age'))}</span></label>
@@ -1480,6 +1490,9 @@ function showForm(){
       <div class="row between"><button type="button" class="btn sm" data-act="board">${esc(t('skip'))}</button><button type="submit" class="btn primary" id="btnSubmit">${esc(t('submit'))}</button></div>
     </form></div>`);
   $('#rankForm').addEventListener('submit', submitForm);
+  const q = $('#fCountryQ'), sel = $('#fCountry');
+  q.addEventListener('input', () => { const cur = sel.value; sel.innerHTML = countryOptions(q.value, cur); const first = sel.querySelector('option[value]:not([value=""])'); if (q.value.trim() && first && !(cur && sel.querySelector(`option[value="${cur}"]`))) sel.value = first.value; });
+  q.addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); sel.focus(); } });
 }
 async function submitForm(e){
   e.preventDefault();
