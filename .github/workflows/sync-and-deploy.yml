@@ -32,6 +32,8 @@ jobs:
           node-version: 20
 
       - name: 슬랙에서 소식 가져오기
+        # 슬랙 동기화가 실패해도(채널·토큰 문제 등) 사이트 배포는 계속해요
+        continue-on-error: true
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SLACK_CHANNEL_ID: ${{ vars.SLACK_CHANNEL_ID }}
