@@ -84,3 +84,15 @@ slack-app-manifest.yml                슬랙 앱 설정
   - `invalid_auth` → 토큰을 잘못 넣음
   - `missing_scope` → 앱 설치 후 권한이 바뀜, 앱을 재설치
   - `channel_not_found` → 채널 ID 확인
+
+## 캠페인 게임: KIKI'S SECRET
+
+SEOUL 1988 글로벌 캠페인용 브라우저 게임. 배포되면 `https://<계정명>.github.io/ksecret-news/kiki/` 에서 열립니다.
+
+```
+site/kiki/index.html              게임 (단일 파일)
+docs/kiki/GAME_DESIGN.md          기획서
+docs/kiki/CHANGELOG.md            차수별 변경 기록
+docs/kiki/backend/leaderboard.gs  Top 50 리더보드 백엔드 (Google Apps Script)
+docs/kiki/backend/README.md       리더보드 연결 방법
+```

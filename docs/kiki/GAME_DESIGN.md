@@ -1,0 +1,245 @@
+# KIKI'S SECRET — 게임 기획서 (1차)
+
+> SEOUL 1988 글로벌 캠페인 게임. LA 고등학교의 퀸카 Kiki의 유리 피부를 밤마다 지켜주는
+> 서울의 뷰티 요정(= 케이시크릿 제품)들의 이야기.
+>
+> 문서 버전: v1 (1차 산출물) · 작성일 2026-11-06 · 플레이: `site/kiki/index.html`
+
+---
+
+## 0. 한눈에 보기
+
+| 항목 | 내용 |
+|---|---|
+| 제목 | **KIKI'S SECRET** (키키의 비밀) · 부제 "Glass Skin Guardians" |
+| 장르 | 모바일/웹 캐주얼 디펜스 (탭 매칭 + 타임 프레셔) |
+| 플레이 시간 | 1판 3~6분 (7박 스토리 + 무한 모드) |
+| 플랫폼 | 모바일 브라우저 우선, 데스크톱 지원. 설치 없음. 단일 HTML |
+| 언어 | 영어 기본, 한국어 토글 (우상단) |
+| 핵심 루프 | 저주 등장 → 맞는 요정 선택 → 저주에 적용 → 점수/콤보 → 밤 클리어 |
+| 마케팅 장치 | 요정 = 실제 제품. 도감(Codex)에서 제품 효능/링크 노출. 종료 시 Top 50 랭킹, 1~5등 제품 증정 |
+| 데이터 수집 | 닉네임(필수), 국가(필수), 이메일(선택, 경품 수령 시 필수), 동의 체크 |
+
+---
+
+## 1. 세계관 & 내러티브
+
+**Kiki (17, LA Westgate High)**. 학교에서 "glass skin"으로 유명한 인기 많은 소녀. 비밀은 밤마다 서울에서 날아온 뷰티 요정들이 피부를 축복해 준다는 것. 매일 밤 피부 트러블 저주(여드름·기미·주근깨·주름·건조·모공·칙칙함·다크서클)가 얼굴을 덮치고, 요정들이 아침이 오기 전에 이를 걷어낸다.
+
+플레이어는 요정들의 지휘관. **일주일(월~일, 7박)** 동안 Kiki의 비밀을 지키고, 일요일 밤(프롬 전야)을 넘기면 "비밀 수호자(Secret Keeper)"가 된다. 이후 무한 모드로 계속 밤을 버티며 점수를 쌓는다.
+
+### 밤마다의 한 줄 대사 (밤 시작 화면)
+
+| 밤 | 요일 | 제목 | Kiki의 한마디 (EN) | 신규 요소 |
+|---|---|---|---|---|
+| 1 | Mon | First Night | "Chem test tomorrow. Please, fairies." | 여드름·기미 / Nia, Cica |
+| 2 | Tue | Fine Lines | "I laughed too hard at lunch. Is that… a line?" | 주름 / Retinal Serum |
+| 3 | Wed | The Eye Trap | "Stayed up for the group chat. My eyes…" | 눈가 저주 + **눈가 함정** / Eye Cream |
+| 4 | Thu | Dry Spell | "Santa Ana winds all day. My cheeks feel like paper." | 건조 / Snail Essence + 슬리핑 마스크(파워업) |
+| 5 | Fri | Clogged | "Pizza night. Don't ask." | 모공·블랙헤드 / Cleansing Foam + 하이드로겔 마스크(파워업) |
+| 6 | Sat | Party Glow | "Beach party at noon. Freckles incoming." | 칙칙함·주근깨, 3단계 저주 / Glow Serum, Advanced Shot |
+| 7 | Sun | Prom Eve | "Prom is tomorrow. Everything depends on tonight." | 모든 저주 / TXA Shot, Eye Patch |
+| 8+ | — | Endless | "Another night. The fairies never sleep." | 난이도 상승, 랭킹 변별 |
+
+---
+
+## 2. 핵심 메커니즘
+
+### 2.1 얼굴 존 (Zone)
+Kiki의 얼굴은 7개 존으로 나뉜다. 저주는 종류별로 정해진 존에만 나타난다.
+
+```
+        [ forehead ]
+   [L eye]      [R eye]
+        [ nose ]
+ [L cheek]      [R cheek]
+        [ chin ]
+```
+
+- **눈가 존(L eye / R eye)은 특수 존.** 눈가에 떨어진 저주는 **눈가 전용 요정(Eye Cream, Eye Patch)으로만** 처리할 수 있다. 다른 요정을 쓰면 "함정" 발동(2.4 참고).
+
+### 2.2 저주 (Curse) — 1~3단계
+모든 저주는 1단계로 나타나 시간이 지나면 2단계 → 3단계로 자란다. 3단계에서 또 시간이 지나면 피부에 **고착(Set)** 되어 Glow(체력)를 깎는다.
+
+| 단계 | 크기 | 필요 파워 | 점수 (기본) |
+|---|---|---|---|
+| 1 | 작음 | 1 | 100 |
+| 2 | 중간 | 2 | 200 |
+| 3 | 큼, 붉은 테두리 | 3 | 300 |
+
+- 요정의 **파워**만큼 단계를 깎는다. 파워 1 요정을 3단계에 쓰면 2단계로 내려간다(여러 번 탭하면 결국 제거 가능 → 막히는 상황 없음).
+- 파워 3 "샷" 요정은 3단계를 한 번에 제거한다. 대신 **횟수 제한**.
+
+### 2.3 요정 (Fairy) = 제품
+요정은 세 계열로 나뉜다. 브랜드의 "농도 단계 시스템(1% → 2% → 12%)"을 그대로 게임 룰로 옮겼다.
+
+| 계열 | 제품 유형 | 파워 | 쿨다운 | 특징 |
+|---|---|---|---|---|
+| 크림/에센스/클렌저 | Cream, Essence, Foam, Eye Cream | 1 | 1.0초 | 빠르고 가볍다. 기본기 |
+| 세럼/패치 | Serum, Eye Patch | 2 | 2.4초 | 강하지만 느리다 |
+| 샷 (앰플) | Advanced Shot, TXA Shot | 3 | 0 | 밤마다 3회 제한. 3단계 저주에 쓰면 "Precision Shot" 보너스 |
+
+### 2.4 함정 (Trap) 규칙
+- **눈가 함정**: 눈가 존의 저주에 눈가 전용이 아닌 요정을 쓰면 → "Ouch! Too strong for the eye area." Kiki가 찡그리고, 그 요정은 3초 기절, 저주는 **1단계 성장**, -50점, 콤보 리셋.
+- **미스매치**: 상성이 맞지 않는 요정을 쓰면 → 요정 1.5초 쿨다운, -20점, 콤보 리셋. 저주는 그대로.
+- **샷 낭비**: 1단계 저주에 샷을 쓰면 제거는 되지만 보너스 없이 횟수만 소모(경고 토스트).
+- 2차 이후 추가 예정: "가짜 저주(Decoy)", "번지는 저주(Spreader)", "새벽 러시(Dawn Rush, 선크림 쉴드)".
+
+### 2.5 Glow 미터 (체력)
+- 시작 100. 저주가 고착되면 -12 (눈가 저주 -15).
+- 밤 클리어 시 +10, 퍼펙트(고착 0) 시 +20. 최대 100.
+- Glow가 떨어질수록 피부 하이라이트가 사라지고 톤이 칙칙해진다(시각 피드백).
+- 0이 되면 **"Morning came. Kiki's secret is out."** → 게임 오버.
+
+### 2.6 밤 진행
+- 밤마다 **처리해야 할 저주 수(quota)** 가 정해져 있다. 모든 저주가 제거/고착되면 밤 종료 → 요약 화면 → 다음 밤.
+- 밤이 깊어질수록 등장 간격·성장 간격이 짧아지고, 2·3단계로 시작하는 저주 비율이 늘어난다.
+
+| 밤 | quota | 등장 간격 | 성장 간격 | 동시 최대 | 시작단계 비율 (1/2/3) |
+|---|---|---|---|---|---|
+| 1 | 10 | 2.6s | 7.0s | 4 | 100 / 0 / 0 |
+| 2 | 14 | 2.3s | 6.5s | 5 | 85 / 15 / 0 |
+| 3 | 16 | 2.1s | 6.0s | 5 | 75 / 25 / 0 |
+| 4 | 18 | 1.9s | 5.5s | 6 | 65 / 30 / 5 |
+| 5 | 20 | 1.7s | 5.0s | 6 | 55 / 35 / 10 |
+| 6 | 22 | 1.55s | 4.6s | 7 | 45 / 40 / 15 |
+| 7 | 26 | 1.4s | 4.2s | 8 | 35 / 45 / 20 |
+| 8+ | 26 + 2·(n−7) | max(0.8, 1.4 − 0.07·(n−7)) | max(2.8, 4.2 − 0.15·(n−7)) | min(10, 8 + ⌊(n−7)/2⌋) | 3단계 비율 점증 |
+
+### 2.7 파워업 (한 밤에 1회)
+| 파워업 | 제품 | 효과 | 해금 |
+|---|---|---|---|
+| Night Shield | SEOUL 1988 Sleeping Mask : Collagen Complex 7 + Red Bean | 6초간 모든 저주 성장 정지 + Glow +15 | 4번째 밤 |
+| Glow Burst | SEOUL 1988 Hydrogel Mask : Retinal Liposome + Lotus Flower | 얼굴 위 **1단계** 저주 전부 제거 | 5번째 밤 |
+
+---
+
+## 3. 저주 ↔ 요정(제품) 매칭표
+
+### 3.1 저주 목록
+
+| id | 이름 (EN) | 이름 (KO) | 등장 존 | 해금 밤 | 카운터 요정 |
+|---|---|---|---|---|---|
+| acne | Pimple Imp | 여드름 저주 | 볼·턱·이마·코 | 1 | Cica |
+| spot | Shadow Stain | 기미 저주 | 볼·이마 | 1 | Nia(1) · Glow(2) · TXA Shot(3) |
+| wrinkle | Crease Crone | 주름 저주 | 이마·턱 | 2 | Retinal Serum(2) · Advanced Shot(3) |
+| eye_dark | Night Shadow | 다크서클 저주 | **눈가만** | 3 | Eye Cream(1) · Eye Patch(2) |
+| eye_line | Crow's Feet | 눈가 주름 저주 | **눈가만** | 3 | Eye Cream(1) · Eye Patch(2) |
+| dry | Desert Dust | 건조 저주 | 볼·턱 | 4 | Snail Essence(1) |
+| pore | Goo Goblin | 모공·블랙헤드 저주 | 코·이마·턱 (T존) | 5 | Cleansing Foam(1) |
+| dull | Grey Fog | 칙칙함 저주 | 볼·이마 | 6 | Glow(2) · Nia(1) |
+| freckle | Sun Sprinkle | 주근깨 저주 | 볼·코 | 6 | Nia(1) · Glow(2) · TXA Shot(3) |
+
+### 3.2 요정 목록 (제품 매칭)
+
+| id | 요정 이름 | 실제 제품 (글로벌 표기) | 국문 제품명 | 파워 | 상대 저주 | 해금 밤 |
+|---|---|---|---|---|---|---|
+| nia | **Nia** | SEOUL 1988 Capsule Cream : Niacinamide 5% + Yuja | 서울 1988 나이아신 유자 캡슐 크림 | 1 | spot, freckle, dull | 1 |
+| cica | **Cica** | SEOUL 1988 Repair Cream : Niacica 20% + Mugwort | 서울 1988 나이아시카 쑥 리페어 크림 | 1 | acne | 1 |
+| retinal | **Retina** | SEOUL 1988 Serum : Retinal Liposome 2% + Black Ginseng | 서울 1988 레틴알 흑삼 세럼 | 2 | wrinkle | 2 |
+| eyecream | **Bean** | SEOUL 1988 Eye Cream : Retinal Liposome 4% + Fermented Bean | 서울 1988 레틴알 발효콩 아이크림 | 1 | eye_dark, eye_line (눈가 전용) | 3 |
+| snail | **Snail** | SEOUL 1988 Essence : Snail Mucin 97% + Rice | 서울 1988 달팽이 쌀 에센스 | 1 | dry | 4 |
+| foam | **Pine** | SEOUL 1988 Cleansing Foam : Pine Cica 1% + Probiotics | 서울 1988 파인시카 클렌징 폼 | 1 | pore | 5 |
+| glow | **Yuja** | SEOUL 1988 Glow Serum : Niacinamide 15% + Yuja | 서울 1988 나이아신 15% 유자 글로우 세럼 | 2 | spot, dull, freckle | 6 |
+| ashot | **Shot 12** | SEOUL 1988 Advanced Shot : Retinal Liposome 12% + Black Rice | 서울 1988 레틴알 12% 흑미 어드밴스드 샷 | 3 (3회) | wrinkle | 6 |
+| txa | **TXA** | SEOUL 1988 TXA Shot : TXA + Niacinamide + Rice | 서울 1988 TXA 샷 | 3 (3회) | spot, freckle | 7 |
+| eyepatch | **Patch** | SEOUL 1988 Retinal Glow Eye Patch : Reti-NAD + Turmeric | 서울 1988 레틴알 글로우 아이패치 | 2 | eye_dark, eye_line (눈가 전용) | 7 |
+
+파워업 2종(슬리핑 마스크, 하이드로겔 마스크)은 2.7 참고.
+
+### 3.3 2차 이후 투입 후보 (카탈로그에 있으나 1차 미사용)
+- Cleansing Oil : Pine Cica 1% + Probiotics → "더블 클렌징 콤보"(오일 → 폼 순서로 쓰면 모공 저주 즉시 제거)
+- Cream : Retinal Liposome 1% + Fermented Rice → 주름 파워 1 (초반 밤용)
+- Boosting Serum : Collagen Complex 7 + Red Ginseng / Boosting Ball : Collagen 100% → "탄력 저하(처짐) 저주"
+- Cream/Essence : Snail Mucin 93%/97% → 홍조·민감 저주
+- Multi Balm : Collagen Complex 7 + Plum → 어디서나 쓰는 응급 밤(건조 즉시 제거, 쿨다운 김)
+- Refining Pad : C-Retinal + Bamboo → 각질/결 저주
+- PDRN Shot : PDRN + NAD + Mung Bean → 여드름 3단계 샷 + Glow 회복
+- Daily Gel Cleanser : Retinal Liposome + Pear → 모공 파워 1 (초반용)
+- Sun : Collagen Complex 7 + Plum / Pine Tree + Ceramide → "새벽 러시" 주근깨 쉴드
+
+---
+
+## 4. 점수 · 콤보 · 랭킹
+
+| 이벤트 | 점수 |
+|---|---|
+| 저주 제거 (단계 s) | 100 × s × 콤보 배율 |
+| 콤보 | 정답 히트마다 +1. 배율 = 1 + 0.1 × min(콤보, 20) → 최대 3.0 |
+| Instant Glow | 등장 2초 안에 제거 +50 |
+| Delicate Touch | 눈가 저주를 눈가 전용 요정으로 제거 +100 |
+| Precision Shot | 3단계 저주에 샷 사용 +150 |
+| 밤 클리어 | +500 × 밤 번호 |
+| Perfect Night | 고착 0 → +1000 |
+| 미스매치 | −20, 콤보 리셋 |
+| 눈가 함정 | −50, 콤보 리셋, 저주 +1단계, 요정 3초 기절 |
+
+**랭킹 정렬**: 점수 ▸ 버틴 밤 수 ▸ 플레이 시간(짧을수록) ▸ 먼저 제출한 순.
+**Top 50** 만 노출. 1~5등은 경품(제품) 대상 → 이메일 필수.
+
+---
+
+## 5. 게임 종료 & 데이터 수집 흐름
+
+1. 게임 오버(또는 "Stop here" 버튼으로 자진 종료) → 결과 화면: 점수, 버틴 밤, 최대 콤보, 제거한 저주 수, "오늘 밤 Kiki를 구한 요정" 3개(제품 링크).
+2. **랭킹 등록 폼**
+   - 닉네임 (2~16자, 필수)
+   - 국가 (드롭다운, 필수)
+   - 이메일 (선택. 비우면 랭킹에는 올라가지만 경품 대상 제외. 입력 시 동의 체크 필수)
+   - 동의 문구: "경품 안내 목적으로만 사용하며 이벤트 종료 후 삭제합니다."
+3. 제출 → Top 50 리더보드 (내 순위 강조, 국기 표시). 50위 밖이면 "현재 #N / Top 50까지 N점".
+4. 다시 하기 / 친구에게 공유(링크 복사).
+
+### 5.1 리더보드 백엔드 (1차 제공: Google Apps Script)
+- `docs/kiki/backend/leaderboard.gs` 를 Google 시트에 붙여 웹앱으로 배포 → URL을 `site/kiki/index.html` 상단 `CONFIG.LEADERBOARD_URL` 에 입력.
+- `POST` { nickname, country, email, score, nights, maxCombo, duration, checksum, version } → { ok, rank, total }
+- `GET ?top=50` → [{ nickname, country, score, nights }] (이메일은 절대 반환하지 않음)
+- URL 미설정 시 브라우저 로컬(기기 내) 랭킹으로 동작 (데모용 샘플 행 표시).
+- 부정 방지 1차: 점수 상한 검증(밤 수 × 최대치), 체크섬, 이메일당 최고 기록만 유지. 2차+: 시드 기반 리플레이 검증.
+
+---
+
+## 6. 화면 구성 (1차 구현 범위)
+
+| 화면 | 내용 |
+|---|---|
+| Title | 로고, Kiki 일러스트, Play / How to play / Codex / Leaderboard, 언어 토글, 사운드 토글 |
+| How to play | 3장 카드: ① 저주를 요정으로 ② 1~3단계 ③ 눈가는 아이크림만 |
+| Night intro | "Night 3 · Wednesday · The Eye Trap" + Kiki 대사 + 새 요정/저주 소개 |
+| Play | 상단 HUD(밤·점수·콤보·Glow바·진행), 중앙 Kiki 얼굴(저주 등장), 하단 요정 덱(최대 10) + 파워업 |
+| Night summary | 제거/고착/퍼펙트, 밤 보너스, Glow 변화 |
+| Game over / Secret Keeper | 결과 + 랭킹 등록 폼 |
+| Leaderboard | Top 50, 국기, 내 순위 |
+| Codex | 요정 10 + 파워업 2 카드: 제품 사진 자리, 효능, 상대 저주, 구매 링크 |
+
+조작: 요정 카드 탭(또는 숫자키 1~0) → 저주 탭. 드래그도 지원. 선택한 요정은 커서를 따라다니는 반짝이로 표시.
+
+---
+
+## 7. 아트 디렉션
+- SEOUL 1988 공식 팔레트 계승: 크림 보틀(#EAE4CF), 버터(#E6E0B5), 레드 라벨(#C64046). 밤 배경은 깊은 남색(#141224).
+- Kiki: 단순한 벡터 일러스트(눈 감고 자는 모습, 트랩 시 찡그림). 유리 피부 하이라이트가 Glow에 따라 변함.
+- 저주: 귀여운 악당(작은 눈 + 단계 핍). 요정: 제품 보틀 실루엣 + 날개 + 성분 아이콘. 실제 제품 사진은 2차에 도감/결과 화면에 삽입.
+- 서체: Oswald(숫자·제목), IBM Plex Sans KR(본문) — 케이시크릿 소식 홈페이지와 동일.
+
+---
+
+## 8. 로드맵 (1차 → 5차)
+
+| 차수 | 목표 | 주요 작업 |
+|---|---|---|
+| **1차 (이번)** | 플레이 가능한 코어 | 저주 9종·요정 10종·파워업 2종, 7박+무한, 눈가 함정, 점수/콤보, EN/KO, 결과 폼, Top 50 UI, Apps Script 백엔드 |
+| 2차 | 피드백 반영 + 깊이 | 밸런스 튜닝, 새벽 러시(선크림), 더블 클렌징 콤보, 실제 제품 사진, 사운드 강화, 튜토리얼 개선 |
+| 3차 | 리텐션/확산 | 일일 도전(시드 고정), 공유 카드 이미지(OG), 친구 초대 보너스, 국가별 랭킹 탭 |
+| 4차 | 운영 | 실 백엔드(Cloudflare Workers/Supabase) + 부정 방지, 관리자 대시보드(당첨자 추출, 이메일 내보내기), 개인정보 처리 정책 링크 |
+| 5차 | 런칭 | 브랜드 QA, 다국어(ES/JA/AR 등), 성능 최적화, 광고 랜딩/UTM, 이벤트 기간 설정·종료 화면 |
+
+---
+
+## 9. 1차에서 확인받고 싶은 것 (피드백 포인트)
+1. 톤앤매너: 밤 배경 + 크림/레드 브랜드 색 조합이 SEOUL 1988 답게 보이는지.
+2. 난이도 곡선: 1~3번째 밤이 너무 쉽거나/어렵지 않은지(목표: 첫 판 4번째 밤 전후 탈락).
+3. 제품 매칭: 표 3.2의 매칭이 실제 제품 포지셔닝과 맞는지 (특히 Glow Serum vs Capsule Cream 역할 분담).
+4. 눈가 함정 페널티 강도.
+5. 수집 항목/동의 문구, 경품 규정 문구.
+6. 요정 이름(Nia, Cica, Retina, Bean, Snail, Pine, Yuja, Shot 12, TXA, Patch) 과 저주 이름의 톤.
