@@ -789,7 +789,7 @@ en: {
   album_s:'Ten fairies, ten real SEOUL 1988 products. Tap a product to meet it.', persona:'Personality', kiki_note:"Kiki's note",
   wh:{acne:"Breakouts? That's Cica's job. Niacica 20% + Mugwort calms them down.", spot:'Dark spots fade with Nia. Niacinamide 5% + Yuja, every night.', wrinkle:'Fine lines? Call Retina. Retinal Liposome 2% + Black Ginseng.', eye_dark:'The eye area is delicate. Only Bean (Eye Cream 4%) or Patch go there.', eye_line:'Eye wrinkles need a gentle touch: Bean or Patch only.', dry:'Thirsty skin loves Snail. Snail Mucin 97% + Rice.', pore:'Clogged pores? Pine washes them clean. Pine Cica Cleansing Foam.', dull:'Dull skin? Yuja brings the glow back. Niacinamide 15%.', freckle:'Sun freckles fade with Nia or Yuja. Stubborn ones? TXA Shot.'},
   story_now:'now', story_skip:'Skip', story_play:'Call the fairies', story_later:'Go to title', btn_story:'Story', story_hint:'Next: pick your skin worry',
-  story_ey:['Westgate High, LA','Why she\'s the queen','Her secret','Every night','From Seoul, with love','The rule','Seven nights','Ready?'],
+  story_ey:['Westgate High, LA','Why she\'s the queen','The secret of her glow','Every night','From Seoul, with love','The rule','Seven nights','Ready?'],
   story_q:['Glass-clear skin','Bouncy elasticity','Bright, line-free eyes'],
   st:["Meet <b>Kiki</b>. Queen of Westgate High. Everyone wants to know her secret.","Skin as clear as <b>glass</b>. Cheeks so <b>bouncy</b> they might pop. Bright, lively eyes without a <b>single line</b>.","But Kiki has a <b>SECRET</b>. Every night, while she sleeps…","…the <b>curses</b> creep in. Breakouts, dark spots, fine lines, dark circles.","That's when beauty fairies from <b>Seoul</b> fly in to guard her. Each one is a real SEOUL 1988 product.","Every curse has its fairy. Dark spots? <b>Nia</b>. Lines? <b>Retina</b>. Eyes? Only <b>Bean</b>.","Guard her for <b>seven nights</b>, until prom. Top 50 make the board. Top 5 win SEOUL 1988.","Tonight, Kiki's SECRET is in your hands."],
   st_diary:["","","\"Please don't let anyone find out.\"","","","","\"Prom is Sunday. Seven nights to go.\"",""],
@@ -839,7 +839,7 @@ ko: {
   album_s:'열 명의 요정, 열 개의 진짜 SEOUL 1988 제품. 제품을 눌러 만나보세요.', persona:'성격', kiki_note:'키키의 메모',
   wh:{acne:'여드름? 그건 Cica 담당. 나이아시카 20% + 쑥이 진정시켜요.', spot:'기미는 Nia로 옅어져요. 나이아신아마이드 5% + 유자, 매일 밤.', wrinkle:'잔주름? Retina를 불러요. 레틴알 리포좀 2% + 흑삼.', eye_dark:'눈가는 예민해요. Bean(아이크림 4%)이나 Patch만 닿을 수 있어요.', eye_line:'눈가 주름엔 부드러운 손길. Bean이나 Patch만.', dry:'목마른 피부는 Snail을 좋아해요. 달팽이 점액 97% + 쌀.', pore:'막힌 모공? Pine이 깨끗이 씻어요. 파인시카 클렌징 폼.', dull:'칙칙해? Yuja가 광채를 돌려줘요. 나이아신아마이드 15%.', freckle:'주근깨는 Nia나 Yuja로. 고집 센 건 TXA 샷.'},
   story_now:'지금', story_skip:'건너뛰기', story_play:'요정 부르기', story_later:'타이틀로', btn_story:'스토리', story_hint:'다음: 내 피부 고민 고르기',
-  story_ey:['LA 웨스트게이트 고등학교','퀸카인 이유','그녀의 비밀','매일 밤','서울에서 온 요정','규칙','일주일 밤','준비됐나요?'],
+  story_ey:['LA 웨스트게이트 고등학교','퀸카인 이유','그녀 피부 광채의 비밀','매일 밤','서울에서 온 요정','규칙','일주일 밤','준비됐나요?'],
   story_q:['유리같이 맑은 피부','톡 터질 듯한 탄력','주름 없는 생기 눈빛'],
   st:["<b>키키</b>를 소개할게요. 웨스트게이트 고등학교의 퀸카. 모두가 그녀의 비밀을 궁금해해요.","<b>유리</b>같이 맑은 피부. 톡 터질 것 같은 <b>탄력</b>. 주름 하나 보이지 않는 <b>생기 넘치는 눈빛</b>.","하지만 키키에겐 <b>비밀</b>이 있어요. 매일 밤, 그녀가 잠들면…","…<b>저주</b>가 찾아와요. 여드름, 기미, 잔주름, 다크서클.","그때 <b>서울</b>에서 뷰티 요정들이 키키를 지키러 날아와요. 요정 하나하나가 진짜 SEOUL 1988 제품이죠.","저주마다 짝이 되는 요정이 있어요. 기미엔 <b>Nia</b>, 주름엔 <b>Retina</b>, 눈가엔 오직 <b>Bean</b>.","프롬까지 <b>일주일 밤</b>을 지켜주세요. Top 50은 랭킹에, 1~5등은 SEOUL 1988 선물.","오늘 밤, 키키의 SECRET은 당신 손에."],
   st_diary:["","","\"아무도 몰랐으면 좋겠어.\"","","","","\"프롬은 일요일. 일곱 밤 남았어.\"",""],
@@ -1627,7 +1627,7 @@ addEventListener('keydown', e => {
 document.addEventListener('visibilitychange', () => { if (document.hidden && S.playing && !S.paused) showPause(); });
 
 /* ---------------- story intro (card news) ---------------- */
-const STORY_N = 8, STORY_MS = 3000;
+const STORY_N = 8, STORY_MS = 4000;
 let st = null;
 const kikiBox = (awake, extra = '') => `<div class="kiki" style="--awake:${awake}"><svg viewBox="0 0 400 520" aria-hidden="true"><use href="#kiki"/></svg>${extra}</div>`;
 const pct = (x, y) => `left:${(x / 400 * 100).toFixed(1)}%;top:${(y / 520 * 100).toFixed(1)}%`;

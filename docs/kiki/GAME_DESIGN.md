@@ -408,12 +408,12 @@ Kiki의 얼굴은 7개 존으로 나뉜다. 저주는 종류별로 정해진 존
 - 표정: 제품 위에 작은 크림색 스티커(폭 46%)로 눈·볼·입을 얹는다. 5종 — smile(동그란 눈) · happy(^^ + 벌린 입) · wink · calm(차분) · sleepy(z z). 요정별 표정과 세로 위치(`FACE` 맵): Nia happy 60% · Cica calm · Retina wink · Bean smile · Snail calm · Pine happy · Yuja wink · Shot 12 smile · TXA calm · Patch happy 62% · 슬리핑 마스크 sleepy · 하이드로겔 smile 48%.
 - 적용 범위: 덱 카드, 파워업 링, 속삭임, 오늘의 레슨, 피부 매치, MVP, 앨범, 스토리 비행 장면, 공유 카드(캔버스에 날개→실사→표정 순으로 합성). 실사 로드 실패 시 기존 보틀 일러스트 폴백에는 표정 스티커를 얹지 않는다.
 
-### 14.3 스토리 인트로 v2 (카드당 3초, 8장)
+### 14.3 스토리 인트로 v2 (카드당 3초 → 4초, 8장)
 | # | 아이브로 | 장면 | 카피(EN) |
 |---|---|---|---|
 | 1 | Westgate High, LA | 낮, 키키(눈 뜸), 반짝임 | Meet Kiki. Queen of Westgate High. Everyone wants to know her secret. |
 | 2 | Why she's the queen | 콜아웃 3개 팝업: Glass-clear skin · Bouncy elasticity · Bright, line-free eyes | Skin as clear as glass. Cheeks so bouncy they might pop. Bright, lively eyes without a single line. |
-| 3 | Her secret | 1.4초 뒤 낮→밤, 눈 감김, 일기 | But Kiki has a SECRET. Every night, while she sleeps… |
+| 3 | The secret of her glow (그녀 피부 광채의 비밀) | 1.4초 뒤 낮→밤, 눈 감김, 일기 | But Kiki has a SECRET. Every night, while she sleeps… |
 | 4 | Every night | 저주 4종 팝업(0.2/0.7/1.2/1.7초) | …the curses creep in. Breakouts, dark spots, fine lines, dark circles. |
 | 5 | From Seoul, with love | 요정 4명(실사+날개+표정) 비행 | That's when beauty fairies from Seoul fly in to guard her. Each one is a real SEOUL 1988 product. |
 | 6 | The rule | Nia 매칭 데모 | Every curse has its fairy. Dark spots? Nia. Lines? Retina. Eyes? Only Bean. |
