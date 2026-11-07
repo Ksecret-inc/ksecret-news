@@ -26,7 +26,8 @@ push 하면 GitHub Pages 에 바로 반영됩니다. 이후 게임 종료 시 �
 랭킹 화면은 서버의 Top 50 을 보여줍니다(샘플 행은 더 이상 나오지 않음).
 
 ## 4. 운영
-- **당첨자 추출**: Apps Script 편집기에서 `exportWinners` 함수 실행 → `winners` 탭에 1~5등과 이메일이 정리됩니다. 이메일을 남기지 않은 사람은 "not eligible" 로 표시되니 다음 순위로 넘기면 됩니다.
+- **당첨자 추출**: Apps Script 편집기에서 `exportWinners` 함수 실행 → `winners` 탭에 1~5등과 이메일·SNS 핸들·선택한 피부 고민·추천된 요정(제품)이 정리됩니다. 이메일을 남기지 않은 사람은 "not eligible" 로 표시되니 다음 순위로 넘기면 됩니다.
+- **시딩 활용**: `match` 열이 그 사람에게 게임이 추천한 제품(요정 id)입니다. 크리에이터에게는 이 제품을 보내면 "내 피부 고민에 맞는 제품을 받았다"는 경험이 됩니다. 요정 id ↔ 제품 표는 `docs/kiki/GAME_DESIGN.md` 3.2 참고.
 - **같은 사람 중복**: 이메일이 같으면 최고 기록 1건만 랭킹에 올라갑니다. 이메일이 없으면 닉네임+국가 기준.
 - **부정 제출 필터**: 체크섬이 안 맞거나, 밤 수 대비 점수/시간이 말이 안 되면 `rejected` 로 거부됩니다. (`leaderboard.gs` 상단 상수로 조정)
 - **코드 수정 후**: `배포 → 배포 관리 → 연필 아이콘 → 버전: 새 버전 → 배포`. URL 은 그대로 유지됩니다.
@@ -35,7 +36,8 @@ push 하면 GitHub Pages 에 바로 반영됩니다. 이후 게임 종료 시 �
 ## API (다른 백엔드로 바꿀 때 동일하게 맞추면 게임 수정 불필요)
 - `GET {URL}?top=50` → `{ rows:[{ nickname, country, score, nights, maxCombo }], updatedAt }`
 - `POST {URL}` (Content-Type: text/plain, body = JSON)
-  `{ nickname, country, email, score, nights, maxCombo, dispelled, duration, version, lang, at, checksum }`
+  `{ nickname, country, email, handle, age14, concerns, match, score, nights, maxCombo, dispelled, duration, version, lang, at, checksum }`
+  (이메일이 있으면 `age14` 가 true 여야 저장됩니다. 만 14세 미만의 개인정보 수집을 막기 위한 장치)
   → `{ ok:true, rank, total }` 또는 `{ ok:false, error }`
 - 체크섬: FNV-1a 32bit of `"{score}|{nights}|{duration}|{dispelled}|{SALT}"` (hex 8자리).
 

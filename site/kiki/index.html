@@ -12,17 +12,19 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Jua&family=Nunito:wght@400;600;700;800&family=Gowun+Dodum&family=Caveat:wght@500;600&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* Layout: one-screen app. HUD on top, Kiki's face in the middle, the fairy deck at the bottom; every other view is an overlay.
-   Single committed night look: SEOUL 1988 cream bottle + red label on a deep indigo night. */
+   v2 look: a soft lavender night for a teen diary mood. Pastel pink, peach and butter accents; SEOUL 1988 cream bottle + red label stays on every product. */
 :root{
-  --night:#141224; --night-2:#1E1B36; --night-3:#2A2650; --night-4:#363166;
-  --moon:#F6F2E7; --cream:#EAE4CF; --butter:#E6E0B5; --red:#C64046; --red-deep:#A8323A;
-  --fg:#F4F0E6; --mute:#A9A4BC; --line:rgba(246,242,231,.14); --line-2:rgba(246,242,231,.28);
-  --glow:#FFE9A8; --good:#7BD389; --warn:#F2C14E; --bad:#F06A6A; --eye:#C9A7F0;
-  --display:"Oswald","Arial Narrow","IBM Plex Sans KR",sans-serif;
-  --body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --night:#241E48; --night-2:#2F2860; --night-3:#3D357A; --night-4:#4B4394;
+  --moon:#FFF6E3; --cream:#EAE4CF; --butter:#FFF1B8; --red:#DD5868; --red-deep:#C64046;
+  --pink:#FFD6E0; --peach:#FFC9B5; --mint:#C9F2E5; --lav:#D9CCFF; --heart:#FF8FA3;
+  --fg:#FFF8F2; --mute:#C4BCE6; --line:rgba(255,246,227,.16); --line-2:rgba(255,246,227,.3);
+  --glow:#FFE9A8; --good:#8FE3A6; --warn:#FFD36B; --bad:#FF7E8A; --eye:#D9CCFF;
+  --display:"Fredoka","Jua","Apple SD Gothic Neo",sans-serif;
+  --body:"Nunito","Gowun Dodum","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --diary:"Caveat","Gaegu","Apple SD Gothic Neo",cursive;
   --ease:cubic-bezier(.2,.7,.1,1);
   color-scheme:dark;
   box-sizing:border-box;
@@ -45,7 +47,7 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 /* ---------- HUD ---------- */
 .hud{padding-block:8px 6px;display:grid;gap:4px}
 .hud-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
-.night-chip{font:600 .78rem/1.1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);min-width:0}
+.night-chip{font:600 .78rem/1.1 var(--display);letter-spacing:.02em;color:var(--mute);min-width:0}
 .night-chip b{display:block;color:var(--fg);font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .score{font:600 clamp(1.7rem,6vw,2.3rem)/1 var(--display);font-variant-numeric:tabular-nums;text-align:center;letter-spacing:.02em}
 .hud-right{display:flex;justify-content:flex-end;align-items:center;gap:6px}
@@ -56,13 +58,13 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 .icon-btn:hover{border-color:var(--line-2)}
 .icon-btn svg{width:18px;height:18px;stroke:var(--fg);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .bars{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
-.bars .lbl,.prog{font:500 .74rem/1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-variant-numeric:tabular-nums;white-space:nowrap}
+.bars .lbl,.prog{font:500 .78rem/1 var(--display);letter-spacing:.02em;color:var(--mute);font-variant-numeric:tabular-nums;white-space:nowrap}
 .glowbar{height:8px;border-radius:4px;background:var(--night-3);overflow:hidden}
 .glowbar i{display:block;height:100%;width:var(--w,100%);background:linear-gradient(90deg,var(--butter),var(--glow));transition:width .4s var(--ease)}
 .glowbar.low i{background:linear-gradient(90deg,var(--red-deep),var(--bad))}
 
 /* ---------- stage ---------- */
-.stage{position:relative;min-height:0;overflow:hidden;display:flex;align-items:center;justify-content:center;background:radial-gradient(120% 70% at 50% 100%,#2A2650 0%,rgba(42,38,80,0) 60%),linear-gradient(180deg,#0F0D1E 0%,#1A1733 60%,#262252 100%)}
+.stage{position:relative;min-height:0;overflow:hidden;display:flex;align-items:center;justify-content:center;background:radial-gradient(120% 60% at 50% 100%,rgba(255,143,163,.28) 0%,rgba(255,143,163,0) 60%),linear-gradient(180deg,#1C1740 0%,#2F2860 55%,#4B3F8C 100%)}
 .sky{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .star{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;opacity:var(--o,.6);animation:twinkle var(--d,3s) ease-in-out infinite alternate}
 .moon{position:absolute;top:6%;right:8%;width:clamp(44px,9vw,72px);aspect-ratio:1;border-radius:50%;background:var(--moon);box-shadow:0 0 40px 12px rgba(246,242,231,.18),inset -10px -6px 0 0 #DED8C2}
@@ -94,7 +96,7 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 .power{width:58px;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;padding:0;cursor:pointer}
 .power .ring{width:52px;height:52px;border-radius:50%;background:var(--night-2);border:2px solid var(--acc);display:grid;place-items:center;box-shadow:0 8px 20px -10px var(--acc);transition:transform .15s}
 .power .ring svg{width:34px;height:42px}
-.power .plabel{font:600 .62rem/1 var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--mute);text-align:center}
+.power .plabel{font:600 .66rem/1 var(--display);letter-spacing:.01em;color:var(--mute);text-align:center}
 .power:disabled{opacity:.35;cursor:default}
 .power:not(:disabled):hover .ring{transform:scale(1.06)}
 
@@ -109,7 +111,7 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 .fairy{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px 6px;border-radius:14px;background:var(--night-2);border:1.5px solid var(--line);color:var(--fg);cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;transition:transform .15s,border-color .15s,box-shadow .15s;-webkit-tap-highlight-color:transparent;min-width:0}
 .fairy .icon{width:38px;height:48px;pointer-events:none}
 .fairy .icon svg{width:100%;height:100%;overflow:visible}
-.fairy .name{font:600 .7rem/1 var(--display);letter-spacing:.06em;text-transform:uppercase;pointer-events:none;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fairy .name{font:600 .74rem/1 var(--display);letter-spacing:.01em;pointer-events:none;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .fairy .vs{display:flex;gap:3px;height:6px;pointer-events:none}
 .fairy .vs i{width:6px;height:6px;border-radius:50%;background:var(--c)}
 .fairy .key{position:absolute;top:4px;left:6px;font:500 .62rem/1 var(--display);color:var(--mute);pointer-events:none}
@@ -130,15 +132,16 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 .screen.title{background:var(--night)}
 .card{width:min(600px,100%);background:var(--night-2);border:1px solid var(--line);border-radius:24px;padding:clamp(18px,4vw,30px);box-shadow:0 30px 80px -30px rgba(0,0,0,.7);display:grid;gap:14px;min-width:0}
 .card.wide{width:min(900px,100%)}
-.eyebrow{font:600 .72rem/1 var(--display);letter-spacing:.16em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:.6em}
-.eyebrow::before{content:"";width:18px;height:2px;background:var(--red)}
-.h-display{font:600 clamp(1.6rem,5vw,2.4rem)/1.1 var(--display);letter-spacing:.02em;text-transform:uppercase}
-.quote{font-size:1.05rem;color:var(--fg);border-left:3px solid var(--butter);padding-left:.9em;font-style:italic;margin:0}
+.eyebrow{font:600 .82rem/1 var(--display);letter-spacing:.04em;color:var(--pink);display:flex;align-items:center;gap:.5em}
+.eyebrow::before{content:"♥";font-size:.8em;color:var(--heart)}
+.h-display{font:600 clamp(1.6rem,5vw,2.3rem)/1.15 var(--display);letter-spacing:0}
+.quote{font:500 clamp(1.3rem,4.5vw,1.6rem)/1.3 var(--diary);color:var(--fg);background:rgba(255,214,224,.08);border:1.5px dashed rgba(255,214,224,.35);border-radius:16px;padding:.7em .9em;margin:0;position:relative}
+.quote::before{content:"";position:absolute;top:-9px;left:18px;width:34px;height:14px;background:var(--pink);opacity:.8;border-radius:2px;transform:rotate(-6deg)}
 .lede{color:var(--mute);margin:0;max-width:60ch}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .row.end{justify-content:flex-end}
 .row.between{justify-content:space-between}
-.btn{font:600 .95rem/1 var(--display);letter-spacing:.1em;text-transform:uppercase;padding:.95rem 1.5rem;border-radius:999px;border:1.5px solid var(--line-2);background:transparent;color:var(--fg);cursor:pointer;transition:background .2s,border-color .2s,transform .1s;display:inline-flex;align-items:center;gap:.5em;justify-content:center;min-width:0}
+.btn{font:600 1.02rem/1 var(--display);letter-spacing:.02em;padding:.95rem 1.5rem;border-radius:999px;border:1.5px solid var(--line-2);background:transparent;color:var(--fg);cursor:pointer;transition:background .2s,border-color .2s,transform .1s;display:inline-flex;align-items:center;gap:.5em;justify-content:center;min-width:0}
 .btn:hover{background:var(--night-3)}
 .btn:active{transform:translateY(1px)}
 .btn.primary{background:var(--red);border-color:var(--red);color:#fff}
@@ -155,13 +158,13 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 .chip small{display:block;color:var(--mute);font-size:.74rem;line-height:1.2}
 
 /* title */
-.title-art{position:relative;width:min(62vw,300px);aspect-ratio:400/520;--glow:1;--wince:0;margin-bottom:-8%}
+.title-art{position:relative;width:min(62vw,300px);aspect-ratio:400/520;--glow:1;--wince:0;--awake:1;margin-bottom:-8%}
 .title-art svg{width:100%;height:100%;display:block;filter:drop-shadow(0 24px 40px rgba(0,0,0,.5))}
 .title-art .moon{top:-6%;right:-14%;width:58px}
 .title-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;width:min(560px,100%);text-align:center;position:relative;z-index:1}
 .presents{font:600 .74rem/1 var(--display);letter-spacing:.3em;text-transform:uppercase;color:var(--butter)}
-.logo{font:600 clamp(2.6rem,11vw,4.4rem)/.95 var(--display);letter-spacing:.04em;text-transform:uppercase;color:var(--fg)}
-.logo span{color:var(--red)}
+.logo{font:700 clamp(2.6rem,11vw,4.2rem)/1 var(--display);letter-spacing:-.01em;color:var(--fg);text-shadow:0 6px 24px rgba(255,143,163,.25)}
+.logo span{color:var(--pink)}
 .tagline{font-size:1rem;color:var(--mute);margin:0}
 .title-btns{display:grid;gap:10px;width:min(340px,100%);margin-top:6px}
 .title-foot{display:flex;gap:8px;justify-content:center;margin-top:8px}
@@ -186,7 +189,7 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 .stat b{font:600 1.3rem/1 var(--display);font-variant-numeric:tabular-nums}
 .stat b.good{color:var(--good)} .stat b.bad{color:var(--bad)} .stat b.gold{color:var(--glow)}
 .bigscore{font:600 clamp(2.6rem,10vw,4rem)/1 var(--display);font-variant-numeric:tabular-nums;color:var(--glow);letter-spacing:.02em}
-.badge{display:inline-flex;align-items:center;gap:.5em;padding:.45em .9em;border-radius:999px;background:var(--butter);color:#2B2410;font:600 .8rem/1 var(--display);letter-spacing:.1em;text-transform:uppercase}
+.badge{display:inline-flex;align-items:center;gap:.5em;padding:.45em .9em;border-radius:999px;background:var(--butter);color:#2B2410;font:600 .85rem/1 var(--display);letter-spacing:.02em}
 .mvp{display:grid;gap:8px}
 .mvp a{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--fg);padding:8px 10px;border-radius:14px;background:var(--night-3);border:1px solid var(--line)}
 .mvp a:hover{border-color:var(--line-2)}
@@ -198,7 +201,7 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 /* form */
 .form{display:grid;gap:12px}
 .field{display:grid;gap:5px}
-.field label{font:600 .74rem/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.field label{font:600 .82rem/1 var(--display);letter-spacing:.02em;color:var(--mute)}
 .field input,.field select{width:100%;font:inherit;font-size:1rem;padding:.75rem .9rem;border-radius:12px;border:1.5px solid var(--line-2);background:var(--night);color:var(--fg);min-width:0}
 .field input:focus,.field select:focus{outline:2px solid var(--glow);outline-offset:1px;border-color:transparent}
 .field .err{color:var(--bad);font-size:.82rem;min-height:1.2em}
@@ -236,7 +239,7 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 .cx .prod small{display:block;color:var(--mute);font-size:.76rem}
 .cx .blurb{font-size:.82rem;color:var(--mute);margin:4px 0 0}
 .cx .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;align-items:center}
-.pill{font:600 .64rem/1 var(--display);letter-spacing:.1em;text-transform:uppercase;padding:.35em .6em;border-radius:6px;background:var(--night-2);border:1px solid var(--line-2);color:var(--mute)}
+.pill{font:600 .7rem/1 var(--display);letter-spacing:.02em;padding:.35em .6em;border-radius:999px;background:var(--night-2);border:1px solid var(--line-2);color:var(--mute)}
 .pill.eye{background:var(--eye);color:#2B1B45;border-color:transparent}
 .pill.acc{background:var(--acc);color:#1B1830;border-color:transparent}
 .cx .vs{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
@@ -246,6 +249,48 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 
 /* pause */
 .pause-list{display:grid;gap:10px}
+
+/* ---------- v2: whisper, concerns, lessons, match, share, hearts ---------- */
+.whisper{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);z-index:6;display:flex;align-items:center;gap:10px;width:min(440px,calc(100% - 96px));background:var(--moon);color:#3A2E2A;border-radius:18px;padding:8px 12px 8px 8px;box-shadow:0 14px 30px -14px rgba(0,0,0,.6);animation:whisperIn .35s var(--ease);font-size:.86rem;line-height:1.35}
+.whisper::after{content:"";position:absolute;left:50%;bottom:-8px;width:16px;height:16px;background:var(--moon);transform:translateX(-50%) rotate(45deg);border-radius:3px}
+.whisper .ic{width:40px;height:50px;flex:none}
+.whisper .ic svg{width:100%;height:100%;overflow:visible}
+.whisper b{display:block;font:600 .95rem/1.2 var(--display);color:#2B2240}
+.whisper.out{animation:whisperOut .3s forwards}
+.fairy.hint{animation:hint 1s ease-in-out infinite;border-color:var(--pink)}
+.concerns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.concern{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px 8px;border-radius:18px;border:1.5px solid var(--line);background:var(--night-3);color:var(--fg);cursor:pointer;transition:border-color .15s,transform .15s,background .15s;font:600 .78rem/1.2 var(--display);text-align:center;min-width:0}
+.concern svg{width:44px;height:44px;overflow:visible}
+.concern small{font:400 .7rem/1.2 var(--body);color:var(--mute)}
+.concern.on{border-color:var(--pink);background:rgba(255,214,224,.14);transform:translateY(-2px);box-shadow:0 0 0 3px rgba(255,214,224,.2)}
+.concern.on::after{content:"♥";position:absolute;top:6px;right:9px;color:var(--heart);font-size:.9rem}
+.concern{position:relative}
+.lessons{display:grid;gap:8px}
+.lesson{display:grid;grid-template-columns:36px auto 1fr 40px;gap:10px;align-items:center;padding:8px 10px;border-radius:16px;background:var(--night-3);border:1px dashed var(--line-2);min-width:0}
+.lesson svg{width:36px;height:36px;overflow:visible}
+.lesson .arrow{color:var(--pink);font:600 1rem var(--display)}
+.lesson .ic{width:40px;height:48px;justify-self:end}
+.lesson .ic svg{width:100%;height:100%}
+.lesson .txt{min-width:0;font-size:.86rem;line-height:1.3}
+.lesson .txt b{display:block;font:600 .95rem/1.2 var(--display)}
+.lesson .txt small{color:var(--mute);display:block;font-size:.76rem}
+.match{display:grid;gap:10px}
+.match a{display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:center;text-decoration:none;color:var(--fg);padding:12px;border-radius:20px;background:linear-gradient(135deg,rgba(255,214,224,.16),rgba(255,201,181,.08));border:1.5px solid rgba(255,214,224,.3);min-width:0}
+.match .ic{width:56px;height:70px}
+.match .ic svg{width:100%;height:100%;overflow:visible}
+.match b{font:600 1.05rem/1.2 var(--display);display:block}
+.match small{display:block;color:var(--mute);font-size:.8rem;line-height:1.35}
+.match .why{display:block;margin-top:4px;color:var(--pink);font-size:.78rem}
+.share{display:grid;gap:10px}
+.share img{width:100%;max-width:320px;border-radius:18px;box-shadow:0 20px 40px -20px rgba(0,0,0,.7);display:block;margin-inline:auto}
+.caption{font:500 .86rem/1.5 var(--body);background:var(--night);border:1px solid var(--line);border-radius:14px;padding:10px 12px;color:var(--mute);white-space:pre-wrap;user-select:all;-webkit-user-select:all}
+.heart{position:fixed;font-size:18px;color:var(--heart);pointer-events:none;z-index:30;animation:heartUp 1.3s var(--ease) forwards}
+.ending{font:500 clamp(1.25rem,4.2vw,1.5rem)/1.45 var(--diary);color:var(--fg);text-align:center;padding:4px 0}
+.chip .ic.f.big{width:34px;height:42px}
+@keyframes whisperIn{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes whisperOut{to{opacity:0;transform:translate(-50%,10px)}}
+@keyframes hint{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes heartUp{0%{opacity:0;transform:translate(-50%,0) scale(.6)}20%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx,0px)),-120px) scale(1.2)}}
 
 /* ---------- animations ---------- */
 @keyframes twinkle{from{opacity:calc(var(--o,.6)*.4)}to{opacity:var(--o,.6)}}
@@ -289,8 +334,8 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
   <main class="stage" id="stage">
     <div class="sky" id="sky"><div class="moon"></div></div>
     <svg class="skyline" viewBox="0 0 800 120" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-      <path fill="#0D0B1A" d="M0,120 L0,96 L40,96 L40,70 L70,70 L70,96 L110,96 L110,52 L140,52 L140,96 L180,96 L180,84 L230,84 L230,40 L260,40 L260,30 L280,30 L280,40 L300,40 L300,84 L340,84 L340,64 L380,64 L380,96 L420,96 L420,58 L450,58 L450,96 L500,96 L500,76 L540,76 L540,46 L570,46 L570,96 L620,96 L620,86 L660,86 L660,66 L700,66 L700,96 L740,96 L740,80 L800,80 L800,120 Z"/>
-      <g fill="#0D0B1A">
+      <path fill="#1A1538" d="M0,120 L0,96 L40,96 L40,70 L70,70 L70,96 L110,96 L110,52 L140,52 L140,96 L180,96 L180,84 L230,84 L230,40 L260,40 L260,30 L280,30 L280,40 L300,40 L300,84 L340,84 L340,64 L380,64 L380,96 L420,96 L420,58 L450,58 L450,96 L500,96 L500,76 L540,76 L540,46 L570,46 L570,96 L620,96 L620,86 L660,86 L660,66 L700,66 L700,96 L740,96 L740,80 L800,80 L800,120 Z"/>
+      <g fill="#1A1538">
         <path d="M60,120 L66,70 L72,120 Z"/><path d="M69,72 c-16,-14 -34,-10 -40,4 c14,-6 28,-4 40,4 z M69,72 c16,-14 34,-10 40,4 c-14,-6 -28,-4 -40,4 z M69,72 c-4,-18 4,-30 16,-34 c-6,10 -8,22 -8,34 z M69,72 c4,-18 -4,-30 -16,-34 c6,10 8,22 8,34 z"/>
         <path d="M730,120 L736,66 L742,120 Z"/><path d="M739,68 c-16,-14 -34,-10 -40,4 c14,-6 28,-4 40,4 z M739,68 c16,-14 34,-10 40,4 c-14,-6 -28,-4 -40,4 z M739,68 c-4,-18 4,-30 16,-34 c-6,10 -8,22 -8,34 z M739,68 c4,-18 -4,-30 -16,-34 c6,10 8,22 8,34 z"/>
       </g>
@@ -313,18 +358,21 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <radialGradient id="gSkin" cx="50%" cy="38%" r="68%"><stop offset="0" stop-color="#F8E6D8"/><stop offset="1" stop-color="#EBC8B3"/></radialGradient>
-    <linearGradient id="gHair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8C27A"/><stop offset="1" stop-color="#C99A4C"/></linearGradient>
+    <linearGradient id="gHair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEC98A"/><stop offset="1" stop-color="#D4A45A"/></linearGradient>
+    <pattern id="pHearts" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M17,25 C10,19 6,15 6,10.5 C6,7 8.5,5 11.5,5 C13.5,5 15.5,6 17,8.5 C18.5,6 20.5,5 22.5,5 C25.5,5 28,7 28,10.5 C28,15 24,19 17,25 Z" fill="#DD5868" opacity=".55"/></pattern>
 
     <symbol id="kiki" viewBox="0 0 400 520">
-      <path d="M62,520 L62,250 C58,130 120,48 200,48 C280,48 342,130 338,250 L338,520 Z" fill="url(#gHair)"/>
-      <path d="M90,520 L84,300 C84,230 110,170 140,150 C120,230 118,330 122,520 Z" fill="#B98A3E" opacity=".45"/>
-      <path d="M310,520 L316,300 C316,230 290,170 260,150 C280,230 282,330 278,520 Z" fill="#B98A3E" opacity=".45"/>
-      <path d="M162,400 L162,462 C162,480 238,480 238,462 L238,400 Z" fill="#E4BBA6"/>
-      <path d="M40,520 C60,470 120,452 162,452 C175,470 225,470 238,452 C280,452 340,470 360,520 Z" fill="#C64046"/>
-      <path d="M162,452 C175,470 225,470 238,452 L238,474 C225,490 175,490 162,474 Z" fill="#F6F2E7"/>
-      <ellipse cx="80" cy="282" rx="17" ry="25" fill="#ECC5B0"/><ellipse cx="320" cy="282" rx="17" ry="25" fill="#ECC5B0"/>
-      <path d="M200,92 C292,92 326,178 322,282 C318,378 268,448 200,448 C132,448 82,378 78,282 C74,178 108,92 200,92 Z" fill="url(#gSkin)"/>
-      <ellipse cx="122" cy="318" rx="34" ry="18" fill="#F0A39C" opacity=".32"/><ellipse cx="278" cy="318" rx="34" ry="18" fill="#F0A39C" opacity=".32"/>
+      <path d="M58,520 L58,250 C54,125 118,44 200,44 C282,44 346,125 342,250 L342,520 Z" fill="url(#gHair)"/>
+      <path d="M86,520 L80,300 C80,232 106,172 138,150 C118,232 116,330 120,520 Z" fill="#B98A3E" opacity=".3"/>
+      <path d="M314,520 L320,300 C320,232 294,172 262,150 C282,232 284,330 280,520 Z" fill="#B98A3E" opacity=".3"/>
+      <path d="M160,400 L160,462 C160,480 240,480 240,462 L240,400 Z" fill="#E9C2AE"/>
+      <path d="M34,520 C56,468 118,450 160,450 C174,470 226,470 240,450 C282,450 344,468 366,520 Z" fill="#FFF3F0"/>
+      <path d="M34,520 C56,468 118,450 160,450 C174,470 226,470 240,450 C282,450 344,468 366,520 Z" fill="url(#pHearts)"/>
+      <path d="M160,450 C174,470 226,470 240,450 L240,474 C226,492 174,492 160,474 Z" fill="#DD5868"/>
+      <ellipse cx="78" cy="286" rx="17" ry="24" fill="#F0CBB8"/><ellipse cx="322" cy="286" rx="17" ry="24" fill="#F0CBB8"/>
+      <path d="M200,90 C296,90 330,180 326,284 C322,384 272,452 200,452 C128,452 78,384 74,284 C70,180 104,90 200,90 Z" fill="url(#gSkin)"/>
+      <ellipse cx="118" cy="322" rx="36" ry="22" fill="#FF9FB0" opacity=".38"/><ellipse cx="282" cy="322" rx="36" ry="22" fill="#FF9FB0" opacity=".38"/>
+      <g fill="#fff" opacity=".85"><circle cx="106" cy="316" r="2.6"/><circle cx="120" cy="328" r="1.8"/><circle cx="294" cy="316" r="2.6"/><circle cx="280" cy="328" r="1.8"/></g>
       <g style="opacity:var(--glow,1)">
         <ellipse cx="200" cy="146" rx="46" ry="13" fill="#fff" opacity=".45"/>
         <ellipse cx="116" cy="286" rx="24" ry="9" fill="#fff" opacity=".42" transform="rotate(-14 116 286)"/>
@@ -332,73 +380,92 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
         <ellipse cx="200" cy="262" rx="5" ry="22" fill="#fff" opacity=".35"/>
         <ellipse cx="200" cy="392" rx="16" ry="5" fill="#fff" opacity=".3"/>
       </g>
-      <path d="M118,200 C138,186 166,186 184,196" stroke="#B5874A" stroke-width="6" fill="none" stroke-linecap="round"/>
-      <path d="M282,200 C262,186 234,186 216,196" stroke="#B5874A" stroke-width="6" fill="none" stroke-linecap="round"/>
-      <g style="opacity:calc(1 - var(--wince,0))">
-        <path d="M122,236 C136,252 164,252 178,236" stroke="#4A3528" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-        <path d="M222,236 C236,252 264,252 278,236" stroke="#4A3528" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-        <path d="M126,242 l-6,6 M174,242 l6,6 M226,242 l-6,6 M274,242 l6,6" stroke="#4A3528" stroke-width="3" stroke-linecap="round"/>
+      <path d="M120,198 C140,186 166,186 184,196" stroke="#C49656" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M280,198 C260,186 234,186 216,196" stroke="#C49656" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <g style="opacity:calc((1 - var(--wince,0)) * (1 - var(--awake,0)))">
+        <path d="M118,234 C134,254 166,254 182,234" stroke="#4A3528" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M218,234 C234,254 266,254 282,234" stroke="#4A3528" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M124,241 l-8,7 M137,249 l-5,9 M176,241 l8,7 M163,249 l5,9 M224,241 l-8,7 M237,249 l-5,9 M276,241 l8,7 M263,249 l5,9" stroke="#4A3528" stroke-width="3.5" stroke-linecap="round"/>
+      </g>
+      <g style="opacity:calc(var(--awake,0) * (1 - var(--wince,0)))">
+        <ellipse cx="150" cy="240" rx="22" ry="26" fill="#fff"/><ellipse cx="250" cy="240" rx="22" ry="26" fill="#fff"/>
+        <ellipse cx="152" cy="244" rx="15" ry="19" fill="#6A4630"/><ellipse cx="248" cy="244" rx="15" ry="19" fill="#6A4630"/>
+        <ellipse cx="152" cy="247" rx="9" ry="12" fill="#2E1E14"/><ellipse cx="248" cy="247" rx="9" ry="12" fill="#2E1E14"/>
+        <circle cx="146" cy="236" r="5" fill="#fff"/><circle cx="158" cy="252" r="2.5" fill="#fff"/><circle cx="242" cy="236" r="5" fill="#fff"/><circle cx="254" cy="252" r="2.5" fill="#fff"/>
+        <path d="M124,224 C136,210 166,210 180,224" stroke="#4A3528" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M220,224 C234,210 264,210 276,224" stroke="#4A3528" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M126,222 l-6,-8 M178,222 l6,-8 M222,222 l-6,-8 M274,222 l6,-8" stroke="#4A3528" stroke-width="3.5" stroke-linecap="round"/>
       </g>
       <g style="opacity:var(--wince,0)">
         <path d="M124,228 L160,240 L124,252 M276,228 L240,240 L276,252" stroke="#4A3528" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
       </g>
-      <path d="M194,286 C194,296 204,298 210,290" stroke="#D5A48C" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-      <path d="M176,352 C186,366 214,366 224,352" stroke="#D96F6A" stroke-width="5" fill="none" stroke-linecap="round" style="opacity:calc(1 - var(--wince,0))"/>
-      <path d="M180,364 C190,352 210,352 220,364" stroke="#D96F6A" stroke-width="5" fill="none" stroke-linecap="round" style="opacity:var(--wince,0)"/>
-      <path d="M78,215 C74,120 120,56 200,56 C150,70 118,110 108,190 C98,196 86,206 78,215 Z" fill="url(#gHair)"/>
-      <path d="M322,215 C326,120 280,56 200,56 C250,70 282,110 292,190 C302,196 314,206 322,215 Z" fill="url(#gHair)"/>
+      <path d="M195,284 C195,293 204,295 209,288" stroke="#DCA893" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M184,352 C190,362 198,362 200,356 C202,362 210,362 216,352" stroke="#E07A80" stroke-width="4.5" fill="none" stroke-linecap="round" style="opacity:calc(1 - var(--wince,0))"/>
+      <path d="M182,364 C190,354 210,354 218,364" stroke="#E07A80" stroke-width="4.5" fill="none" stroke-linecap="round" style="opacity:var(--wince,0)"/>
+      <path d="M74,222 C70,120 118,52 200,52 C150,66 120,106 110,186 C98,194 84,208 74,222 Z" fill="url(#gHair)"/>
+      <path d="M326,222 C330,120 282,52 200,52 C250,66 280,106 290,186 C302,194 316,208 326,222 Z" fill="url(#gHair)"/>
+      <g transform="translate(98,132) rotate(-18)">
+        <path d="M0,0 C-22,-16 -36,-4 -31,10 C-27,22 -10,18 0,8 Z" fill="#DD5868"/>
+        <path d="M0,0 C22,-16 36,-4 31,10 C27,22 10,18 0,8 Z" fill="#DD5868"/>
+        <circle cx="0" cy="4" r="6" fill="#F7A2AD"/>
+      </g>
+    </symbol>
+    <symbol id="face" viewBox="0 0 64 80">
+      <circle cx="26" cy="63" r="1.9" fill="#3A2E2A"/><circle cx="38" cy="63" r="1.9" fill="#3A2E2A"/>
+      <path d="M28,67.5 q4,3 8,0" stroke="#3A2E2A" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <ellipse cx="21" cy="66" rx="3" ry="1.6" fill="#FF9FB0" opacity=".75"/><ellipse cx="43" cy="66" rx="3" ry="1.6" fill="#FF9FB0" opacity=".75"/>
     </symbol>
 
     <!-- curses -->
     <symbol id="c-acne" viewBox="0 0 64 64">
-      <circle cx="18" cy="22" r="7" fill="#E4574F"/><circle cx="48" cy="20" r="6" fill="#E4574F"/>
-      <circle cx="32" cy="36" r="17" fill="#E4574F"/><circle cx="26" cy="29" r="4" fill="#fff" opacity=".55"/>
+      <circle cx="18" cy="22" r="7" fill="#F27C7C"/><circle cx="48" cy="20" r="6" fill="#F27C7C"/>
+      <circle cx="32" cy="36" r="17" fill="#F27C7C"/><circle cx="26" cy="29" r="4" fill="#fff" opacity=".55"/>
       <path d="M22,30 l7,3 M42,30 l-7,3" stroke="#5A1C1C" stroke-width="2.5" stroke-linecap="round"/>
       <circle cx="26" cy="38" r="2.4" fill="#3A1414"/><circle cx="38" cy="38" r="2.4" fill="#3A1414"/>
       <path d="M27,46 q5,-3 10,0" stroke="#3A1414" stroke-width="2" fill="none" stroke-linecap="round"/>
     </symbol>
     <symbol id="c-spot" viewBox="0 0 64 64">
-      <path d="M14,30 C12,16 30,8 42,14 C56,20 56,40 46,50 C36,58 14,52 14,30 Z" fill="#8B5A3C"/>
-      <path d="M22,30 C22,22 32,18 40,22 C48,26 46,40 38,44 C30,48 22,40 22,30 Z" fill="#A6724F" opacity=".8"/>
+      <path d="M14,30 C12,16 30,8 42,14 C56,20 56,40 46,50 C36,58 14,52 14,30 Z" fill="#B07A5C"/>
+      <path d="M22,30 C22,22 32,18 40,22 C48,26 46,40 38,44 C30,48 22,40 22,30 Z" fill="#C9937A" opacity=".8"/>
       <circle cx="28" cy="31" r="2.4" fill="#2E1A10"/><circle cx="38" cy="31" r="2.4" fill="#2E1A10"/>
       <path d="M29,39 q4,2 8,0" stroke="#2E1A10" stroke-width="2" fill="none" stroke-linecap="round"/>
     </symbol>
     <symbol id="c-wrinkle" viewBox="0 0 64 64">
-      <path d="M8,20 q8,-9 16,0 t16,0 t16,0" fill="none" stroke="#8C7BA3" stroke-width="4.5" stroke-linecap="round"/>
-      <path d="M8,33 q8,-9 16,0 t16,0 t16,0" fill="none" stroke="#8C7BA3" stroke-width="4.5" stroke-linecap="round"/>
-      <path d="M8,46 q8,-9 16,0 t16,0 t16,0" fill="none" stroke="#8C7BA3" stroke-width="4.5" stroke-linecap="round"/>
+      <path d="M8,20 q8,-9 16,0 t16,0 t16,0" fill="none" stroke="#A595C4" stroke-width="4.5" stroke-linecap="round"/>
+      <path d="M8,33 q8,-9 16,0 t16,0 t16,0" fill="none" stroke="#A595C4" stroke-width="4.5" stroke-linecap="round"/>
+      <path d="M8,46 q8,-9 16,0 t16,0 t16,0" fill="none" stroke="#A595C4" stroke-width="4.5" stroke-linecap="round"/>
       <circle cx="27" cy="27" r="2.3" fill="#2B2238"/><circle cx="37" cy="27" r="2.3" fill="#2B2238"/>
     </symbol>
     <symbol id="c-dry" viewBox="0 0 64 64">
-      <path d="M12,28 L26,14 L38,20 L52,16 L50,34 L38,50 L22,46 L10,40 Z" fill="#C9B59A"/>
-      <path d="M26,14 L30,30 L22,46 M38,20 L30,30 L50,34 M30,30 L38,50" stroke="#A48D70" stroke-width="2" fill="none"/>
+      <path d="M12,28 L26,14 L38,20 L52,16 L50,34 L38,50 L22,46 L10,40 Z" fill="#E0CDB2"/>
+      <path d="M26,14 L30,30 L22,46 M38,20 L30,30 L50,34 M30,30 L38,50" stroke="#B8A088" stroke-width="2" fill="none"/>
       <circle cx="26" cy="26" r="2.2" fill="#4A3B2A"/><circle cx="36" cy="25" r="2.2" fill="#4A3B2A"/>
       <path d="M28,36 q4,-2 8,0" stroke="#4A3B2A" stroke-width="2" fill="none" stroke-linecap="round"/>
     </symbol>
     <symbol id="c-pore" viewBox="0 0 64 64">
-      <circle cx="32" cy="32" r="20" fill="#9A9AA6"/>
+      <circle cx="32" cy="32" r="20" fill="#B3B3C4"/>
       <circle cx="22" cy="24" r="2.6" fill="#2A2A33"/><circle cx="32" cy="18" r="2.2" fill="#2A2A33"/><circle cx="42" cy="24" r="2.6" fill="#2A2A33"/><circle cx="18" cy="36" r="2.2" fill="#2A2A33"/><circle cx="46" cy="36" r="2.2" fill="#2A2A33"/><circle cx="24" cy="46" r="2.4" fill="#2A2A33"/><circle cx="40" cy="46" r="2.4" fill="#2A2A33"/>
       <circle cx="27" cy="33" r="2.4" fill="#1D1D24"/><circle cx="37" cy="33" r="2.4" fill="#1D1D24"/>
       <path d="M28,40 q4,3 8,0" stroke="#1D1D24" stroke-width="2" fill="none" stroke-linecap="round"/>
     </symbol>
     <symbol id="c-dull" viewBox="0 0 64 64">
-      <path d="M16,46 C6,46 6,32 16,32 C16,18 34,14 38,26 C50,22 56,38 46,46 Z" fill="#8E8E9E"/>
+      <path d="M16,46 C6,46 6,32 16,32 C16,18 34,14 38,26 C50,22 56,38 46,46 Z" fill="#B0ADC4"/>
       <path d="M24,36 l6,2 M40,38 l-6,0" stroke="#3B3B48" stroke-width="2.2" stroke-linecap="round"/>
       <path d="M28,42 q4,-1 8,0" stroke="#3B3B48" stroke-width="2" fill="none" stroke-linecap="round"/>
     </symbol>
     <symbol id="c-eye_dark" viewBox="0 0 64 64">
-      <path d="M10,26 C20,44 44,44 54,26 C48,52 16,52 10,26 Z" fill="#4C4F8A"/>
+      <path d="M10,26 C20,44 44,44 54,26 C48,52 16,52 10,26 Z" fill="#6E72B8"/>
       <circle cx="26" cy="36" r="2.4" fill="#15162E"/><circle cx="38" cy="36" r="2.4" fill="#15162E"/>
       <path d="M22,32 l7,2 M42,32 l-7,2" stroke="#15162E" stroke-width="2" stroke-linecap="round"/>
       <path d="M28,43 q4,-3 8,0" stroke="#15162E" stroke-width="2" fill="none" stroke-linecap="round"/>
     </symbol>
     <symbol id="c-eye_line" viewBox="0 0 64 64">
-      <path d="M14,32 L50,18 M14,32 L52,32 M14,32 L50,46" stroke="#9C7FB8" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <path d="M14,32 L50,18 M14,32 L52,32 M14,32 L50,46" stroke="#B39BD6" stroke-width="4" stroke-linecap="round" fill="none"/>
       <circle cx="30" cy="27" r="2.2" fill="#2E2240"/><circle cx="30" cy="38" r="2.2" fill="#2E2240"/>
     </symbol>
     <symbol id="c-freckle" viewBox="0 0 64 64">
-      <circle cx="16" cy="22" r="4" fill="#C68A4E"/><circle cx="28" cy="16" r="3.4" fill="#C68A4E"/><circle cx="42" cy="20" r="4.2" fill="#C68A4E"/><circle cx="52" cy="32" r="3.2" fill="#C68A4E"/><circle cx="20" cy="40" r="3.6" fill="#C68A4E"/><circle cx="34" cy="48" r="4" fill="#C68A4E"/><circle cx="46" cy="42" r="3.2" fill="#C68A4E"/>
-      <circle cx="30" cy="30" r="7" fill="#C68A4E"/><circle cx="27.5" cy="29" r="1.6" fill="#3A2412"/><circle cx="32.5" cy="29" r="1.6" fill="#3A2412"/>
+      <circle cx="16" cy="22" r="4" fill="#D9A06B"/><circle cx="28" cy="16" r="3.4" fill="#D9A06B"/><circle cx="42" cy="20" r="4.2" fill="#D9A06B"/><circle cx="52" cy="32" r="3.2" fill="#D9A06B"/><circle cx="20" cy="40" r="3.6" fill="#D9A06B"/><circle cx="34" cy="48" r="4" fill="#D9A06B"/><circle cx="46" cy="42" r="3.2" fill="#D9A06B"/>
+      <circle cx="30" cy="30" r="7" fill="#D9A06B"/><circle cx="27.5" cy="29" r="1.6" fill="#3A2412"/><circle cx="32.5" cy="29" r="1.6" fill="#3A2412"/>
     </symbol>
 
     <!-- bottles (fairies) -->
@@ -413,6 +480,7 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
       <rect x="8" y="18" width="48" height="12" rx="5" fill="var(--acc)"/>
       <rect x="10" y="40" width="44" height="16" fill="#C64046"/>
       <rect x="16" y="30" width="6" height="36" rx="3" fill="#fff" opacity=".35"/>
+      <use href="#face"/>
     </symbol>
     <symbol id="b-dropper" viewBox="0 0 64 80">
       <rect x="26" y="4" width="12" height="10" rx="4" fill="var(--acc)"/>
@@ -420,18 +488,21 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
       <path d="M16,23 h32 v42 a8,8 0 0 1 -8,8 h-16 a8,8 0 0 1 -8,-8 z" fill="#EAE4CF"/>
       <rect x="16" y="40" width="32" height="16" fill="#C64046"/>
       <rect x="20" y="28" width="5" height="40" rx="2.5" fill="#fff" opacity=".35"/>
+      <use href="#face"/>
     </symbol>
     <symbol id="b-ampoule" viewBox="0 0 64 80">
       <rect x="24" y="6" width="16" height="8" rx="3" fill="var(--acc)"/>
       <path d="M26,14 h12 v8 l6,6 v38 a6,6 0 0 1 -6,6 h-12 a6,6 0 0 1 -6,-6 v-38 l6,-6 z" fill="#EAE4CF"/>
       <rect x="20" y="40" width="24" height="16" fill="#C64046"/>
       <rect x="23" y="32" width="4" height="36" rx="2" fill="#fff" opacity=".35"/>
+      <use href="#face"/>
     </symbol>
     <symbol id="b-tube" viewBox="0 0 64 80">
       <rect x="22" y="6" width="20" height="10" rx="3" fill="var(--acc)"/>
       <path d="M14,16 h36 l-4,54 a6,6 0 0 1 -6,6 h-16 a6,6 0 0 1 -6,-6 z" fill="#EAE4CF"/>
       <rect x="14" y="40" width="36" height="16" fill="#C64046"/>
       <rect x="19" y="20" width="5" height="44" rx="2.5" fill="#fff" opacity=".35"/>
+      <use href="#face"/>
     </symbol>
     <symbol id="b-pump" viewBox="0 0 64 80">
       <path d="M30,4 h16 v6 h-10 v8 h-6 z" fill="var(--acc)"/>
@@ -439,17 +510,20 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
       <rect x="14" y="24" width="36" height="50" rx="8" fill="#EAE4CF"/>
       <rect x="14" y="40" width="36" height="16" fill="#C64046"/>
       <rect x="19" y="28" width="5" height="42" rx="2.5" fill="#fff" opacity=".35"/>
+      <use href="#face"/>
     </symbol>
     <symbol id="b-patch" viewBox="0 0 64 80">
       <path d="M8,30 C16,54 48,54 56,30 C50,66 14,66 8,30 Z" fill="var(--acc)"/>
       <path d="M14,32 C20,48 44,48 50,32 C46,56 18,56 14,32 Z" fill="#fff" opacity=".22"/>
       <rect x="16" y="40" width="32" height="14" rx="7" fill="#C64046"/>
+      <use href="#face" y="-6"/>
     </symbol>
     <symbol id="b-tub" viewBox="0 0 64 80">
       <rect x="6" y="30" width="52" height="42" rx="12" fill="#EAE4CF"/>
       <rect x="4" y="20" width="56" height="14" rx="7" fill="var(--acc)"/>
       <rect x="6" y="42" width="52" height="14" fill="#C64046"/>
       <rect x="12" y="36" width="6" height="30" rx="3" fill="#fff" opacity=".35"/>
+      <use href="#face"/>
     </symbol>
     <symbol id="b-sheet" viewBox="0 0 64 80">
       <path d="M32,8 C50,8 58,26 56,44 C54,62 44,74 32,74 C20,74 10,62 8,44 C6,26 14,8 32,8 Z" fill="var(--acc)" opacity=".92"/>
@@ -471,7 +545,7 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
    ========================================================= */
 const CONFIG = {
   LEADERBOARD_URL: '',
-  VERSION: '1.0.0',
+  VERSION: '2.0.0',
   SALT: 'seoul1988-kiki-v1',
   TOP_N: 50,
   PRIZE_RANKS: 5,
@@ -493,8 +567,8 @@ const store = {
 const STR = {
 en: {
   presents:'SEOUL 1988 presents', tagline:'Glass Skin Guardians',
-  story:"Kiki is the queen of Westgate High, famous for her glass skin. Her secret? Every night, beauty fairies from Seoul bless her skin. Tonight the curses are coming. Command the fairies.",
-  play:'Play', howto:'How to play', codex:'Fairy Codex', board:'Leaderboard', back:'Back', cont:'Continue', next:'Next night',
+  story:"Kiki is the queen of Westgate High, famous for her glass skin. Her secret? Every night, beauty fairies from Seoul look after her skin. Tonight the curses are coming. Stay up with the fairies.",
+  play:'Play', howto:'How to play', codex:'Fairy Album', board:'Leaderboard', back:'Back', cont:'Continue', next:'Next night',
   stop:'Stop & submit score', again:'Play again', submit:'Join the ranking', skip:'Skip, just show the board', share:'Copy link', copied:'Link copied',
   lang:'한국어', sound_on:'Sound on', sound_off:'Sound off', best:'Best on this device',
   h1t:'Match the fairy to the curse', h1:"Tap a fairy, then tap a curse on Kiki's face (or drag the fairy onto it). Each fairy counters specific curses. Wrong fairy? You lose your combo and the fairy needs a moment.",
@@ -514,15 +588,23 @@ en: {
   sending:'Sending…', fail:"Couldn't reach the leaderboard. Your score was saved on this device.",
   lb_t:'Top 50', lb_you:'You', lb_rank:'Your rank: #{r}', lb_out:"You're #{r}. {d} more points to enter the Top 50.", lb_empty:'No scores yet. Be the first.',
   lb_local:'Demo board. Scores are stored on this device only until a leaderboard server is connected.', lb_sample:'sample', lb_prize:'Prize', lb_err:'The leaderboard is not reachable right now.',
-  cx_s:'Every fairy is a real SEOUL 1988 product.', cx_power:'Power {p}', cx_vs:'Counters', cx_eye:'Eye-safe', cx_shots:'3 shots a night', cx_link:'See product', cx_unlock:'Night {n}', cx_pu:'Power-up',
+  cx_s:'Every fairy is a real SEOUL 1988 product.',  cx_power:'Power {p}', cx_vs:'Counters', cx_eye:'Eye-safe', cx_shots:'3 shots a night', cx_link:'See product', cx_unlock:'Night {n}', cx_pu:'Power-up',
   t_pick:'Pick a fairy first', t_cd:'Still recharging', t_stun:'Stunned', t_noshots:'No shots left tonight', t_miss:'Wrong fairy', t_trap:'Ouch! Eyes need eye cream',
   t_waste:'Shot wasted on a small curse', t_instant:'Instant Glow', t_delicate:'Delicate Touch', t_precision:'Precision Shot', t_set:'A curse set in',
   t_shield:'Night Shield: curses frozen', t_burst:'Glow Burst', t_used:'Already used tonight', t_nothing:'No stage-1 curses to clear', t_partial:'Weakened',
   pause:'Paused', resume:'Resume', quit:'Quit to title',
+  concern_t:'What bugs your skin lately?', concern_s:'Pick up to two. Those curses will visit Kiki more often, and your fairies will be ready.', concern_skip:'Skip for now', concern_go:'Call the fairies',
+  your_f:'Your fairies', lesson_t:"Tonight's lesson", match_t:'Your skin match', match_s:'Picked from the curses you fought tonight.', match_why:'You dispelled {n} × {c} tonight', match_why_pick:'You picked {c} as your worry',
+  share_t:'Share your night', share_save:'Save image', share_share:'Share', share_copy:'Copy caption', share_copied:'Caption copied', share_hint:'On a phone, press and hold the image to save it.',
+  caption:'I guarded Kiki\'s secret for {n} nights with {score} points 🌙 My fairy is {f} ({p}) ✨ #KikisSecret #SEOUL1988 #KSECRET',
+  f_handle:'Instagram / TikTok (optional, for creator gifts)', f_age:"I'm 14 or older.", e_age:'You need to be 14 or older to leave an email.',
+  ending:'The secret was never the fairies. It was that someone cared for her skin every single night. From tomorrow, Kiki does it herself.',
+  album_s:'Ten fairies, ten real SEOUL 1988 products. Tap a product to meet it.', persona:'Personality', kiki_note:"Kiki's note",
+  wh:{acne:"Breakouts? That's Cica's job. Niacica 20% + Mugwort calms them down.", spot:'Dark spots fade with Nia. Niacinamide 5% + Yuja, every night.', wrinkle:'Fine lines? Call Retina. Retinal Liposome 2% + Black Ginseng.', eye_dark:'The eye area is delicate. Only Bean (Eye Cream 4%) or Patch go there.', eye_line:'Eye wrinkles need a gentle touch: Bean or Patch only.', dry:'Thirsty skin loves Snail. Snail Mucin 97% + Rice.', pore:'Clogged pores? Pine washes them clean. Pine Cica Cleansing Foam.', dull:'Dull skin? Yuja brings the glow back. Niacinamide 15%.', freckle:'Sun freckles fade with Nia or Yuja. Stubborn ones? TXA Shot.'},
   day:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
   nt:['First Night','Fine Lines','The Eye Trap','Dry Spell','Clogged','Party Glow','Prom Eve'],
-  nq:["Chem test tomorrow. Please, fairies.","I laughed too hard at lunch. Is that… a line?","Stayed up for the group chat. My eyes…","Santa Ana winds all day. My cheeks feel like paper.","Pizza night. Don't ask.","Beach party at noon. Freckles incoming.","Prom is tomorrow. Everything depends on tonight."],
-  nq8:'Another night. The fairies never sleep.',
+  nq:["Chem test tomorrow. I keep touching my chin. Please, fairies.","Laughed so hard with Mina at lunch that my face hurt. Worth it. (Is that a line, though?)","The group chat went till 2am. Someone said my skin is 'unreal'. If only they knew.","Santa Ana winds all day. The smell of Grandma's lotion came back to me. I miss her.","Pizza night with Dad. He said I look just like Mom did. Don't ask about my nose.","Beach party. Jay said hi. Just hi. I'm reading too much into it. Freckles incoming.","Prom is tomorrow. Fairies, I'm scared. Not of my skin. Of everything."],
+  nq8:'Another night. The fairies never sleep, and neither do my worries.',
   curse:{acne:'Pimple Imp',spot:'Shadow Stain',wrinkle:'Crease Crone',eye_dark:'Night Shadow',eye_line:"Crow's Feet",dry:'Desert Dust',pore:'Goo Goblin',dull:'Grey Fog',freckle:'Sun Sprinkle'},
   cursek:{acne:'breakouts',spot:'dark spots',wrinkle:'wrinkles',eye_dark:'dark circles',eye_line:'eye wrinkles',dry:'dryness',pore:'pores',dull:'dullness',freckle:'freckles'},
   power:{sleeping:'Night Shield',hydrogel:'Glow Burst'},
@@ -530,8 +612,8 @@ en: {
 },
 ko: {
   presents:'SEOUL 1988 presents', tagline:'유리 피부 수호대',
-  story:'LA 웨스트게이트 고등학교의 퀸카 키키. 유리 같은 피부의 비밀은 매일 밤 서울에서 날아오는 뷰티 요정들. 오늘 밤도 저주가 몰려온다. 요정들을 지휘하자.',
-  play:'시작', howto:'게임 방법', codex:'요정 도감', board:'랭킹', back:'뒤로', cont:'계속', next:'다음 밤',
+  story:'LA 웨스트게이트 고등학교의 퀸카 키키. 유리 같은 피부의 비밀은 매일 밤 서울에서 날아와 피부를 돌봐주는 뷰티 요정들. 오늘 밤도 저주가 몰려와요. 요정들과 함께 밤을 지켜주세요.',
+  play:'시작', howto:'게임 방법', codex:'요정 앨범', board:'랭킹', back:'뒤로', cont:'계속', next:'다음 밤',
   stop:'여기서 멈추고 점수 등록', again:'다시 하기', submit:'랭킹 등록', skip:'건너뛰고 랭킹만 보기', share:'링크 복사', copied:'링크를 복사했어요',
   lang:'English', sound_on:'소리 켬', sound_off:'소리 끔', best:'이 기기 최고 기록',
   h1t:'저주에 맞는 요정을 고르세요', h1:'요정을 탭한 뒤 키키 얼굴 위의 저주를 탭하세요(끌어다 놓아도 돼요). 요정마다 상대할 수 있는 저주가 정해져 있어요. 틀리면 콤보가 끊기고 요정은 잠시 쉬어야 해요.',
@@ -556,10 +638,18 @@ ko: {
   t_waste:'작은 저주에 샷을 낭비했어요', t_instant:'즉시 광채', t_delicate:'섬세한 손길', t_precision:'정밀 샷', t_set:'저주가 고착됐어요',
   t_shield:'나이트 쉴드: 저주 정지', t_burst:'글로우 버스트', t_used:'오늘 밤 이미 사용', t_nothing:'지울 1단계 저주가 없어요', t_partial:'약화',
   pause:'일시정지', resume:'계속하기', quit:'타이틀로',
+  concern_t:'요즘 피부 고민이 뭐야?', concern_s:'최대 두 개까지. 그 저주가 키키를 더 자주 찾아오고, 요정들이 준비하고 있을 거예요.', concern_skip:'일단 건너뛰기', concern_go:'요정 부르기',
+  your_f:'나의 요정', lesson_t:'오늘 밤의 레슨', match_t:'나의 피부 매치', match_s:'오늘 밤 싸운 저주를 바탕으로 골랐어요.', match_why:'오늘 밤 {c} {n}개를 물리쳤어요', match_why_pick:'{c}을(를) 고민으로 골랐어요',
+  share_t:'오늘 밤을 공유하기', share_save:'이미지 저장', share_share:'공유', share_copy:'캡션 복사', share_copied:'캡션을 복사했어요', share_hint:'폰에서는 이미지를 길게 눌러 저장할 수 있어요.',
+  caption:'키키의 비밀을 {n}일 밤 지켰어요, {score}점 🌙 나의 요정은 {f} ({p}) ✨ #키키의비밀 #SEOUL1988 #케이시크릿',
+  f_handle:'인스타그램 / 틱톡 (선택, 크리에이터 선물용)', f_age:'만 14세 이상입니다.', e_age:'이메일을 남기려면 만 14세 이상이어야 해요.',
+  ending:'비밀은 요정이 아니었어. 누군가 매일 밤 내 피부를 돌봐줬다는 것. 내일부터는 키키가 직접 할 거야.',
+  album_s:'열 명의 요정, 열 개의 진짜 SEOUL 1988 제품. 제품을 눌러 만나보세요.', persona:'성격', kiki_note:'키키의 메모',
+  wh:{acne:'여드름? 그건 Cica 담당. 나이아시카 20% + 쑥이 진정시켜요.', spot:'기미는 Nia로 옅어져요. 나이아신아마이드 5% + 유자, 매일 밤.', wrinkle:'잔주름? Retina를 불러요. 레틴알 리포좀 2% + 흑삼.', eye_dark:'눈가는 예민해요. Bean(아이크림 4%)이나 Patch만 닿을 수 있어요.', eye_line:'눈가 주름엔 부드러운 손길. Bean이나 Patch만.', dry:'목마른 피부는 Snail을 좋아해요. 달팽이 점액 97% + 쌀.', pore:'막힌 모공? Pine이 깨끗이 씻어요. 파인시카 클렌징 폼.', dull:'칙칙해? Yuja가 광채를 돌려줘요. 나이아신아마이드 15%.', freckle:'주근깨는 Nia나 Yuja로. 고집 센 건 TXA 샷.'},
   day:['월','화','수','목','금','토','일'],
   nt:['첫날 밤','미세한 선','눈가의 함정','건조 주의보','막힌 모공','파티 글로우','프롬 전야'],
-  nq:['내일 화학 시험이야. 요정들아, 부탁해.','점심에 너무 크게 웃었나 봐. 이거… 주름이야?','단톡방 때문에 밤샜어. 내 눈…','하루 종일 건조한 바람. 볼이 종이 같아.','피자 먹은 날. 묻지 마.','낮에 비치 파티. 주근깨가 몰려온다.','내일이 프롬이야. 오늘 밤에 모든 게 달렸어.'],
-  nq8:'또 하룻밤. 요정들은 잠들지 않아.',
+  nq:['내일 화학 시험. 자꾸 턱을 만지게 돼. 요정들아, 부탁해.','점심에 미나랑 너무 웃어서 얼굴이 아파. 그래도 좋았어. (근데 이거… 주름이야?)','단톡방이 새벽 2시까지 이어졌어. 누가 내 피부가 "비현실적"이래. 사실을 알면 어쩌려고.','하루 종일 건조한 바람. 할머니 로션 냄새가 떠올랐어. 보고 싶다.','아빠랑 피자 먹는 밤. 엄마 어릴 때랑 똑같이 생겼대. 코 얘기는 묻지 마.','비치 파티. 제이가 인사했어. 그냥 인사. 내가 너무 멀리 간 거겠지. 주근깨가 몰려온다.','내일이 프롬이야. 요정들아, 무서워. 피부 때문이 아니라, 전부 다.'],
+  nq8:'또 하룻밤. 요정들은 잠들지 않고, 내 걱정도 그래.',
   curse:{acne:'여드름 저주',spot:'기미 저주',wrinkle:'주름 저주',eye_dark:'다크서클 저주',eye_line:'눈가 주름 저주',dry:'건조 저주',pore:'모공 저주',dull:'칙칙함 저주',freckle:'주근깨 저주'},
   cursek:{acne:'여드름',spot:'기미',wrinkle:'주름',eye_dark:'다크서클',eye_line:'눈가 주름',dry:'건조',pore:'모공',dull:'칙칙함',freckle:'주근깨'},
   power:{sleeping:'나이트 쉴드',hydrogel:'글로우 버스트'},
@@ -575,48 +665,48 @@ const ZONES = {
   nose:{cx:200,cy:272,rx:18,ry:30}, lcheek:{cx:122,cy:318,rx:36,ry:34}, rcheek:{cx:278,cy:318,rx:36,ry:34}, chin:{cx:200,cy:395,rx:50,ry:24}
 };
 const CURSES = {
-  acne:{color:'#E4574F',zones:['lcheek','rcheek','chin','forehead','nose']},
-  spot:{color:'#8B5A3C',zones:['lcheek','rcheek','forehead']},
-  wrinkle:{color:'#8C7BA3',zones:['forehead','chin']},
-  eye_dark:{color:'#4C4F8A',zones:['leye','reye'],weight:.55},
-  eye_line:{color:'#9C7FB8',zones:['leye','reye'],weight:.55},
-  dry:{color:'#C9B59A',zones:['lcheek','rcheek','chin']},
-  pore:{color:'#9A9AA6',zones:['nose','forehead','chin']},
-  dull:{color:'#8E8E9E',zones:['lcheek','rcheek','forehead']},
-  freckle:{color:'#C68A4E',zones:['lcheek','rcheek','nose']}
+  acne:{cure:'cica',color:'#F27C7C',zones:['lcheek','rcheek','chin','forehead','nose']},
+  spot:{cure:'nia',color:'#B07A5C',zones:['lcheek','rcheek','forehead']},
+  wrinkle:{cure:'retinal',color:'#A595C4',zones:['forehead','chin']},
+  eye_dark:{cure:'eyecream',color:'#6E72B8',zones:['leye','reye'],weight:.55},
+  eye_line:{cure:'eyecream',color:'#B39BD6',zones:['leye','reye'],weight:.55},
+  dry:{cure:'snail',color:'#E0CDB2',zones:['lcheek','rcheek','chin']},
+  pore:{cure:'foam',color:'#B3B3C4',zones:['nose','forehead','chin']},
+  dull:{cure:'glow',color:'#B0ADC4',zones:['lcheek','rcheek','forehead']},
+  freckle:{cure:'nia',color:'#D9A06B',zones:['lcheek','rcheek','nose']}
 };
 const ALL_CURSES = Object.keys(CURSES);
 const FAIRIES = [
   {id:'nia',name:'Nia',acc:'#F2C14E',shape:'b-jar',label:'5%',power:1,cd:1.0,vs:['spot','freckle','dull'],unlock:1,slug:'seoul-1988-capsule-cream-niacinamide-5-yuja',
    prod:{en:'SEOUL 1988 Capsule Cream : Niacinamide 5% + Yuja',ko:'서울 1988 나이아신 유자 캡슐 크림'},
-   blurb:{en:'Brightening capsule cream with niacinamide 5% and yuja. Evens tone, lifts dullness.',ko:'나이아신아마이드 5% + 유자 캡슐 크림. 톤을 고르게, 칙칙함을 환하게.'}},
+   blurb:{en:'Brightening capsule cream with niacinamide 5% and yuja. Evens tone, lifts dullness.',ko:'나이아신아마이드 5% + 유자 캡슐 크림. 톤을 고르게, 칙칙함을 환하게.'},persona:{en:'Morning person. Hums citrus songs while she works.',ko:'아침형 요정. 일하면서 유자 노래를 흥얼거려요.'},note:{en:'Dark spots don\'t vanish overnight. Nia says: every night, a little.',ko:'기미는 하룻밤에 사라지지 않아. Nia가 그랬어. 매일 밤, 조금씩.'}},
   {id:'cica',name:'Cica',acc:'#6DAA6B',shape:'b-jar',label:'20%',power:1,cd:1.0,vs:['acne'],unlock:1,slug:'seoul-1988-repair-cream-niacica-20-mugwort',
    prod:{en:'SEOUL 1988 Repair Cream : Niacica 20% + Mugwort',ko:'서울 1988 나이아시카 쑥 리페어 크림'},
-   blurb:{en:'Niacinamide 5% + cica 15% with mugwort. Calms redness and blemish-prone skin.',ko:'나이아신아마이드 5% + 시카 15% + 쑥. 트러블과 붉은기를 진정.'}},
+   blurb:{en:'Niacinamide 5% + cica 15% with mugwort. Calms redness and blemish-prone skin.',ko:'나이아신아마이드 5% + 시카 15% + 쑥. 트러블과 붉은기를 진정.'},persona:{en:'Calm and steady. Smells like a mugwort field after rain.',ko:'차분하고 든든해요. 비 온 뒤 쑥밭 냄새가 나요.'},note:{en:'When my skin flares up, Cica tells me to stop poking at it.',ko:'피부가 뒤집히면 Cica가 그만 만지라고 해.'}},
   {id:'retinal',name:'Retina',acc:'#B3485A',shape:'b-dropper',label:'2%',power:2,cd:2.4,vs:['wrinkle'],unlock:2,slug:'seoul-1988-serum-retinal-liposome-2-black-ginseng',
    prod:{en:'SEOUL 1988 Serum : Retinal Liposome 2% + Black Ginseng',ko:'서울 1988 레틴알 흑삼 세럼'},
-   blurb:{en:'Retinal liposome 2% with 58% black ginseng. Fine lines, pores and texture.',ko:'레틴알 리포좀 2% + 흑삼 58%. 주름·모공·결 케어.'}},
+   blurb:{en:'Retinal liposome 2% with 58% black ginseng. Fine lines, pores and texture.',ko:'레틴알 리포좀 2% + 흑삼 58%. 주름·모공·결 케어.'},persona:{en:'The eldest. Speaks softly, works hard, needs the lights off.',ko:'맏언니. 조용히 말하고 열심히 일하고, 불은 꺼야 해요.'},note:{en:'Retina only comes at night. Something about the sun.',ko:'Retina는 밤에만 와. 햇빛 때문이래.'}},
   {id:'eyecream',name:'Bean',acc:'#C9A7F0',shape:'b-tube',label:'4%',power:1,cd:1.0,vs:['eye_dark','eye_line'],eyeSafe:true,unlock:3,slug:'seoul-1988-eye-cream-retinal-liposome-4-fermented-bean',
    prod:{en:'SEOUL 1988 Eye Cream : Retinal Liposome 4% + Fermented Bean',ko:'서울 1988 레틴알 발효콩 아이크림'},
-   blurb:{en:'Retinal liposome 4% with fermented bean, made for the delicate eye area.',ko:'레틴알 리포좀 4% + 발효콩. 예민한 눈가를 위한 전용 크림.'}},
+   blurb:{en:'Retinal liposome 4% with fermented bean, made for the delicate eye area.',ko:'레틴알 리포좀 4% + 발효콩. 예민한 눈가를 위한 전용 크림.'},persona:{en:'Tiny and careful. The only one allowed near my eyes.',ko:'작고 조심스러워요. 내 눈가에 닿을 수 있는 유일한 요정.'},note:{en:'Everyone says the eyes show when you\'re tired. Bean disagrees.',ko:'눈가는 피곤함이 다 드러난대. Bean은 아니라고 해.'}},
   {id:'snail',name:'Snail',acc:'#8FC7D6',shape:'b-pump',label:'97%',power:1,cd:1.0,vs:['dry'],unlock:4,slug:'seoul-1988-essence-snail-mucin-97-rice',
    prod:{en:'SEOUL 1988 Essence : Snail Mucin 97% + Rice',ko:'서울 1988 달팽이 쌀 에센스'},
-   blurb:{en:'97% snail mucin essence with rice. Deep hydration and soothing.',ko:'달팽이 점액 97% + 쌀. 깊은 보습과 진정.'}},
+   blurb:{en:'97% snail mucin essence with rice. Deep hydration and soothing.',ko:'달팽이 점액 97% + 쌀. 깊은 보습과 진정.'},persona:{en:'Slow talker, quick healer. Brings rain when I\'m thirsty.',ko:'느리게 말하고 빨리 고쳐요. 목마를 때 비를 데려와요.'},note:{en:'Dry days make me cranky. Snail makes me forget why.',ko:'건조한 날은 예민해져. Snail은 그 이유를 잊게 해줘.'}},
   {id:'foam',name:'Pine',acc:'#4FA3A1',shape:'b-pump',label:'1%',power:1,cd:1.0,vs:['pore'],unlock:5,slug:'seoul-1988-cleansing-foam-pine-cica-1-probiotics',
    prod:{en:'SEOUL 1988 Cleansing Foam : Pine Cica 1% + Probiotics',ko:'서울 1988 파인시카 클렌징 폼'},
-   blurb:{en:'Low-pH foam with pine cica and probiotics. Clears pores and sebum gently.',ko:'파인시카 + 프로바이오틱스 저자극 폼. 모공과 피지를 부드럽게.'}},
+   blurb:{en:'Low-pH foam with pine cica and probiotics. Clears pores and sebum gently.',ko:'파인시카 + 프로바이오틱스 저자극 폼. 모공과 피지를 부드럽게.'},persona:{en:'Fresh as a pine forest. Hates leftover pizza grease.',ko:'소나무 숲처럼 상쾌해요. 남은 피자 기름을 싫어해요.'},note:{en:'Pine says a clean face sleeps better. She\'s right.',ko:'Pine이 그러는데 깨끗한 얼굴이 잠을 더 잘 잔대. 맞는 말이야.'}},
   {id:'glow',name:'Yuja',acc:'#FFB03B',shape:'b-dropper',label:'15%',power:2,cd:2.4,vs:['spot','dull','freckle'],unlock:6,slug:'seoul-1988-glow-serum-niacinamide-15-yuja',
    prod:{en:'SEOUL 1988 Glow Serum : Niacinamide 15% + Yuja',ko:'서울 1988 나이아신 15% 유자 글로우 세럼'},
-   blurb:{en:'Niacinamide 15% glow serum with glutathione and yuja. Dark spots, dullness, uneven tone.',ko:'나이아신아마이드 15% + 글루타치온 + 유자. 기미·칙칙함·톤 케어.'}},
+   blurb:{en:'Niacinamide 15% glow serum with glutathione and yuja. Dark spots, dullness, uneven tone.',ko:'나이아신아마이드 15% + 글루타치온 + 유자. 기미·칙칙함·톤 케어.'},persona:{en:'Loud, sunny, a little dramatic. Turns the lights back on.',ko:'시끄럽고 햇살 같고 조금 드라마틱해요. 꺼진 빛을 다시 켜요.'},note:{en:'On grey days, Yuja is the one I call first.',ko:'흐린 날엔 Yuja를 제일 먼저 불러.'}},
   {id:'ashot',name:'Shot 12',acc:'#8E86C9',shape:'b-ampoule',label:'12%',power:3,cd:0.3,shots:3,vs:['wrinkle'],unlock:6,slug:'seoul-1988-advanced-shot-retinal-liposome-12-black-rice',
    prod:{en:'SEOUL 1988 Advanced Shot : Retinal Liposome 12% + Black Rice',ko:'서울 1988 레틴알 12% 흑미 어드밴스드 샷'},
-   blurb:{en:'The strongest step of the retinal line: liposome 12% with black rice. For advanced users.',ko:'레틴알 라인의 가장 강한 단계. 리포좀 12% + 흑미. 숙련자용.'}},
+   blurb:{en:'The strongest step of the retinal line: liposome 12% with black rice. For advanced users.',ko:'레틴알 라인의 가장 강한 단계. 리포좀 12% + 흑미. 숙련자용.'},persona:{en:'Rare and serious. Three visits a night, no more.',ko:'드물고 진지해요. 하룻밤에 딱 세 번.'},note:{en:'Shot 12 only shows up for the big ones.',ko:'Shot 12는 큰 저주에만 나타나.'}},
   {id:'txa',name:'TXA',acc:'#E88C9A',shape:'b-ampoule',label:'TXA',power:3,cd:0.3,shots:3,vs:['spot','freckle'],unlock:7,slug:'seoul-1988-txa-shot',
    prod:{en:'SEOUL 1988 TXA Shot : TXA + Niacinamide + Rice',ko:'서울 1988 TXA 샷'},
-   blurb:{en:'Tranexamic acid with niacinamide and rice, aimed at stubborn dark spots.',ko:'트라넥삼산 + 나이아신아마이드 + 쌀. 고집스러운 기미와 잡티.'}},
+   blurb:{en:'Tranexamic acid with niacinamide and rice, aimed at stubborn dark spots.',ko:'트라넥삼산 + 나이아신아마이드 + 쌀. 고집스러운 기미와 잡티.'},persona:{en:'A specialist with a tiny bag and a steady hand.',ko:'작은 가방을 든 전문가. 손이 떨리지 않아요.'},note:{en:'The spot that wouldn\'t leave? TXA.',ko:'안 지워지던 그 점? TXA.'}},
   {id:'eyepatch',name:'Patch',acc:'#E0A33B',shape:'b-patch',label:'NAD',power:2,cd:2.4,vs:['eye_dark','eye_line'],eyeSafe:true,unlock:7,slug:'seoul-1988-retinal-glow-eye-patch-reti-nad-turmeric',
    prod:{en:'SEOUL 1988 Retinal Glow Eye Patch : Reti-NAD + Turmeric',ko:'서울 1988 레틴알 글로우 아이패치'},
-   blurb:{en:'Reti-NAD eye patch with turmeric. A glow boost for tired eyes.',ko:'레티-NAD + 강황 아이패치. 피곤한 눈가에 글로우.'}}
+   blurb:{en:'Reti-NAD eye patch with turmeric. A glow boost for tired eyes.',ko:'레티-NAD + 강황 아이패치. 피곤한 눈가에 글로우.'},persona:{en:'Warm and golden. Likes to sit still for twenty minutes.',ko:'따뜻하고 황금빛. 20분 동안 가만히 앉아 있길 좋아해요.'},note:{en:'Patch is for the nights I cried a little. Don\'t tell anyone.',ko:'Patch는 조금 운 밤을 위한 거야. 아무한테도 말하지 마.'}}
 ];
 const FAIRY_BY = Object.fromEntries(FAIRIES.map(f => [f.id, f]));
 const POWERS = [
@@ -629,7 +719,7 @@ const POWERS = [
 ];
 const POWER_BY = Object.fromEntries(POWERS.map(p => [p.id, p]));
 const NIGHTS = [
-  {unlock:['nia','cica'], curses:['acne','spot'], quota:10, spawn:2.6, grow:7.0, max:4, w:[1,0,0]},
+  {unlock:['nia','cica'], curses:['acne','spot'], quota:10, spawn:2.8, grow:8.0, max:4, w:[1,0,0]},
   {unlock:['retinal'], curses:['acne','spot','wrinkle'], quota:14, spawn:2.3, grow:6.5, max:5, w:[.85,.15,0]},
   {unlock:['eyecream'], curses:['acne','spot','wrinkle','eye_dark','eye_line'], quota:16, spawn:2.1, grow:6.0, max:5, w:[.75,.25,0]},
   {unlock:['snail'], power:'sleeping', curses:['acne','spot','wrinkle','eye_dark','eye_line','dry'], quota:18, spawn:1.9, grow:5.5, max:6, w:[.65,.3,.05]},
@@ -673,7 +763,8 @@ const sfx = {
 const S = {
   screen:'title', night:0, cfg:null, score:0, combo:0, maxCombo:0, glow:100, nightsDone:0, totalDispelled:0, setCount:0,
   startAt:0, time:0, playing:false, paused:false, curses:[], spawned:0, nightCleared:0, nightSet:0, nextSpawn:0,
-  selected:null, deck:[], f:{}, powers:{}, shieldUntil:0, hitsBy:{}, seq:0, ended:null, lastTick:0, raf:0, lastEntry:null
+  selected:null, deck:[], f:{}, powers:{}, shieldUntil:0, hitsBy:{}, seq:0, ended:null, lastTick:0, raf:0, lastEntry:null,
+  concerns:[], seen:{}, nightTypes:{}, clearedBy:{}, shareUrl:null
 };
 const el = {
   hud:$('#hud'), night:$('#hudNight'), score:$('#hudScore'), combo:$('#hudCombo'), glowbar:$('#glowbar'), prog:$('#hudProg'), glowLbl:$('#hudGlowLbl'),
@@ -769,7 +860,7 @@ function shake(id){ const c = cardOf(id); if (!c) return; c.classList.remove('sh
 /* ---------------- curses ---------------- */
 function weightedStage(w){ const r = Math.random(); return r < w[0] ? 1 : r < w[0] + w[1] ? 2 : 3; }
 function pickType(cfg){
-  const list = cfg.curses, ws = list.map(c => CURSES[c].weight ?? 1), sum = ws.reduce((a, b) => a + b, 0);
+  const list = cfg.curses, ws = list.map(c => (CURSES[c].weight ?? 1) * (S.concerns.includes(c) ? 1.8 : 1)), sum = ws.reduce((a, b) => a + b, 0);
   let r = Math.random() * sum; for (let i = 0; i < list.length; i++){ r -= ws[i]; if (r <= 0) return list[i]; } return list[list.length - 1];
 }
 function spawnCurse(){
@@ -781,7 +872,8 @@ function spawnCurse(){
     if (S.curses.every(o => Math.hypot(o.x - x, o.y - y) > 60)) break;
   }
   const c = {id:++S.seq, type, zone:zoneId, eye:!!z.eye, x, y, stage:weightedStage(cfg.w), born:S.time, growAt:S.time + cfg.grow, el:null};
-  S.curses.push(c); S.spawned++;
+  S.curses.push(c); S.spawned++; S.nightTypes[type] = (S.nightTypes[type] || 0) + 1;
+  if (!S.seen[type]){ S.seen[type] = true; whisper(type); }
   const b = document.createElement('button'); b.className = 'curse spawn'; b.type = 'button'; b.dataset.id = c.id;
   b.style.setProperty('--x', (x / 400 * 100).toFixed(2) + '%'); b.style.setProperty('--y', (y / 520 * 100).toFixed(2) + '%');
   c.el = b; el.facebox.appendChild(b); renderCurse(c); updateHUD();
@@ -812,6 +904,26 @@ function toast(msg, bad = false){
   while (el.toasts.children.length > 3) el.toasts.firstElementChild.remove();
   setTimeout(() => d.remove(), 2300);
 }
+let whisperTimer = 0;
+function whisper(type){
+  const f = FAIRY_BY[CURSES[type].cure];
+  const old = $('.whisper', el.stage); if (old) old.remove();
+  $$('.fairy.hint', el.deck).forEach(c => c.classList.remove('hint'));
+  const d = document.createElement('div'); d.className = 'whisper';
+  d.innerHTML = `<span class="ic">${fairySVG(f)}</span><span><b>${esc(tn('curse', type))}</b>${esc(tn('wh', type))}</span>`;
+  el.stage.appendChild(d);
+  const card = cardOf(f.id); if (card) card.classList.add('hint');
+  clearTimeout(whisperTimer);
+  whisperTimer = setTimeout(() => { d.classList.add('out'); setTimeout(() => d.remove(), 320); if (card) card.classList.remove('hint'); }, 4200);
+}
+function hearts(c){
+  const p = center(c);
+  for (let i = 0; i < 5; i++){
+    const h = document.createElement('i'); h.className = 'heart'; h.textContent = '♥';
+    h.style.left = (p.x + rnd(-30, 30)) + 'px'; h.style.top = p.y + 'px'; h.style.setProperty('--dx', rnd(-40, 40).toFixed(0) + 'px'); h.style.animationDelay = (i * 60) + 'ms';
+    document.body.appendChild(h); setTimeout(() => h.remove(), 1700);
+  }
+}
 function wince(){ el.facebox.style.setProperty('--wince', '1'); setTimeout(() => el.facebox.style.setProperty('--wince', '0'), 700); }
 function bumpCombo(){ el.combo.classList.add('bump'); setTimeout(() => el.combo.classList.remove('bump'), 150); }
 
@@ -833,7 +945,7 @@ function apply(fid, c){
   }
   if (F.shots){ rt.charges--; const card = cardOf(fid); if (card) $$('.charges i', card).forEach((i, k) => i.classList.toggle('used', k >= rt.charges)); }
   rt.cdUntil = now + F.cd;
-  S.combo++; S.maxCombo = Math.max(S.maxCombo, S.combo); bumpCombo();
+  S.combo++; S.maxCombo = Math.max(S.maxCombo, S.combo); bumpCombo(); if (S.combo % 5 === 0) hearts(c);
   const prev = c.stage; c.stage -= F.power; c.growAt = now + S.cfg.grow;
   if (c.stage <= 0){
     let pts = 100 * prev * mult(); const notes = [];
@@ -841,7 +953,7 @@ function apply(fid, c){
     if (c.eye){ pts += 100; notes.push(t('t_delicate')); }
     if (F.shots && prev === 3){ pts += 150; notes.push(t('t_precision')); }
     if (F.shots && prev === 1) toast(t('t_waste'));
-    pts = Math.round(pts); S.score += pts; S.nightCleared++; S.totalDispelled++; S.hitsBy[fid] = (S.hitsBy[fid] || 0) + 1;
+    pts = Math.round(pts); S.score += pts; S.nightCleared++; S.totalDispelled++; S.hitsBy[fid] = (S.hitsBy[fid] || 0) + 1; S.clearedBy[c.type] = (S.clearedBy[c.type] || 0) + 1;
     popAt(c, `+${pts}`); notes.forEach((n, i) => setTimeout(() => popAt(c, n, 'note'), 180 * (i + 1)));
     sparks(c, F.acc); sfx.dispel(); removeCurse(c, 'gone');
   } else {
@@ -863,7 +975,7 @@ function usePower(id){
     const ones = S.curses.filter(c => c.stage === 1);
     if (!ones.length){ toast(t('t_nothing')); return; }
     S.powers[id]--; let total = 0;
-    ones.forEach(c => { const pts = Math.round(100 * mult()); total += pts; S.nightCleared++; S.totalDispelled++; sparks(c, POWER_BY.hydrogel.acc); removeCurse(c, 'gone'); });
+    ones.forEach(c => { const pts = Math.round(100 * mult()); total += pts; S.nightCleared++; S.totalDispelled++; S.clearedBy[c.type] = (S.clearedBy[c.type] || 0) + 1; sparks(c, POWER_BY.hydrogel.acc); removeCurse(c, 'gone'); });
     S.score += total; toast(`${t('t_burst')} +${total}`); sfx.power();
   }
   renderPowers(); updateHUD();
@@ -890,8 +1002,18 @@ function tick(ts){
 
 /* ---------------- flow ---------------- */
 function newGame(){
-  Object.assign(S, {night:0, score:0, combo:0, maxCombo:0, glow:100, nightsDone:0, totalDispelled:0, setCount:0, startAt:Date.now(), time:0, deck:[], f:{}, powers:{}, hitsBy:{}, ended:null, selected:null, lastEntry:null});
-  nextNight();
+  Object.assign(S, {night:0, score:0, combo:0, maxCombo:0, glow:100, nightsDone:0, totalDispelled:0, setCount:0, startAt:Date.now(), time:0, deck:[], f:{}, powers:{}, hitsBy:{}, ended:null, selected:null, lastEntry:null, concerns:[], seen:{}, nightTypes:{}, clearedBy:{}, shareUrl:null});
+  showConcerns();
+}
+function showConcerns(){
+  const saved = (() => { try { return JSON.parse(store.get('kiki_concerns') || '[]'); } catch { return []; } })();
+  S.concerns = (Array.isArray(saved) ? saved : []).filter(c => CURSES[c]).slice(0, 2);
+  openScreen(`<div class="card">
+    <div class="eyebrow">Kiki</div>
+    <h2 class="h-display">${esc(t('concern_t'))}</h2>
+    <p class="lede">${esc(t('concern_s'))}</p>
+    <div class="concerns" id="concerns">${ALL_CURSES.map(c => `<button type="button" class="concern ${S.concerns.includes(c) ? 'on' : ''}" data-concern="${c}"><svg viewBox="0 0 64 64"><use href="#c-${c}"/></svg>${esc(tn('cursek', c))}<small>→ ${esc(FAIRY_BY[CURSES[c].cure].name)}</small></button>`).join('')}</div>
+    <div class="row between">${btn(t('concern_skip'), 'concernSkip', 'sm')}${btn(t('concern_go'), 'concernGo', 'primary')}</div></div>`);
 }
 function nextNight(){
   S.night++; S.cfg = nightCfg(S.night);
@@ -902,8 +1024,8 @@ function nextNight(){
   showNightIntro(newF);
 }
 function startNight(newF){
-  closeScreen(); $$('.curse', el.facebox).forEach(x => x.remove());
-  Object.assign(S, {curses:[], spawned:0, nightCleared:0, nightSet:0, time:0, nextSpawn:1.0, shieldUntil:0, selected:null, playing:true, paused:false, screen:'play'});
+  closeScreen(); $$('.curse', el.facebox).forEach(x => x.remove()); $$('.whisper', el.stage).forEach(w => w.remove());
+  Object.assign(S, {curses:[], spawned:0, nightCleared:0, nightSet:0, time:0, nextSpawn:1.0, shieldUntil:0, selected:null, playing:true, paused:false, screen:'play', nightTypes:{}});
   S.deck.forEach(id => { S.f[id] = {cdUntil:0, stunUntil:0, charges:FAIRY_BY[id].shots || null}; });
   el.facebox.classList.remove('shield'); el.wand.classList.remove('on');
   renderDeck(newF); layout(); updateHUD(); sfx.night();
@@ -972,11 +1094,12 @@ function showCodex(){
       <h3>${esc(pu ? tn('power', f.id) : f.name)} ${pu ? `<span class="pill acc">${esc(t('cx_pu'))}</span>` : `<span class="pill acc">${esc(t('cx_power', {p:f.power}))}</span>`}${f.eyeSafe ? `<span class="pill eye">${esc(t('cx_eye'))}</span>` : ''}${f.shots ? `<span class="pill">${esc(t('cx_shots'))}</span>` : ''}<span class="pill">${esc(t('cx_unlock', {n:f.unlock}))}</span></h3>
       <p class="prod">${esc(f.prod.en)}<small>${esc(f.prod.ko)}</small></p>
       <p class="blurb">${esc(pu ? tn('pdesc', f.id) + ' ' : '')}${esc(f.blurb[lang] || f.blurb.en)}</p>
+      ${f.persona ? `<p class="blurb"><b style="color:var(--pink)">${esc(t('persona'))}</b> · ${esc(f.persona[lang] || f.persona.en)}</p><p class="blurb" style="font-family:var(--diary);font-size:1.1rem;color:var(--fg)">“${esc(f.note[lang] || f.note.en)}” <small>— ${esc(t('kiki_note'))}</small></p>` : ''}
       <div class="meta">${pu ? '' : `<div class="vs"><span class="pill">${esc(t('cx_vs'))}</span>${f.vs.map(c => `<span><svg viewBox="0 0 64 64"><use href="#c-${c}"/></svg>${esc(tn('curse', c))}</span>`).join('')}</div>`}
         <a href="${CONFIG.SHOP}${f.slug}" target="_blank" rel="noopener">${esc(t('cx_link'))} ↗</a></div>
     </div></div>`;
   openScreen(`<div class="card wide">
-    <div class="eyebrow">${esc(t('codex'))}</div><p class="lede">${esc(t('cx_s'))}</p>
+    <div class="eyebrow">${esc(t('codex'))}</div><p class="lede">${esc(t('album_s'))}</p>
     <div class="codex">${FAIRIES.map(f => card(f, false)).join('')}${POWERS.map(p => card(p, true)).join('')}</div>
     <div class="row end">${btn(t('back'), 'title')}</div></div>`);
 }
@@ -991,6 +1114,7 @@ function showNightIntro(newF){
     <div class="eyebrow">${esc(n <= 7 ? t('day')[n - 1] : t('endless'))}</div>
     <h2 class="h-display">${esc(t('night', {n}))}${n <= 7 ? ` · ${esc(t('nt')[n - 1])}` : ''}</h2>
     <p class="quote">“${esc(n <= 7 ? t('nq')[n - 1] : t('nq8'))}”</p>
+    ${(n === 1 && S.concerns.length) ? `<div><div class="eyebrow" style="margin-bottom:8px">${esc(t('your_f'))}</div><div class="chips">${S.concerns.map(c => { const f = FAIRY_BY[CURSES[c].cure]; return `<span class="chip" style="--acc:${f.acc}"><span class="ic f">${fairySVG(f)}</span><span><b>${esc(f.name)}</b><small>${esc(tn('cursek', c))} · ${esc(f.prod[lang] || f.prod.en)}</small></span></span>`; }).join('')}</div></div>` : ''}
     ${chipsF ? `<div><div class="eyebrow" style="margin-bottom:8px">${esc(t('new_f'))}</div><div class="chips">${chipsF}</div></div>` : ''}
     ${chipsC ? `<div><div class="eyebrow" style="margin-bottom:8px">${esc(t('new_c'))}</div><div class="chips">${chipsC}</div></div>` : (n > 7 ? `<p class="note">${esc(t('all_c'))}</p>` : '')}
     ${chipP ? `<div><div class="eyebrow" style="margin-bottom:8px">${esc(t('new_p'))}</div><div class="chips">${chipP}</div></div>` : ''}
@@ -1002,6 +1126,7 @@ function showSummary({perfect, bonus, before}){
     <div class="eyebrow">${esc(t('night', {n:S.night}))}</div>
     <h2 class="h-display">${esc(t('sum_t', {n:S.night}))}</h2>
     ${perfect ? `<div><span class="badge">✦ ${esc(t('perfect'))}</span></div>` : ''}
+    ${lessonsHTML()}
     <div>
       <div class="stat"><span>${esc(t('sum_cl'))}</span><b class="good">${S.nightCleared}</b></div>
       <div class="stat"><span>${esc(t('sum_set'))}</span><b class="${S.nightSet ? 'bad' : ''}">${S.nightSet}</b></div>
@@ -1029,9 +1154,75 @@ function showResults(){
       <div class="stat"><span>${esc(t('r_combo'))}</span><b>${S.maxCombo}</b></div>
       <div class="stat"><span>${esc(t('r_curses'))}</span><b>${S.totalDispelled}</b></div>
     </div>
+    ${matchHTML()}
+    ${keeper ? `<p class="ending">“${esc(t('ending'))}”</p>` : ''}
     ${mvp ? `<div><div class="eyebrow" style="margin-bottom:8px">${esc(t('r_mvp'))}</div><div class="mvp">${mvp}</div></div>` : ''}
+    <div><div class="eyebrow" style="margin-bottom:8px">${esc(t('share_t'))}</div><div class="share" id="share"><img id="shareImg" alt="" hidden><div class="row">${window.claude ? '' : btn(t('share_save'), 'shareSave', 'sm')}${btn(t('share_share'), 'shareShare', 'sm')}${btn(t('share_copy'), 'shareCopy', 'sm')}</div><div class="caption" id="caption"></div><p class="note" id="shareHint" hidden>${esc(t('share_hint'))}</p></div></div>
     <div class="row end">${btn(t('again'), 'play')}${btn(t('submit'), 'form', 'primary')}</div></div>`);
+  renderShare();
 }
+function lessonsHTML(){
+  const types = Object.keys(S.nightTypes); if (!types.length) return '';
+  return `<div><div class="eyebrow" style="margin-bottom:8px">${esc(t('lesson_t'))}</div><div class="lessons">${types.map(c => { const f = FAIRY_BY[CURSES[c].cure]; return `<div class="lesson" style="--acc:${f.acc}"><svg viewBox="0 0 64 64"><use href="#c-${c}"/></svg><span class="arrow">→</span><span class="txt"><b>${esc(tn('cursek', c))} → ${esc(f.name)}</b><small>${esc(f.prod[lang] || f.prod.en)}</small></span><span class="ic">${fairySVG(f)}</span></div>`; }).join('')}</div></div>`;
+}
+function matchPicks(){
+  const picks = [];
+  const add = (type, why) => { const fid = CURSES[type].cure; if (!picks.some(p => p.fid === fid)) picks.push({fid, type, why}); };
+  S.concerns.forEach(c => add(c, t('match_why_pick', {c:tn('cursek', c)})));
+  Object.entries(S.clearedBy).sort((a, b) => b[1] - a[1]).forEach(([c, n]) => add(c, t('match_why', {n, c:tn('cursek', c)})));
+  if (!picks.length) add('spot', '');
+  return picks.slice(0, 2);
+}
+function matchHTML(){
+  return `<div><div class="eyebrow" style="margin-bottom:8px">${esc(t('match_t'))}</div><p class="note" style="margin:-6px 0 8px">${esc(t('match_s'))}</p><div class="match">${matchPicks().map(p => { const f = FAIRY_BY[p.fid]; return `<a href="${CONFIG.SHOP}${f.slug}" target="_blank" rel="noopener" style="--acc:${f.acc}"><span class="ic">${fairySVG(f)}</span><span style="min-width:0"><b>${esc(f.name)} · ${esc(f.prod[lang] || f.prod.en)}</b><small>${esc(f.blurb[lang] || f.blurb.en)}</small>${p.why ? `<span class="why">♥ ${esc(p.why)}</span>` : ''}</span></a>`; }).join('')}</div></div>`;
+}
+/* ---------------- share card ---------------- */
+function captionText(){ const f = FAIRY_BY[matchPicks()[0].fid]; return t('caption', {n:S.nightsDone, score:S.score.toLocaleString(), f:f.name, p:f.prod[lang] || f.prod.en}); }
+async function renderShare(){
+  const img = $('#shareImg'), cap = $('#caption'); if (!img || !cap) return;
+  cap.textContent = captionText();
+  try { const url = await drawShareCard(FAIRY_BY[matchPicks()[0].fid]); if (!img.isConnected) return; S.shareUrl = url; img.src = url; img.hidden = false; $('#shareHint').hidden = false; } catch {}
+}
+function svgImage(markup){ return new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(markup); }); }
+function defMarkup(id){ const n = document.querySelector('svg defs #' + id); return n ? n.outerHTML : ''; }
+function roundRect(x, l, tp, w, h, r){ x.beginPath(); x.moveTo(l + r, tp); x.arcTo(l + w, tp, l + w, tp + h, r); x.arcTo(l + w, tp + h, l, tp + h, r); x.arcTo(l, tp + h, l, tp, r); x.arcTo(l, tp, l + w, tp, r); x.closePath(); }
+async function drawShareCard(f){
+  const W = 1080, H = 1350, cv = document.createElement('canvas'); cv.width = W; cv.height = H; const x = cv.getContext('2d');
+  try { await document.fonts.ready; } catch {}
+  const g = x.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#1C1740'); g.addColorStop(.6, '#2F2860'); g.addColorStop(1, '#4B3F8C'); x.fillStyle = g; x.fillRect(0, 0, W, H);
+  const rg = x.createRadialGradient(W / 2, H, 0, W / 2, H, 760); rg.addColorStop(0, 'rgba(255,143,163,.4)'); rg.addColorStop(1, 'rgba(255,143,163,0)'); x.fillStyle = rg; x.fillRect(0, 0, W, H);
+  for (let i = 0; i < 90; i++){ x.globalAlpha = rnd(.3, .9); x.fillStyle = '#fff'; x.beginPath(); x.arc(rnd(0, W), rnd(0, H * .7), rnd(1.5, 4), 0, 7); x.fill(); } x.globalAlpha = 1;
+  x.fillStyle = '#FFF6E3'; x.beginPath(); x.arc(W - 150, 170, 64, 0, 7); x.fill();
+  const kikiSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520" width="400" height="520">${defMarkup('gSkin')}${defMarkup('gHair')}${defMarkup('pHearts')}<g>${document.querySelector('svg defs #kiki').innerHTML}</g></svg>`
+    .replace(/var\(--awake,0\)/g, '1').replace(/var\(--glow,1\)/g, '1').replace(/var\(--wince,0\)/g, '0');
+  const kiki = await svgImage(kikiSvg);
+  x.drawImage(kiki, (W - 600) / 2, 96, 600, 780);
+  const fairySvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 80" width="64" height="80">${defMarkup('wings')}${defMarkup('face')}${defMarkup(f.shape)}<use href="#wings"/><use href="#${f.shape}"/><text x="32" y="52.5" text-anchor="middle" font-family="Fredoka, Arial, sans-serif" font-size="${f.label.length > 3 ? 9.5 : 11}" font-weight="600" fill="#fff">${esc(f.label)}</text></svg>`.replace(/var\(--acc\)/g, f.acc);
+  const fi = await svgImage(fairySvg);
+  x.fillStyle = 'rgba(255,246,227,.97)'; roundRect(x, 70, 900, W - 140, 370, 44); x.fill();
+  x.drawImage(fi, 104, 940, 168, 210);
+  const disp = lang === 'ko' ? 'Jua, Fredoka, sans-serif' : 'Fredoka, Jua, sans-serif';
+  x.textBaseline = 'top'; x.fillStyle = '#2B2240'; x.font = `700 58px ${disp}`; x.fillText("Kiki's Secret", 300, 936);
+  x.fillStyle = '#DD5868'; x.font = `600 40px ${disp}`; x.fillText(`${t('night', {n:S.nightsDone})} · ${S.score.toLocaleString()}`, 300, 1010);
+  x.fillStyle = '#2B2240'; x.font = `600 38px ${disp}`; x.fillText(`${lang === 'ko' ? '나의 요정' : 'My fairy'} · ${f.name}`, 300, 1072);
+  x.fillStyle = '#6B6184'; x.font = `600 26px Nunito, "Gowun Dodum", sans-serif`;
+  const prod = f.prod[lang] || f.prod.en, words = prod.split(' '); let line = '', ly = 1130;
+  for (const w of words){ const test = line ? line + ' ' + w : w; if (x.measureText(test).width > 690 && line){ x.fillText(line, 300, ly); ly += 34; line = w; } else line = test; } if (line) x.fillText(line, 300, ly);
+  x.fillStyle = '#FFD6E0'; x.font = `600 30px ${disp}`; x.textAlign = 'center'; x.fillText('#KikisSecret  #SEOUL1988  #KSECRET', W / 2, 1292); x.textAlign = 'left';
+  return cv.toDataURL('image/png');
+}
+async function shareNative(){
+  const text = captionText(), url = location.href.split('#')[0];
+  if (navigator.share){
+    try {
+      let data = {text:`${text} ${url}`};
+      if (S.shareUrl && navigator.canShare){ const blob = await (await fetch(S.shareUrl)).blob(); const file = new File([blob], 'kikis-secret.png', {type:'image/png'}); if (navigator.canShare({files:[file]})) data = {files:[file], text}; }
+      await navigator.share(data); return;
+    } catch {}
+  }
+  copyText(`${text} ${url}`, () => toast(t('share_copied')));
+}
+function copyText(text, done){ if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, () => fallbackCopy(text, done)); else fallbackCopy(text, done); }
 function showForm(){
   const saved = (() => { try { return JSON.parse(store.get('kiki_me') || 'null') || {}; } catch { return {}; } })();
   openScreen(`<div class="card">
@@ -1042,6 +1233,9 @@ function showForm(){
       <div class="field"><label for="fNick">${esc(t('f_nick'))}</label><input id="fNick" name="nickname" maxlength="16" autocomplete="nickname" value="${esc(saved.nickname || '')}" autofocus><div class="err" id="eNick"></div></div>
       <div class="field"><label for="fCountry">${esc(t('f_country'))}</label><select id="fCountry" name="country"><option value="">${esc(t('f_country_ph'))}</option>${COUNTRIES.map(([c, n]) => `<option value="${c}" ${saved.country === c ? 'selected' : ''}>${flag(c)} ${esc(n)}</option>`).join('')}</select><div class="err" id="eCountry"></div></div>
       <div class="field"><label for="fEmail">${esc(t('f_email'))}</label><input id="fEmail" name="email" type="email" inputmode="email" autocomplete="email" value="${esc(saved.email || '')}"><div class="err" id="eEmail"></div></div>
+      <div class="field"><label for="fHandle">${esc(t('f_handle'))}</label><input id="fHandle" name="handle" maxlength="40" autocomplete="off" placeholder="@" value="${esc(saved.handle || '')}"></div>
+      <label class="check"><input type="checkbox" id="fAge" name="age"><span>${esc(t('f_age'))}</span></label>
+      <div class="err" id="eAge"></div>
       <label class="check"><input type="checkbox" id="fConsent" name="consent"><span>${esc(t('f_consent'))}</span></label>
       <div class="err" id="eConsent"></div>
       <div class="row between"><button type="button" class="btn sm" data-act="board">${esc(t('skip'))}</button><button type="submit" class="btn primary" id="btnSubmit">${esc(t('submit'))}</button></div>
@@ -1051,17 +1245,19 @@ function showForm(){
 async function submitForm(e){
   e.preventDefault();
   const nick = $('#fNick').value.trim(), country = $('#fCountry').value, email = $('#fEmail').value.trim(), consent = $('#fConsent').checked;
+  const handle = $('#fHandle').value.trim().replace(/^@+/, '').slice(0, 40), age = $('#fAge').checked;
   let ok = true;
-  $('#eNick').textContent = ''; $('#eCountry').textContent = ''; $('#eEmail').textContent = ''; $('#eConsent').textContent = '';
+  $('#eNick').textContent = ''; $('#eCountry').textContent = ''; $('#eEmail').textContent = ''; $('#eConsent').textContent = ''; $('#eAge').textContent = '';
+  if (email && !age){ $('#eAge').textContent = t('e_age'); ok = false; }
   if (nick.length < 2 || nick.length > 16){ $('#eNick').textContent = t('e_nick'); ok = false; }
   if (!country){ $('#eCountry').textContent = t('e_country'); ok = false; }
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ $('#eEmail').textContent = t('e_email'); ok = false; }
   if (email && !consent){ $('#eConsent').textContent = t('e_consent'); ok = false; }
   if (!ok) return;
   const b = $('#btnSubmit'); b.disabled = true; b.textContent = t('sending');
-  store.set('kiki_me', JSON.stringify({nickname:nick, country, email}));
+  store.set('kiki_me', JSON.stringify({nickname:nick, country, email, handle}));
   const duration = Math.max(1, Math.round((Date.now() - S.startAt) / 1000));
-  const entry = {nickname:nick, country, email, score:S.score, nights:S.nightsDone, maxCombo:S.maxCombo, dispelled:S.totalDispelled, duration, version:CONFIG.VERSION, lang, at:Date.now()};
+  const entry = {nickname:nick, country, email, handle, age14:age, concerns:S.concerns.join(','), match:matchPicks().map(p => p.fid).join(','), score:S.score, nights:S.nightsDone, maxCombo:S.maxCombo, dispelled:S.totalDispelled, duration, version:CONFIG.VERSION, lang, at:Date.now()};
   entry.checksum = checksum(entry);
   const res = await LB.submit(entry);
   S.lastEntry = {...entry, rank:res.rank, remote:res.remote};
@@ -1155,9 +1351,19 @@ el.facebox.addEventListener('click', e => {
 el.powers.addEventListener('click', e => { const b = e.target.closest('.power'); if (b) usePower(b.dataset.id); });
 el.pause.addEventListener('click', () => { if (S.playing && !S.paused) showPause(); });
 el.screens.addEventListener('click', e => {
+  const cb = e.target.closest('[data-concern]');
+  if (cb){
+    const c = cb.dataset.concern;
+    if (S.concerns.includes(c)) S.concerns = S.concerns.filter(x => x !== c); else { if (S.concerns.length >= 2) S.concerns.shift(); S.concerns.push(c); }
+    $$('[data-concern]', el.screens).forEach(k => k.classList.toggle('on', S.concerns.includes(k.dataset.concern))); sfx.tap(); return;
+  }
   const b = e.target.closest('[data-act]'); if (!b) return; const act = b.dataset.act;
   audio();
   if (act === 'play'){ closeScreen(); newGame(); }
+  else if (act === 'concernGo' || act === 'concernSkip'){ if (act === 'concernSkip') S.concerns = []; store.set('kiki_concerns', JSON.stringify(S.concerns)); nextNight(); }
+  else if (act === 'shareSave'){ if (!S.shareUrl) return; const a = document.createElement('a'); a.href = S.shareUrl; a.download = 'kikis-secret.png'; document.body.appendChild(a); a.click(); a.remove(); }
+  else if (act === 'shareShare') shareNative();
+  else if (act === 'shareCopy') copyText(captionText(), () => toast(t('share_copied')));
   else if (act === 'howto') showHowto();
   else if (act === 'codex') showCodex();
   else if (act === 'board') showBoard();

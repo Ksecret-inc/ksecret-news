@@ -4,6 +4,7 @@
  * 설치 방법은 같은 폴더의 README.md 참고.
  * 시트 구조: 'scores' 시트에 아래 열 순서로 쌓입니다.
  *   A at(ISO) | B nickname | C country | D email | E score | F nights | G maxCombo | H dispelled | I duration | J version | K lang | L checksum_ok | M ip_hash
+ *   N handle(SNS) | O concerns(선택한 피부 고민) | P match(추천된 요정 id) | Q age14(만 14세 이상 확인)
  *
  * GET  ?top=50            → Top 50 JSON (이메일은 절대 반환하지 않음, 이메일당 최고 기록 1건)
  * POST (text/plain JSON)  → { ok:true, rank, total }
@@ -38,6 +39,11 @@ function doPost(e) {
     var duration = Math.max(0, Math.floor(Number(body.duration) || 0));
     var version = String(body.version || '').slice(0, 16);
     var lang = String(body.lang || '').slice(0, 5);
+    var handle = String(body.handle || '').replace(/^@+/, '').slice(0, 40);
+    var concerns = String(body.concerns || '').slice(0, 40);
+    var match = String(body.match || '').slice(0, 40);
+    var age14 = body.age14 ? 1 : 0;
+    if (email && !age14) return json_({ ok: false, error: 'age' });
 
     if (nickname.length < 2) return json_({ ok: false, error: 'nickname' });
     if (!country) return json_({ ok: false, error: 'country' });
@@ -49,7 +55,7 @@ function doPost(e) {
     if (!checksumOk || !plausible) return json_({ ok: false, error: 'rejected' });
 
     var sheet = sheet_();
-    sheet.appendRow([new Date().toISOString(), nickname, country, email, score, nights, maxCombo, dispelled, duration, version, lang, checksumOk ? 1 : 0, '']);
+    sheet.appendRow([new Date().toISOString(), nickname, country, email, score, nights, maxCombo, dispelled, duration, version, lang, checksumOk ? 1 : 0, '', handle, concerns, match, age14]);
 
     var all = allRows_();
     var rank = 1;
@@ -68,7 +74,7 @@ function sheet_() {
   var sh = ss.getSheetByName(SHEET_NAME);
   if (!sh) {
     sh = ss.insertSheet(SHEET_NAME);
-    sh.appendRow(['at', 'nickname', 'country', 'email', 'score', 'nights', 'maxCombo', 'dispelled', 'duration', 'version', 'lang', 'checksum_ok', 'ip_hash']);
+    sh.appendRow(['at', 'nickname', 'country', 'email', 'score', 'nights', 'maxCombo', 'dispelled', 'duration', 'version', 'lang', 'checksum_ok', 'ip_hash', 'handle', 'concerns', 'match', 'age14']);
   }
   return sh;
 }
@@ -77,12 +83,12 @@ function allRows_() {
   var sh = sheet_();
   var last = sh.getLastRow();
   if (last < 2) return [];
-  var values = sh.getRange(2, 1, last - 1, 12).getValues();
+  var values = sh.getRange(2, 1, last - 1, 17).getValues();
   var best = {};   // 이메일(또는 닉네임+국가)당 최고 기록 1건만
   var out = [];
   for (var i = 0; i < values.length; i++) {
     var v = values[i];
-    var row = { at: v[0], nickname: v[1], country: v[2], email: v[3], score: Number(v[4]) || 0, nights: Number(v[5]) || 0, maxCombo: Number(v[6]) || 0, duration: Number(v[8]) || 0 };
+    var row = { at: v[0], nickname: v[1], country: v[2], email: v[3], score: Number(v[4]) || 0, nights: Number(v[5]) || 0, maxCombo: Number(v[6]) || 0, duration: Number(v[8]) || 0, handle: v[13] || '', concerns: v[14] || '', match: v[15] || '' };
     var key = row.email ? 'e:' + row.email : 'n:' + String(row.nickname).toLowerCase() + '|' + row.country;
     if (!best[key] || better_(row, best[key])) best[key] = row;
   }
@@ -123,6 +129,6 @@ function exportWinners() {
   var all = allRows_().slice(0, 5);
   var sh = ss.getSheetByName('winners') || ss.insertSheet('winners');
   sh.clear();
-  sh.appendRow(['rank', 'nickname', 'country', 'email', 'score', 'nights', 'at']);
-  all.forEach(function (r, i) { sh.appendRow([i + 1, r.nickname, r.country, r.email || '(no email: not eligible)', r.score, r.nights, r.at]); });
+  sh.appendRow(['rank', 'nickname', 'country', 'email', 'handle', 'concerns', 'match(추천 요정)', 'score', 'nights', 'at']);
+  all.forEach(function (r, i) { sh.appendRow([i + 1, r.nickname, r.country, r.email || '(no email: not eligible)', r.handle, r.concerns, r.match, r.score, r.nights, r.at]); });
 }
