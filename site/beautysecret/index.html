@@ -239,7 +239,7 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 .lb-row .nm em{font-style:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 .lb-row .nm small{flex:none;color:var(--mute);font-weight:400;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase}
 .lb-row .ni{font:500 .78rem/1 var(--display);color:var(--mute);letter-spacing:.06em;font-variant-numeric:tabular-nums}
-.lb-row .sc{font:600 1rem/1 var(--display);font-variant-numeric:tabular-nums}
+.lb-row .lb-sc{font:600 1rem/1 var(--display);font-variant-numeric:tabular-nums}
 .lb-row.me{background:var(--red);color:#fff}
 .lb-row.me .r,.lb-row.me .ni,.lb-row.me .nm small{color:rgba(255,255,255,.85)}
 .lb-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
@@ -1536,7 +1536,7 @@ async function showBoard(){
   const list = $('#lbList'), me = S.lastEntry, rows = data.rows.slice(0, CONFIG.TOP_N);
   list.innerHTML = rows.length ? rows.map((r, i) => {
     const mine = me && ((me.remote && me.rank === i + 1 && r.nickname === me.nickname) || (!me.remote && r.at === me.at));
-    return `<div class="lb-row ${i < CONFIG.PRIZE_RANKS ? 'prize' : ''} ${mine ? 'me' : ''}"><span class="r">${i + 1}</span><span class="flag" title="${esc(countryName(r.country))}">${flag(r.country)}</span><span class="nm"><em>${esc(r.nickname)}</em>${mine ? `<small>${esc(t('lb_you'))}</small>` : ''}</span><span class="ni">N${r.nights}</span><span class="sc">${(+r.score).toLocaleString()}</span></div>`;
+    return `<div class="lb-row ${i < CONFIG.PRIZE_RANKS ? 'prize' : ''} ${mine ? 'me' : ''}"><span class="r">${i + 1}</span><span class="flag" title="${esc(countryName(r.country))}">${flag(r.country)}</span><span class="nm"><em>${esc(r.nickname)}</em>${mine ? `<small>${esc(t('lb_you'))}</small>` : ''}</span><span class="ni">N${r.nights}</span><span class="lb-sc">${(+r.score).toLocaleString()}</span></div>`;
   }).join('') : `<p class="note">${esc(data.error ? t('lb_err') : t('lb_empty'))}</p>`;
   $('#lbNote').textContent = data.remote ? '' : t('lb_local');
   if (me && me.rank){
