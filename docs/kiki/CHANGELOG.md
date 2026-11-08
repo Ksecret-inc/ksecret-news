@@ -56,4 +56,6 @@
 
 - 배포 주소: 게임 폴더를 `site/beautysecret/` 로 옮겨 `https://ksecret-inc.github.io/ksecret-news/beautysecret/` 에서 열리도록 함
 
+- 링크 꾸미기: "비밀"을 상징하는 하트 자물쇠 파비콘(SVG + 32px PNG + 홈 화면용 180px), 링크 미리보기(오픈그래프·트위터 카드) "KIKI의 비밀을 지켜줘! · Keep Kiki's SECRET" 1200×630 이미지(`site/beautysecret/og-image.jpg`), 탭 제목 변경
+
 ## 7차 이후 (예정) — 런칭 QA/다국어
