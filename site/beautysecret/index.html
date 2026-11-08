@@ -888,34 +888,34 @@ const CURSES = {
 };
 const ALL_CURSES = Object.keys(CURSES);
 const FAIRIES = [
-  {id:'nia',img:'products/nia.webp',name:'Nia',acc:'#F2C14E',shape:'b-jar',label:'5%',power:1,cd:0.5,vs:['spot','freckle','dull'],unlock:1,slug:'seoul-1988-capsule-cream-niacinamide-5-yuja',
+  {id:'nia',img:'products/nia.webp',name:'Nia',acc:'#F2C14E',shape:'b-jar',label:'5%',power:1,cd:0,vs:['spot','freckle','dull'],unlock:1,slug:'seoul-1988-capsule-cream-niacinamide-5-yuja',
    prod:{en:'SEOUL 1988 Capsule Cream : Niacinamide 5% + Yuja',ko:'서울 1988 나이아신 유자 캡슐 크림'},
    blurb:{en:'Brightening capsule cream with niacinamide 5% and yuja. Evens tone, lifts dullness.',ko:'나이아신아마이드 5% + 유자 캡슐 크림. 톤을 고르게, 칙칙함을 환하게.'},persona:{en:'Morning person. Hums citrus songs while she works.',ko:'아침형 요정. 일하면서 유자 노래를 흥얼거려요.'},note:{en:'Dark spots don\'t vanish overnight. Nia says: every night, a little.',ko:'기미는 하룻밤에 사라지지 않아. Nia가 그랬어. 매일 밤, 조금씩.'}},
-  {id:'cica',img:'products/cica.webp',name:'Cica',acc:'#6DAA6B',shape:'b-jar',label:'20%',power:1,cd:0.5,vs:['acne'],unlock:1,slug:'seoul-1988-repair-cream-niacica-20-mugwort',
+  {id:'cica',img:'products/cica.webp',name:'Cica',acc:'#6DAA6B',shape:'b-jar',label:'20%',power:1,cd:0,vs:['acne'],unlock:1,slug:'seoul-1988-repair-cream-niacica-20-mugwort',
    prod:{en:'SEOUL 1988 Repair Cream : Niacica 20% + Mugwort',ko:'서울 1988 나이아시카 쑥 리페어 크림'},
    blurb:{en:'Niacinamide 5% + cica 15% with mugwort. Calms redness and blemish-prone skin.',ko:'나이아신아마이드 5% + 시카 15% + 쑥. 트러블과 붉은기를 진정.'},persona:{en:'Calm and steady. Smells like a mugwort field after rain.',ko:'차분하고 든든해요. 비 온 뒤 쑥밭 냄새가 나요.'},note:{en:'When my skin flares up, Cica tells me to stop poking at it.',ko:'피부가 뒤집히면 Cica가 그만 만지라고 해.'}},
-  {id:'retinal',img:'products/retinal.webp',name:'Retina',acc:'#B3485A',shape:'b-dropper',label:'2%',power:2,cd:1.2,vs:['wrinkle'],unlock:2,slug:'seoul-1988-serum-retinal-liposome-2-black-ginseng',
+  {id:'retinal',img:'products/retinal.webp',name:'Retina',acc:'#B3485A',shape:'b-dropper',label:'2%',power:2,cd:0,vs:['wrinkle'],unlock:2,slug:'seoul-1988-serum-retinal-liposome-2-black-ginseng',
    prod:{en:'SEOUL 1988 Serum : Retinal Liposome 2% + Black Ginseng',ko:'서울 1988 레틴알 흑삼 세럼'},
    blurb:{en:'Retinal liposome 2% with 58% black ginseng. Fine lines, pores and texture.',ko:'레틴알 리포좀 2% + 흑삼 58%. 주름·모공·결 케어.'},persona:{en:'The eldest. Speaks softly, works hard, needs the lights off.',ko:'맏언니. 조용히 말하고 열심히 일하고, 불은 꺼야 해요.'},note:{en:'Retina only comes at night. Something about the sun.',ko:'Retina는 밤에만 와. 햇빛 때문이래.'}},
-  {id:'eyecream',img:'products/eyecream.webp',name:'Bean',acc:'#C9A7F0',shape:'b-tube',label:'4%',power:1,cd:0.5,vs:['eye_dark','eye_line'],eyeSafe:true,unlock:3,slug:'seoul-1988-eye-cream-retinal-liposome-4-fermented-bean',
+  {id:'eyecream',img:'products/eyecream.webp',name:'Bean',acc:'#C9A7F0',shape:'b-tube',label:'4%',power:1,cd:0,vs:['eye_dark','eye_line'],eyeSafe:true,unlock:3,slug:'seoul-1988-eye-cream-retinal-liposome-4-fermented-bean',
    prod:{en:'SEOUL 1988 Eye Cream : Retinal Liposome 4% + Fermented Bean',ko:'서울 1988 레틴알 발효콩 아이크림'},
    blurb:{en:'Retinal liposome 4% with fermented bean, made for the delicate eye area.',ko:'레틴알 리포좀 4% + 발효콩. 예민한 눈가를 위한 전용 크림.'},persona:{en:'Tiny and careful. The only one allowed near my eyes.',ko:'작고 조심스러워요. 내 눈가에 닿을 수 있는 유일한 요정.'},note:{en:'Everyone says the eyes show when you\'re tired. Bean disagrees.',ko:'눈가는 피곤함이 다 드러난대. Bean은 아니라고 해.'}},
-  {id:'snail',img:'products/snail.webp',name:'Snail',acc:'#8FC7D6',shape:'b-pump',label:'97%',power:1,cd:0.5,vs:['dry'],unlock:4,slug:'seoul-1988-essence-snail-mucin-97-rice',
+  {id:'snail',img:'products/snail.webp',name:'Snail',acc:'#8FC7D6',shape:'b-pump',label:'97%',power:1,cd:0,vs:['dry'],unlock:4,slug:'seoul-1988-essence-snail-mucin-97-rice',
    prod:{en:'SEOUL 1988 Essence : Snail Mucin 97% + Rice',ko:'서울 1988 달팽이 쌀 에센스'},
    blurb:{en:'97% snail mucin essence with rice. Deep hydration and soothing.',ko:'달팽이 점액 97% + 쌀. 깊은 보습과 진정.'},persona:{en:'Slow talker, quick healer. Brings rain when I\'m thirsty.',ko:'느리게 말하고 빨리 고쳐요. 목마를 때 비를 데려와요.'},note:{en:'Dry days make me cranky. Snail makes me forget why.',ko:'건조한 날은 예민해져. Snail은 그 이유를 잊게 해줘.'}},
-  {id:'foam',img:'products/foam.webp',name:'Pine',acc:'#4FA3A1',shape:'b-pump',label:'1%',power:1,cd:0.5,vs:['pore'],unlock:5,slug:'seoul-1988-cleansing-foam-pine-cica-1-probiotics',
+  {id:'foam',img:'products/foam.webp',name:'Pine',acc:'#4FA3A1',shape:'b-pump',label:'1%',power:1,cd:0,vs:['pore'],unlock:5,slug:'seoul-1988-cleansing-foam-pine-cica-1-probiotics',
    prod:{en:'SEOUL 1988 Cleansing Foam : Pine Cica 1% + Probiotics',ko:'서울 1988 파인시카 클렌징 폼'},
    blurb:{en:'Low-pH foam with pine cica and probiotics. Clears pores and sebum gently.',ko:'파인시카 + 프로바이오틱스 저자극 폼. 모공과 피지를 부드럽게.'},persona:{en:'Fresh as a pine forest. Hates leftover pizza grease.',ko:'소나무 숲처럼 상쾌해요. 남은 피자 기름을 싫어해요.'},note:{en:'Pine says a clean face sleeps better. She\'s right.',ko:'Pine이 그러는데 깨끗한 얼굴이 잠을 더 잘 잔대. 맞는 말이야.'}},
-  {id:'glow',img:'products/glow.webp',name:'Yuja',acc:'#FFB03B',shape:'b-dropper',label:'15%',power:2,cd:1.2,vs:['spot','dull','freckle'],unlock:6,slug:'seoul-1988-glow-serum-niacinamide-15-yuja',
+  {id:'glow',img:'products/glow.webp',name:'Yuja',acc:'#FFB03B',shape:'b-dropper',label:'15%',power:2,cd:0,vs:['spot','dull','freckle'],unlock:6,slug:'seoul-1988-glow-serum-niacinamide-15-yuja',
    prod:{en:'SEOUL 1988 Glow Serum : Niacinamide 15% + Yuja',ko:'서울 1988 나이아신 15% 유자 글로우 세럼'},
    blurb:{en:'Niacinamide 15% glow serum with glutathione and yuja. Dark spots, dullness, uneven tone.',ko:'나이아신아마이드 15% + 글루타치온 + 유자. 기미·칙칙함·톤 케어.'},persona:{en:'Loud, sunny, a little dramatic. Turns the lights back on.',ko:'시끄럽고 햇살 같고 조금 드라마틱해요. 꺼진 빛을 다시 켜요.'},note:{en:'On grey days, Yuja is the one I call first.',ko:'흐린 날엔 Yuja를 제일 먼저 불러.'}},
-  {id:'ashot',img:'products/ashot.webp',name:'Shot 12',acc:'#8E86C9',shape:'b-ampoule',label:'12%',power:3,cd:0.15,shots:3,vs:['wrinkle'],unlock:6,slug:'seoul-1988-advanced-shot-retinal-liposome-12-black-rice',
+  {id:'ashot',img:'products/ashot.webp',name:'Shot 12',acc:'#8E86C9',shape:'b-ampoule',label:'12%',power:3,cd:0,shots:3,vs:['wrinkle'],unlock:6,slug:'seoul-1988-advanced-shot-retinal-liposome-12-black-rice',
    prod:{en:'SEOUL 1988 Advanced Shot : Retinal Liposome 12% + Black Rice',ko:'서울 1988 레틴알 12% 흑미 어드밴스드 샷'},
    blurb:{en:'The strongest step of the retinal line: liposome 12% with black rice. For advanced users.',ko:'레틴알 라인의 가장 강한 단계. 리포좀 12% + 흑미. 숙련자용.'},persona:{en:'Rare and serious. Three visits a night, no more.',ko:'드물고 진지해요. 하룻밤에 딱 세 번.'},note:{en:'Shot 12 only shows up for the big ones.',ko:'Shot 12는 큰 저주에만 나타나.'}},
-  {id:'txa',img:'products/txa.webp',name:'TXA',acc:'#E88C9A',shape:'b-ampoule',label:'TXA',power:3,cd:0.15,shots:3,vs:['spot','freckle'],unlock:7,slug:'seoul-1988-txa-shot',
+  {id:'txa',img:'products/txa.webp',name:'TXA',acc:'#E88C9A',shape:'b-ampoule',label:'TXA',power:3,cd:0,shots:3,vs:['spot','freckle'],unlock:7,slug:'seoul-1988-txa-shot',
    prod:{en:'SEOUL 1988 TXA Shot : TXA + Niacinamide + Rice',ko:'서울 1988 TXA 샷'},
    blurb:{en:'Tranexamic acid with niacinamide and rice, aimed at stubborn dark spots.',ko:'트라넥삼산 + 나이아신아마이드 + 쌀. 고집스러운 기미와 잡티.'},persona:{en:'A specialist with a tiny bag and a steady hand.',ko:'작은 가방을 든 전문가. 손이 떨리지 않아요.'},note:{en:'The spot that wouldn\'t leave? TXA.',ko:'안 지워지던 그 점? TXA.'}},
-  {id:'eyepatch',img:'products/eyepatch.webp',name:'Patch',acc:'#E0A33B',shape:'b-patch',label:'NAD',power:2,cd:1.2,vs:['eye_dark','eye_line'],eyeSafe:true,unlock:7,slug:'seoul-1988-retinal-glow-eye-patch-reti-nad-turmeric',
+  {id:'eyepatch',img:'products/eyepatch.webp',name:'Patch',acc:'#E0A33B',shape:'b-patch',label:'NAD',power:2,cd:0,vs:['eye_dark','eye_line'],eyeSafe:true,unlock:7,slug:'seoul-1988-retinal-glow-eye-patch-reti-nad-turmeric',
    prod:{en:'SEOUL 1988 Retinal Glow Eye Patch : Reti-NAD + Turmeric',ko:'서울 1988 레틴알 글로우 아이패치'},
    blurb:{en:'Reti-NAD eye patch with turmeric. A glow boost for tired eyes.',ko:'레티-NAD + 강황 아이패치. 피곤한 눈가에 글로우.'},persona:{en:'Warm and golden. Likes to sit still for twenty minutes.',ko:'따뜻하고 황금빛. 20분 동안 가만히 앉아 있길 좋아해요.'},note:{en:'Patch is for the nights I cried a little. Don\'t tell anyone.',ko:'Patch는 조금 운 밤을 위한 거야. 아무한테도 말하지 마.'}}
 ];
@@ -1085,7 +1085,7 @@ function updateCooldowns(now){
     c.classList.toggle('stunned', stunned);
     c.classList.toggle('cooling', cooling || stunned);
     if (stunned) c.style.setProperty('--p', ((rt.stunUntil - now) / 3).toFixed(3));
-    else if (cooling) c.style.setProperty('--p', ((rt.cdUntil - now) / Math.max(f.cd, .1)).toFixed(3));
+    else if (cooling) c.style.setProperty('--p', ((rt.cdUntil - now) / Math.max(f.cd, .5)).toFixed(3));
   }
 }
 function selectFairy(id){
@@ -1186,7 +1186,7 @@ function apply(fid, c){
     wince(); sfx.trap(); popAt(c, t('t_trap'), 'bad'); toast(t('t_trap'), true); shake(fid); updateHUD(); return;
   }
   if (!F.vs.includes(c.type)){
-    S.score = Math.max(0, S.score - 20); S.combo = 0; rt.cdUntil = now + 1.5;
+    S.score = Math.max(0, S.score - 20); S.combo = 0; rt.cdUntil = now + .5;
     sfx.bad(); popAt(c, t('t_miss'), 'bad'); shake(fid); updateHUD(); return;
   }
   if (F.shots){ rt.charges--; const card = cardOf(fid); if (card) $$('.charges i', card).forEach((i, k) => i.classList.toggle('used', k >= rt.charges)); }
