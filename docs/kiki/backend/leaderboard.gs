@@ -60,7 +60,8 @@ function doPost(e) {
     var all = allRows_();
     var rank = 1;
     for (var i = 0; i < all.length; i++) {
-      if (better_(all[i], { score: score, nights: nights, duration: duration })) rank++;
+      var self = all[i].nickname === nickname && all[i].country === country && all[i].score === score && all[i].nights === nights && all[i].duration === duration;
+      if (!self && better_(all[i], { score: score, nights: nights, duration: duration, at: '~' })) rank++;
     }
     return json_({ ok: true, rank: rank, total: all.length });
   } finally {
