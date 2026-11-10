@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>KIKI의 비밀을 지켜줘! · Kiki's SECRET</title>
+<title>Kiki's SECRET · Defense (preview)</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Kiki, the queen of Westgate High, has a secret behind her glass skin. Every night curses creep in, and fairies from Seoul fly in to guard her. Keep Kiki's SECRET for seven nights.">
 <meta property="og:title" content="KIKI의 비밀을 지켜줘! · Keep Kiki's SECRET">
@@ -428,81 +428,103 @@ span.pimg>svg.face{position:absolute;left:calc(var(--fx) * 1%);top:calc(var(--fy
   .star,.zzz,.curse.s3::before,.wand::before,.facebox.shield::after,.pimg .wg{animation:none}
   .curse,.fairy,.combo{transition:none}
 }
-/* ---------- defense board: lanes, cells, fairy towers, marching curses ---------- */
-.stage{display:block}
-.board{position:absolute;left:50%;top:0;bottom:0;transform:translateX(-50%);width:var(--bw,100%);display:flex;flex-direction:column}
-.lanes{position:relative;flex:1;min-height:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding-top:var(--band,44px)}
-.lane{position:relative;display:grid;grid-template-rows:repeat(4,minmax(0,1fr));min-height:0}
-.lane::before{content:"";position:absolute;left:2px;right:2px;top:calc(var(--band,44px) * -1);bottom:0;border-radius:14px 14px 0 0;background:linear-gradient(180deg,rgba(246,242,231,0),rgba(246,242,231,.06));pointer-events:none}
-.lane.eye::before{background:linear-gradient(180deg,rgba(201,167,240,0),rgba(201,167,240,.2))}
-.lane.closed{opacity:.3}
-.lane .ltag{position:absolute;top:calc(var(--band,44px) * -1 + 5px);left:50%;transform:translateX(-50%);font:600 .55rem/1 var(--display);letter-spacing:.08em;padding:.25em .45em;border-radius:5px;background:var(--eye);color:#2B1B45;pointer-events:none;z-index:1}
-.cell{position:relative;border:0;background:none;padding:0;margin:3px;border-radius:14px;cursor:pointer;-webkit-tap-highlight-color:transparent;display:grid;place-items:center;min-height:0;min-width:0;touch-action:manipulation}
-.cell::before{content:"";position:absolute;inset:0;border-radius:14px;border:1.5px dashed rgba(246,242,231,.16);transition:border-color .15s,background .15s}
-.lanes.placing .cell.ok:not(.has)::before{border-color:var(--acc,var(--glow));background:color-mix(in srgb,var(--acc,var(--glow)) 18%,transparent);animation:cellPulse 1.1s ease-in-out infinite}
-.cell.target::before{border-style:solid;border-color:var(--glow)}
-.cell.has::before{border-style:solid;border-color:rgba(246,242,231,.2);background:rgba(20,18,36,.38)}
-.cell:focus-visible{outline:2px solid var(--glow);outline-offset:1px}
-.cell .tw{position:relative;width:min(88%,calc(var(--rh,60px) - 12px));aspect-ratio:1;display:block;pointer-events:none;transition:transform .12s}
-.cell .tw.fire{transform:scale(1.14)}
-.cell .tw.in{animation:newcard .35s var(--ease)}
-.cell .sell{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;font:600 .7rem/1 var(--display);white-space:nowrap;padding:.55em .75em;border-radius:999px;background:var(--cream);color:#2B2410;box-shadow:0 6px 16px -6px rgba(0,0,0,.6);pointer-events:none}
-.coach{position:absolute;left:50%;top:6px;transform:translateX(-50%);z-index:5;width:max-content;max-width:calc(100% - 20px);font:600 .84rem/1.3 var(--display);text-align:center;padding:.55em .9em;border-radius:14px;background:var(--moon);color:#2B2240;box-shadow:0 10px 24px -10px rgba(0,0,0,.6);pointer-events:none}
-.coach[hidden]{display:none}
 
-.mob{position:absolute;left:0;top:0;width:var(--mw,44px);height:var(--mw,44px);margin:calc(var(--mw,44px) / -2) 0 0 calc(var(--mw,44px) / -2);pointer-events:none;z-index:2;will-change:transform}
-.mob .in{position:absolute;inset:0;display:block;filter:drop-shadow(0 5px 8px rgba(0,0,0,.4))}
-.mob svg{width:100%;height:100%;display:block;overflow:visible}
-.mob .hp{position:absolute;left:10%;right:10%;bottom:-7px;height:4px;border-radius:2px;background:rgba(20,18,36,.65);overflow:hidden}
-.mob .hp i{display:block;height:100%;width:var(--hp,100%);background:var(--bad);transition:width .12s}
-.mob[data-stage="3"] .in::before{content:"";position:absolute;inset:-8%;border-radius:50%;border:2px solid var(--bad);animation:ring 1s ease-in-out infinite}
-.mob.spawn .in{animation:mobIn .35s var(--ease)}
-.mob.hit .in{animation:mobHit .22s}
-.mob.gone .in{animation:mobGone .35s forwards}
-.mob.leak .in{animation:mobLeak .5s forwards}
-.mob.slow .in{filter:drop-shadow(0 0 6px #8FC7D6) drop-shadow(0 5px 8px rgba(0,0,0,.4)) saturate(.65)}
-.mob.frozen .in{filter:brightness(1.25) saturate(.3) drop-shadow(0 0 8px rgba(246,242,231,.7))}
-.shot{position:absolute;left:0;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--acc);box-shadow:0 0 8px var(--acc);pointer-events:none;z-index:3;transition:transform .14s linear}
-.fx{position:absolute;pointer-events:none;z-index:3}
-.fx.burst{width:var(--rw,60px);height:var(--rh2,60px);margin:calc(var(--rh2,60px) / -2) 0 0 calc(var(--rw,60px) / -2);border-radius:50%;border:2px solid var(--acc);background:color-mix(in srgb,var(--acc) 24%,transparent);animation:fxBurst .42s var(--ease) forwards}
-.fx.beam{top:0;bottom:0;width:8px;margin-left:-4px;border-radius:4px;background:linear-gradient(180deg,transparent,var(--acc) 30%,var(--acc) 70%,transparent);box-shadow:0 0 14px var(--acc);animation:fxBeam .36s ease-out forwards}
-
-.facebox{position:relative;flex:none;height:var(--kh,120px);--glow:1;--wince:0}
-.facebox::before{content:"";position:absolute;left:50%;bottom:-18%;width:min(92%,440px);height:86%;transform:translateX(-50%);border-radius:50% 50% 0 0;background:radial-gradient(80% 100% at 50% 100%,rgba(255,246,227,.2),rgba(255,246,227,0) 70%);pointer-events:none}
-.kikibox{position:absolute;left:50%;top:3%;height:97%;aspect-ratio:360/446;transform:translateX(-50%)}
-.kikibox svg.kiki{width:100%;height:100%;display:block;filter:saturate(calc(.5 + .5*var(--glow))) drop-shadow(0 8px 16px rgba(0,0,0,.4))}
-.facebox.shield .kikibox::after{content:"";position:absolute;inset:8% 6% 2%;border-radius:50% 50% 46% 46%;background:radial-gradient(circle at 50% 30%,rgba(198,64,70,.08),rgba(246,242,231,.25));box-shadow:0 0 0 3px rgba(246,242,231,.6),0 0 30px rgba(246,242,231,.35);pointer-events:none;animation:shieldPulse 1.2s ease-in-out infinite}
-.marks{position:absolute;inset:0;pointer-events:none}
-.mark{position:absolute;width:15%;aspect-ratio:1;transform:translate(-50%,-50%);opacity:.92;animation:markIn .4s var(--ease);filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
-.mark svg{width:100%;height:100%;display:block;overflow:visible}
-.zzz{left:82%;top:0;font-size:.9rem}
-.wallet{position:absolute;left:8px;bottom:10px;z-index:5;display:flex;align-items:center;gap:.35em;font:600 1.2rem/1 var(--display);font-variant-numeric:tabular-nums;color:var(--butter);background:rgba(20,18,36,.6);border:1.5px solid rgba(246,242,231,.18);padding:.42em .75em .42em .6em;border-radius:999px}
-.wallet span{font-size:.9em;color:var(--glow)}
-.powers{flex-direction:row;right:8px;bottom:8px;gap:6px}
-.power{width:50px}
-.power .ring{width:44px;height:44px}
-.power .ring .pimg{width:38px;height:38px}
-.power .plabel{font-size:.58rem}
-.stage .moon{opacity:.5}
-.whisper{bottom:auto;top:6px;width:min(440px,calc(100% - 24px))}
-.whisper::after{display:none}
-.fairy .icon{width:46px;height:46px}
-.fairy .cost{font:600 .72rem/1 var(--display);color:var(--butter);letter-spacing:.02em;pointer-events:none;font-variant-numeric:tabular-nums}
-.fairy.poor .icon,.fairy.poor .name{opacity:.45}
-.fairy.poor .cost{color:var(--bad)}
-.fairy.skill{border-style:dashed}
-.fairy.hint{border-color:var(--acc);box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 35%,transparent)}
-@keyframes cellPulse{0%,100%{opacity:.75}50%{opacity:1}}
-@keyframes mobIn{from{transform:scale(0)}to{transform:scale(1)}}
-@keyframes mobHit{0%{transform:scale(1)}40%{transform:scale(.82) rotate(-8deg)}100%{transform:scale(1)}}
-@keyframes mobGone{to{transform:scale(0) rotate(30deg);opacity:0}}
-@keyframes mobLeak{50%{filter:brightness(1.6) saturate(.3)}100%{transform:translateY(26px) scale(.4);opacity:0}}
-@keyframes fxBurst{from{transform:scale(.3);opacity:.9}to{transform:scale(1);opacity:0}}
-@keyframes fxBeam{from{opacity:1;transform:scaleX(1.6)}to{opacity:0;transform:scaleX(.4)}}
-@keyframes markIn{from{transform:translate(-50%,-50%) scale(2.2);opacity:0}to{transform:translate(-50%,-50%) scale(1);opacity:.92}}
-@media (prefers-reduced-motion:reduce){.lanes.placing .cell.ok:not(.has)::before,.mob[data-stage="3"] .in::before{animation:none}}
-
+/* ---------- v9 defense: curses pour down, a few fairies hold the dome, level-up cards ---------- */
+.stage{align-items:stretch}
+.deck{display:none}
+.board{position:relative;cursor:pointer;width:var(--bw,100%);height:100%;margin-inline:auto;overflow:hidden;touch-action:manipulation;--us:60px;--kh:130px}
+.fx{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
+.base{position:absolute;left:0;right:0;bottom:0;height:var(--kh);z-index:1;pointer-events:none}
+.base .facebox{position:absolute;left:50%;bottom:0;height:var(--kh);width:calc(var(--kh)*.807);transform:translateX(-50%)}
+.base .facebox>svg.kiki{filter:saturate(calc(.5 + .5*var(--glow))) drop-shadow(0 10px 24px rgba(0,0,0,.45))}
 .facebox.shield::after{content:none}
+.base .zzz{display:none}
+.marks{position:absolute;inset:0;pointer-events:none}
+.marks svg{position:absolute;width:15%;aspect-ratio:1;transform:translate(-50%,-50%);opacity:.85;animation:markIn .45s var(--ease)}
+.units{position:absolute;inset:0;z-index:4;pointer-events:none}
+.unit{position:absolute;left:0;top:0;width:var(--us);height:var(--us);padding:0;border:0;background:none;color:inherit;cursor:pointer;pointer-events:auto;transform:translate(-50%,-50%);animation:bob 2.6s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
+.unit .pimg{pointer-events:none}
+.unit .lv{position:absolute;right:-1px;bottom:-1px;min-width:1.7em;padding:.22em .4em;border-radius:999px;background:var(--acc);color:#2B2240;font:700 .62rem/1 var(--display);text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.45);pointer-events:none}
+.unit.join{animation:unitIn .7s var(--ease),bob 2.6s ease-in-out .7s infinite}
+.unit.up .lv{animation:lvPop .5s var(--ease)}
+.slot{position:absolute;width:calc(var(--us)*.42);height:calc(var(--us)*.42);border-radius:50%;border:1.5px dashed rgba(255,246,227,.26);transform:translate(-50%,-50%)}
+.xp{position:absolute;left:10px;right:10px;top:8px;z-index:5;display:flex;align-items:center;gap:8px;pointer-events:none}
+.xp b{font:700 .8rem/1 var(--display);color:var(--butter);min-width:2.8em;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.xpbar{flex:1;height:7px;border-radius:4px;background:rgba(20,18,36,.55);overflow:hidden;border:1px solid rgba(255,246,227,.16)}
+.xpbar i{display:block;height:100%;width:100%;transform-origin:0 50%;transform:scaleX(var(--xp,0));background:linear-gradient(90deg,var(--mint),var(--lav));transition:transform .25s var(--ease)}
+.bosshp{position:absolute;left:10px;right:10px;top:26px;z-index:5;display:grid;gap:3px;pointer-events:none}
+.bosshp span{font:700 .72rem/1 var(--display);color:var(--heart);text-align:center;letter-spacing:.04em;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.bosshp .bar{height:9px;border-radius:5px;background:rgba(20,18,36,.6);border:1px solid rgba(255,143,163,.5);overflow:hidden}
+.bosshp .bar i{display:block;height:100%;transform-origin:0 50%;transform:scaleX(var(--hp,1));background:linear-gradient(90deg,var(--red-deep),var(--heart))}
+.whisper{bottom:auto;top:44px;width:min(440px,calc(100% - 24px))}
+.whisper::after{display:none}
+.coach{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);z-index:6;background:rgba(20,18,36,.8);border:1px solid var(--line-2);color:var(--fg);padding:.6rem 1rem;border-radius:999px;font:600 .86rem/1.3 var(--display);pointer-events:none;text-align:center;max-width:88%;animation:whisperIn .35s var(--ease)}
+button.combo{border:0;cursor:pointer;font-family:var(--display)}
+button.combo.fast{background:var(--butter);color:#2B2410}
+/* level-up cards */
+.screen.pick{background:rgba(20,18,36,.74);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+.pickwrap{width:min(780px,100%);margin:auto;display:grid;gap:12px;min-width:0}
+.pickhead{text-align:center;display:grid;gap:6px;justify-items:center}
+.pickhead .eyebrow{justify-content:center}
+.pickhead .h-display{font-size:clamp(1.35rem,5vw,2rem)}
+.pickhead p{margin:0;color:var(--mute);font-size:.9rem;line-height:1.4}
+.pickhead .quote{font-size:1.08rem;line-height:1.3;padding:.55em .9em}
+.toast-wrap{top:auto;bottom:40%}
+.mvp .cnt{white-space:nowrap;flex:none}
+.newc{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;align-items:center;font:600 .78rem/1 var(--display);color:var(--pink)}
+.newc span{display:inline-flex;align-items:center;gap:4px;padding:3px 9px 3px 4px;border-radius:999px;background:var(--night-3);border:1px solid var(--line);color:var(--fg)}
+.newc svg{width:22px;height:22px}
+.teamrow{display:flex;justify-content:center;gap:6px}
+.teamrow .tm{position:relative;width:42px;height:42px;border-radius:13px;background:var(--night-2);border:1.5px solid var(--line);display:grid;place-items:center}
+.teamrow .tm.empty{border-style:dashed;opacity:.45}
+.teamrow .tm .pimg{width:36px;height:36px}
+.teamrow .tm i{position:absolute;right:-5px;bottom:-5px;min-width:1.6em;padding:.2em .35em;border-radius:999px;background:var(--acc);color:#2B2240;font:700 .58rem/1 var(--display);font-style:normal;text-align:center}
+.cards{display:grid;gap:10px;grid-template-columns:1fr;perspective:900px}
+.pcard{position:relative;display:grid;grid-template-columns:70px 1fr;gap:3px 12px;align-items:center;text-align:left;padding:12px 14px;border-radius:20px;background:linear-gradient(160deg,var(--night-3),var(--night-2));border:2px solid color-mix(in srgb,var(--acc) 60%,transparent);color:var(--fg);cursor:pointer;min-width:0;animation:flipIn .5s var(--ease) backwards;animation-delay:calc(var(--i)*.13s);box-shadow:0 14px 30px -18px var(--acc);transition:transform .15s,border-color .15s;-webkit-tap-highlight-color:transparent}
+.pcard .ic{grid-row:1 / span 4;width:70px;height:70px;pointer-events:none}
+.pcard .ic svg.kc{width:100%;height:100%}
+.pcard .tagrow{display:flex;gap:5px;flex-wrap:wrap;align-items:center;padding-right:1.2em}
+.pcard .tg{font:700 .62rem/1 var(--display);letter-spacing:.05em;padding:.32em .6em;border-radius:999px;background:var(--acc);color:#2B2240}
+.pcard .tg.rec{background:var(--heart);color:#fff}
+.pcard h3{font:600 1rem/1.2 var(--display)}
+.pcard h3 small{display:block;font:600 .76rem/1.25 var(--display);color:var(--mute)}
+.pcard p{margin:0;font-size:.8rem;line-height:1.35;color:var(--mute)}
+.pcard .vsrow{display:flex;flex-wrap:wrap;align-items:center;gap:3px;font:700 .72rem/1 var(--display);color:var(--butter)}
+.pcard .vsrow svg{width:22px;height:22px}
+.pcard .pips{display:flex;gap:3px;align-items:center}
+.pcard .pips i{width:7px;height:7px;border-radius:50%;background:var(--line-2)}
+.pcard .pips i.on{background:var(--acc)}
+.pcard .key{position:absolute;top:9px;right:11px;font:600 .64rem/1 var(--display);color:var(--mute)}
+.pcard:hover,.pcard:focus-visible{transform:translateY(-3px);border-color:var(--acc)}
+.cards.locked .pcard{pointer-events:none}
+@media (max-width:639px){
+  .pickwrap{gap:9px}
+  .pickhead{gap:5px}
+  .pcard{padding:9px 12px;grid-template-columns:58px 1fr}
+  .pcard .ic{width:58px;height:58px}
+  .pcard p{font-size:.78rem}
+}
+@media (min-width:640px){
+  .cards{grid-template-columns:repeat(3,1fr)}
+  .pcard{grid-template-columns:1fr;justify-items:center;text-align:center;padding:18px 14px 16px;align-content:start;gap:6px}
+  .pcard .ic{grid-row:auto;width:104px;height:104px}
+  .pcard .tagrow,.pcard .vsrow,.pcard .pips{justify-content:center;padding-right:0}
+}
+.team{display:grid;gap:8px}
+.team .tu{display:grid;grid-template-columns:46px 1fr;gap:10px;align-items:center;padding:8px 10px;border-radius:14px;background:var(--night-3);border:1px solid var(--line);min-width:0}
+.team .tu .ic{width:46px;height:46px}
+.team .tu b{font:600 .92rem/1.2 var(--display)}
+.team .tu small{display:block;color:var(--mute);font-size:.76rem;line-height:1.4}
+.howcards{display:flex;gap:5px;align-items:center}
+.howcards span{width:38px;height:50px;border-radius:9px;background:var(--night-2);border:1.5px solid var(--line-2);display:grid;place-items:center}
+.howcards span.on{border-color:var(--heart);transform:translateY(-4px)}
+.howcards .pimg{width:32px;height:32px}
+@keyframes bob{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,calc(-50% - 5px))}}
+@keyframes unitIn{0%{transform:translate(-50%,-190%) scale(.3);opacity:0}70%{transform:translate(-50%,-44%) scale(1.12);opacity:1}100%{transform:translate(-50%,-50%) scale(1)}}
+@keyframes lvPop{0%{transform:scale(1)}40%{transform:scale(1.7)}100%{transform:scale(1)}}
+@keyframes markIn{from{opacity:0;transform:translate(-50%,-50%) scale(2.2)}to{opacity:.85;transform:translate(-50%,-50%) scale(1)}}
+@keyframes flipIn{0%{opacity:0;transform:rotateY(88deg) scale(.92)}55%{opacity:1}100%{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.unit,.pcard,.marks svg{animation:none}}
 </style>
 <style>:root{--logo-s88:url("data:image/png;base64,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");--logo-ks:url("data:image/png;base64,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")}</style>
 </head>
@@ -513,7 +535,7 @@ span.pimg>svg.face{position:absolute;left:calc(var(--fx) * 1%);top:calc(var(--fy
       <div class="night-chip" id="hudNight"></div>
       <div class="score" id="hudScore" aria-label="score">0</div>
       <div class="hud-right">
-        <span class="combo" id="hudCombo">×1.0</span>
+        <button type="button" class="combo" id="hudCombo">×1</button>
         <button class="icon-btn" id="btnPause" aria-label="Pause"><svg viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg></button>
       </div>
     </div>
@@ -537,15 +559,18 @@ span.pimg>svg.face{position:absolute;left:calc(var(--fx) * 1%);top:calc(var(--fy
       <rect x="646" y="68" width="62" height="20" rx="2" fill="#221C48"/><use href="#s88c" x="650" y="71.5" width="54" height="13" opacity=".9"/>
     </svg>
     <div class="board" id="board">
-      <div class="lanes" id="lanes"><div class="coach" id="coach" hidden></div></div>
-      <div class="facebox" id="facebox">
-        <div class="wallet" aria-label="Stardust"><span aria-hidden="true">✦</span><b id="wallet">0</b></div>
-        <div class="kikibox">
+      <div class="xp" id="xp"><b id="xpLv">Lv.1</b><span class="xpbar"><i id="xpFill"></i></span></div>
+      <div class="bosshp" id="bossHp" hidden><span id="bossName"></span><div class="bar"><i></i></div></div>
+      <div class="base">
+        <div class="facebox" id="facebox">
           <svg class="kiki" viewBox="20 14 360 446" aria-hidden="true"><use href="#kiki" width="400" height="520"/></svg>
           <div class="marks" id="marks"></div>
           <span class="zzz" id="zzz" aria-hidden="true">z z</span>
         </div>
       </div>
+      <canvas class="fx" id="fx"></canvas>
+      <div class="units" id="units"></div>
+      <div class="coach" id="coach" hidden></div>
     </div>
     <div class="powers" id="powers"></div>
   </main>
@@ -829,7 +854,7 @@ span.pimg>svg.face{position:absolute;left:calc(var(--fx) * 1%);top:calc(var(--fy
    ========================================================= */
 const CONFIG = {
   LEADERBOARD_URL: 'https://script.google.com/macros/s/AKfycbxlx5JBztaPab-msCgnlzaPibwV77L4u4-61g918c5NJFz1wrGXC90lJNDy9-SXNHN9uQ/exec',
-  VERSION: '8.0.0',
+  VERSION: '9.0.0',
   RANKING: false,          // defense rework: ranking is hidden until the new scoring settles
   SALT: 'seoul1988-kiki-v1',
   TOP_N: 50,
@@ -851,32 +876,40 @@ const store = {
 /* ---------------- i18n ---------------- */
 const STR = {
 en: {
-  gift:'The new fairies brought {n} Stardust',
-  tr:{nia:'Splash burst',cica:'Rapid fire',retinal:'Heavy hit · whole lane',eyecream:'EYE lanes · steady',snail:'Slows curses',foam:'Bubble wave',glow:'Glow beam · whole lane',eyepatch:'EYE lanes · heavy + slow',ashot:'Skill · clears 3 wrinkles',txa:'Skill · clears 3 spots'},
-  star:'Stardust',
-  cx_skill:'Skill · 3 a night',
-  cx_cost:'✦ {n}',
-  coach_eye:'EYE lanes opened. Only Bean can stand there',
-  coach2:'Nice! Fairies attack on their own',
-  coach1:'Tap a fairy card, then tap a slot to place it',
-  t_noskill:'No {c} to clear right now',
-  t_weak:'weak…',
-  t_sell:'Take back +{n}',
-  t_closed:'This lane is still asleep',
-  t_eyelane:'Eye fairies only work in the EYE lanes',
-  t_eyeonly:'Ouch! Only eye fairies can stand in the EYE lanes',
-  t_poor:'{n} more Stardust needed',
+  kc:{"sleeping": ["Night Shield", "Freezes every curse for 5 seconds. Glow +20."], "hydrogel": ["Glow Burst", "A flash of light hurts every curse on screen. Glow +10."], "nap": ["Beauty Sleep", "Glow +15."]},
+  upg:{"cica.multi": ["Twin Leaves", "+1 dart per volley, at 60% strength"], "cica.pierce": ["Sharp Leaf", "Darts pierce 1 more curse"], "cica.power": ["Mugwort Extract", "+30% damage"], "cica.haste": ["Quick Hands", "Attacks 15% faster"], "nia.count": ["Extra Capsule", "+1 capsule per throw, at 60% strength"], "nia.size": ["Juicy Burst", "+30% blast radius"], "nia.pool": ["Yuja Pool", "The burst leaves a pool that keeps hurting for 3s"], "nia.power": ["Niacinamide Boost", "+30% damage"], "retinal.twin": ["Twin Lance", "+1 beam per cast, at 60% strength"], "retinal.width": ["Wide Lance", "+50% beam width"], "retinal.power": ["Black Ginseng", "+30% damage"], "retinal.haste": ["Night Shift", "Attacks 15% faster"], "eyecream.count": ["More Sprites", "+1 sprite per cast"], "eyecream.bounce": ["Bouncy Bean", "Sprites hop to 1 more curse"], "eyecream.power": ["Fermented", "+30% damage"], "eyecream.haste": ["Gentle Rhythm", "Attacks 15% faster"], "snail.size": ["Big Puddle", "+30% puddle size"], "snail.long": ["Lasting Mucin", "Puddles stay 2s longer"], "snail.sticky": ["Extra Sticky", "Slow 45% → 65%"], "snail.power": ["Mucin 97%", "+30% damage"], "foam.knock": ["Big Splash", "+60% push-back"], "foam.range": ["High Tide", "The wave reaches 25% further"], "foam.double": ["Second Wave", "A second wave follows the first"], "foam.power": ["Pine Cica", "+30% damage"], "glow.cap": ["Brighter", "The ray can grow one step stronger"], "glow.second": ["Double Ray", "A second ray at 60% strength"], "glow.refract": ["Prism", "Curses burst with light when the ray dispels them"], "glow.power": ["Niacinamide 15%", "+30% damage"], "eyepatch.count": ["Extra Patch", "+1 crescent per cast, at 60% strength"], "eyepatch.size": ["Wide Patch", "+30% crescent size"], "eyepatch.slow": ["Cooling Gel", "Curses it hits are slowed for 2s"], "eyepatch.power": ["Turmeric Gold", "+30% damage"], "ashot.chain": ["Chain Lightning", "The bolt jumps to 1 more curse"], "ashot.power": ["Retinal 12%", "+30% damage"], "ashot.haste": ["Charged", "Attacks 15% faster"], "ashot.stun": ["Shock", "Struck curses freeze for 0.8s"], "txa.crit": ["Sharp Eye", "+20% chance of a ×2.5 critical"], "txa.rico": ["Ricochet", "The needle bounces to 1 more curse"], "txa.power": ["TXA Boost", "+30% damage"], "txa.exec": ["Finisher", "Instantly dispels curses under 20% health"]},
+  mgd:{"cica": "Rapid leaf darts that chase one curse at a time.", "nia": "Lobs a capsule that bursts over a whole group.", "retinal": "Slow but heavy. The beam pierces every curse in its line.", "eyecream": "Gentle sprites that seek out eye-area curses first.", "snail": "Sticky puddles slow curses down and wear them away.", "foam": "A foamy wave washes curses back up the sky.", "glow": "A ray that grows stronger the longer it shines on one curse.", "eyepatch": "Crescent patches sweep out and back, cutting through curses. Eye-safe.", "ashot": "Lightning strikes the toughest curse and jumps to the next.", "txa": "A fast needle for the curse closest to Kiki."},
+  mg:{"cica": "Mugwort Darts", "nia": "Yuja Capsule", "retinal": "Ginseng Lance", "eyecream": "Bean Sprites", "snail": "Mucin Puddle", "foam": "Bubble Wave", "glow": "Glow Ray", "eyepatch": "Golden Patch", "ashot": "Thunder Shot", "txa": "Precision Needle"},
+  coach_focus:"Tap a curse to make every fairy aim at it",
+  boss_down:"The giant curse is gone!",
+  boss_in:"A giant curse is coming!",
+  t_crit:"CRIT!",
+  t_weak:"weak",
+  r_level:"Level reached",
+  speed:"Game speed",
+  lv:"Lv.{n}",
+  team:"Your fairies",
+  tag_rec:"Good tonight",
+  tag_kiki:"For Kiki",
+  tag_up:"Upgrade",
+  tag_new:"New fairy",
+  pick_s:"Pick one card.",
+  pick_lv_t:"Level {n}",
+  pick_lv_e:"Level up",
+  pick_night_t:"A gift for the new night",
+  pick_first_s:"She fights on her own. More fairies join as you level up, five at most.",
+  pick_first_t:"Choose your first fairy",
   presents:'presents', tagline:'Glass Skin Guardians',
   story:"Kiki is the queen of Westgate High, famous for her glass skin. Her secret? Every night, beauty fairies from Seoul look after her skin. Tonight the curses are coming. Stay up with the fairies.",
   play:'Play', howto:'How to play', codex:'Fairy Album', board:'Leaderboard', back:'Back', cont:'Continue', next:'Next night',
-  stop:'Stop here', again:'Play again', submit:'Join the ranking', skip:'Skip, just show the board', share:'Copy link', copied:'Link copied',
+  stop:"Stop here", again:'Play again', submit:'Join the ranking', skip:'Skip, just show the board', share:'Copy link', copied:'Link copied',
   lang:'한국어', sound_on:'Sound on', sound_off:'Sound off', best:'Best on this device',
-  h1t:'Place fairies in the lanes', h1:"Tap a fairy card, then tap a glowing slot. Fairies attack on their own. Each one costs Stardust (✦), which you earn by dispelling curses.",
-  h2t:'Match the fairy to the curse', h2:"A fairy does full damage to its own curses and only a quarter to the rest. Bigger curses have more health. A curse that reaches Kiki leaves a mark and drains her Glow.",
-  h3t:'The eye lanes are special', h3:"Eye-area curses come down the two EYE lanes, and only eye products (Eye Cream, Eye Patch) can stand there. Shots are skills: tap one to clear three curses, three times a night.",
+  h1t:"Curses pour down. Fairies hold the line", h1:"Curses fall toward sleeping Kiki from everywhere. Your fairies attack on their own, each with a different kind of magic. A curse that slips past the dome drains Kiki's Glow.",
+  h2t:"Level up, pick 1 of 3 cards", h2:"Dispelling curses fills the level bar. Every level opens three random cards: call a new fairy (five at most) or make one of yours stronger. Who you call and how you grow them decides the night.",
+  h3t:"The right fairy hits twice as hard", h3:"A fairy deals double damage to its own curses. Eye-area curses (dashed ring) barely feel anything but the eye fairies, Bean and Patch. Tap a curse to make every fairy aim at it first.",
   night:'Night {n}', endless:'Endless Night', score:'Score', combo:'Combo', glow:'Glow', prog:'{c} / {q}',
   new_f:'New fairies', new_c:'New curses', new_p:'New power-up', all_c:'Every curse is out tonight',
-  sum_t:'Night {n} cleared', perfect:'Perfect night', sum_cl:'Curses dispelled', sum_set:'Curses that got through', sum_bonus:'Night bonus', sum_glow:'Glow',
+  sum_t:'Night {n} cleared', perfect:'Perfect night', sum_cl:'Curses dispelled', sum_set:"Curses that got through", sum_bonus:'Night bonus', sum_glow:'Glow',
   over_t:'Morning came.', over_s:"Kiki's SECRET is out. The fairies will be back tomorrow night.",
   keeper:'SECRET Keeper', keeper_s:'You guarded Kiki through the whole week.',
   stop_t:'You stopped here.', stop_s:'Your score is locked in. Kiki sleeps well tonight.',
@@ -888,10 +921,10 @@ en: {
   sending:'Sending…', fail:"Couldn't reach the leaderboard. Your score was saved on this device.",
   lb_t:'Top 50', lb_you:'You', lb_rank:'Your rank: #{r}', lb_out:"You're #{r}. {d} more points to enter the Top 50.", lb_empty:'No scores yet. Be the first.',
   lb_local:'Demo board. Scores are stored on this device only until a leaderboard server is connected.', lb_prize:'Prize', lb_err:'The leaderboard is not reachable right now.',
-  cx_s:'Every fairy carries the energy of Korea. Tap one to meet it.',  cx_power:'Power {p}', cx_vs:'Counters', cx_eye:'Eye-safe', cx_shots:'3 shots a night', cx_link:'See product', cx_unlock:'Night {n}', cx_pu:'Power-up',
+  cx_s:'Every fairy carries the energy of Korea. Tap one to meet it.',  cx_power:'Power {p}', cx_vs:'Counters', cx_eye:'Eye-safe', cx_shots:'3 shots a night', cx_link:'See product', cx_unlock:'Night {n}', cx_pu:"Kiki card",
   t_pick:'Pick a fairy first', t_cd:'Still recharging', t_stun:'Stunned', t_noshots:'No shots left tonight', t_miss:'Wrong fairy', t_trap:'Ouch! Eyes need eye cream',
-  t_waste:'Shot wasted on a small curse', t_instant:'Instant Glow', t_delicate:'Delicate Touch', t_precision:'Precision Shot', t_set:'A curse got through',
-  t_shield:'Night Shield: curses frozen', t_burst:'Glow Burst', t_used:'Already used tonight', t_nothing:'No curses on the board', t_partial:'Weakened',
+  t_waste:'Shot wasted on a small curse', t_instant:'Instant Glow', t_delicate:'Delicate Touch', t_precision:'Precision Shot', t_set:'A curse set in',
+  t_shield:'Night Shield: curses frozen', t_burst:'Glow Burst', t_used:'Already used tonight', t_nothing:'No stage-1 curses to clear', t_partial:'Weakened',
   pause:'Paused', resume:'Resume', quit:'Quit to title',
   concern_t:'What bugs your skin lately?', concern_s:'Pick up to two. Those curses will visit Kiki more often, and your fairies will be ready.', concern_skip:'Skip for now', concern_go:'Call the fairies',
   your_f:'Your fairies', lesson_t:"Tonight's lesson", match_t:'Your skin match', match_s:'Picked from the curses you fought tonight.', match_why:'You dispelled {n} × {c} tonight', match_why_pick:'You picked {c} as your worry',
@@ -904,7 +937,7 @@ en: {
   story_now:'now', story_skip:'Skip', story_play:'Call the fairies', story_later:'Go to title', btn_story:'Story', story_hint:'Next: pick your skin worry',
   story_ey:['Westgate High, LA','Why she\'s the queen','The secret of her glow','Every night','From Seoul, with love','The rule','Seven nights','Ready?'],
   story_q:['Glass-clear skin','Bouncy elasticity','Bright, line-free eyes'],
-  st:["Meet <b>Kiki</b>. Queen of Westgate High. Everyone wants to know her secret.","Skin as clear as <b>glass</b>. Cheeks so <b>bouncy</b> they might pop. Bright, lively eyes without a <b>single line</b>.","But Kiki has a <b>SECRET</b>. Every night, while she sleeps…","…the <b>curses</b> creep in. Breakouts, dark spots, fine lines, dark circles.","That's when beauty fairies from <b>Seoul</b>, filled with the <b>energy of Korea</b>, fly in to guard her.","Every curse has its fairy. Dark spots? <b>Nia</b>. Lines? <b>Retina</b>. Eyes? Only <b>Bean</b>.","Guard her for <b>seven nights</b>, until prom. Station the fairies in the right lanes and they will hold the line.","Tonight, Kiki's SECRET is in your hands."],
+  st:["Meet <b>Kiki</b>. Queen of Westgate High. Everyone wants to know her secret.","Skin as clear as <b>glass</b>. Cheeks so <b>bouncy</b> they might pop. Bright, lively eyes without a <b>single line</b>.","But Kiki has a <b>SECRET</b>. Every night, while she sleeps…","…the <b>curses</b> creep in. Breakouts, dark spots, fine lines, dark circles.","That's when beauty fairies from <b>Seoul</b>, filled with the <b>energy of Korea</b>, fly in to guard her.","Every curse has its fairy. Dark spots? <b>Nia</b>. Lines? <b>Retina</b>. Eyes? Only <b>Bean</b>.","Guard her for <b>seven nights</b>, until prom. Call the right fairies and make them stronger, one card at a time.","Tonight, Kiki's SECRET is in your hands."],
   st_diary:["","","\"Please don't let anyone find out.\"","","","","\"Prom is Sunday. Seven nights to go.\"",""],
   day:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
   nt:['First Night','Fine Lines','The Eye Trap','Dry Spell','Clogged','Party Glow','Prom Eve'],
@@ -913,35 +946,43 @@ en: {
   curse:{acne:'Pimple Imp',spot:'Shadow Stain',wrinkle:'Crease Crone',eye_dark:'Night Shadow',eye_line:"Crow's Feet",dry:'Desert Dust',pore:'Goo Goblin',dull:'Grey Fog',freckle:'Sun Sprinkle'},
   cursek:{acne:'breakouts',spot:'dark spots',wrinkle:'wrinkles',eye_dark:'dark circles',eye_line:'eye wrinkles',dry:'dryness',pore:'pores',dull:'dullness',freckle:'freckles'},
   power:{sleeping:'Night Shield',hydrogel:'Glow Burst'},
-  pdesc:{sleeping:'Freezes every curse for 6 seconds and restores 15 Glow.',hydrogel:'Dispels every stage-1 curse at once and weakens the rest.'}
+  pdesc:{sleeping:'Freezes every curse for 6 seconds and restores 15 Glow.',hydrogel:'Dispels every stage-1 curse on the face at once.'}
 },
 ko: {
-  gift:'새 요정이 별빛 {n}을 들고 왔어요',
-  tr:{nia:'범위 공격',cica:'빠른 연사',retinal:'강한 한 방 · 레인 전체',eyecream:'EYE 레인 · 꾸준한 연사',snail:'저주를 느리게',foam:'거품 파도',glow:'광채 빔 · 레인 전체',eyepatch:'EYE 레인 · 강한 한 방 + 느리게',ashot:'스킬 · 주름 3개 제거',txa:'스킬 · 기미 3개 제거'},
-  star:'별빛',
-  cx_skill:'스킬 · 밤마다 3회',
-  cx_cost:'✦ {n}',
-  coach_eye:'EYE 레인이 열렸어요. Bean만 설 수 있어요',
-  coach2:'좋아요! 요정이 알아서 저주를 막아요',
-  coach1:'요정 카드를 고르고, 칸을 눌러 배치하세요',
-  t_noskill:'지금은 지울 {c}가 없어요',
-  t_weak:'약해요…',
-  t_sell:'회수 +{n}',
-  t_closed:'이 레인은 아직 잠들어 있어요',
-  t_eyelane:'눈가 요정은 EYE 레인에서만 일해요',
-  t_eyeonly:'아야! EYE 레인엔 눈가 요정만 설 수 있어요',
-  t_poor:'별빛이 {n} 모자라요',
+  kc:{"sleeping": ["나이트 쉴드", "5초 동안 모든 저주를 멈추고 Glow +20."], "hydrogel": ["글로우 버스트", "빛이 번쩍, 화면의 모든 저주에게 피해를 주고 Glow +10."], "nap": ["꿀잠", "Glow +15."]},
+  upg:{"cica.multi": ["쌍엽", "한 번에 다트 +1 (세기 60%)"], "cica.pierce": ["날카로운 잎", "다트가 저주를 하나 더 뚫어요"], "cica.power": ["쑥 농축", "피해 +30%"], "cica.haste": ["빠른 손길", "공격 속도 +15%"], "nia.count": ["캡슐 추가", "한 번에 캡슐 +1 (세기 60%)"], "nia.size": ["과즙 팡", "폭발 범위 +30%"], "nia.pool": ["유자 웅덩이", "터진 자리에 3초간 피해를 주는 웅덩이"], "nia.power": ["나이아신 농축", "피해 +30%"], "retinal.twin": ["쌍광선", "한 번에 광선 +1 (세기 60%)"], "retinal.width": ["넓은 광선", "광선 폭 +50%"], "retinal.power": ["흑삼 농축", "피해 +30%"], "retinal.haste": ["야간 근무", "공격 속도 +15%"], "eyecream.count": ["정령 추가", "한 번에 정령 +1"], "eyecream.bounce": ["통통 콩", "정령이 다음 저주로 한 번 더 튀어요"], "eyecream.power": ["발효 농축", "피해 +30%"], "eyecream.haste": ["부드러운 리듬", "공격 속도 +15%"], "snail.size": ["큰 웅덩이", "웅덩이 크기 +30%"], "snail.long": ["오래가는 점액", "웅덩이가 2초 더 남아요"], "snail.sticky": ["더 끈적하게", "느려짐 45% → 65%"], "snail.power": ["점액 97%", "피해 +30%"], "foam.knock": ["큰 물결", "밀어내기 +60%"], "foam.range": ["밀물", "파도가 25% 더 멀리 가요"], "foam.double": ["두 번째 파도", "파도가 한 번 더 따라와요"], "foam.power": ["파인시카 농축", "피해 +30%"], "glow.cap": ["더 눈부시게", "광선이 한 단계 더 강해질 수 있어요"], "glow.second": ["두 줄기 빛", "60% 세기의 광선 하나 더"], "glow.refract": ["프리즘", "광선으로 지운 저주가 빛으로 터져요"], "glow.power": ["나이아신 15%", "피해 +30%"], "eyepatch.count": ["패치 추가", "한 번에 패치 +1 (세기 60%)"], "eyepatch.size": ["넓은 패치", "패치 크기 +30%"], "eyepatch.slow": ["쿨링 젤", "맞은 저주가 2초간 느려져요"], "eyepatch.power": ["강황 농축", "피해 +30%"], "ashot.chain": ["연쇄 번개", "번개가 저주 하나에 더 옮겨가요"], "ashot.power": ["레틴알 12%", "피해 +30%"], "ashot.haste": ["빠른 충전", "공격 속도 +15%"], "ashot.stun": ["감전", "맞은 저주가 0.8초 멈춰요"], "txa.crit": ["예리한 눈", "치명타(×2.5) 확률 +20%"], "txa.rico": ["튕기기", "니들이 다음 저주로 튕겨요"], "txa.power": ["TXA 농축", "피해 +30%"], "txa.exec": ["마무리", "체력 20% 아래의 저주를 바로 지워요"]},
+  mgd:{"cica": "쑥잎 다트를 빠르게 쏴요. 한 마리씩 확실하게.", "nia": "캡슐을 던져 모여 있는 저주를 한 번에 터뜨려요.", "retinal": "느리지만 강해요. 광선이 일직선의 저주를 모두 꿰뚫어요.", "eyecream": "작은 정령들이 눈가 저주를 먼저 찾아가요.", "snail": "끈적한 웅덩이가 저주를 느리게 하고 조금씩 녹여요.", "foam": "거품 파도가 저주를 하늘 쪽으로 밀어내요.", "glow": "한 저주를 오래 비출수록 점점 강해지는 광선.", "eyepatch": "초승달 패치가 날아갔다 돌아오며 저주를 베어요. 눈가 전용.", "ashot": "가장 센 저주에게 번개를 내리꽂고 옆으로 옮겨가요.", "txa": "키키에게 가장 가까운 저주를 빠르게 저격해요."},
+  mg:{"cica": "쑥잎 다트", "nia": "유자 캡슐", "retinal": "흑삼 광선", "eyecream": "콩 정령", "snail": "점액 웅덩이", "foam": "거품 파도", "glow": "광채 광선", "eyepatch": "황금 패치", "ashot": "번개 샷", "txa": "정밀 니들"},
+  coach_focus:"저주를 누르면 요정들이 그 저주부터 공격해요",
+  boss_down:"거대한 저주를 물리쳤어요!",
+  boss_in:"거대한 저주가 와요!",
+  t_crit:"치명타!",
+  t_weak:"약해요",
+  r_level:"도달 레벨",
+  speed:"게임 속도",
+  lv:"Lv.{n}",
+  team:"내 요정",
+  tag_rec:"오늘 밤 추천",
+  tag_kiki:"키키 카드",
+  tag_up:"강화",
+  tag_new:"새 요정",
+  pick_s:"카드 한 장을 골라주세요.",
+  pick_lv_t:"레벨 {n}",
+  pick_lv_e:"레벨 업",
+  pick_night_t:"새 밤의 선물",
+  pick_first_s:"요정은 알아서 싸워요. 레벨이 오르면 요정이 더 찾아와요. 최대 다섯 명까지.",
+  pick_first_t:"첫 요정을 골라주세요",
   presents:'presents', tagline:'유리 피부 수호대',
   story:'LA 웨스트게이트 고등학교의 퀸카 키키. 유리 같은 피부의 비밀은 매일 밤 서울에서 날아와 피부를 돌봐주는 뷰티 요정들. 오늘 밤도 저주가 몰려와요. 요정들과 함께 밤을 지켜주세요.',
   play:'시작', howto:'게임 방법', codex:'요정 앨범', board:'랭킹', back:'뒤로', cont:'계속', next:'다음 밤',
-  stop:'여기서 그만하기', again:'다시 하기', submit:'랭킹 등록', skip:'건너뛰고 랭킹만 보기', share:'링크 복사', copied:'링크를 복사했어요',
+  stop:"여기서 그만하기", again:'다시 하기', submit:'랭킹 등록', skip:'건너뛰고 랭킹만 보기', share:'링크 복사', copied:'링크를 복사했어요',
   lang:'English', sound_on:'소리 켬', sound_off:'소리 끔', best:'이 기기 최고 기록',
-  h1t:'요정을 레인에 배치하세요', h1:'요정 카드를 고르고 빛나는 칸을 누르면 배치돼요. 요정은 알아서 저주를 공격해요. 배치에는 별빛(✦)이 들고, 저주를 물리치면 별빛을 얻어요.',
-  h2t:'저주에 맞는 요정을 세우세요', h2:'요정은 자기 짝인 저주에게 온전한 피해를, 나머지에게는 4분의 1만 줘요. 큰 저주일수록 체력이 많아요. 키키에게 닿은 저주는 자국을 남기고 광채를 깎아요.',
-  h3t:'눈가 레인은 특별해요', h3:'눈가 저주는 EYE 레인 두 줄로 내려와요. 그곳엔 눈가 전용 제품(아이크림, 아이패치)만 설 수 있어요. 샷은 스킬이에요. 누르면 저주 셋을 바로 지우고, 하룻밤에 세 번 쓸 수 있어요.',
+  h1t:"저주가 쏟아져요. 요정이 막아요", h1:"저주는 사방에서 잠든 키키를 향해 떨어져요. 요정들은 저마다 다른 마법으로 알아서 공격해요. 돔을 넘은 저주는 키키의 광채를 깎아요.",
+  h2t:"레벨 업마다 카드 3장 중 1장", h2:"저주를 물리치면 레벨 바가 차요. 레벨이 오를 때마다 무작위 카드 세 장이 열려요. 새 요정을 부르거나(최대 다섯), 이미 있는 요정을 강하게 만들 수 있어요. 누구를 부르고 어떻게 키우느냐가 밤을 결정해요.",
+  h3t:"짝이 맞는 요정은 두 배로 강해요", h3:"요정은 자기 짝인 저주에게 두 배의 피해를 줘요. 눈가 저주(점선 고리)는 눈가 요정 Bean과 Patch가 아니면 잘 막지 못해요. 저주를 누르면 모든 요정이 그 저주부터 공격해요.",
   night:'{n}번째 밤', endless:'끝없는 밤', score:'점수', combo:'콤보', glow:'Glow', prog:'{c} / {q}',
   new_f:'새 요정', new_c:'새 저주', new_p:'새 파워업', all_c:'오늘 밤은 모든 저주가 나와요',
-  sum_t:'{n}번째 밤 클리어', perfect:'퍼펙트 나이트', sum_cl:'물리친 저주', sum_set:'지나간 저주', sum_bonus:'밤 보너스', sum_glow:'Glow',
+  sum_t:'{n}번째 밤 클리어', perfect:'퍼펙트 나이트', sum_cl:'물리친 저주', sum_set:"지나간 저주", sum_bonus:'밤 보너스', sum_glow:'Glow',
   over_t:'아침이 밝았어요.', over_s:'키키의 비밀이 들켰어요. 요정들은 내일 밤 다시 올 거예요.',
   keeper:'비밀 수호자', keeper_s:'일주일 내내 키키의 비밀을 지켰어요.',
   stop_t:'여기서 멈췄어요.', stop_s:'점수가 확정됐어요. 오늘 밤 키키는 편히 자요.',
@@ -953,10 +994,10 @@ ko: {
   sending:'등록 중…', fail:'서버에 연결하지 못했어요. 점수는 이 기기에 저장했어요.',
   lb_t:'Top 50', lb_you:'나', lb_rank:'내 순위: {r}위', lb_out:'현재 {r}위. Top 50까지 {d}점 남았어요.', lb_empty:'아직 기록이 없어요. 첫 번째가 되어보세요.',
   lb_local:'데모 랭킹. 서버를 연결하기 전까지 점수는 이 기기에만 저장돼요.', lb_prize:'경품', lb_err:'지금은 랭킹 서버에 연결할 수 없어요.',
-  cx_s:'요정마다 한국의 에너지가 담겨 있어요. 눌러서 만나보세요.', cx_power:'파워 {p}', cx_vs:'상대 저주', cx_eye:'눈가 전용', cx_shots:'밤마다 3회', cx_link:'제품 보기', cx_unlock:'{n}번째 밤', cx_pu:'파워업',
+  cx_s:'요정마다 한국의 에너지가 담겨 있어요. 눌러서 만나보세요.', cx_power:'파워 {p}', cx_vs:'상대 저주', cx_eye:'눈가 전용', cx_shots:'밤마다 3회', cx_link:'제품 보기', cx_unlock:'{n}번째 밤', cx_pu:"키키 카드",
   t_pick:'먼저 요정을 고르세요', t_cd:'아직 쿨다운 중', t_stun:'기절', t_noshots:'오늘 밤 샷을 다 썼어요', t_miss:'상성이 안 맞아요', t_trap:'아야! 눈가엔 아이크림만',
-  t_waste:'작은 저주에 샷을 낭비했어요', t_instant:'즉시 광채', t_delicate:'섬세한 손길', t_precision:'정밀 샷', t_set:'저주가 지나갔어요',
-  t_shield:'나이트 쉴드: 저주 정지', t_burst:'글로우 버스트', t_used:'오늘 밤 이미 사용', t_nothing:'보드에 저주가 없어요', t_partial:'약화',
+  t_waste:'작은 저주에 샷을 낭비했어요', t_instant:'즉시 광채', t_delicate:'섬세한 손길', t_precision:'정밀 샷', t_set:'저주가 고착됐어요',
+  t_shield:'나이트 쉴드: 저주 정지', t_burst:'글로우 버스트', t_used:'오늘 밤 이미 사용', t_nothing:'지울 1단계 저주가 없어요', t_partial:'약화',
   pause:'일시정지', resume:'계속하기', quit:'타이틀로',
   concern_t:'요즘 피부 고민이 뭐야?', concern_s:'최대 두 개까지. 그 저주가 키키를 더 자주 찾아오고, 요정들이 준비하고 있을 거예요.', concern_skip:'일단 건너뛰기', concern_go:'요정 부르기',
   your_f:'나의 요정', lesson_t:'오늘 밤의 레슨', match_t:'나의 피부 매치', match_s:'오늘 밤 싸운 저주를 바탕으로 골랐어요.', match_why:'오늘 밤 {c} {n}개를 물리쳤어요', match_why_pick:'{c}을(를) 고민으로 골랐어요',
@@ -969,7 +1010,7 @@ ko: {
   story_now:'지금', story_skip:'건너뛰기', story_play:'요정 부르기', story_later:'타이틀로', btn_story:'스토리', story_hint:'다음: 내 피부 고민 고르기',
   story_ey:['LA 웨스트게이트 고등학교','퀸카인 이유','그녀 피부 광채의 비밀','매일 밤','서울에서 온 요정','규칙','일주일 밤','준비됐나요?'],
   story_q:['유리같이 맑은 피부','톡 터질 듯한 탄력','주름 없는 생기 눈빛'],
-  st:["<b>키키</b>를 소개할게요. 웨스트게이트 고등학교의 퀸카. 모두가 그녀의 비밀을 궁금해해요.","<b>유리</b>같이 맑은 피부. 톡 터질 것 같은 <b>탄력</b>. 주름 하나 보이지 않는 <b>생기 넘치는 눈빛</b>.","하지만 키키에겐 <b>비밀</b>이 있어요. 매일 밤, 그녀가 잠들면…","…<b>저주</b>가 찾아와요. 여드름, 기미, 잔주름, 다크서클.","그때 <b>한국의 에너지</b>가 담긴 요정들이 <b>서울</b>에서 키키를 지키러 날아와요.","저주마다 짝이 되는 요정이 있어요. 기미엔 <b>Nia</b>, 주름엔 <b>Retina</b>, 눈가엔 오직 <b>Bean</b>.","프롬까지 <b>일주일 밤</b>을 지켜주세요. 요정들을 알맞은 자리에 세우면 저주를 막아줘요.","오늘 밤, 키키의 SECRET은 당신 손에."],
+  st:["<b>키키</b>를 소개할게요. 웨스트게이트 고등학교의 퀸카. 모두가 그녀의 비밀을 궁금해해요.","<b>유리</b>같이 맑은 피부. 톡 터질 것 같은 <b>탄력</b>. 주름 하나 보이지 않는 <b>생기 넘치는 눈빛</b>.","하지만 키키에겐 <b>비밀</b>이 있어요. 매일 밤, 그녀가 잠들면…","…<b>저주</b>가 찾아와요. 여드름, 기미, 잔주름, 다크서클.","그때 <b>한국의 에너지</b>가 담긴 요정들이 <b>서울</b>에서 키키를 지키러 날아와요.","저주마다 짝이 되는 요정이 있어요. 기미엔 <b>Nia</b>, 주름엔 <b>Retina</b>, 눈가엔 오직 <b>Bean</b>.","프롬까지 <b>일주일 밤</b>을 지켜주세요. 알맞은 요정을 부르고, 카드를 골라 더 강하게 키워주세요.","오늘 밤, 키키의 SECRET은 당신 손에."],
   st_diary:["","","\"아무도 몰랐으면 좋겠어.\"","","","","\"프롬은 일요일. 일곱 밤 남았어.\"",""],
   day:['월','화','수','목','금','토','일'],
   nt:['첫날 밤','미세한 선','눈가의 함정','건조 주의보','막힌 모공','파티 글로우','프롬 전야'],
@@ -978,7 +1019,7 @@ ko: {
   curse:{acne:'여드름 저주',spot:'기미 저주',wrinkle:'주름 저주',eye_dark:'다크서클 저주',eye_line:'눈가 주름 저주',dry:'건조 저주',pore:'모공 저주',dull:'칙칙함 저주',freckle:'주근깨 저주'},
   cursek:{acne:'여드름',spot:'기미',wrinkle:'주름',eye_dark:'다크서클',eye_line:'눈가 주름',dry:'건조',pore:'모공',dull:'칙칙함',freckle:'주근깨'},
   power:{sleeping:'나이트 쉴드',hydrogel:'글로우 버스트'},
-  pdesc:{sleeping:'6초 동안 모든 저주를 멈추고 Glow를 15 회복해요.',hydrogel:'1단계 저주를 한 번에 지우고 나머지를 약하게 해요.'}
+  pdesc:{sleeping:'6초 동안 모든 저주를 멈추고 Glow를 15 회복해요.',hydrogel:'얼굴 위의 1단계 저주를 한 번에 지워요.'}
 }};
 let lang = store.get('kiki_lang') || ((navigator.language || '').toLowerCase().startsWith('ko') ? 'ko' : 'en');
 const t = (k, v = {}) => { const s = STR[lang][k] ?? STR.en[k] ?? k; return typeof s === 'string' ? s.replace(/\{(\w+)\}/g, (_, n) => v[n] ?? '') : s; };
@@ -1093,25 +1134,54 @@ const sfx = {
   power(){ [784, 988, 1175, 1568].forEach((f, i) => tone(f, .2, 'triangle', .05, i * .06)); }
 };
 
-/* ---------------- defense: fairies as towers ---------------- */
-const LANES = 5, ROWS = 4, EYE_LANES = [1, 3];
-// cost in Stardust, seconds between attacks, damage to a matching curse, range as a share of the lane length
-const TW = {
-  cica:    {cost:40,  every:.55, dmg:1,   range:.5,  mode:'single'},
-  nia:     {cost:50,  every:1.4, dmg:2,   range:.6,  mode:'splash', radius:.2},
-  retinal: {cost:70,  every:2.4, dmg:6,   range:2,   mode:'single', pick:'strong'},
-  eyecream:{cost:50,  every:.8,  dmg:1.5, range:.6,  mode:'single'},
-  snail:   {cost:60,  every:1.2, dmg:1,   range:.55, mode:'single', slow:.5, slowFor:2.5},
-  foam:    {cost:70,  every:1.8, dmg:2,   range:.45, mode:'wave'},
-  glow:    {cost:100, every:2.6, dmg:4,   range:2,   mode:'beam'},
-  eyepatch:{cost:90,  every:1.6, dmg:3,   range:.7,  mode:'single', slow:.6, slowFor:2}
+/* ---------------- defense v2: curses pour down, up to five fairies, level-up cards ---------------- */
+const MAX_UNITS = 5, SLOT_X = [50, 31, 69, 12, 88];          // seats along the dome, in % of the board width, in the order fairies join
+let SPEED = clamp(+(new URLSearchParams(location.search).get('speed')) || 1, 1, 8);   // ?speed=N fast-forward for testing
+// each fairy's magic before upgrades: seconds between casts, damage, sizes in % of the board width
+const MG = {
+  cica:    {every:.45, dmg:2.2},
+  nia:     {every:1.8, dmg:5, r:15},
+  retinal: {every:2.8, dmg:7, w:4},
+  eyecream:{every:1.6, dmg:2.5, n:2},
+  snail:   {every:3.2, dps:1.6, r:12, life:4},
+  foam:    {every:2.6, dmg:3, reach:55, knock:5},
+  glow:    {dps:4, cap:2.5},
+  eyepatch:{every:3.5, dmg:4, n:2, r:6},
+  ashot:   {every:3.0, dmg:13},
+  txa:     {every:1.35, dmg:6}
 };
+// upgrade cards per fairy: [key, max level]
+const UPG = {
+  cica:[['multi',2],['pierce',2],['power',3],['haste',2]],
+  nia:[['count',2],['size',2],['pool',1],['power',3]],
+  retinal:[['twin',2],['width',2],['power',3],['haste',2]],
+  eyecream:[['count',2],['bounce',2],['power',3],['haste',2]],
+  snail:[['size',2],['long',2],['sticky',1],['power',3]],
+  foam:[['knock',2],['range',2],['double',1],['power',3]],
+  glow:[['cap',2],['second',1],['refract',2],['power',3]],
+  eyepatch:[['count',2],['size',2],['slow',1],['power',3]],
+  ashot:[['chain',2],['power',3],['haste',2],['stun',1]],
+  txa:[['crit',2],['rico',2],['power',3],['exec',1]]
+};
+// quota: curses per night, gap: seconds between spawns, travel: seconds from the top to the dome, w: share of small/medium/large curses
+const NIGHTS2 = [
+  {curses:['acne','spot'], quota:20, gap:1.3, travel:13, w:[.9,.1,0]},
+  {curses:['acne','spot','wrinkle'], quota:28, gap:1.1, travel:12.4, w:[.75,.25,0]},
+  {curses:['acne','spot','wrinkle','eye_dark','eye_line'], quota:34, gap:1.0, travel:11.8, w:[.65,.3,.05]},
+  {curses:['acne','spot','wrinkle','eye_dark','eye_line','dry'], quota:42, gap:.9, travel:11.2, w:[.55,.35,.1], boss:'dry', bossHp:100},
+  {curses:['acne','spot','wrinkle','eye_dark','eye_line','dry','pore'], quota:50, gap:.8, travel:10.6, w:[.45,.4,.15]},
+  {curses:['acne','spot','wrinkle','eye_dark','eye_line','dry','pore','dull','freckle'], quota:58, gap:.72, travel:10, w:[.38,.42,.2]},
+  {curses:ALL_CURSES, quota:64, gap:.66, travel:9.4, w:[.3,.45,.25], boss:'dull', bossHp:180}
+];
+const HPK = [1.5, 2.2, 3.0, 3.6, 4.1, 4.4, 4.7];        // curse health multiplier per night
 function defCfg(n){
-  const c = nightCfg(n), k = Math.max(0, n - 7);
-  return {...c, quota:Math.round(c.quota * 1.3), travel:n <= 7 ? 17 - n : Math.max(7.5, 10 - .3 * k), hpK:1 + .16 * (n - 1)};
+  const k = Math.max(0, n - 7);
+  const b = n <= 7 ? NIGHTS2[n - 1] : {curses:ALL_CURSES, quota:64 + 6 * k, gap:Math.max(.4, .66 - .03 * k), travel:Math.max(7, 9.4 - .3 * k), w:[.25, .45, .3], boss:['dull','wrinkle','acne','spot','dry','pore'][n % 6], bossHp:260};
+  const hpK = (n <= 7 ? HPK[n - 1] : HPK[6] * Math.pow(1.17, k));
+  return {...b, hpK, pair:Math.min(.4, .08 + .03 * n), bossHp:b.bossHp ? b.bossHp * hpK : 0};
 }
-const SPEED = clamp(+new URLSearchParams(location.search).get('speed') || 1, 1, 8);   // test hook: ?speed=4 fast-forwards a night
-let L = {bw:360, kh:120, band:44, rh:60, lw:72, lh:300, mw:42};
+const needXp = l => 1 + 3 * l;      // curses' worth of XP for the next level
+let L = {w:0, h:0, bw:0, kh:0, us:0, u:1, drop:0, top:1, dpr:1};
 
 /* ---------------- state ---------------- */
 const S = {
@@ -1119,12 +1189,13 @@ const S = {
   startAt:0, time:0, playing:false, paused:false, curses:[], spawned:0, nightCleared:0, nightSet:0, nextSpawn:0,
   selected:null, deck:[], f:{}, powers:{}, shieldUntil:0, hitsBy:{}, seq:0, ended:null, lastTick:0, raf:0, lastEntry:null,
   concerns:[], seen:{}, nightTypes:{}, clearedBy:{}, shareUrl:null,
-  towers:[], star:0, starAcc:0, sell:null, eyeOpen:false, gift:0
+  units:[], xp:0, lvl:1, need:needXp(1), pending:[], picks:0, cards:null, speed:[1, 1.5, 2].includes(+store.get('kiki_speed')) ? +store.get('kiki_speed') : 1,
+  proj:[], zones:[], fxs:[], parts:[], texts:[], focus:0, boss:null, total:0, dirty:false
 };
 const el = {
   hud:$('#hud'), night:$('#hudNight'), score:$('#hudScore'), combo:$('#hudCombo'), glowbar:$('#glowbar'), prog:$('#hudProg'), glowLbl:$('#hudGlowLbl'),
   stage:$('#stage'), sky:$('#sky'), facebox:$('#facebox'), powers:$('#powers'), deck:$('#deck'), wand:$('#wand'), toasts:$('#toasts'), screens:$('#screens'), pause:$('#btnPause'), zzz:$('#zzz'),
-  board:$('#board'), lanes:$('#lanes'), marks:$('#marks'), wallet:$('#wallet'), coach:$('#coach')
+  board:$('#board'), fx:$('#fx'), units:$('#units'), marks:$('#marks'), xpLv:$('#xpLv'), xpFill:$('#xpFill'), bossHp:$('#bossHp'), bossName:$('#bossName'), coach:$('#coach')
 };
 
 /* ---------------- icons ---------------- */
@@ -1155,13 +1226,17 @@ const curseSVG = (type, stage) => `<svg viewBox="0 0 64 64" aria-hidden="true"><
 
 /* ---------------- layout ---------------- */
 function layout(){
-  const w = el.stage.clientWidth, h = el.stage.clientHeight;
-  const bw = Math.min(w, 560), kh = clamp(h * .27, 96, 190), band = clamp((h - kh) * .13, 32, 60);
-  const rh = (h - kh - band) / ROWS, lw = bw / LANES;
-  L = {bw, kh, band, rh, lw, lh:h - kh, mw:Math.max(30, Math.min(lw * .84, rh * 1.02))};
-  el.board.style.setProperty('--bw', bw + 'px'); el.board.style.setProperty('--kh', kh + 'px');
-  el.board.style.setProperty('--band', band + 'px'); el.board.style.setProperty('--rh', rh + 'px');
-  S.curses.forEach(c => { if (c.el){ c.el.style.setProperty('--mw', (L.mw * [.8, 1, 1.22][c.stage - 1]).toFixed(1) + 'px'); placeMob(c); } });
+  const w = el.stage.clientWidth, h = el.stage.clientHeight; if (!w || !h) return;
+  const bw = Math.round(Math.min(w, Math.max(340, h * .9))), kh = clamp(h * .22, 92, 210), us = clamp(bw * .16, 48, 100), top = h - kh - us * .98, old = L;
+  L = {w, h, bw, kh, us, u:bw / 100, drop:kh * .6, top, dpr:Math.min(2, window.devicePixelRatio || 1)};
+  el.board.style.setProperty('--bw', bw + 'px'); el.board.style.setProperty('--kh', kh + 'px'); el.board.style.setProperty('--us', us + 'px');
+  el.fx.width = Math.round(bw * L.dpr); el.fx.height = Math.round(h * L.dpr);
+  if (old.bw && (old.bw !== bw || old.top !== top)){
+    const kx = bw / old.bw, ky = top / old.top;
+    S.curses.forEach(m => { m.x *= kx; m.x0 *= kx; m.y *= ky; m.r *= kx; m.swayA *= kx; });
+    S.zones.forEach(z => { if (z.x !== undefined){ z.x *= kx; z.y *= ky; z.r *= kx; } }); S.proj = [];
+  }
+  SPRC = {}; S.units.forEach(placeUnit); renderSlots(); if (S.cfg) draw();
 }
 addEventListener('resize', layout);
 function stars(){
@@ -1175,155 +1250,34 @@ function stars(){
 }
 
 /* ---------------- HUD ---------------- */
-const mult = () => 1 + .1 * Math.min(S.combo, 20);
 function updateHUD(){
   const n = S.night;
   el.night.innerHTML = n <= 7 ? `${esc(t('night', {n}))}<b>${esc(t('day')[n - 1])} · ${esc(t('nt')[n - 1])}</b>` : `${esc(t('night', {n}))}<b>${esc(t('endless'))}</b>`;
   el.score.textContent = S.score.toLocaleString();
-  el.combo.textContent = '×' + mult().toFixed(1);
-  el.combo.classList.toggle('hot', S.combo >= 10);
+  el.combo.textContent = '×' + S.speed; el.combo.classList.toggle('fast', S.speed > 1); el.combo.setAttribute('aria-label', t('speed'));
   el.glowbar.firstElementChild.style.setProperty('--w', clamp(S.glow, 0, 100) + '%');
   el.glowbar.classList.toggle('low', S.glow <= 30);
   el.glowLbl.innerHTML = `<span class="logo-s88" style="height:9px;margin-right:.45em;opacity:.8"></span>${esc(t('glow'))}`;
-  el.prog.textContent = S.cfg ? t('prog', {c:S.nightCleared + S.nightSet, q:S.cfg.quota}) : '';
+  el.prog.textContent = S.cfg ? t('prog', {c:S.nightCleared + S.nightSet, q:S.total || S.cfg.quota}) : '';
   el.facebox.style.setProperty('--glow', (clamp(S.glow, 0, 100) / 100).toFixed(2));
   el.pause.setAttribute('aria-label', t('pause'));
-  updateAfford();
+  el.xpLv.textContent = t('lv', {n:S.lvl}); el.xpFill.style.setProperty('--xp', clamp(S.xp / S.need, 0, 1).toFixed(3));
 }
 
-/* ---------------- deck ---------------- */
-function renderDeck(newIds = []){
-  el.deck.innerHTML = '';
-  S.deck.forEach((id, i) => {
-    const f = FAIRY_BY[id], tw = TW[id];
-    const b = document.createElement('button');
-    b.className = 'fairy' + (tw ? '' : ' skill') + (newIds.includes(id) ? ' new' : '') + (S.selected === id ? ' sel' : '');
-    b.style.setProperty('--acc', f.acc); b.dataset.id = id; b.type = 'button';
-    b.setAttribute('aria-label', `${f.name}: ${f.vs.map(c => tn('cursek', c)).join(', ')}${tw ? ` · ${tw.cost}` : ''}`);
-    b.innerHTML = `<span class="key">${(i + 1) % 10}</span>${f.eyeSafe ? '<span class="tag">EYE</span>' : ''}<span class="icon">${fairyIcon(f)}</span><span class="name">${esc(f.name)}</span>` +
-      (tw ? `<span class="cost">✦ ${tw.cost}</span>` : `<span class="charges">${[0,1,2].map(k => `<i class="${k < (S.f[id]?.charges ?? 3) ? '' : 'used'}"></i>`).join('')}</span>`);
-    el.deck.appendChild(b);
-  });
-  renderPowers(); updateAfford();
-}
-function updateAfford(){
-  $$('.fairy', el.deck).forEach(c => { const tw = TW[c.dataset.id]; c.classList.toggle('poor', !!tw && S.star < tw.cost); });
-  el.wallet.textContent = S.star;
-}
-function renderPowers(){
-  el.powers.innerHTML = '';
-  Object.keys(S.powers).forEach(id => {
-    const p = POWER_BY[id];
-    const b = document.createElement('button'); b.className = 'power'; b.type = 'button'; b.dataset.id = id; b.style.setProperty('--acc', p.acc);
-    b.disabled = S.powers[id] <= 0; b.setAttribute('aria-label', tn('power', id));
-    b.innerHTML = `<span class="ring">${fairyIcon(p)}</span><span class="plabel">${esc(tn('power', id))}</span>`;
-    el.powers.appendChild(b);
-  });
-}
-function cardOf(id){ return el.deck.querySelector(`.fairy[data-id="${id}"]`); }
-function selectFairy(id){
-  if (S.selected === id) { S.selected = null; } else { S.selected = id; sfx.tap(); }
-  $$('.fairy', el.deck).forEach(c => c.classList.toggle('sel', c.dataset.id === S.selected));
-  el.wand.classList.toggle('on', !!S.selected && pointerType !== 'touch');
-  if (S.selected) el.wand.style.setProperty('--acc', FAIRY_BY[S.selected].acc);
-  markCells();
-}
-function shake(id){ const c = cardOf(id); if (!c) return; c.classList.remove('shake'); void c.offsetWidth; c.classList.add('shake'); }
-
-/* ---------------- board: lanes, cells, towers ---------------- */
-const isEye = l => EYE_LANES.includes(l);
-const laneOpen = l => !isEye(l) || S.eyeOpen;
-const towerY = tw => (L.band + (tw.row + .5) * L.rh) / L.lh;
-function towerAt(l, r){ return S.towers.find(x => x.lane === l && x.row === r); }
-function cellOf(l, r){ return el.lanes.querySelector(`.cell[data-lane="${l}"][data-row="${r}"]`); }
-function renderBoard(){
-  $$('.lane, .mob, .shot, .fx', el.lanes).forEach(n => n.remove());
-  for (let l = 0; l < LANES; l++){
-    const d = document.createElement('div'); d.className = 'lane' + (isEye(l) ? ' eye' : '') + (laneOpen(l) ? '' : ' closed'); d.dataset.lane = l;
-    d.innerHTML = (isEye(l) ? '<span class="ltag">EYE</span>' : '') + Array.from({length:ROWS}, (_, r) => `<button type="button" class="cell" data-lane="${l}" data-row="${r}" aria-label="lane ${l + 1}, slot ${r + 1}"></button>`).join('');
-    el.lanes.appendChild(d);
-  }
-  S.towers.forEach(tw => drawTower(tw, false)); markCells();
-}
-function drawTower(tw, fresh){
-  const c = cellOf(tw.lane, tw.row); if (!c) return;
-  c.classList.add('has'); c.dataset.fid = tw.fid;
-  c.innerHTML = `<span class="tw${fresh ? ' in' : ''}">${fairyIcon(FAIRY_BY[tw.fid])}</span>`;
-}
-function markCells(){
-  const f = S.selected ? FAIRY_BY[S.selected] : null;
-  el.lanes.classList.toggle('placing', !!f);
-  if (f) el.lanes.style.setProperty('--acc', f.acc);
-  $$('.cell', el.lanes).forEach(c => { const l = +c.dataset.lane; c.classList.toggle('ok', !!f && laneOpen(l) && isEye(l) === !!f.eyeSafe); });
-}
-function placeAt(fid, l, r){
-  if (!S.playing || S.paused) return;
-  const f = FAIRY_BY[fid], def = TW[fid]; if (!def || towerAt(l, r)) return;
-  if (!laneOpen(l)){ toast(t('t_closed')); return; }
-  if (isEye(l) && !f.eyeSafe){ toast(t('t_eyeonly'), true); shake(fid); sfx.trap(); return; }
-  if (!isEye(l) && f.eyeSafe){ toast(t('t_eyelane')); shake(fid); return; }
-  if (S.star < def.cost){ toast(t('t_poor', {n:def.cost - S.star})); shake(fid); sfx.bad(); return; }
-  S.star -= def.cost;
-  const tw = {id:++S.seq, fid, lane:l, row:r, next:S.time + .3}; S.towers.push(tw); drawTower(tw, true); sfx.hit();
-  if (S.night === 1 && S.towers.length === 1){ S.nextSpawn = S.time + 1.2; coach(t('coach2'), 3200); }
-  clearSell(); updateHUD();
-}
-let sellTimer = 0;
-function clearSell(){ S.sell = null; clearTimeout(sellTimer); $$('.sell', el.lanes).forEach(n => n.remove()); }
-function sellTap(l, r){
-  const tw = towerAt(l, r); if (!tw || !S.playing || S.paused) return;
-  const c = cellOf(l, r), back = Math.round(TW[tw.fid].cost * .6);
-  if (S.sell === tw.id){
-    clearSell(); S.towers = S.towers.filter(x => x !== tw); S.star += back;
-    c.classList.remove('has'); delete c.dataset.fid; c.innerHTML = ''; sfx.tap(); updateHUD(); markCells(); return;
-  }
-  clearSell(); S.sell = tw.id;
-  const s = document.createElement('span'); s.className = 'sell'; s.textContent = t('t_sell', {n:back}); c.appendChild(s);
-  sellTimer = setTimeout(clearSell, 2600);
-}
-let coachTimer = 0;
-function coach(msg, ms){
-  clearTimeout(coachTimer); el.coach.textContent = msg || ''; el.coach.hidden = !msg;
-  if (msg && ms) coachTimer = setTimeout(() => { el.coach.hidden = true; }, ms);
-}
-
-/* ---------------- curses ---------------- */
-function weightedStage(w){ const r = Math.random(); return r < w[0] ? 1 : r < w[0] + w[1] ? 2 : 3; }
-function pickType(cfg){
-  const list = cfg.curses, ws = list.map(c => (CURSES[c].weight ?? 1) * (S.concerns.includes(c) ? 1.8 : 1)), sum = ws.reduce((a, b) => a + b, 0);
-  let r = Math.random() * sum; for (let i = 0; i < list.length; i++){ r -= ws[i]; if (r <= 0) return list[i]; } return list[list.length - 1];
-}
-const eyeType = type => CURSES[type].zones.some(z => ZONES[z].eye);
-function spawnCurse(){
-  const cfg = S.cfg, type = pickType(cfg), eye = eyeType(type);
-  const pool = eye ? EYE_LANES : Array.from({length:LANES}, (_, l) => l).filter(l => !isEye(l));
-  const count = l => S.curses.filter(c => c.lane === l).length;
-  const lane = Math.random() < .7 ? pool.slice().sort((a, b) => count(a) - count(b) || Math.random() - .5)[0] : pick(pool);
-  const stage = weightedStage(cfg.w), hp = [3, 6, 10][stage - 1] * cfg.hpK;
-  const c = {id:++S.seq, type, lane, eye, y:-.03, stage, hp, maxHp:hp, slowUntil:0, slowK:1, weak:{}, dead:false, el:null};
-  S.curses.push(c); S.spawned++; S.nightTypes[type] = (S.nightTypes[type] || 0) + 1;
-  if (!S.seen[type]){ S.seen[type] = true; whisper(type); }
-  const b = document.createElement('div'); b.className = 'mob spawn'; b.dataset.id = c.id; b.dataset.type = type; b.dataset.lane = lane; b.dataset.stage = stage;
-  b.style.setProperty('--mw', (L.mw * [.8, 1, 1.22][stage - 1]).toFixed(1) + 'px');
-  b.setAttribute('aria-label', `${tn('curse', type)} ${stage}/3`);
-  b.innerHTML = `<span class="in">${curseSVG(type)}<span class="hp"><i></i></span></span>`;
-  c.el = b; el.lanes.appendChild(b); placeMob(c); updateHUD();
-}
-function placeMob(c){ c.el.style.transform = `translate(${((c.lane + .5) * L.lw).toFixed(1)}px,${(c.y * L.lh).toFixed(1)}px)`; }
-function removeCurse(c, cls){
-  S.curses = S.curses.filter(o => o !== c); c.dead = true;
-  c.el.classList.add(cls); setTimeout(() => c.el.remove(), 600);
-}
-function center(c){ const r = c.el.getBoundingClientRect(); return {x:r.left + r.width / 2, y:r.top + r.height / 2}; }
-function popAt(c, text, cls = ''){ const p = center(c); const d = document.createElement('div'); d.className = 'pop ' + cls; d.textContent = text; d.style.left = p.x + 'px'; d.style.top = p.y + 'px'; document.body.appendChild(d); setTimeout(() => d.remove(), 950); }
-function sparks(c, color){
-  const p = center(c);
-  for (let i = 0; i < 8; i++){
-    const s = document.createElement('i'); s.className = 'spark'; s.style.left = p.x + 'px'; s.style.top = p.y + 'px'; s.style.setProperty('--c', color);
-    const a = i / 8 * Math.PI * 2, d = rnd(28, 60); s.style.setProperty('--dx', (Math.cos(a) * d).toFixed(0) + 'px'); s.style.setProperty('--dy', (Math.sin(a) * d).toFixed(0) + 'px');
-    document.body.appendChild(s); setTimeout(() => s.remove(), 650);
-  }
-}
+/* ---------------- field helpers ---------------- */
+const eyeType = c => c === 'eye_dark' || c === 'eye_line';
+const arcD = x => { const d = (x / L.bw - .5) / .38; return Math.min(1.6, d * d); };
+const leakY = x => L.top + L.drop * arcD(x);                       // the dome line: a curse that crosses it reaches Kiki
+const unitY = x => L.h - L.kh - L.us * .3 + L.drop * arcD(x);
+const up = (u, k) => u.up[k] || 0;
+const pw = u => 1 + .3 * up(u, 'power');
+const extra = i => i ? .6 : 1;                                   // every extra dart, capsule, beam or patch hits at 60%
+const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+const muzzle = u => ({x:u.x, y:u.y - L.us * .32});
+const vOf = m => (S.time < S.freezeUntil || S.time < m.stunUntil) ? 0 : (L.top + 10) / S.cfg.travel * m.v * (S.time < m.slowUntil ? m.slowK : 1);
+let G = null;
+const sfxAt = {};
+function sfxT(name, gap){ const n = performance.now(); if (n - (sfxAt[name] || 0) < gap * 1000) return; sfxAt[name] = n; sfx[name](); }
 function toast(msg, bad = false){
   const d = document.createElement('div'); d.className = 'toast' + (bad ? ' bad' : ''); d.textContent = msg; el.toasts.appendChild(d);
   while (el.toasts.children.length > 3) el.toasts.firstElementChild.remove();
@@ -1332,151 +1286,512 @@ function toast(msg, bad = false){
 let whisperTimer = 0;
 function whisper(type){
   const f = FAIRY_BY[CURSES[type].cure];
-  const old = $('.whisper', el.stage); if (old) old.remove();
-  $$('.fairy.hint', el.deck).forEach(c => c.classList.remove('hint'));
+  const old = $('.whisper', el.board); if (old) old.remove();
   const d = document.createElement('div'); d.className = 'whisper';
   d.innerHTML = `<span class="ic">${fairyIcon(f)}</span><span><b>${esc(tn('curse', type))}</b>${esc(tn('wh', type))}</span>`;
-  el.stage.appendChild(d);
-  const card = cardOf(f.id); if (card) card.classList.add('hint');
+  el.board.appendChild(d);
   clearTimeout(whisperTimer);
-  whisperTimer = setTimeout(() => { d.classList.add('out'); setTimeout(() => d.remove(), 320); if (card) card.classList.remove('hint'); }, 4200);
+  whisperTimer = setTimeout(() => { d.classList.add('out'); setTimeout(() => d.remove(), 320); }, 4200);
 }
-function brandPop(c){
-  if (!c.el || !c.el.isConnected) return;
-  const p = center(c); const d = document.createElement('div'); d.className = 'pop brand';
-  d.innerHTML = `<span class="logo-s88" style="height:14px"></span><span>glow ×${mult().toFixed(1)}</span>`;
-  d.style.left = p.x + 'px'; d.style.top = (p.y - 26) + 'px'; document.body.appendChild(d); setTimeout(() => d.remove(), 950);
-}
-function hearts(c){
-  const p = center(c);
+let coachTimer = 0;
+function coach(msg, ms = 0){ clearTimeout(coachTimer); el.coach.hidden = !msg; el.coach.textContent = msg || ''; if (msg && ms) coachTimer = setTimeout(() => { el.coach.hidden = true; }, ms); }
+function wince(){ el.facebox.style.setProperty('--wince', '1'); setTimeout(() => el.facebox.style.setProperty('--wince', '0'), 700); }
+function heartsAt(x, y){
+  const r = el.board.getBoundingClientRect();
   for (let i = 0; i < 5; i++){
     const h = document.createElement('i'); h.className = 'heart'; h.textContent = '♥';
-    h.style.left = (p.x + rnd(-30, 30)) + 'px'; h.style.top = p.y + 'px'; h.style.setProperty('--dx', rnd(-40, 40).toFixed(0) + 'px'); h.style.animationDelay = (i * 60) + 'ms';
+    h.style.left = (r.left + x + rnd(-30, 30)) + 'px'; h.style.top = (r.top + y) + 'px'; h.style.setProperty('--dx', rnd(-40, 40).toFixed(0) + 'px'); h.style.animationDelay = (i * 60) + 'ms';
     document.body.appendChild(h); setTimeout(() => h.remove(), 1700);
   }
 }
-function wince(){ el.facebox.style.setProperty('--wince', '1'); setTimeout(() => el.facebox.style.setProperty('--wince', '0'), 700); }
-function bumpCombo(){ el.combo.classList.add('bump'); setTimeout(() => el.combo.classList.remove('bump'), 150); }
+function burst(x, y, color, n, r){
+  for (let i = 0; i < n && S.parts.length < 240; i++){ const a = Math.random() * 6.283, v = rnd(.5, 1.6) * (r + 14); S.parts.push({x, y, vx:Math.cos(a) * v, vy:Math.sin(a) * v, t:0, T:rnd(.3, .6), c:color, s:rnd(2, 4.5)}); }
+  S.fxs.push({k:'ring', x, y, r:r * 1.5, t:0, T:.3, c:color});
+}
+function floatText(x, y, txt, tone){ if (S.texts.length > 40) S.texts.shift(); S.texts.push({x, y, txt, t:0, T:.7, c:tone > 0 ? '#FFE08A' : tone === -2 ? '#FF8FA3' : '#C9C3E6'}); }
+function mark(type){
+  const z = ZONES[pick(CURSES[type].zones)], x = z.cx + rnd(-.6, .6) * z.rx, y = z.cy + rnd(-.6, .6) * z.ry;
+  if (el.marks.children.length >= 14) el.marks.firstElementChild.remove();
+  el.marks.insertAdjacentHTML('beforeend', `<svg viewBox="0 0 64 64" style="left:${((x - 20) / 3.6).toFixed(1)}%;top:${((y - 14) / 4.46).toFixed(1)}%"><use href="#c-${type}"/></svg>`);
+}
 
-/* ---------------- resolution: fairies attack on their own ---------------- */
-function fxEl(cls, acc){ const d = document.createElement('i'); d.className = cls; d.style.setProperty('--acc', acc); el.lanes.appendChild(d); return d; }
-function shotFx(tw, c, acc, radius){
-  const x = (tw.lane + .5) * L.lw, y0 = towerY(tw) * L.lh, y1 = c.y * L.lh;
-  const d = fxEl('shot', acc); d.style.transform = `translate(${x.toFixed(1)}px,${y0.toFixed(1)}px)`;
-  requestAnimationFrame(() => { d.style.transform = `translate(${x.toFixed(1)}px,${y1.toFixed(1)}px)`; });
-  setTimeout(() => { d.remove(); if (radius) ringFx(x, y1, radius * 2 * L.lh, acc); }, 150);
+/* ---------------- curses ---------------- */
+function weightedStage(w){ const r = Math.random(); return r < w[0] ? 1 : r < w[0] + w[1] ? 2 : 3; }
+function pickType(cfg){
+  const list = cfg.curses, ws = list.map(c => (CURSES[c].weight ?? 1) * (S.concerns.includes(c) ? 1.8 : 1)), sum = ws.reduce((a, b) => a + b, 0);
+  let r = Math.random() * sum; for (let i = 0; i < list.length; i++){ r -= ws[i]; if (r <= 0) return list[i]; } return list[list.length - 1];
 }
-function ringFx(x, y, h, acc){
-  const b = fxEl('fx burst', acc); b.style.left = x + 'px'; b.style.top = y + 'px';
-  b.style.setProperty('--rw', (L.lw * .92).toFixed(0) + 'px'); b.style.setProperty('--rh2', Math.max(24, h).toFixed(0) + 'px'); setTimeout(() => b.remove(), 440);
+// curses are drawn on the canvas from sprites rasterised once from the SVG symbols (moving dozens of DOM nodes was the frame-rate bottleneck)
+const SPR = {}; let SPRC = {};
+function sprite(type, px){      // a copy at the exact pixel size on screen, so each frame is a plain blit
+  const key = type + ':' + px; let cv = SPRC[key];
+  if (!cv && SPR[type]){ cv = SPRC[key] = document.createElement('canvas'); cv.width = cv.height = px; cv.getContext('2d').drawImage(SPR[type], 0, 0, px, px); }
+  return cv;
 }
-function beamFx(tw, acc){ const b = fxEl('fx beam', acc); b.style.left = ((tw.lane + .5) * L.lw) + 'px'; setTimeout(() => b.remove(), 380); }
-let lastHitSound = 0;
-function hitSound(){ const n = performance.now(); if (n - lastHitSound > 130){ lastHitSound = n; sfx.tap(); } }
-function fire(tw, now){
-  const f = FAIRY_BY[tw.fid], def = TW[tw.fid], ty = towerY(tw);
-  const inLane = S.curses.filter(c => c.lane === tw.lane && c.y > 0);
-  const near = inLane.filter(c => Math.abs(c.y - ty) <= def.range);
-  if (!near.length) return;
-  const match = near.filter(c => f.vs.includes(c.type)), pool = match.length ? match : near;
-  let targets;
-  if (def.mode === 'beam'){ targets = near; beamFx(tw, f.acc); }
-  else if (def.mode === 'wave'){ targets = near; ringFx((tw.lane + .5) * L.lw, ty * L.lh, def.range * 2 * L.lh, f.acc); }
-  else {
-    let tg;
-    if (def.pick === 'strong') tg = pool.reduce((a, b) => b.hp > a.hp ? b : a);
-    else if (def.slow){ const fresh = pool.filter(c => now >= c.slowUntil); tg = (fresh.length ? fresh : pool).reduce((a, b) => b.y > a.y ? b : a); }
-    else tg = pool.reduce((a, b) => b.y > a.y ? b : a);
-    targets = def.mode === 'splash' ? inLane.filter(c => Math.abs(c.y - tg.y) <= def.radius) : [tg];
-    shotFx(tw, tg, f.acc, def.mode === 'splash' ? def.radius : 0);
+for (const c of ALL_CURSES){
+  const im = new Image();
+  im.onload = () => { const cv = document.createElement('canvas'); cv.width = cv.height = 320; cv.getContext('2d').drawImage(im, 0, 0, 320, 320); SPR[c] = cv; };
+  im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="320" height="320">${document.getElementById('c-' + c).innerHTML}</svg>`);
+}
+function spawnMob(boss){
+  const cfg = S.cfg;
+  const type = boss ? (S.concerns.find(c => cfg.curses.includes(c) && !eyeType(c)) || cfg.boss) : pickType(cfg);
+  const tier = boss ? 3 : weightedStage(cfg.w), eye = eyeType(type);
+  const size = (boss ? 44 : [11.5, 14.5, 18][tier - 1]) * L.u, r = size / 2;
+  const hp = boss ? cfg.bossHp : [5, 12, 26][tier - 1] * cfg.hpK * (eye ? .85 : 1);
+  const x = boss ? L.bw / 2 : rnd(r + 2 * L.u, L.bw - r - 2 * L.u);
+  const m = {id:++S.seq, type, tier, boss, eye, x, x0:x, y:-r, r, hp, max:hp, v:(boss ? .3 : [1.08, 1, .88][tier - 1]) * rnd(.93, 1.07),
+    sway:rnd(0, 6.28), swayA:boss ? 0 : rnd(1, 3.5) * L.u, slowUntil:0, slowK:1, stunUntil:0, flash:0, txtAt:-1, dmgOn:false};
+  S.curses.push(m); S.spawned++; S.nightTypes[type] = (S.nightTypes[type] || 0) + 1;
+  if (!S.seen[type]){ S.seen[type] = true; whisper(type); }
+  if (boss){ S.boss = m; el.bossName.textContent = tn('curse', type); el.bossHp.hidden = false; el.bossHp.lastElementChild.firstElementChild.style.setProperty('--hp', '1'); toast(t('boss_in'), true); sfx.trap(); }
+  S.dirty = true;
+}
+function slowMob(m, k, dur){
+  if (m.boss) k = 1 - (1 - k) * .5;
+  m.slowK = S.time < m.slowUntil ? Math.min(m.slowK, k) : k; m.slowUntil = Math.max(m.slowUntil, S.time + dur);
+}
+// damage rule: a fairy's own curses take double, eye-area curses shrug off everything but the eye fairies
+function hurt(m, raw, u, soft){
+  if (m.dead) return false;
+  let k = 1, tone = 0;
+  if (u){ const F = FAIRY_BY[u.fid]; if (m.eye && !F.eyeSafe){ k = .35; tone = -1; } else if (F.vs.includes(m.type)){ k = 2; tone = 1; } }
+  m.hp -= raw * k; if (!soft) m.flash = 1; m.dmgOn = true; if (m.boss) m.hpDirty = true;
+  if (tone && S.time - m.txtAt > .4){ m.txtAt = S.time; floatText(m.x + rnd(-6, 6), m.y - m.r - 2, tone > 0 ? '×2' : t('t_weak'), tone); }
+  if (m.hp <= 0){ kill(m, u); return true; }
+  return false;
+}
+function blast(x, y, r, dmg, u, color){
+  for (const m of S.curses){ if (!m.dead && Math.hypot(m.x - x, m.y - y) < r + m.r * .5) hurt(m, dmg, u); }
+  S.fxs.push({k:'ring', x, y, r, t:0, T:.35, c:color, fill:true});
+}
+function gone(m){ m.dead = true; S.curses = S.curses.filter(o => o !== m); if (S.focus === m.id) S.focus = 0; if (m.boss){ S.boss = null; el.bossHp.hidden = true; } S.dirty = true; }
+function kill(m, u){
+  gone(m);
+  S.score += m.boss ? 1500 : 50 * m.tier; S.nightCleared++; S.totalDispelled++;
+  if (u) S.hitsBy[u.fid] = (S.hitsBy[u.fid] || 0) + 1;
+  S.clearedBy[m.type] = (S.clearedBy[m.type] || 0) + 1;
+  burst(m.x, m.y, CURSES[m.type].color, m.boss ? 30 : 5 + m.tier * 2, m.r);
+  if (m.boss){ toast(t('boss_down')); sfx.power(); heartsAt(m.x, m.y); } else sfxT('dispel', .1);
+  if (u && u.fid === 'glow' && up(u, 'refract')) blast(m.x, m.y, (9 + 3 * up(u, 'refract')) * L.u, 4 * up(u, 'refract') * pw(u), u, '#FFC24A');
+  gainXp(m.boss ? 12 : m.tier);
+}
+function leak(m){
+  gone(m);
+  const d = m.boss ? 35 : [4, 6, 9][m.tier - 1] + (m.eye ? 1 : 0);
+  S.glow -= d; S.nightSet++; S.setCount++; S.domeHit = 1;
+  mark(m.type); wince(); sfxT('set', .15); floatText(m.x, leakY(m.x) - 10, '−' + d, -2);
+  for (let i = 0; i < 6 && S.parts.length < 240; i++) S.parts.push({x:m.x, y:m.y, vx:(L.bw / 2 - m.x) * rnd(.8, 1.6), vy:(L.h - L.kh * .5 - m.y) * rnd(.8, 1.6), t:0, T:.5, c:CURSES[m.type].color, s:rnd(3, 5)});
+}
+function gainXp(n){
+  S.xp += n;
+  while (S.xp >= S.need){ S.xp -= S.need; S.lvl++; S.need = needXp(S.lvl); S.pending.push('lv'); }
+  S.dirty = true;
+}
+
+/* ---------------- fairies ---------------- */
+function scoreFor(u, m){
+  const F = FAIRY_BY[u.fid];
+  let s = m.y / L.top - (m.boss ? .12 : 0);          // the curse closest to Kiki first; the giant one waits unless it is the nearest
+  if (F.vs.includes(m.type)) s += .3;                // then the fairy's own curses
+  if (m.eye) s += F.eyeSafe ? .4 : -.45;             // eye curses are left to the eye fairies when there is a choice
+  if (m.id === S.focus) s += 5;
+  return s;
+}
+function targets(u, n = 1){
+  return S.curses.filter(m => !m.dead && m.y > -m.r * .4).map(m => [scoreFor(u, m), m]).sort((a, b) => b[0] - a[0]).slice(0, n).map(x => x[1]);
+}
+function placeUnit(u){
+  u.x = SLOT_X[u.slot] / 100 * L.bw; u.y = unitY(u.x);
+  u.el.style.left = u.x.toFixed(1) + 'px'; u.el.style.top = u.y.toFixed(1) + 'px';
+}
+function renderSlots(){
+  $$('.slot', el.units).forEach(s => s.remove());
+  for (let i = S.units.length; i < MAX_UNITS; i++){ const s = document.createElement('i'); s.className = 'slot'; const x = SLOT_X[i] / 100 * L.bw; s.style.left = x.toFixed(1) + 'px'; s.style.top = unitY(x).toFixed(1) + 'px'; el.units.appendChild(s); }
+}
+function badge(u){ u.el.lastElementChild.textContent = 'Lv.' + (u.n + 1); }
+function addUnit(fid){
+  const f = FAIRY_BY[fid], u = {fid, slot:S.units.length, x:0, y:0, cd:.5, up:{}, n:0, el:null, rays:[]};
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'unit join'; b.dataset.fid = fid; b.style.setProperty('--acc', f.acc);
+  b.setAttribute('aria-label', `${f.name}: ${tn('mg', fid)}`);
+  b.innerHTML = fairyIcon(f) + '<span class="lv">Lv.1</span>';
+  u.el = b; el.units.appendChild(b); S.units.push(u); placeUnit(u); renderSlots();
+  setTimeout(() => b.classList.remove('join'), 760);
+  return u;
+}
+// one cast per fairy; returns false when there was nothing to aim at
+const CAST = {
+  cica(u){
+    const n = 1 + up(u, 'multi'), ts = targets(u, n); if (!ts.length) return false;
+    const o = muzzle(u);
+    for (let i = 0; i < n; i++) S.proj.push({k:'dart', x:o.x + (i - (n - 1) / 2) * 7, y:o.y, tgt:ts[i % ts.length], dx:0, dy:-1, sp:95 * L.u, dmg:MG.cica.dmg * pw(u) * extra(i), u, pierce:up(u, 'pierce'), hit:[], life:2.5});
+    return true;
+  },
+  nia(u){
+    const n = 1 + up(u, 'count'), ts = targets(u, n); if (!ts.length) return false;
+    const o = muzzle(u), r = MG.nia.r * L.u * (1 + .3 * up(u, 'size'));
+    for (let i = 0; i < n; i++){
+      const tg = ts[i % ts.length], T = .55 + i * .12, ox = i >= ts.length ? rnd(-6, 6) * L.u : 0;
+      S.proj.push({k:'cap', x:o.x, y:o.y, x0:o.x, y0:o.y, tx:tg.x + ox, ty:Math.min(tg.y + vOf(tg) * T, leakY(tg.x) - 4), t:0, T, dmg:MG.nia.dmg * pw(u) * extra(i), r, u, pool:!i && up(u, 'pool')});
+    }
+    return true;
+  },
+  retinal(u){
+    const n = 1 + up(u, 'twin'), ts = targets(u, n); if (!ts.length) return false;
+    const o = muzzle(u), w = MG.retinal.w * L.u * (1 + .5 * up(u, 'width')), len = L.h + L.bw;
+    for (let i = 0; i < n; i++){
+      const tg = ts[i % ts.length]; let dx = tg.x - o.x + (i >= ts.length ? rnd(-10, 10) * L.u : 0), dy = Math.min(-1, tg.y - o.y); const d = Math.hypot(dx, dy); dx /= d; dy /= d;
+      for (const m of S.curses){ if (m.dead) continue; const px = m.x - o.x, py = m.y - o.y; if (px * dx + py * dy < 0) continue; if (Math.abs(px * dy - py * dx) <= w / 2 + m.r * .8) hurt(m, MG.retinal.dmg * pw(u) * extra(i), u); }
+      S.fxs.push({k:'beam', x1:o.x, y1:o.y, x2:o.x + dx * len, y2:o.y + dy * len, w, t:0, T:.32});
+    }
+    sfxT('hit', .25); return true;
+  },
+  eyecream(u){
+    const n = MG.eyecream.n + up(u, 'count'), ts = targets(u, n); if (!ts.length) return false;
+    const o = muzzle(u);
+    for (let i = 0; i < n; i++){ const a = -Math.PI / 2 + (i - (n - 1) / 2) * .55; S.proj.push({k:'sprite', x:o.x, y:o.y, vx:Math.cos(a) * 34 * L.u, vy:Math.sin(a) * 34 * L.u, tgt:ts[i % ts.length], sp:64 * L.u, dmg:MG.eyecream.dmg * pw(u), u, bounce:up(u, 'bounce'), hit:[], life:4}); }
+    return true;
+  },
+  snail(u){
+    const tg = targets(u, 1)[0]; if (!tg) return false;
+    const r = MG.snail.r * L.u * (1 + .3 * up(u, 'size'));
+    S.zones.push({k:'puddle', x:tg.x, y:Math.min(tg.y + vOf(tg) * .6 + r * .5, leakY(tg.x) - r * .2), r, born:S.time, until:S.time + MG.snail.life + 2 * up(u, 'long'), dps:MG.snail.dps * pw(u), slow:up(u, 'sticky') ? .35 : .55, u});
+    return true;
+  },
+  foam(u){
+    const reach = MG.foam.reach * L.u * (1 + .25 * up(u, 'range'));
+    if (!S.curses.some(m => !m.dead && leakY(m.x) - m.y - m.r <= reach)) return false;
+    const mk = (delay, k) => S.zones.push({k:'tide', off:-delay * 75 * L.u, reach, sp:75 * L.u, dmg:MG.foam.dmg * pw(u) * k, knock:MG.foam.knock * L.u * (1 + .6 * up(u, 'knock')), u, hit:[]});
+    mk(0, 1); if (up(u, 'double')) mk(.45, .6);
+    return true;
+  },
+  eyepatch(u){
+    const n = MG.eyepatch.n + up(u, 'count'), ts = targets(u, n); if (!ts.length) return false;
+    const o = muzzle(u), r = MG.eyepatch.r * L.u * (1 + .3 * up(u, 'size'));
+    for (let i = 0; i < n; i++){
+      const tg = ts[i % ts.length], ty = tg.y + vOf(tg) * .5;
+      S.proj.push({k:'cres', x:o.x, y:o.y, x0:o.x, y0:o.y, tx:o.x + (tg.x - o.x) * 1.25, ty:Math.max(r, o.y + (ty - o.y) * 1.25), t:-i * .2, T:1.5, side:i % 2 ? -1 : 1, dmg:MG.eyepatch.dmg * pw(u) * extra(i >= MG.eyepatch.n ? 1 : 0), r, u, slow:up(u, 'slow'), hitA:[], hitB:[]});
+    }
+    return true;
+  },
+  ashot(u){
+    const live = S.curses.filter(m => !m.dead && m.y > 0); if (!live.length) return false;
+    const tg = live.find(m => m.id === S.focus) || live.slice().sort((a, b) => (b.hp * (b.eye ? .3 : 1)) - (a.hp * (a.eye ? .3 : 1)))[0];
+    const d = MG.ashot.dmg * pw(u), stun = up(u, 'stun') ? .8 : 0, done = [tg], pts = [{x:tg.x + rnd(-12, 12) * L.u, y:-12}, {x:tg.x, y:tg.y}];
+    const strike = (m, dmg) => { if (stun && !m.boss) m.stunUntil = Math.max(m.stunUntil, S.time + stun); hurt(m, dmg, u); };
+    strike(tg, d); let cur = tg;
+    for (let i = 0; i < 1 + up(u, 'chain'); i++){
+      const nx = S.curses.filter(m => !m.dead && !done.includes(m) && dist(m, cur) < 26 * L.u).sort((a, b) => dist(a, cur) - dist(b, cur))[0]; if (!nx) break;
+      done.push(nx); pts.push({x:nx.x, y:nx.y}); strike(nx, d * .6); cur = nx;
+    }
+    const jag = []; for (let i = 0; i < pts.length - 1; i++){ const a = pts[i], b = pts[i + 1], n = Math.max(2, Math.round(dist(a, b) / (7 * L.u))); for (let j = 0; j < n; j++){ const s = j / n; jag.push({x:a.x + (b.x - a.x) * s + (j ? rnd(-2.2, 2.2) * L.u : 0), y:a.y + (b.y - a.y) * s + (j ? rnd(-1.2, 1.2) * L.u : 0)}); } }
+    jag.push(pts[pts.length - 1]); S.fxs.push({k:'bolt', pts:jag, t:0, T:.3}); S.fxs.push({k:'ring', x:tg.x, y:tg.y, r:tg.r * 1.8, t:0, T:.3, c:'#B9A7FF'});
+    sfxT('trap', .3); return true;
+  },
+  txa(u){
+    const tg = targets(u, 1)[0]; if (!tg) return false;
+    const crit = Math.random() < .2 * up(u, 'crit'), exec = up(u, 'exec'); let d = MG.txa.dmg * pw(u) * (crit ? 2.5 : 1), from = muzzle(u), cur = tg; const done = [];
+    for (let i = 0; i <= up(u, 'rico') && cur; i++){
+      S.fxs.push({k:'needle', x1:from.x, y1:from.y, x2:cur.x, y2:cur.y, t:0, T:.18, crit});
+      if (crit && !i) floatText(cur.x, cur.y - cur.r - 14, t('t_crit'), 1);
+      if (!hurt(cur, d, u) && exec && !cur.boss && cur.hp < cur.max * .2) kill(cur, u);
+      done.push(cur); from = {x:cur.x, y:cur.y}; d *= .7;
+      cur = S.curses.filter(m => !m.dead && !done.includes(m) && dist(m, from) < 32 * L.u).sort((a, b) => dist(a, from) - dist(b, from))[0];
+    }
+    return true;
   }
-  tw.next = now + def.every;
-  const cell = cellOf(tw.lane, tw.row), tel = cell && cell.firstElementChild;
-  if (tel){ tel.classList.add('fire'); setTimeout(() => tel.classList.remove('fire'), 120); }
-  targets.forEach(c => hurt(c, def.dmg, tw.fid, def));
-  hitSound();
-}
-function hurt(c, base, fid, def){
-  if (c.dead) return;
-  const ok = FAIRY_BY[fid].vs.includes(c.type), now = S.time;
-  c.hp -= base * (ok ? 1 : .25);
-  if (def && def.slow){ c.slowUntil = now + def.slowFor; c.slowK = def.slow; }
-  if (!ok && !c.weak[fid]){ c.weak[fid] = 1; popAt(c, t('t_weak'), 'note'); }
-  if (c.hp <= 0){ dispel(c, fid); return; }
-  c.el.style.setProperty('--hp', Math.max(0, c.hp / c.maxHp * 100).toFixed(0) + '%');
-  c.el.classList.remove('hit'); void c.el.offsetWidth; c.el.classList.add('hit');
-}
-function dispel(c, fid){
-  if (c.dead) return;
-  const acc = (FAIRY_BY[fid] || POWER_BY[fid] || {}).acc || '#fff';
-  S.combo++; S.maxCombo = Math.max(S.maxCombo, S.combo); bumpCombo(); if (S.combo % 5 === 0) hearts(c); if (S.combo === 10 || S.combo === 20) brandPop(c);
-  const pts = Math.round(50 * c.stage * mult()); S.score += pts; S.star += 4 * c.stage;
-  S.nightCleared++; S.totalDispelled++; S.clearedBy[c.type] = (S.clearedBy[c.type] || 0) + 1;
-  if (FAIRY_BY[fid]) S.hitsBy[fid] = (S.hitsBy[fid] || 0) + 1;
-  popAt(c, `+${pts}`); sparks(c, acc); sfx.dispel(); removeCurse(c, 'gone'); updateHUD();
-}
-function leak(c){
-  S.glow -= [8, 12, 16][c.stage - 1] + (c.eye ? 2 : 0); S.nightSet++; S.setCount++; S.combo = 0;
-  popAt(c, t('t_set'), 'bad'); sfx.set(); wince(); addMark(c); removeCurse(c, 'leak'); updateHUD();
-}
-function addMark(c){
-  const z = ZONES[pick(CURSES[c.type].zones)];
-  while (el.marks.children.length >= 10) el.marks.firstElementChild.remove();
-  const m = document.createElement('i'); m.className = 'mark';
-  m.style.left = ((z.cx + rnd(-.6, .6) * z.rx - 20) / 360 * 100).toFixed(1) + '%'; m.style.top = ((z.cy + rnd(-.6, .6) * z.ry - 14) / 446 * 100).toFixed(1) + '%';
-  m.innerHTML = curseSVG(c.type); el.marks.appendChild(m);
-}
-function useSkill(fid){
-  if (!S.playing || S.paused) return;
-  const f = FAIRY_BY[fid], rt = S.f[fid];
-  if (!rt || rt.charges <= 0){ toast(t('t_noshots'), true); shake(fid); return; }
-  const tg = S.curses.filter(c => f.vs.includes(c.type) && c.y > 0).sort((a, b) => b.y - a.y).slice(0, 3);
-  if (!tg.length){ toast(t('t_noskill', {c:f.vs.map(x => tn('cursek', x)).join(' · ')})); shake(fid); return; }
-  rt.charges--; const card = cardOf(fid); if (card) $$('.charges i', card).forEach((i, k) => i.classList.toggle('used', k >= rt.charges));
-  tg.forEach(c => dispel(c, fid)); sfx.power(); toast(`${f.name} ×${tg.length}`);
-}
-function usePower(id){
-  if (!S.playing || S.paused) return;
-  if (S.powers[id] <= 0){ toast(t('t_used')); return; }
-  const now = S.time;
-  if (id === 'sleeping'){ S.powers[id]--; S.shieldUntil = now + 6; S.glow = Math.min(100, S.glow + 15); el.facebox.classList.add('shield'); toast(t('t_shield')); sfx.power(); }
-  if (id === 'hydrogel'){
-    const live = S.curses.filter(c => c.y > 0);
-    if (!live.length){ toast(t('t_nothing')); return; }
-    S.powers[id]--; const before = S.score;
-    live.forEach(c => { if (c.stage === 1) dispel(c, id); else { c.hp -= 3; if (c.hp <= 0) dispel(c, id); else { c.el.style.setProperty('--hp', (c.hp / c.maxHp * 100).toFixed(0) + '%'); sparks(c, POWER_BY.hydrogel.acc); } } });
-    toast(`${t('t_burst')} +${S.score - before}`); sfx.power();
+};
+function glowRay(u, dt){
+  const n = 1 + up(u, 'second'), cap = MG.glow.cap + up(u, 'cap');
+  for (let i = 0; i < n; i++){
+    const r = u.rays[i] || (u.rays[i] = {tgt:null, ramp:1});
+    if (!i && S.focus && (!r.tgt || r.tgt.id !== S.focus)){ const f = S.curses.find(m => m.id === S.focus); if (f){ r.tgt = f; r.ramp = 1; } }
+    if (!r.tgt || r.tgt.dead){ const used = u.rays.map(x => x.tgt); r.tgt = targets(u, n + 1).find(m => !used.includes(m)) || null; r.ramp = 1; }
+    if (!r.tgt) continue;
+    r.ramp = Math.min(cap, r.ramp + dt * .6);
+    if (hurt(r.tgt, MG.glow.dps * pw(u) * r.ramp * (i ? .6 : 1) * dt, u, true)) r.tgt = null;
   }
-  renderPowers(); updateHUD();
 }
+const FLY = {
+  dart(p, dt){
+    p.life -= dt; if (p.life <= 0) return false;
+    if (p.tgt && p.tgt.dead) p.tgt = p.pierced ? null : (targets(p.u, 1)[0] || null);
+    if (p.tgt){ const dx = p.tgt.x - p.x, dy = p.tgt.y - p.y, d = Math.hypot(dx, dy) || 1; p.dx = dx / d; p.dy = dy / d; }
+    p.x += p.dx * p.sp * dt; p.y += p.dy * p.sp * dt;
+    if (p.x < -20 || p.x > L.bw + 20 || p.y < -30 || p.y > L.h) return false;
+    for (const m of S.curses){
+      if (m.dead || p.hit.includes(m) || Math.hypot(m.x - p.x, m.y - p.y) >= m.r * .8 + 4) continue;
+      hurt(m, p.dmg, p.u); p.hit.push(m);
+      if (p.pierce > 0){ p.pierce--; p.pierced = true; p.tgt = null; break; }
+      return false;
+    }
+    return true;
+  },
+  cap(p, dt){
+    p.t += dt; const s = Math.min(1, p.t / p.T);
+    p.x = p.x0 + (p.tx - p.x0) * s; p.y = p.y0 + (p.ty - p.y0) * s - Math.sin(s * Math.PI) * 14 * L.u;
+    if (s < 1) return true;
+    blast(p.tx, p.ty, p.r, p.dmg, p.u, '#FFD25E');
+    if (p.pool) S.zones.push({k:'pool', x:p.tx, y:p.ty, r:p.r * .85, born:S.time, until:S.time + 3, dps:1.2 * pw(p.u), u:p.u});
+    sfxT('hit', .18); return false;
+  },
+  sprite(p, dt){
+    p.life -= dt; if (p.life <= 0) return false;
+    if (!p.tgt || p.tgt.dead) p.tgt = targets(p.u, 4).find(m => !p.hit.includes(m)) || null;
+    if (p.tgt){
+      const dx = p.tgt.x - p.x, dy = p.tgt.y - p.y, d = Math.hypot(dx, dy) || 1, k = Math.min(1, 6 * dt);
+      p.vx += (dx / d * p.sp - p.vx) * k; p.vy += (dy / d * p.sp - p.vy) * k;
+      if (d < p.tgt.r * .8 + 5){
+        const m = p.tgt; hurt(m, p.dmg, p.u); p.hit.push(m);
+        if (p.bounce <= 0) return false;
+        p.bounce--; p.dmg *= .75; p.tgt = S.curses.filter(o => !o.dead && !p.hit.includes(o)).sort((a, b) => dist(a, p) - dist(b, p))[0] || null;
+        if (!p.tgt) return false;
+      }
+    } else p.vy -= 30 * L.u * dt;
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    return p.y > -40 && p.y < L.h + 20;
+  },
+  cres(p, dt){
+    p.t += dt; if (p.t < 0) return true; const s = p.t / p.T; if (s >= 1) return false;
+    const out = s < .5, e = out ? 1 - (1 - s * 2) ** 2 : 1 - ((s - .5) * 2) ** 2;
+    const dx = p.tx - p.x0, dy = p.ty - p.y0, d = Math.hypot(dx, dy) || 1, bow = Math.sin(s * Math.PI * 2) * 9 * L.u * p.side;
+    p.x = p.x0 + dx * e - dy / d * bow; p.y = p.y0 + dy * e + dx / d * bow;
+    const hit = out ? p.hitA : p.hitB;
+    for (const m of S.curses){ if (m.dead || hit.includes(m) || Math.hypot(m.x - p.x, m.y - p.y) >= m.r * .8 + p.r) continue; hit.push(m); if (p.slow) slowMob(m, .6, 2); hurt(m, p.dmg, p.u); }
+    return true;
+  }
+};
 
 /* ---------------- loop ---------------- */
+function stepUnits(dt){
+  for (const u of S.units){
+    if (u.fid === 'glow'){ glowRay(u, dt); continue; }
+    u.cd -= dt; if (u.cd > 0) continue;
+    u.cd = S.curses.length && CAST[u.fid](u) ? MG[u.fid].every * Math.pow(.85, up(u, 'haste')) : .18;
+  }
+}
+function stepZones(dt, now){
+  const keep = [];
+  for (const z of S.zones){
+    if (z.k === 'tide'){
+      z.off += z.sp * dt; if (z.off >= z.reach) continue;
+      if (z.off >= 0) for (const m of S.curses){ if (m.dead || z.hit.includes(m) || leakY(m.x) - m.y - m.r > z.off) continue; z.hit.push(m); m.y = Math.max(-m.r, m.y - z.knock * (m.boss ? .25 : 1)); hurt(m, z.dmg, z.u); }
+      keep.push(z); continue;
+    }
+    if (now >= z.until) continue;
+    for (const m of S.curses){ if (m.dead || Math.hypot(m.x - z.x, m.y - z.y) >= z.r + m.r * .4) continue; if (z.slow) slowMob(m, z.slow, .2); hurt(m, z.dps * dt, z.u, true); }
+    keep.push(z);
+  }
+  S.zones = keep;
+}
+function stepMobs(dt, now){
+  const frozen = now < S.freezeUntil, base = (L.top + 10) / S.cfg.travel;
+  for (const m of S.curses){
+    if (m.dead) continue;
+    if (m.flash > 0) m.flash = Math.max(0, m.flash - dt * 7);
+    const sl = now < m.slowUntil; if (!sl) m.slowK = 1;
+    if (!frozen && now >= m.stunUntil){
+      m.y += base * m.v * (sl ? m.slowK : 1) * dt;
+      m.x = clamp(m.x0 + Math.sin(m.sway + m.y * .018) * m.swayA, m.r, L.bw - m.r);
+    }
+    if (m.hpDirty){ m.hpDirty = false; el.bossHp.lastElementChild.firstElementChild.style.setProperty('--hp', clamp(m.hp / m.max, 0, 1).toFixed(3)); }
+    if (m.y + m.r * .25 >= leakY(m.x)) leak(m);
+  }
+}
+function stepFx(dt){
+  S.proj = S.proj.filter(p => FLY[p.k](p, dt));
+  for (const a of [S.fxs, S.parts, S.texts]) for (const f of a) f.t += dt;
+  S.fxs = S.fxs.filter(f => f.t < f.T); S.texts = S.texts.filter(f => f.t < f.T);
+  S.parts = S.parts.filter(p => { p.x += p.vx * dt; p.y += p.vy * dt; return p.t < p.T; });
+}
+function step(dt){
+  if (S.pending.length){ showPick(); return; }
+  S.time += dt; const now = S.time, cfg = S.cfg, frozen = now < S.freezeUntil;
+  if (S.domeHit > 0) S.domeHit = Math.max(0, S.domeHit - dt * 3);
+  if (!frozen && S.spawned < S.total && now >= S.nextSpawn){
+    if (cfg.bossHp && !S.bossDone && S.spawned >= Math.floor(cfg.quota * .55)){ S.bossDone = true; spawnMob(true); }
+    else { spawnMob(false); if (S.spawned < S.total - (cfg.bossHp && !S.bossDone ? 1 : 0) && Math.random() < cfg.pair) spawnMob(false); }
+    S.nextSpawn = now + cfg.gap * rnd(.7, 1.3);
+  }
+  stepUnits(dt); stepFx(dt); stepZones(dt, now); stepMobs(dt, now);
+  if (S.dirty){ S.dirty = false; updateHUD(); }
+  if (S.glow <= 0){ S.glow = 0; updateHUD(); endGame('morning'); return; }
+  if (S.spawned >= S.total && S.curses.length === 0){ endNight(); return; }
+}
+function draw(){
+  if (!G) G = el.fx.getContext('2d');
+  const g = G, U = L.u; g.setTransform(L.dpr, 0, 0, L.dpr, 0, 0); g.clearRect(0, 0, L.bw, L.h); g.lineCap = 'round'; g.lineJoin = 'round';
+  const arc = off => { g.beginPath(); for (let i = 0; i <= 24; i++){ const x = L.bw * i / 24, y = leakY(x) + off; i ? g.lineTo(x, y) : g.moveTo(x, y); } };
+  // the dome over Kiki
+  const hitA = S.domeHit || 0, frozen = S.time < S.freezeUntil;
+  arc(L.us * .16); g.strokeStyle = 'rgba(255,214,224,.13)'; g.lineWidth = 10; g.stroke();
+  g.strokeStyle = hitA > 0 ? `rgba(255,143,163,${(.55 + .45 * hitA).toFixed(2)})` : frozen ? 'rgba(201,242,229,.95)' : 'rgba(255,214,224,.55)'; g.lineWidth = 2 + 3 * hitA; g.stroke();
+  // puddles, pools, waves
+  for (const z of S.zones){
+    if (z.k === 'tide'){
+      if (z.off < 0) continue; const a = 1 - z.off / z.reach;
+      arc(-z.off); g.strokeStyle = `rgba(126,214,208,${(.8 * a).toFixed(2)})`; g.lineWidth = 7; g.stroke();
+      g.fillStyle = `rgba(255,255,255,${(.85 * a).toFixed(2)})`;
+      for (let i = 0; i < 14; i++){ const x = L.bw * (i + .5) / 14, y = leakY(x) - z.off + Math.sin(i * 2.4 + z.off * .08) * 5; g.beginPath(); g.arc(x, y, 2.5 + (i % 3) * 1.3, 0, 6.283); g.fill(); }
+      continue;
+    }
+    const a = Math.min(1, (z.until - S.time) / .5, (S.time - z.born) / .2 + .2), pud = z.k === 'puddle';
+    g.fillStyle = pud ? `rgba(143,199,214,${(.32 * a).toFixed(2)})` : `rgba(255,193,60,${(.26 * a).toFixed(2)})`;
+    g.strokeStyle = pud ? `rgba(200,236,244,${(.75 * a).toFixed(2)})` : `rgba(255,224,138,${(.65 * a).toFixed(2)})`; g.lineWidth = 1.5;
+    g.beginPath(); g.ellipse(z.x, z.y, z.r, z.r * .82, 0, 0, 6.283); g.fill(); g.stroke();
+    g.fillStyle = `rgba(255,255,255,${(.5 * a).toFixed(2)})`; for (let i = 0; i < 4; i++){ const an = i * 1.7 + z.born, rr = z.r * (.3 + .13 * i); g.beginPath(); g.arc(z.x + Math.cos(an) * rr, z.y + Math.sin(an) * rr * .8, 1.5 + i % 2, 0, 6.283); g.fill(); }
+  }
+  // curses
+  const now = S.time;
+  for (const m of S.curses){
+    const sz = m.r * 2 * (1 - .14 * m.flash), sp = sprite(m.type, Math.max(8, Math.round(m.r * 2 * L.dpr)));
+    if (m.boss){ g.fillStyle = 'rgba(255,107,107,.18)'; g.beginPath(); g.arc(m.x, m.y, m.r * 1.12, 0, 6.283); g.fill(); }
+    if (sp) g.drawImage(sp, m.x - sz / 2, m.y - sz / 2, sz, sz); else { g.fillStyle = CURSES[m.type].color; g.beginPath(); g.arc(m.x, m.y, m.r * .7, 0, 6.283); g.fill(); }
+    if (m.eye){ g.setLineDash([5, 4]); g.strokeStyle = '#C9A7F0'; g.lineWidth = 2; g.beginPath(); g.arc(m.x, m.y, m.r * 1.07, 0, 6.283); g.stroke(); g.setLineDash([]); }
+    if (frozen || now < m.slowUntil || now < m.stunUntil){ g.fillStyle = frozen ? 'rgba(214,244,236,.42)' : 'rgba(143,199,214,.4)'; g.beginPath(); g.arc(m.x, m.y, m.r * .84, 0, 6.283); g.fill(); }
+    if (m.id === S.focus){ g.strokeStyle = '#FF8FA3'; g.lineWidth = 2.5; g.beginPath(); g.arc(m.x, m.y, m.r * 1.2, 0, 6.283); g.stroke(); }
+    if (m.dmgOn && !m.boss){ const w = m.r * 1.5, x0 = m.x - w / 2, y0 = m.y + m.r + 3; g.fillStyle = 'rgba(20,18,36,.65)'; g.fillRect(x0, y0, w, 4); g.fillStyle = '#FF8FA3'; g.fillRect(x0, y0, w * clamp(m.hp / m.max, 0, 1), 4); }
+  }
+  // Yuja's rays
+  for (const u of S.units){
+    if (u.fid !== 'glow') continue; const o = muzzle(u), cap = MG.glow.cap + up(u, 'cap');
+    for (const r of u.rays){ if (!r.tgt || r.tgt.dead) continue; const w = 2 + 4 * (r.ramp - 1) / (cap - 1), m = r.tgt;
+      g.strokeStyle = 'rgba(255,186,66,.85)'; g.lineWidth = w; g.beginPath(); g.moveTo(o.x, o.y); g.lineTo(m.x, m.y); g.stroke();
+      g.strokeStyle = 'rgba(255,255,255,.9)'; g.lineWidth = w * .35; g.stroke();
+      g.fillStyle = 'rgba(255,236,190,.85)'; g.beginPath(); g.arc(m.x, m.y, w * 1.4 + Math.sin(S.time * 30) * 1.5, 0, 6.283); g.fill(); }
+  }
+  for (const f of S.fxs){
+    const a = 1 - f.t / f.T; g.globalAlpha = a;
+    if (f.k === 'ring'){ const rr = f.r * (.35 + .65 * f.t / f.T); g.beginPath(); g.arc(f.x, f.y, rr, 0, 6.283); if (f.fill){ g.globalAlpha = a * .35; g.fillStyle = f.c; g.fill(); g.globalAlpha = a; } g.strokeStyle = f.c; g.lineWidth = 3; g.stroke(); }
+    else if (f.k === 'beam'){ g.beginPath(); g.moveTo(f.x1, f.y1); g.lineTo(f.x2, f.y2); g.strokeStyle = '#E8607E'; g.lineWidth = f.w * (.5 + .5 * a); g.stroke(); g.strokeStyle = '#FFE3EA'; g.lineWidth = f.w * .3 * a + 1; g.stroke(); }
+    else if (f.k === 'bolt'){ g.beginPath(); f.pts.forEach((p, i) => i ? g.lineTo(p.x, p.y) : g.moveTo(p.x, p.y)); g.strokeStyle = '#A995FF'; g.lineWidth = 5; g.stroke(); g.strokeStyle = '#fff'; g.lineWidth = 1.8; g.stroke(); }
+    else if (f.k === 'needle'){ g.beginPath(); g.moveTo(f.x1, f.y1); g.lineTo(f.x2, f.y2); g.strokeStyle = f.crit ? '#FFE08A' : '#FF9FB5'; g.lineWidth = f.crit ? 4.5 : 2.5; g.stroke(); g.strokeStyle = '#fff'; g.lineWidth = 1; g.stroke(); }
+  }
+  g.globalAlpha = 1;
+  for (const p of S.proj){
+    if (p.k === 'dart'){ g.save(); g.translate(p.x, p.y); g.rotate(Math.atan2(p.dy, p.dx)); g.fillStyle = '#8FD08A'; g.beginPath(); g.ellipse(0, 0, 1.9 * U + 2, .7 * U + 1.2, 0, 0, 6.283); g.fill(); g.strokeStyle = '#E9F8E2'; g.lineWidth = 1.2; g.beginPath(); g.moveTo(-1.6 * U, 0); g.lineTo(1.6 * U, 0); g.stroke(); g.restore(); }
+    else if (p.k === 'cap'){ g.strokeStyle = 'rgba(255,210,94,.35)'; g.lineWidth = 1.5; g.beginPath(); g.arc(p.tx, p.ty, p.r * .5, 0, 6.283); g.stroke(); g.fillStyle = '#FFD25E'; g.beginPath(); g.arc(p.x, p.y, 1.5 * U + 2, 0, 6.283); g.fill(); g.fillStyle = 'rgba(255,255,255,.85)'; g.beginPath(); g.arc(p.x - .5 * U, p.y - .5 * U, .5 * U + .8, 0, 6.283); g.fill(); }
+    else if (p.k === 'sprite'){ const v = Math.hypot(p.vx, p.vy) || 1; for (let i = 2; i >= 0; i--){ g.fillStyle = i ? `rgba(217,204,255,${.5 - i * .15})` : '#E7DEFF'; g.beginPath(); g.arc(p.x - p.vx / v * i * 1.3 * U, p.y - p.vy / v * i * 1.3 * U, (1.3 - i * .3) * U + 1.5, 0, 6.283); g.fill(); } g.fillStyle = '#fff'; g.beginPath(); g.arc(p.x, p.y, .5 * U + .6, 0, 6.283); g.fill(); }
+    else if (p.k === 'cres' && p.t >= 0){ g.save(); g.translate(p.x, p.y); g.rotate(p.t * 11 * p.side); const r = p.r; g.beginPath(); g.moveTo(0, -r); g.quadraticCurveTo(-1.7 * r, 0, 0, r); g.quadraticCurveTo(-.65 * r, 0, 0, -r); g.fillStyle = '#F2C14E'; g.fill(); g.strokeStyle = '#FFF1B8'; g.lineWidth = 1.5; g.stroke(); g.restore(); }
+  }
+  for (const p of S.parts){ g.globalAlpha = 1 - p.t / p.T; g.fillStyle = p.c; g.beginPath(); g.arc(p.x, p.y, p.s * (1 - .5 * p.t / p.T), 0, 6.283); g.fill(); }
+  g.textAlign = 'center'; g.font = `700 ${Math.round(11 + U * 1.1)}px Fredoka, Jua, sans-serif`; g.lineWidth = 3; g.strokeStyle = 'rgba(20,18,36,.7)';
+  for (const f of S.texts){ g.globalAlpha = Math.min(1, (1 - f.t / f.T) * 1.6); const y = f.y - f.t * 46; g.strokeText(f.txt, f.x, y); g.fillStyle = f.c; g.fillText(f.txt, f.x, y); }
+  g.globalAlpha = 1;
+}
 function tick(ts){
   if (!S.playing) return;
-  const dt = Math.min(.05, (ts - S.lastTick) / 1000) * SPEED; S.lastTick = ts;
+  const real = Math.min(.05, (ts - S.lastTick) / 1000); S.lastTick = ts;
   if (!S.paused){
-    S.time += dt; const now = S.time, cfg = S.cfg, shielded = now < S.shieldUntil;
-    if (!shielded && el.facebox.classList.contains('shield')) el.facebox.classList.remove('shield');
-    S.starAcc += dt; if (S.starAcc >= 2){ S.starAcc -= 2; S.star++; updateAfford(); }
-    const hold = S.night === 1 && !S.towers.length && now < 10;
-    if (!hold && S.spawned < cfg.quota && S.curses.length < 16 && now >= S.nextSpawn){ spawnCurse(); S.nextSpawn = now + cfg.spawn * rnd(.8, 1.2); }
-    for (const c of [...S.curses]){
-      const slowed = now < c.slowUntil;
-      if (!shielded) c.y += dt / cfg.travel * [1.12, 1, .85][c.stage - 1] * (slowed ? c.slowK : 1);
-      if (c.slow !== slowed){ c.slow = slowed; c.el.classList.toggle('slow', slowed); }
-      if (c.frozen !== shielded){ c.frozen = shielded; c.el.classList.toggle('frozen', shielded); }
-      if (c.y >= 1) leak(c); else placeMob(c);
-    }
-    for (const tw of S.towers) if (now >= tw.next) fire(tw, now);
-    if (S.glow <= 0){ S.glow = 0; updateHUD(); endGame('morning'); return; }
-    if (S.spawned >= cfg.quota && S.curses.length === 0){ endNight(); return; }
+    let rest = real * S.speed * SPEED;
+    while (rest > 1e-6 && S.playing && !S.paused){ const h = Math.min(.04, rest); step(h); rest -= h; }
+    if (S.playing) draw();
   }
-  S.raf = requestAnimationFrame(tick);
+  if (S.playing) S.raf = requestAnimationFrame(tick);
 }
 
+/* ---------------- level-up cards ---------------- */
+function poolTypes(){ const a = new Set(S.cfg.curses); defCfg(S.night + 1).curses.forEach(c => a.add(c)); return a; }
+function rollCards(reason){
+  const tonight = S.cfg.curses, owned = S.units.map(u => u.fid), pool = poolTypes();
+  const covered = c => S.units.some(u => FAIRY_BY[u.fid].vs.includes(c));
+  const hasEye = S.units.some(u => FAIRY_BY[u.fid].eyeSafe);
+  const cand = [];
+  if (owned.length < MAX_UNITS){
+    const last = owned.length === MAX_UNITS - 1;
+    for (const f of FAIRIES){
+      if (owned.includes(f.id) || !f.vs.some(c => pool.has(c)) || (reason === 'first' && !f.vs.some(c => tonight.includes(c)))) continue;
+      if (last && !hasEye && !f.eyeSafe && S.night >= 2) continue;        // the last seat is kept for an eye fairy
+      const fresh = f.vs.some(c => tonight.includes(c) && !covered(c));
+      let w = fresh ? 2.6 : f.vs.some(c => tonight.includes(c)) ? 1 : .45;
+      if (f.vs.some(c => S.concerns.includes(c))) w *= 1.7;
+      if (f.eyeSafe && !hasEye && tonight.some(eyeType)) w *= 3;
+      cand.push({kind:'new', fid:f.id, w, rec:fresh});
+    }
+  }
+  if (reason !== 'first'){
+    for (const u of S.units) for (const [key, max] of UPG[u.fid]) if (up(u, key) < max) cand.push({kind:'up', fid:u.fid, key, max, w:FAIRY_BY[u.fid].vs.some(c => tonight.includes(c)) ? 1.3 : 1});
+    const need = (100 - S.glow) / 40;
+    if (S.night >= 2 || S.glow < 60){ cand.push({kind:'kiki', id:'sleeping', w:.3 + need}); cand.push({kind:'kiki', id:'hydrogel', w:.3 + need * .7}); }
+  }
+  const out = [], take = c => { out.push(c); cand.splice(cand.indexOf(c), 1); };
+  const wt = c => c.w * (c.fid && out.some(o => o.fid === c.fid) ? .25 : 1);      // spread the three cards over different fairies
+  const wpick = list => { let r = Math.random() * list.reduce((a, c) => a + wt(c), 0); for (const c of list){ r -= wt(c); if (r <= 0) return c; } return list[list.length - 1]; };
+  const news = () => cand.filter(c => c.kind === 'new');
+  if (reason !== 'lv'){ const rec = news().filter(c => c.rec); if (rec.length) take(wpick(rec)); }
+  else if (owned.length < 3 && news().length) take(wpick(news()));
+  if (reason !== 'first'){ const ups = cand.filter(c => c.kind === 'up'); if (ups.length) take(wpick(ups)); }
+  while (out.length < 3 && cand.length) take(wpick(cand));
+  while (out.length < 3) out.push({kind:'kiki', id:'nap'});
+  for (let i = out.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
+  return out;
+}
+function teamRow(){
+  return `<div class="teamrow" aria-label="${esc(t('team'))}">${Array.from({length:MAX_UNITS}, (_, i) => { const u = S.units[i]; if (!u) return '<span class="tm empty"></span>'; const f = FAIRY_BY[u.fid]; return `<span class="tm" style="--acc:${f.acc}">${fairyIcon(f)}${u.n ? `<i>+${u.n}</i>` : ''}</span>`; }).join('')}</div>`;
+}
+function cardHTML(c, i){
+  const key = `<span class="key">${i + 1}</span>`;
+  if (c.kind === 'kiki'){
+    const p = POWER_BY[c.id], acc = p ? p.acc : '#FFD6E0';
+    return `<button type="button" class="pcard" data-card="${i}" data-kind="kiki" data-id="${c.id}" style="--acc:${acc};--i:${i}">${key}<span class="ic">${p ? fairyIcon(p) : '<svg class="kc" viewBox="20 14 360 446" aria-hidden="true"><use href="#kiki" width="400" height="520"/></svg>'}</span>
+      <span class="tagrow"><span class="tg">${esc(t('tag_kiki'))}</span></span><h3>${esc(tn('kc', c.id)[0])}${p ? `<small>${esc(p.prod[lang] || p.prod.en)}</small>` : ''}</h3><p>${esc(tn('kc', c.id)[1])}</p></button>`;
+  }
+  const f = FAIRY_BY[c.fid];
+  if (c.kind === 'new') return `<button type="button" class="pcard" data-card="${i}" data-kind="new" data-id="${f.id}" data-rec="${c.rec ? 1 : 0}" style="--acc:${f.acc};--i:${i}">${key}<span class="ic">${fairyIcon(f)}</span>
+    <span class="tagrow"><span class="tg">${esc(t('tag_new'))}</span>${c.rec ? `<span class="tg rec">${esc(t('tag_rec'))}</span>` : ''}</span>
+    <h3>${esc(f.name)}<small>${esc(tn('mg', f.id))}</small></h3><p>${esc(tn('mgd', f.id))}</p>
+    <span class="vsrow">${f.vs.map(v => `<svg viewBox="0 0 64 64" aria-hidden="true"><use href="#c-${v}"/></svg>`).join('')}<span>${esc(f.vs.map(v => tn('cursek', v)).join(' · '))} ×2</span></span></button>`;
+  const u = S.units.find(x => x.fid === c.fid), s = tn('upg', c.fid + '.' + c.key), cur = up(u, c.key);
+  return `<button type="button" class="pcard" data-card="${i}" data-kind="up" data-id="${f.id}" data-key="${c.key}" style="--acc:${f.acc};--i:${i}">${key}<span class="ic">${fairyIcon(f)}</span>
+    <span class="tagrow"><span class="tg">${esc(t('tag_up'))}</span><span class="pips">${Array.from({length:c.max}, (_, k) => `<i class="${k <= cur ? 'on' : ''}"></i>`).join('')}</span></span>
+    <h3>${esc(s[0])}<small>${esc(f.name)} · ${esc(tn('mg', f.id))}</small></h3><p>${esc(s[1])}</p></button>`;
+}
+function showPick(){
+  const reason = S.pending[0], n = S.night;
+  S.paused = true; S.screen = 'pick'; S.cards = rollCards(reason);
+  let head;
+  if (reason === 'lv') head = `<div class="eyebrow">${esc(t('pick_lv_e'))}</div><h2 class="h-display">${esc(t('pick_lv_t', {n:S.lvl - S.pending.filter(p => p === 'lv').length + 1}))}</h2><p>${esc(t('pick_s'))}</p>`;
+  else {
+    const prev = n > 1 ? defCfg(n - 1).curses : [], newC = S.cfg.curses.filter(c => !prev.includes(c));
+    head = `<div class="eyebrow">${esc(n <= 7 ? `${t('night', {n})} · ${t('day')[n - 1]} · ${t('nt')[n - 1]}` : `${t('night', {n})} · ${t('endless')}`)}</div>
+      <p class="quote">“${esc(n <= 7 ? t('nq')[n - 1] : t('nq8'))}”</p>
+      ${newC.length ? `<div class="newc">${esc(t('new_c'))}${newC.map(c => `<span><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#c-${c}"/></svg>${esc(tn('cursek', c))}</span>`).join('')}</div>` : ''}
+      <h2 class="h-display">${esc(t(reason === 'first' ? 'pick_first_t' : 'pick_night_t'))}</h2><p>${esc(t(reason === 'first' ? 'pick_first_s' : 'pick_s'))}</p>`;
+  }
+  openScreen(`<div class="pickwrap"><div class="pickhead">${head}${reason === 'first' ? '' : teamRow()}</div><div class="cards locked" id="cards">${S.cards.map(cardHTML).join('')}</div></div>`, 'pick');
+  setTimeout(() => { const c = $('#cards'); if (c) c.classList.remove('locked'); }, 520);
+  if (reason === 'lv') sfx.night();
+}
+function kikiCard(id){
+  if (id === 'sleeping'){ S.freezeUntil = S.time + 5; S.glow = Math.min(100, S.glow + 20); toast(t('t_shield')); }
+  else if (id === 'hydrogel'){
+    const d = 14 * S.cfg.hpK; for (const m of S.curses) hurt(m, m.boss ? d * 2 : d, null);
+    S.fxs.push({k:'ring', x:L.bw / 2, y:L.h - L.kh, r:L.h, t:0, T:.7, c:'#E7A9C0', fill:true});
+    S.glow = Math.min(100, S.glow + 10); toast(t('t_burst'));
+  } else S.glow = Math.min(100, S.glow + 15);
+  heartsAt(L.bw / 2, L.h - L.kh * .6);
+}
+function pickCard(i){
+  const c = S.cards && S.cards[i], box = $('#cards'); if (!c || S.screen !== 'pick' || !box || box.classList.contains('locked')) return;
+  S.cards = null; const reason = S.pending.shift(); closeScreen(); S.paused = false; S.screen = 'play'; S.lastTick = performance.now(); S.picks++;
+  if (c.kind === 'new'){ addUnit(c.fid); toast(`${FAIRY_BY[c.fid].name} · ${tn('mg', c.fid)}`); }
+  else if (c.kind === 'up'){ const u = S.units.find(x => x.fid === c.fid); u.up[c.key] = up(u, c.key) + 1; u.n++; badge(u); u.el.classList.remove('up'); void u.el.offsetWidth; u.el.classList.add('up'); toast(`${FAIRY_BY[c.fid].name} · ${tn('upg', c.fid + '.' + c.key)[0]}`); }
+  else kikiCard(c.id);
+  sfx.power(); updateHUD();
+  if (reason === 'first') coach(t('coach_focus'), 5200);
+}
+function teamHTML(){
+  if (!S.units.length) return '';
+  return `<div><div class="eyebrow" style="margin-bottom:8px">${esc(t('team'))} · ${S.units.length}/${MAX_UNITS}</div><div class="team">${S.units.map(u => { const f = FAIRY_BY[u.fid]; const ups = UPG[u.fid].filter(([k]) => up(u, k)).map(([k]) => `${tn('upg', u.fid + '.' + k)[0]}${up(u, k) > 1 ? ' ×' + up(u, k) : ''}`); return `<div class="tu" style="--acc:${f.acc}"><span class="ic">${fairyIcon(f)}</span><span style="min-width:0"><b>${esc(f.name)} · ${esc(tn('mg', u.fid))}</b><small>${esc(ups.length ? ups.join(' · ') : tn('mgd', u.fid))}</small></span></div>`; }).join('')}</div></div>`;
+}
+
+if (new URLSearchParams(location.search).has('debug')) window.__kiki = {S, MG, UPG, get L(){ return L; }, targets, hurt, rollCards, addUnit, kikiCard, spawnMob, step, draw, speed(n){ SPEED = n; }};   // test hook
 /* ---------------- flow ---------------- */
+function clearField(){ el.marks.innerHTML = ''; $$('.whisper', el.board).forEach(w => w.remove()); coach(''); el.bossHp.hidden = true; }
 function newGame(){
-  Object.assign(S, {night:0, score:0, combo:0, maxCombo:0, glow:100, nightsDone:0, totalDispelled:0, setCount:0, startAt:Date.now(), time:0, deck:[], f:{}, powers:{}, hitsBy:{}, ended:null, selected:null, lastEntry:null, concerns:[], seen:{}, nightTypes:{}, clearedBy:{}, shareUrl:null, towers:[], star:120, starAcc:0, sell:null, eyeOpen:false, curses:[]});
+  Object.assign(S, {night:0, score:0, combo:0, maxCombo:0, glow:100, nightsDone:0, totalDispelled:0, setCount:0, startAt:Date.now(), time:0, hitsBy:{}, ended:null, lastEntry:null, concerns:[], seen:{}, nightTypes:{}, clearedBy:{}, shareUrl:null,
+    units:[], curses:[], xp:0, lvl:1, need:needXp(1), pending:[], picks:0, cards:null, proj:[], zones:[], fxs:[], parts:[], texts:[], focus:0, boss:null});
+  el.units.innerHTML = ''; clearField();
   showConcerns();
 }
 function showConcerns(){
@@ -1489,36 +1804,27 @@ function showConcerns(){
     <div class="concerns" id="concerns">${ALL_CURSES.map(c => `<button type="button" class="concern ${S.concerns.includes(c) ? 'on' : ''}" data-concern="${c}"><svg viewBox="0 0 64 64"><use href="#c-${c}"/></svg>${esc(tn('cursek', c))}<small>→ ${esc(FAIRY_BY[CURSES[c].cure].name)}</small></button>`).join('')}</div>
     <div class="row between">${btn(t('concern_skip'), 'concernSkip', 'sm')}${btn(t('concern_go'), 'concernGo', 'primary')}</div></div>`);
 }
-function nextNight(){
-  S.night++; S.cfg = defCfg(S.night); S.eyeOpen = S.cfg.curses.some(eyeType);
-  const newF = S.cfg.unlock.filter(id => !S.deck.includes(id));
-  newF.forEach(id => { S.deck.push(id); });
-  // new fairies bring Stardust so the player can try them right away (Bean brings double: two EYE lanes open at once)
-  S.gift = S.night > 1 ? newF.reduce((a, id) => a + (TW[id] ? TW[id].cost * (id === 'eyecream' ? 2 : 1) : 0), 0) : 0; S.star += S.gift;
-  S.deck.forEach(id => { S.f[id] = {cdUntil:0, stunUntil:0, charges:FAIRY_BY[id].shots || null}; });
-  if (S.cfg.power) S.powers[S.cfg.power] = 1; else Object.keys(S.powers).forEach(k => S.powers[k] = 1);
-  showNightIntro(newF);
-}
-function startNight(newF){
-  closeScreen(); el.marks.innerHTML = ''; clearSell(); $$('.whisper', el.stage).forEach(w => w.remove());
-  Object.assign(S, {curses:[], spawned:0, nightCleared:0, nightSet:0, time:0, nextSpawn:1.0, shieldUntil:0, selected:null, playing:true, paused:false, screen:'play', nightTypes:{}});
-  S.deck.forEach(id => { S.f[id] = {cdUntil:0, stunUntil:0, charges:FAIRY_BY[id].shots || null}; });
-  el.facebox.classList.remove('shield'); el.wand.classList.remove('on');
-  S.towers.forEach(tw => { tw.next = .3; }); S.starAcc = 0;
-  renderDeck(newF); layout(); renderBoard(); updateHUD(); sfx.night();
-  coach(S.night === 1 && !S.towers.length ? t('coach1') : S.night === 3 ? t('coach_eye') : '', S.night === 3 ? 5200 : 0);
+function nextNight(){ S.night++; S.cfg = defCfg(S.night); startNight(); }
+function startNight(){
+  closeScreen(); clearField();
+  Object.assign(S, {curses:[], spawned:0, nightCleared:0, nightSet:0, time:0, nextSpawn:1.2, freezeUntil:0, playing:true, paused:false, screen:'play', nightTypes:{},
+    proj:[], zones:[], fxs:[], parts:[], texts:[], focus:0, boss:null, bossDone:false, domeHit:0, total:S.cfg.quota + (S.cfg.bossHp ? 1 : 0)});
+  S.units.forEach(u => { u.cd = .5 + u.slot * .15; u.rays = []; });
+  S.pending = S.pending.filter(p => p === 'lv'); S.pending.unshift(S.units.length ? 'night' : 'first');
+  layout(); updateHUD(); draw(); sfx.night();
   S.lastTick = performance.now(); cancelAnimationFrame(S.raf); S.raf = requestAnimationFrame(tick);
 }
 function endNight(){
-  S.playing = false; cancelAnimationFrame(S.raf); S.nightsDone = S.night; S.selected = null; el.wand.classList.remove('on'); markCells();
+  S.playing = false; cancelAnimationFrame(S.raf); S.nightsDone = S.night;
   const perfect = S.nightSet === 0, bonus = 500 * S.night + (perfect ? 1000 : 0);
-  S.score += bonus; S.star += 30; clearSell(); coach(''); const before = S.glow; S.glow = Math.min(100, S.glow + (perfect ? 20 : 10));
+  S.score += bonus; const before = S.glow; S.glow = Math.min(100, S.glow + (perfect ? 20 : 10));
+  S.proj = []; S.zones = []; draw(); coach(''); el.toasts.innerHTML = '';
   updateHUD(); showSummary({perfect, bonus, before});
 }
 function endGame(reason){
-  S.playing = false; cancelAnimationFrame(S.raf); S.ended = reason; S.selected = null; el.wand.classList.remove('on');
+  S.playing = false; cancelAnimationFrame(S.raf); S.ended = reason; S.cards = null; coach(''); el.toasts.innerHTML = '';
   if (reason === 'morning') sfx.over();
-  const best = +(store.get('kiki_best') || 0); if (S.score > best) store.set('kiki_best', String(S.score));
+  const best = +(store.get('kiki_best_def') || 0); if (S.score > best) store.set('kiki_best_def', String(S.score));
   showResults();
 }
 
@@ -1529,7 +1835,7 @@ function btn(label, id, cls = '') { return `<button type="button" class="btn ${c
 
 function showTitle(){
   S.screen = 'title'; S.playing = false; cancelAnimationFrame(S.raf);
-  const best = +(store.get('kiki_best') || 0);
+  const best = +(store.get('kiki_best_def') || 0);
   openScreen(`
     <div class="title-bg" id="titleBg"><div class="moon" style="top:10%;right:12%"></div></div>
     <div class="title-wrap">
@@ -1558,7 +1864,7 @@ function showHowto(){
         <div class="viz"><span class="hv">${fairyIcon(f1)}</span><span class="arrow">→</span><svg viewBox="0 0 64 64"><use href="#c-acne"/></svg></div>
         <h3>${esc(t('h1t'))}</h3><p>${esc(t('h1'))}</p></div>
       <div class="step"><div class="n">2</div>
-        <div class="viz"><svg viewBox="0 0 64 64" style="height:46px"><use href="#c-spot"/></svg><svg viewBox="0 0 64 64" style="height:58px"><use href="#c-spot"/></svg><svg viewBox="0 0 64 64" style="height:70px"><use href="#c-spot"/></svg></div>
+        <div class="viz"><span class="howcards"><span>${fairyIcon(FAIRY_BY.nia)}</span><span class="on">${fairyIcon(FAIRY_BY.retinal)}</span><span>${fairyIcon(FAIRY_BY.snail)}</span></span></div>
         <h3>${esc(t('h2t'))}</h3><p>${esc(t('h2'))}</p></div>
       <div class="step"><div class="n">3</div>
         <div class="viz"><svg viewBox="0 0 64 64"><use href="#c-eye_dark"/></svg><span class="arrow">←</span><span class="hv">${fairyIcon(f2)}</span></div>
@@ -1570,9 +1876,9 @@ function showCodex(){
   const card = (f, pu) => `<div class="cx" style="--acc:${f.acc}">
     <div class="ic">${fairyIcon(f)}</div>
     <div style="min-width:0">
-      <h3>${esc(pu ? tn('power', f.id) : f.name)} ${pu ? `<span class="pill acc">${esc(t('cx_pu'))}</span>` : `<span class="pill acc">${esc(tn('tr', f.id))}</span>${TW[f.id] ? `<span class="pill">${esc(t('cx_cost', {n:TW[f.id].cost}))}</span>` : ''}`}${f.eyeSafe ? `<span class="pill eye">${esc(t('cx_eye'))}</span>` : ''}${f.shots ? `<span class="pill">${esc(t('cx_skill'))}</span>` : ''}<span class="pill">${esc(t('cx_unlock', {n:f.unlock}))}</span></h3>
+      <h3>${esc(pu ? tn('kc', f.id)[0] : f.name)} ${pu ? `<span class="pill acc">${esc(t('cx_pu'))}</span>` : `<span class="pill acc">${esc(tn('mg', f.id))}</span>`}${f.eyeSafe ? `<span class="pill eye">${esc(t('cx_eye'))}</span>` : ''}</h3>
       <p class="prod">${esc(f.prod.en)}<small>${esc(f.prod.ko)}</small></p>
-      <p class="blurb">${esc(pu ? tn('pdesc', f.id) + ' ' : '')}${esc(f.blurb[lang] || f.blurb.en)}</p>
+      <p class="blurb">${esc(pu ? tn('kc', f.id)[1] + ' ' : tn('mgd', f.id) + ' ')}${esc(f.blurb[lang] || f.blurb.en)}</p>
       ${f.persona ? `<p class="blurb"><b style="color:var(--pink)">${esc(t('persona'))}</b> · ${esc(f.persona[lang] || f.persona.en)}</p><p class="blurb" style="font-family:var(--diary);font-size:1.1rem;color:var(--fg)">“${esc(f.note[lang] || f.note.en)}” <small>— ${esc(t('kiki_note'))}</small></p>` : ''}
       <div class="meta">${pu ? '' : `<div class="vs"><span class="pill">${esc(t('cx_vs'))}</span>${f.vs.map(c => `<span><svg viewBox="0 0 64 64"><use href="#c-${c}"/></svg>${esc(tn('curse', c))}</span>`).join('')}</div>`}
         <a href="${CONFIG.SHOP}${f.slug}" target="_blank" rel="noopener">${esc(t('cx_link'))} ↗</a></div>
@@ -1586,7 +1892,7 @@ function showNightIntro(newF){
   const n = S.night, cfg = S.cfg;
   const prevCurses = n > 1 ? nightCfg(n - 1).curses : [];
   const newC = cfg.curses.filter(c => !prevCurses.includes(c));
-  const chipsF = newF.map(id => { const f = FAIRY_BY[id]; return `<span class="chip"><span class="ic f">${fairyIcon(f)}</span><span><b>${esc(f.name)}</b><small>${esc(f.vs.map(c => tn('cursek', c)).join(' · '))} · ${esc(tn('tr', id))}${TW[id] ? ` · ✦${TW[id].cost}` : ''}</small></span></span>`; }).join('');
+  const chipsF = newF.map(id => { const f = FAIRY_BY[id]; return `<span class="chip"><span class="ic f">${fairyIcon(f)}</span><span><b>${esc(f.name)}</b><small>${esc(f.vs.map(c => tn('cursek', c)).join(' · '))}${f.eyeSafe ? ' · ' + esc(t('cx_eye')) : ''}</small></span></span>`; }).join('');
   const chipsC = newC.map(c => `<span class="chip"><span class="ic"><svg viewBox="0 0 64 64"><use href="#c-${c}"/></svg></span><span><b>${esc(tn('curse', c))}</b><small>${esc(tn('cursek', c))}</small></span></span>`).join('');
   const chipP = cfg.power ? (() => { const p = POWER_BY[cfg.power]; return `<span class="chip" style="--acc:${p.acc}"><span class="ic f">${fairyIcon(p)}</span><span><b>${esc(tn('power', p.id))}</b><small>${esc(tn('pdesc', p.id))}</small></span></span>`; })() : '';
   openScreen(`<div class="card">
@@ -1594,7 +1900,7 @@ function showNightIntro(newF){
     <h2 class="h-display">${esc(t('night', {n}))}${n <= 7 ? ` · ${esc(t('nt')[n - 1])}` : ''}</h2>
     <p class="quote">“${esc(n <= 7 ? t('nq')[n - 1] : t('nq8'))}”</p>
     ${(n === 1 && S.concerns.length) ? `<div><div class="eyebrow" style="margin-bottom:8px">${esc(t('your_f'))}</div><div class="chips">${S.concerns.map(c => { const f = FAIRY_BY[CURSES[c].cure]; return `<span class="chip" style="--acc:${f.acc}"><span class="ic f">${fairyIcon(f)}</span><span><b>${esc(f.name)}</b><small>${esc(tn('cursek', c))} · ${esc(f.prod[lang] || f.prod.en)}</small></span></span>`; }).join('')}</div></div>` : ''}
-    ${chipsF ? `<div><div class="eyebrow" style="margin-bottom:8px">${esc(t('new_f'))}</div><div class="chips">${chipsF}</div>${S.gift ? `<p class="note" style="margin:8px 0 0;color:var(--butter)">✦ ${esc(t('gift', {n:S.gift}))}</p>` : ''}</div>` : ''}
+    ${chipsF ? `<div><div class="eyebrow" style="margin-bottom:8px">${esc(t('new_f'))}</div><div class="chips">${chipsF}</div></div>` : ''}
     ${chipsC ? `<div><div class="eyebrow" style="margin-bottom:8px">${esc(t('new_c'))}</div><div class="chips">${chipsC}</div></div>` : (n > 7 ? `<p class="note">${esc(t('all_c'))}</p>` : '')}
     ${chipP ? `<div><div class="eyebrow" style="margin-bottom:8px">${esc(t('new_p'))}</div><div class="chips">${chipP}</div></div>` : ''}
     <div class="row end">${btn(t('cont'), 'startNight', 'primary')}</div></div>`);
@@ -1616,8 +1922,9 @@ function showSummary({perfect, bonus, before}){
     <div class="row between">${btn(t('stop'), 'stop', 'sm')}${btn(t('next'), 'nextNight', 'primary')}</div></div>`);
 }
 function showPause(){
-  S.paused = true; S.screen = 'pause'; el.wand.classList.remove('on');
-  openScreen(`<div class="card"><div class="eyebrow">${esc(t('night', {n:S.night}))}</div><h2 class="h-display">${esc(t('pause'))}</h2>
+  S.paused = true; S.screen = 'pause';
+  openScreen(`<div class="card"><div class="eyebrow">${esc(t('night', {n:S.night}))} · ${esc(t('lv', {n:S.lvl}))}</div><h2 class="h-display">${esc(t('pause'))}</h2>
+    ${teamHTML()}
     <div class="pause-list">${btn(t('resume'), 'resume', 'primary block')}${btn(t('stop'), 'stop', 'block')}${btn(t('quit'), 'quit', 'block')}</div></div>`);
 }
 function showResults(){
@@ -1630,7 +1937,7 @@ function showResults(){
     <div class="bigscore">${S.score.toLocaleString()}</div>
     <div>
       <div class="stat"><span>${esc(t('r_nights'))}</span><b>${S.nightsDone}</b></div>
-      <div class="stat"><span>${esc(t('r_combo'))}</span><b>${S.maxCombo}</b></div>
+      <div class="stat"><span>${esc(t('r_level'))}</span><b>${S.lvl}</b></div>
       <div class="stat"><span>${esc(t('r_curses'))}</span><b>${S.totalDispelled}</b></div>
     </div>
     ${matchHTML()}
@@ -1810,44 +2117,20 @@ const LB = {
 };
 
 /* ---------------- input ---------------- */
-let pointerType = 'mouse', drag = null;
-const cellAt = (x, y) => { const n = document.elementFromPoint(x, y); return n && n.closest ? n.closest('.cell') : null; };
-el.deck.addEventListener('pointerdown', e => {
-  const card = e.target.closest('.fairy'); if (!card) return;
-  pointerType = e.pointerType; e.preventDefault();
-  if (!TW[card.dataset.id]){ useSkill(card.dataset.id); return; }
-  drag = {id:card.dataset.id, x:e.clientX, y:e.clientY, moved:false, pid:e.pointerId};
-  try { card.setPointerCapture(e.pointerId); } catch {}
-  if (S.selected !== card.dataset.id) selectFairy(card.dataset.id); else sfx.tap();
-  el.wand.style.left = e.clientX + 'px'; el.wand.style.top = e.clientY + 'px';
+// tap a curse: every fairy aims at it first. tap a fairy: pause and look at the team.
+el.board.addEventListener('click', e => {
+  if (!S.playing || S.paused) return;
+  if (e.target.closest('.unit')){ showPause(); return; }
+  const r = el.board.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+  let best = null, bd = Math.max(10, L.u * 3);
+  for (const m of S.curses){ const d = Math.hypot(m.x - x, m.y - y) - m.r; if (d < bd){ bd = d; best = m; } }
+  if (!best) return;
+  S.focus = S.focus === best.id ? 0 : best.id; if (S.focus){ sfx.tap(); coach(''); }
 });
-addEventListener('pointermove', e => {
-  if (S.selected){ el.wand.style.left = e.clientX + 'px'; el.wand.style.top = e.clientY + 'px'; }
-  if (!drag) return;
-  if (!drag.moved && Math.hypot(e.clientX - drag.x, e.clientY - drag.y) > 10){ drag.moved = true; el.wand.classList.add('on'); }
-  if (drag.moved){ const target = cellAt(e.clientX, e.clientY); $$('.cell.target', el.lanes).forEach(c => c.classList.remove('target')); if (target) target.classList.add('target'); }
-});
-addEventListener('pointerup', e => {
-  if (!drag) return;
-  const d = drag; drag = null;
-  if (d.moved){
-    const target = cellAt(e.clientX, e.clientY);
-    $$('.cell.target', el.lanes).forEach(c => c.classList.remove('target'));
-    if (target && !target.classList.contains('has')) placeAt(d.id, +target.dataset.lane, +target.dataset.row);
-    if (pointerType === 'touch') el.wand.classList.remove('on');
-  }
-});
-addEventListener('pointercancel', () => { drag = null; $$('.cell.target', el.lanes).forEach(c => c.classList.remove('target')); });
-el.lanes.addEventListener('click', e => {
-  const c = e.target.closest('.cell'); if (!c) return;
-  const l = +c.dataset.lane, r = +c.dataset.row;
-  if (c.classList.contains('has')){ sellTap(l, r); return; }
-  if (!S.selected){ toast(t('t_pick')); return; }
-  placeAt(S.selected, l, r);
-});
-el.powers.addEventListener('click', e => { const b = e.target.closest('.power'); if (b) usePower(b.dataset.id); });
+el.combo.addEventListener('click', () => { S.speed = S.speed === 1 ? 1.5 : S.speed === 1.5 ? 2 : 1; store.set('kiki_speed', String(S.speed)); updateHUD(); sfx.tap(); });
 el.pause.addEventListener('click', () => { if (S.playing && !S.paused) showPause(); });
 el.screens.addEventListener('click', e => {
+  const pc = e.target.closest('[data-card]'); if (pc){ audio(); pickCard(+pc.dataset.card); return; }
   const cb = e.target.closest('[data-concern]');
   if (cb){
     const c = cb.dataset.concern;
@@ -1868,7 +2151,7 @@ el.screens.addEventListener('click', e => {
   else if (act === 'codex') showCodex();
   else if (act === 'board') showBoard();
   else if (act === 'title') showTitle();
-  else if (act === 'startNight'){ const newF = JSON.parse(el.screens.firstElementChild.dataset.newF || '[]'); startNight(newF); }
+  else if (act === 'startNight') startNight();
   else if (act === 'nextNight') nextNight();
   else if (act === 'resume'){ closeScreen(); S.paused = false; S.screen = 'play'; S.lastTick = performance.now(); }
   else if (act === 'stop'){ if (S.playing){ S.nightsDone = Math.max(S.nightsDone, S.night - 1); } endGame('stop'); }
@@ -1881,10 +2164,11 @@ el.screens.addEventListener('click', e => {
 function fallbackCopy(text, done){ const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch {} ta.remove(); }
 addEventListener('keydown', e => {
   if (S.screen === 'story' && st){ if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') storyGo(st.i + 1); else if (e.key === 'ArrowLeft') storyGo(st.i - 1); else if (e.key === 'Escape') storyEnd('title'); return; }
+  if (S.screen === 'pick'){ const k = parseInt(e.key, 10); if (k >= 1 && k <= 3) pickCard(k - 1); return; }
   if (S.screen !== 'play' || !S.playing) return;
   if (e.key === 'Escape'){ if (!S.paused) showPause(); return; }
-  const k = parseInt(e.key, 10); if (Number.isNaN(k)) return;
-  const idx = k === 0 ? 9 : k - 1; const id = S.deck[idx]; if (id){ if (TW[id]){ selectFairy(id); pointerType = 'mouse'; } else useSkill(id); }
+  if (e.key === 'f' || e.key === 'F') el.combo.click();
+
 });
 document.addEventListener('visibilitychange', () => { if (document.hidden && S.playing && !S.paused) showPause(); });
 
