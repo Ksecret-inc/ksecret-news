@@ -1,6 +1,7 @@
 # Kiki's SECRET — 카드형 디펜스 기획서
 
-> v9 (2026-11-10) · 미리보기 `site/beautysecret/defense/` · 기존 탭 매칭 버전은 `site/beautysecret/classic/` 에 보존
+> v9 (2026-11-10) · `site/beautysecret/defense/` · 기존 탭 매칭 버전은 `/beautysecret/` 에서 그대로 운영(사본은 `classic/` 에 보존)
+> 두 게임은 매력이 달라 각자 주소로 유지한다. 시작 화면과 결과 화면에 서로의 "버전 해보기" 링크를 둔다.
 > v8(레인 디펜스)는 이 문서로 대체했다. 정해진 줄로 오는 방식 대신, 레퍼런스 게임의 구조를 따랐다.
 
 ## 1. 한 줄 요약

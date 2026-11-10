@@ -174,7 +174,7 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 .chip small{display:block;color:var(--mute);font-size:.74rem;line-height:1.2}
 
 /* title */
-.title-art{position:relative;width:min(54vw,270px);aspect-ratio:400/520;--glow:1;--wince:0;--awake:1;margin-bottom:0}
+.title-art{position:relative;width:min(54vw,270px);width:clamp(150px,min(54vw,270px,calc((100dvh - 560px) * .77)),270px);aspect-ratio:400/520;--glow:1;--wince:0;--awake:1;margin-bottom:0}
 .title-art svg{width:100%;height:100%;display:block;filter:drop-shadow(0 24px 40px rgba(0,0,0,.5))}
 .title-art .moon{top:-6%;right:-14%;width:58px}
 .title-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;width:min(560px,100%);text-align:center;position:relative;z-index:1;margin:auto}
@@ -185,6 +185,10 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 .title-btns{display:grid;gap:10px;width:min(340px,100%);margin-top:6px}
 .title-foot{display:flex;gap:8px;justify-content:center;margin-top:8px}
 .title-foot .btn{font-size:.75rem;padding:.55rem .9rem}
+a.btn{text-decoration:none}
+.btn.other{flex-direction:column;gap:.2em;border-style:dashed;border-color:rgba(255,214,224,.5);color:var(--pink);text-align:center}
+.btn.other small{font:400 .72rem/1.25 var(--body);color:var(--mute);letter-spacing:0}
+.btn.other:hover{border-color:var(--pink);background:rgba(255,214,224,.08)}
 .title-bg{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
 
 /* how to */
@@ -903,6 +907,7 @@ en: {
   story:"Kiki is the queen of Westgate High, famous for her glass skin. Her secret? Every night, beauty fairies from Seoul look after her skin. Tonight the curses are coming. Stay up with the fairies.",
   play:'Play', howto:'How to play', codex:'Fairy Album', board:'Leaderboard', back:'Back', cont:'Continue', next:'Next night',
   stop:"Stop here", again:'Play again', submit:'Join the ranking', skip:'Skip, just show the board', share:'Copy link', copied:'Link copied',
+  try_other:'Try the Classic version', try_other_s:'Tap the curses away yourself.',
   lang:'한국어', sound_on:'Sound on', sound_off:'Sound off', best:'Best on this device',
   h1t:"Curses pour down. Fairies hold the line", h1:"Curses fall toward sleeping Kiki from everywhere. Your fairies attack on their own, each with a different kind of magic. A curse that slips past the dome drains Kiki's Glow.",
   h2t:"Level up, pick 1 of 3 cards", h2:"Dispelling curses fills the level bar. Every level opens three random cards: call a new fairy (five at most) or make one of yours stronger. Who you call and how you grow them decides the night.",
@@ -976,6 +981,7 @@ ko: {
   story:'LA 웨스트게이트 고등학교의 퀸카 키키. 유리 같은 피부의 비밀은 매일 밤 서울에서 날아와 피부를 돌봐주는 뷰티 요정들. 오늘 밤도 저주가 몰려와요. 요정들과 함께 밤을 지켜주세요.',
   play:'시작', howto:'게임 방법', codex:'요정 앨범', board:'랭킹', back:'뒤로', cont:'계속', next:'다음 밤',
   stop:"여기서 그만하기", again:'다시 하기', submit:'랭킹 등록', skip:'건너뛰고 랭킹만 보기', share:'링크 복사', copied:'링크를 복사했어요',
+  try_other:'클래식 버전 해보기', try_other_s:'저주를 직접 눌러 지워요.',
   lang:'English', sound_on:'소리 켬', sound_off:'소리 끔', best:'이 기기 최고 기록',
   h1t:"저주가 쏟아져요. 요정이 막아요", h1:"저주는 사방에서 잠든 키키를 향해 떨어져요. 요정들은 저마다 다른 마법으로 알아서 공격해요. 돔을 넘은 저주는 키키의 광채를 깎아요.",
   h2t:"레벨 업마다 카드 3장 중 1장", h2:"저주를 물리치면 레벨 바가 차요. 레벨이 오를 때마다 무작위 카드 세 장이 열려요. 새 요정을 부르거나(최대 다섯), 이미 있는 요정을 강하게 만들 수 있어요. 누구를 부르고 어떻게 키우느냐가 밤을 결정해요.",
@@ -1848,6 +1854,7 @@ function showTitle(){
         ${btn(t('play'), 'play', 'primary')}
         ${btn(t('howto'), 'howto')}
         ${CONFIG.RANKING ? `<div class="row" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">${btn(t('codex'), 'codex')}${btn(t('board'), 'board')}</div>` : btn(t('codex'), 'codex')}
+        <a class="btn other" href="../">${esc(t('try_other'))}<small>${esc(t('try_other_s'))}</small></a>
       </div>
       ${best ? `<p class="note">${esc(t('best'))}: <b style="font-family:var(--display);font-size:1rem;color:var(--glow)">${best.toLocaleString()}</b></p>` : ''}
       <div class="title-foot">${btn(t('btn_story'), 'story')}${btn(t('lang'), 'lang')}${btn(soundOn ? t('sound_on') : t('sound_off'), 'sound')}</div>
@@ -1944,7 +1951,8 @@ function showResults(){
     ${keeper ? `<p class="ending">“${esc(t('ending'))}”</p><div class="kept"><span class="logo-ks" style="height:18px;color:var(--fg)"></span><span class="logo-s88" style="height:22px;color:var(--pink)"></span></div>` : ''}
     ${mvp ? `<div><div class="eyebrow" style="margin-bottom:8px">${esc(t('r_mvp'))}</div><div class="mvp">${mvp}</div></div>` : ''}
     <div><div class="eyebrow" style="margin-bottom:8px">${esc(t('share_t'))}</div><div class="share" id="share"><img id="shareImg" alt="" hidden><div class="row">${window.claude ? '' : btn(t('share_save'), 'shareSave', 'sm')}${btn(t('share_share'), 'shareShare', 'sm')}${btn(t('share_copy'), 'shareCopy', 'sm')}</div><div class="caption" id="caption"></div><p class="note" id="shareHint" hidden>${esc(t('share_hint'))}</p></div></div>
-    <div class="row end">${CONFIG.RANKING ? btn(t('again'), 'play') + btn(t('submit'), 'form', 'primary') : btn(t('again'), 'play', 'primary')}</div></div>`);
+    <div class="row end">${CONFIG.RANKING ? btn(t('again'), 'play') + btn(t('submit'), 'form', 'primary') : btn(t('again'), 'play', 'primary')}</div>
+    <a class="btn other block" href="../">${esc(t('try_other'))}<small>${esc(t('try_other_s'))}</small></a></div>`);
   renderShare();
 }
 function lessonsHTML(){
